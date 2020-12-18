@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:clickToClose="true"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
+
+   <LinearLayout
+       android:id="@+id/view_background"
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:padding="8dp"
+       android:orientation="vertical"
+       android:background="@color/colorAccent">
+
+       <androidx.appcompat.widget.AppCompatImageView
+           android:layout_centerInParent="true"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:srcCompat="@drawable/ic_delete"/>
+
+   </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_foreground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_login_user_list_item"
+        android:padding="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/idPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_person"/>
+
+        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            android:layout_alignRight="@+id/idPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PUJA MANUSHUKHBHAI VIDIYA"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
+
+    </LinearLayout>
+
+</FrameLayout>

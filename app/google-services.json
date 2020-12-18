@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "679040222691",
+    "firebase_url": "https://atmiya-3c50c.firebaseio.com",
+    "project_id": "atmiya-3c50c",
+    "storage_bucket": "atmiya-3c50c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679040222691:android:e3ba4a0c1ca60651bd8cd6",
+        "android_client_info": {
+          "package_name": "com.infinity.infoway.atmiya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679040222691-k84jhag000rsg775drt9cqgvqs5p5g3b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.infinity.infoway.atmiya",
+            "certificate_hash": "baa375cb7eff2071023683a62333d863a7c17a41"
+          }
+        },
+        {
+          "client_id": "679040222691-pqqnuf5bhglp3m4gfddj3kikl7cim9k1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANuYUs7ka7I5o9anMaKVgfEyUGQ0TBPLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679040222691-pqqnuf5bhglp3m4gfddj3kikl7cim9k1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

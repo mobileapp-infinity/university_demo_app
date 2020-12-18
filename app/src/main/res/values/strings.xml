@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Atmiya</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="alert_dialog_title">Please Select</string>
+    <string name="positive_button_text">Select</string>
+    <string name="negative_button_text">Cancel</string>
+    <string name="my_text">This is an <u>underline</u>.</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_tabactivity">tabactivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="internal_storage">Internal storage</string>
+    <string name="type_to_search">Type to Search</string>
+
+    <string name="employee_profile">Employee Profile</string>
+    <string name="family_details">Family Details</string>
+    <string name="details_of_theory_subject_taught">Details of theory subjects taught</string>
+    <string name="lab_or_lecture_plan">Lab / Lecture Plan</string>
+    <string name="subject_wise_devision_wise_total_theory_period_engaged">Subject Wise,Division Wise Total Theory Period Engaged</string>
+    <string name="student_forum_activity">Student Forum Activity</string>
+    //4-6-2020//
+    <string name="view_details"><u>View Details</u></string>
+    //4-6-2020//
+    <string name="faculty_adviser_remarks">Faculty Adviser Remarks</string>
+    <string name="time_table">Time Table</string>
+    <string name="e_learning">E-Learning</string>
+    <string name="exam">Exam</string>
+    <string name="leave_application">Leave Application</string>
+    <string name="assignment">Assignment</string>
+    <string name="result">Result</string>
+    <string name="current_month">Current Month</string>
+    <string name="previous_month">Previous Month</string>
+    <string name="average">Average</string>
+    <string name="syllabus">Syllabus</string>
+    <string name="lesson_plan">Lesson Plan</string>
+    <string name="home_work">Home Work</string>
+    <string name="fee_details">Fee Details</string>
+    <string name="activity">Activity</string>
+    <string name="message_history">Message History</string>
+    <string name="news_notifications">News | Notifications</string>
+
+</resources>
