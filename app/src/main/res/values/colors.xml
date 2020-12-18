@@ -12,4 +12,19 @@
 
     <color name="white_color_with_85_opacity">#26FFFFFF</color>
 
+    <color name="profile_heading_color">@color/colorAccent</color>
+    <color name="profile_heading_value_color">@color/colorPrimary</color>
+
+    <color name="attendance_selected_tab_color">@color/colorAccent</color>
+    <color name="attendance_unselected_tab_color">@color/colorPrimary</color>
+
+    <color name="status_present_color">#31BDA2</color>
+    <color name="status_absent_color">#F5506D</color>
+    <color name="status_remaining_color">#1E1E1E</color>
+    <color name="status_holiday_color">#FF0000</color>
+    <color name="status_period_suspend_color">#FF6F00</color>
+
+    <color name="lightgrey">#E0E0E0</color>
+    <color name="green">#197319</color>
+
 </resources>

@@ -19,6 +19,11 @@ public class MySharedPreferences {
     }
 
 
+    public void logoutStudent() {
+        editor.clear();
+        editor.commit();
+    }
+
     public void setStudentUsername(String studentUsername) {
         editor.putString(PreferencesConstants.STUD_USER_NAME, studentUsername);
         editor.apply();

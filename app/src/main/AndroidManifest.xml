@@ -26,9 +26,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".student.fee_details.FeeDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".student.attendance.activity.StudentAttendanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".student.profile.StudentProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".login.activity.LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Login.Theme">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,8 +45,7 @@
         </activity>
         <activity
             android:name=".student.student_dashboard.activity.StudentDashboardActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

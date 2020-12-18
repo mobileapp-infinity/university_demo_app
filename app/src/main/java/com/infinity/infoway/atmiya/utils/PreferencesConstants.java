@@ -2,7 +2,7 @@ package com.infinity.infoway.atmiya.utils;
 
 public class PreferencesConstants {
 
-    public static final String PREFERENCES_FILE_NAME = "atmiya_preferences_details";
+    public static final String PREFERENCES_FILE_NAME = "atmiya_login_details";
 
 
     //Student Side Param
@@ -32,10 +32,6 @@ public class PreferencesConstants {
     public static final String INSTITUTE_ID = "intitute_id";
     public static final String FC_FILE = "fc_file";
     public static final String IM_EXAM_DB_NAME = "im_exam_db_name";
-
-
-
-
 
 
 }

@@ -17,6 +17,8 @@ import com.infinity.infoway.atmiya.custom_class.RecyclerItemTouchHelper;
 import com.infinity.infoway.atmiya.login.adapter.LoginUserListAdapter;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
+import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.HashMap;
@@ -78,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
     public void onClick(View v) {
         if (v.getId() == R.id.llLogin) {
             if (isValid()) {
+                CommonUtil.hideKeyboardCommon(LoginActivity.this);
                 checkLoginApiCall(edtLoginUserName.getText().toString().trim(), edtLoginUserPassword.getText().toString().trim());
             }
         } else if (v.getId() == R.id.llForgotPassword) {
@@ -87,26 +90,32 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
 
 
     private void checkLoginApiCall(String userName, String password) {
-        Map<String, String> mParams = new HashMap<String, String>();
+        DialogUtil.showProgressDialogNotCancelable(LoginActivity.this, "");
+        HashMap<String, String> mParams = new HashMap();
         mParams.put("username", userName);
         mParams.put("password", password);
-        ApiImplementer.checkStudentLoginApiImplementer(null, new Callback<StudentLoginPojo>() {
+        ApiImplementer.checkStudentLoginApiImplementer(mParams, new Callback<StudentLoginPojo>() {
             @Override
             public void onResponse(Call<StudentLoginPojo> call, Response<StudentLoginPojo> response) {
-                if (response.isSuccessful() && response.body() != null && response.body().getStatus().equalsIgnoreCase("1")) {
-                    StudentLoginPojo studentLoginPojo = response.body();
-                    setStudentLoginData(userName, password, studentLoginPojo);
-                    Intent intent = new Intent(LoginActivity.this, StudentDashboardActivity.class);
-                    startActivity(intent);
-                    finish();
-
+                DialogUtil.hideProgressDialog();
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().getStatus().equalsIgnoreCase("1")) {
+                        StudentLoginPojo studentLoginPojo = response.body();
+                        setStudentLoginData(userName, password, studentLoginPojo);
+                        Intent intent = new Intent(LoginActivity.this, StudentDashboardActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<StudentLoginPojo> call, Throwable t) {
+                DialogUtil.hideProgressDialog();
                 Toast.makeText(LoginActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

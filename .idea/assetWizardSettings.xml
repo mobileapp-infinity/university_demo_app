@@ -301,7 +301,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Android_Sdk/icons/material/materialicons/delete/baseline_delete_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Android_Sdk/icons/material/materialiconsround/done/round_done_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -311,9 +311,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_delete" />
-                            <entry key="sourceFile" value="D:\Android Studio Projects\atmiya_new_code" />
+                            <entry key="outputName" value="ic_pdf_new" />
+                            <entry key="sourceFile" value="C:\Users\iipl\Downloads\pdf_new.svg" />
                           </map>
                         </option>
                       </PersistentState>

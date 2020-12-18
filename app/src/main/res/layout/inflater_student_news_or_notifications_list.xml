@@ -6,7 +6,7 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="@drawable/news_or_notification_list_item_shape"
+    android:background="@drawable/shape_news_or_notification_list_item"
     android:elevation="8dp"
     android:orientation="vertical"
     android:paddingBottom="5dp">
@@ -27,27 +27,30 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
+                android:background="#CEA955"
                 android:orientation="horizontal"
                 android:paddingLeft="6dp"
                 android:paddingTop="6dp"
                 android:paddingRight="6dp"
                 android:paddingBottom="12dp">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                     android:id="@+id/tvNewsOrNotificationTitle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Online SEE-Timetable \nPg Sem-1"
+                    android:text="-"
+                    android:maxLines="2"
+                    android:minLines="2"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:background="#252258"
                 android:orientation="vertical"
                 android:paddingLeft="6dp"
                 android:paddingTop="6dp"
@@ -59,7 +62,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="end"
-                    android:text="23 Nov, \n2020"
+                    android:text="-"
+                    android:minLines="2"
+                    android:maxLines="2"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -79,12 +84,14 @@
         android:padding="6dp">
 
         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-            android:id="@+id/NewsOrNotificationDescription"
+            android:id="@+id/tvNewsOrNotificationDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Online SEE(Supplementary) Timetable with guideline PG Program - Sem 1 Online SEE(Supplementary) Timetable with guidelines PG Program - Sem 1"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp" />
+            android:text="-"
+            android:textColor="#252258"
+            android:textSize="12sp"
+            android:minLines="4"
+            android:maxLines="4"/>
 
     </LinearLayout>
 

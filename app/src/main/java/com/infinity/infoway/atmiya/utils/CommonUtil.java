@@ -1,5 +1,9 @@
 package com.infinity.infoway.atmiya.utils;
 
+import android.app.Activity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -109,6 +113,9 @@ public class CommonUtil {
         return goal;
 
 
+
+
+
 //        if (dayOfMonth != 10 && String.valueOf(dayOfMonth).contains("0")) {
 //            dayOfMonth = Integer.parseInt(String.valueOf(dayOfMonth).replace("0", ""));
 //        }
@@ -121,6 +128,15 @@ public class CommonUtil {
 //        int dayIndex = calendar.get(Calendar.DAY_OF_WEEK);
 //
 //        return days[dayIndex - 1];
+    }
+
+    public static void hideKeyboardCommon(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 

@@ -43,5 +43,6 @@
     <string name="activity">Activity</string>
     <string name="message_history">Message History</string>
     <string name="news_notifications">News | Notifications</string>
+    <string name="holiday">Holiday</string>
 
 </resources>
