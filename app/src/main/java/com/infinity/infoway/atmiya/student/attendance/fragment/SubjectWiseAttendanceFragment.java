@@ -18,6 +18,7 @@ import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.student.attendance.activity.StudentAttendanceActivity;
 import com.infinity.infoway.atmiya.student.attendance.adapter.SubjectWiseAttendanceAdapter;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
+import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class SubjectWiseAttendanceFragment extends Fragment {
     LinearLayout llSubjectWiseAttendance, llSubjectWiseAttendanceProgressbar;
     MySharedPreferences mySharedPreferences;
     LinearLayout llNoDataFound;
+    ConnectionDetector connectionDetector;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -59,6 +61,7 @@ public class SubjectWiseAttendanceFragment extends Fragment {
     }
 
     private void initView(View view) {
+        connectionDetector = new ConnectionDetector(studentAttendanceActivity);
         llSubjectWiseAttendance = view.findViewById(R.id.llSubjectWiseAttendance);
         llSubjectWiseAttendanceProgressbar = view.findViewById(R.id.llSubjectWiseAttendanceProgressbar);
         rvSubjectWiseList = view.findViewById(R.id.rvSubjectWiseList);
@@ -67,36 +70,40 @@ public class SubjectWiseAttendanceFragment extends Fragment {
 
 
     private void getStudentSubjectWiseAttendance() {
-        llSubjectWiseAttendance.setVisibility(View.GONE);
-        llSubjectWiseAttendanceProgressbar.setVisibility(View.VISIBLE);
-        llNoDataFound.setVisibility(View.GONE);
-        Map<String, String> mParams;
-        mParams = new HashMap<>();
-        mParams.put("stud_id", mySharedPreferences.getStudentId());
-        mParams.put("year_id", mySharedPreferences.getSwdYearId());
-        ApiImplementer.getStudentSubjectWiseAttendanceApiImplementer(mParams, new Callback<ArrayList<StudentSubjectWiseAttendancePojo>>() {
-            @Override
-            public void onResponse(Call<ArrayList<StudentSubjectWiseAttendancePojo>> call, Response<ArrayList<StudentSubjectWiseAttendancePojo>> response) {
-                llSubjectWiseAttendanceProgressbar.setVisibility(View.GONE);
-                if (response.isSuccessful() && response.body() != null &&
-                        response.body().size() > 0) {
-                    llNoDataFound.setVisibility(View.GONE);
-                    ArrayList<StudentSubjectWiseAttendancePojo> studentSubjectWiseAttendancePojoArrayList = response.body();
-                    rvSubjectWiseList.setAdapter(new SubjectWiseAttendanceAdapter(studentAttendanceActivity, studentSubjectWiseAttendancePojoArrayList));
-                    llSubjectWiseAttendance.setVisibility(View.VISIBLE);
-                } else {
-                    llNoDataFound.setVisibility(View.VISIBLE);
+        if (connectionDetector.isConnectingToInternet()) {
+            llSubjectWiseAttendance.setVisibility(View.GONE);
+            llSubjectWiseAttendanceProgressbar.setVisibility(View.VISIBLE);
+            llNoDataFound.setVisibility(View.GONE);
+            Map<String, String> mParams;
+            mParams = new HashMap<>();
+            mParams.put("stud_id", mySharedPreferences.getStudentId());
+            mParams.put("year_id", mySharedPreferences.getSwdYearId());
+            ApiImplementer.getStudentSubjectWiseAttendanceApiImplementer(mParams, new Callback<ArrayList<StudentSubjectWiseAttendancePojo>>() {
+                @Override
+                public void onResponse(Call<ArrayList<StudentSubjectWiseAttendancePojo>> call, Response<ArrayList<StudentSubjectWiseAttendancePojo>> response) {
+                    llSubjectWiseAttendanceProgressbar.setVisibility(View.GONE);
+                    if (response.isSuccessful() && response.body() != null &&
+                            response.body().size() > 0) {
+                        llNoDataFound.setVisibility(View.GONE);
+                        ArrayList<StudentSubjectWiseAttendancePojo> studentSubjectWiseAttendancePojoArrayList = response.body();
+                        rvSubjectWiseList.setAdapter(new SubjectWiseAttendanceAdapter(studentAttendanceActivity, studentSubjectWiseAttendancePojoArrayList));
+                        llSubjectWiseAttendance.setVisibility(View.VISIBLE);
+                    } else {
+                        llNoDataFound.setVisibility(View.VISIBLE);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<StudentSubjectWiseAttendancePojo>> call, Throwable t) {
-                Toast.makeText(studentAttendanceActivity, "Request Failed" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                llNoDataFound.setVisibility(View.VISIBLE);
-                llSubjectWiseAttendance.setVisibility(View.GONE);
-                llSubjectWiseAttendanceProgressbar.setVisibility(View.GONE);
-            }
-        });
+                @Override
+                public void onFailure(Call<ArrayList<StudentSubjectWiseAttendancePojo>> call, Throwable t) {
+                    Toast.makeText(studentAttendanceActivity, "Request Failed" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    llNoDataFound.setVisibility(View.VISIBLE);
+                    llSubjectWiseAttendance.setVisibility(View.GONE);
+                    llSubjectWiseAttendanceProgressbar.setVisibility(View.GONE);
+                }
+            });
+        } else {
+            Toast.makeText(studentAttendanceActivity, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

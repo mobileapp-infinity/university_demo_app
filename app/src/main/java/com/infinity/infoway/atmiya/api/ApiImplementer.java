@@ -1,5 +1,7 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
+import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
@@ -15,6 +17,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class ApiImplementer {
+
+    public static void logoutUserApiImplementer(int loginUserType, String userId, Callback<ArrayList<LogOutPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<LogOutPojo>> call = apiService.logoutUser(loginUserType, userId);
+        call.enqueue(cb);
+    }
+
+    public static void checkVersionInfoApiImplementer(int appVersionCode, Callback<CheckVersionApiPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<CheckVersionApiPojo> call = apiService.checkVersionInfo(appVersionCode);
+        call.enqueue(cb);
+    }
 
     public static void checkStudentLoginApiImplementer(HashMap<String, String> param, Callback<StudentLoginPojo> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);

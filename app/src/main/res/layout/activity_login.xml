@@ -24,7 +24,7 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/logo" />
+            android:src="@drawable/atmiya_login_screen_logo" />
 
     </LinearLayout>
 
@@ -48,8 +48,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:padding="27dp">
 
                 <LinearLayout
@@ -63,23 +63,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:padding="12dp"
+                        android:fontFamily="@font/ubuntu_r"
+                        android:gravity="center"
                         android:hint="Username"
                         android:inputType="text"
-                        android:fontFamily="@font/ubuntu_r"
+                        android:padding="12dp"
                         android:textAllCaps="true"
+                        android:textColor="@color/white"
                         android:textColorHint="@color/white"
-                        android:gravity="center"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"/>
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="22dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="22dp"
                     android:background="@drawable/shape_login_username_bg"
                     android:orientation="vertical">
 
@@ -88,15 +88,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:padding="12dp"
+                        android:fontFamily="@font/ubuntu_r"
+                        android:gravity="center"
                         android:hint="Password"
                         android:inputType="textPassword"
-                        android:fontFamily="@font/ubuntu_r"
+                        android:padding="12dp"
                         android:textAllCaps="true"
+                        android:textColor="@color/white"
                         android:textColorHint="@color/white"
-                        android:gravity="center"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"/>
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -105,56 +105,58 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_login_btn"
-                    android:orientation="vertical"
-                    android:elevation="7dp">
+                    android:elevation="7dp"
+                    android:orientation="vertical">
 
                     <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:padding="12dp"
-                        android:hint="Login"
-                        android:textAllCaps="true"
-                        android:textColorHint="@color/white"
                         android:gravity="center"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"/>
+                        android:hint="Login"
+                        android:padding="12dp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:padding="4dp"
                     android:id="@+id/llForgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_gravity="end"
                     android:layout_marginTop="16dp"
-                    android:layout_gravity="end">
+                    android:orientation="vertical"
+                    android:padding="4dp">
 
                     <com.infinity.infoway.atmiya.custom_class.TextViewBoldFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Forgot Password ?"
                         android:textColor="@color/white"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llLoggedInStudentList"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvLoginUserList"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </LinearLayout>
 

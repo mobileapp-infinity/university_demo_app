@@ -33,6 +33,7 @@ import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.adapter.NewsOrNotificationListAdapter;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
+import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
@@ -87,6 +88,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
     LinearLayout llStudentDashboradProgressbar;
     LinearLayout llNewsOrNotificationListStudentDashboard;
 
+    ConnectionDetector connectionDetector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //For day mode theme
@@ -118,6 +121,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
 
     private void initView() {
         mySharedPreferences = new MySharedPreferences(StudentDashboardActivity.this);
+        connectionDetector = new ConnectionDetector(StudentDashboardActivity.this);
         cImgProfileStudentSide = findViewById(R.id.cImgProfileStudentSide);
         tvStudentName = findViewById(R.id.tvStudentName);
         tvStudentSemAndDesignation = findViewById(R.id.tvStudentSemAndDesignation);
@@ -200,8 +204,12 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         } else if (v.getId() == R.id.llMessageHistoryStudentSide) {
 
         } else if (v.getId() == R.id.llAttendanceStudentSide) {
-            Intent studentAttendanceIntent = new Intent(StudentDashboardActivity.this, StudentAttendanceActivity.class);
-            startActivity(studentAttendanceIntent);
+            if (connectionDetector.isConnectingToInternet()) {
+                Intent studentAttendanceIntent = new Intent(StudentDashboardActivity.this, StudentAttendanceActivity.class);
+                startActivity(studentAttendanceIntent);
+            } else {
+                Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+            }
         } else if (v.getId() == R.id.btnViewAllStudentSide) {
 
         }
@@ -231,59 +239,64 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
     }
 
     private void getStudentProfileAndAttendanceData() {
-        llStudentDashboradProgressbar.setVisibility(View.VISIBLE);
-        svStudentDashboard.setVisibility(View.GONE);
-        HashMap<String, String> mParams = new HashMap<>();
-        mParams.put("stud_id", mySharedPreferences.getStudentId());
-        mParams.put("year_id", mySharedPreferences.getSwdYearId());
-        mParams.put("school_id", mySharedPreferences.getAcId());
-        ApiImplementer.getStudentProfileImplementer(mParams, new Callback<StudentProfilePojo>() {
-            @Override
-            public void onResponse(Call<StudentProfilePojo> call, Response<StudentProfilePojo> response) {
-                llStudentDashboradProgressbar.setVisibility(View.GONE);
-                if (response.isSuccessful() && response.body() != null) {
-                    StudentProfilePojo studentProfilePojo = response.body();
-                    if (studentProfilePojo.getStudName() != null && !studentProfilePojo.getStudName().isEmpty()) {
-                        tvStudentName.setText("Hello, " + studentProfilePojo.getStudName());
-                    }
-                    String studentSemAndDesignation = "Sem - ";
-                    if (studentProfilePojo.getSmName() != null && !studentProfilePojo.getSmName().isEmpty()) {
-                        studentSemAndDesignation += studentProfilePojo.getSmName().split("-")[1];
-                    }
+        if (connectionDetector.isConnectingToInternet()) {
+            llStudentDashboradProgressbar.setVisibility(View.VISIBLE);
+            svStudentDashboard.setVisibility(View.GONE);
+            HashMap<String, String> mParams = new HashMap<>();
+            mParams.put("stud_id", mySharedPreferences.getStudentId());
+            mParams.put("year_id", mySharedPreferences.getSwdYearId());
+            mParams.put("school_id", mySharedPreferences.getAcId());
+            ApiImplementer.getStudentProfileImplementer(mParams, new Callback<StudentProfilePojo>() {
+                @Override
+                public void onResponse(Call<StudentProfilePojo> call, Response<StudentProfilePojo> response) {
+                    llStudentDashboradProgressbar.setVisibility(View.GONE);
+                    if (response.isSuccessful() && response.body() != null) {
+                        StudentProfilePojo studentProfilePojo = response.body();
+                        if (studentProfilePojo.getStudName() != null && !studentProfilePojo.getStudName().isEmpty()) {
+                            tvStudentName.setText("Hello, " + studentProfilePojo.getStudName());
+                        }
+                        String studentSemAndDesignation = "Sem - ";
+                        if (studentProfilePojo.getSmName() != null && !studentProfilePojo.getSmName().isEmpty()) {
+                            studentSemAndDesignation += studentProfilePojo.getSmName().split("-")[1];
+                        }
 
-                    if (studentProfilePojo.getCourseFullname() != null && !studentProfilePojo.getCourseFullname().isEmpty()) {
-                        studentSemAndDesignation += ", " + studentProfilePojo.getCourseFullname();
+                        if (studentProfilePojo.getCourseFullname() != null && !studentProfilePojo.getCourseFullname().isEmpty()) {
+                            studentSemAndDesignation += ", " + studentProfilePojo.getCourseFullname();
+                        }
+                        tvStudentSemAndDesignation.setText(studentSemAndDesignation);
+
+                        Glide.with(StudentDashboardActivity.this)
+                                .asBitmap()
+                                .load(studentProfilePojo.getStudPhoto())
+                                .override(46, 46)
+                                .placeholder(R.drawable.person_img)
+                                .error(R.drawable.person_img)
+                                .into(cImgProfileStudentSide);
+
+                        svStudentDashboard.setVisibility(View.VISIBLE);
+                        llAttendanceStudentSide.startAnimation(AnimationUtils.loadAnimation(StudentDashboardActivity.this, R.anim.attendance_left_to_right));
+                        getSliderImagesApiCall();
+                        loadStudentAttendanceProgress(studentProfilePojo.getCurrentMonthAvgAtt(),
+                                studentProfilePojo.getPreviousMonthAvgAtt(),
+                                studentProfilePojo.getSemesterAvgAtt());
+                        getStudentNewsOrNotificationListApiCall();
+                    } else {
+                        Toast.makeText(StudentDashboardActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
                     }
-                    tvStudentSemAndDesignation.setText(studentSemAndDesignation);
-
-                    Glide.with(StudentDashboardActivity.this)
-                            .asBitmap()
-                            .load(studentProfilePojo.getStudPhoto())
-                            .override(46, 46)
-                            .placeholder(R.drawable.person_img)
-                            .error(R.drawable.person_img)
-                            .into(cImgProfileStudentSide);
-
-                    svStudentDashboard.setVisibility(View.VISIBLE);
-                    llAttendanceStudentSide.startAnimation(AnimationUtils.loadAnimation(StudentDashboardActivity.this, R.anim.attendance_left_to_right));
-                    getSliderImagesApiCall();
-                    loadStudentAttendanceProgress(studentProfilePojo.getCurrentMonthAvgAtt(),
-                            studentProfilePojo.getPreviousMonthAvgAtt(),
-                            studentProfilePojo.getSemesterAvgAtt());
-                    getStudentNewsOrNotificationListApiCall();
-                } else {
-                    Toast.makeText(StudentDashboardActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<StudentProfilePojo> call, Throwable t) {
-                llStudentDashboradProgressbar.setVisibility(View.GONE);
-                svStudentDashboard.setVisibility(View.GONE);
-                Toast.makeText(StudentDashboardActivity.this, "Request Failed,Please try again later", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
+                @Override
+                public void onFailure(Call<StudentProfilePojo> call, Throwable t) {
+                    llStudentDashboradProgressbar.setVisibility(View.GONE);
+                    svStudentDashboard.setVisibility(View.GONE);
+                    Toast.makeText(StudentDashboardActivity.this, "Request Failed,Please try again later", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        } else {
+            Toast.makeText(this, "No internet connection,Please try again later", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void getStudentNewsOrNotificationListApiCall() {

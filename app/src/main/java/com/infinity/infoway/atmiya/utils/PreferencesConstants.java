@@ -2,10 +2,11 @@ package com.infinity.infoway.atmiya.utils;
 
 public class PreferencesConstants {
 
-    public static final String PREFERENCES_FILE_NAME = "atmiya_login_details";
+    //Preferences file names
+    public static final String PREFERENCES_ATMIYA_STUDENT_OR_FACULTY_LOGIN_DETAILS = "atmiya_student_or_faculty_login_details";
 
-
-    //Student Side Param
+    //Student Side key for preferences
+    public static final String LOGGED_IN_STUDENT_PASSWORD_AND_NAME_JASON = "logged_in_student_password_and_name";
     public static final String STUD_USER_NAME = "Stud_user_name";
     public static final String STUD_PASSWORD = "Stud_password";
     public static final String STUDENT_ID = "student_id";
@@ -32,6 +33,10 @@ public class PreferencesConstants {
     public static final String INSTITUTE_ID = "intitute_id";
     public static final String FC_FILE = "fc_file";
     public static final String IM_EXAM_DB_NAME = "im_exam_db_name";
+
+    //Common key for preferences
+    public static final String FCM_TOKEN = "fcm_token";
+    public static final String LOGIN_USER_TYPE = "login_user_type";
 
 
 }

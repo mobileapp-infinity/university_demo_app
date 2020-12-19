@@ -45,4 +45,7 @@
     <string name="news_notifications">News | Notifications</string>
     <string name="holiday">Holiday</string>
 
+    <string name="permissions_has_not_grant">Permissions has not been granted</string>
+    <string name="permission_request">Permission Request</string>
+
 </resources>

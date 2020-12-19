@@ -2,260 +2,393 @@ package com.infinity.infoway.atmiya.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class MySharedPreferences {
 
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferencesForStudentOrFaculty;
+    SharedPreferences.Editor editorForStudentOrFaculty;
+    private SharedPreferences sharedPreferencesForFirebaseFcmToken;
+    private SharedPreferences.Editor editorForFirebaseFcmToken;
     Context context;
+
+    private static final String FIREBASE_FCM_TOKEN = "fcm_token_details";//please do not use this file name in other places
 
     public MySharedPreferences(Context context) {
         this.context = context;
-        sharedPreferences = context.getSharedPreferences(PreferencesConstants.PREFERENCES_FILE_NAME, MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        sharedPreferencesForStudentOrFaculty = context.getSharedPreferences(PreferencesConstants.PREFERENCES_ATMIYA_STUDENT_OR_FACULTY_LOGIN_DETAILS, MODE_PRIVATE);
+        editorForStudentOrFaculty = sharedPreferencesForStudentOrFaculty.edit();
+        sharedPreferencesForFirebaseFcmToken = context.getSharedPreferences(FIREBASE_FCM_TOKEN, MODE_PRIVATE);
+        editorForFirebaseFcmToken = sharedPreferencesForFirebaseFcmToken.edit();
+    }
+
+    public void setLoginUserType(int loginUserType) {
+        editorForStudentOrFaculty.putInt(PreferencesConstants.LOGIN_USER_TYPE, loginUserType);
+        editorForStudentOrFaculty.apply();
+    }
+
+    public int getLoginUserType() {
+        return sharedPreferencesForStudentOrFaculty.getInt(PreferencesConstants.LOGIN_USER_TYPE, 0);
+    }
+
+    public void setFCMToken(String fcmToken) {
+        editorForFirebaseFcmToken.putString(PreferencesConstants.FCM_TOKEN, fcmToken);
+        editorForFirebaseFcmToken.apply();
+    }
+
+    public String getFCMToken() {
+        return sharedPreferencesForFirebaseFcmToken.getString(PreferencesConstants.FCM_TOKEN, "");
     }
 
 
-    public void logoutStudent() {
-        editor.clear();
-        editor.commit();
+    public boolean checkIsStudentCurrentlyLoggedIn() {
+        return sharedPreferencesForStudentOrFaculty.contains(PreferencesConstants.STUDENT_ID) &&
+                sharedPreferencesForStudentOrFaculty.contains(PreferencesConstants.LOGIN_USER_TYPE);
+    }
+
+
+    public void logoutStudentOrFaulty() {
+        editorForStudentOrFaculty.clear();
+        editorForStudentOrFaculty.commit();
     }
 
     public void setStudentUsername(String studentUsername) {
-        editor.putString(PreferencesConstants.STUD_USER_NAME, studentUsername);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.STUD_USER_NAME, studentUsername);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getStudentUsername() {
-        return sharedPreferences.getString(PreferencesConstants.STUD_USER_NAME, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.STUD_USER_NAME, "");
     }
 
     public void setStudentPassword(String studentPassword) {
-        editor.putString(PreferencesConstants.STUD_PASSWORD, studentPassword);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.STUD_PASSWORD, studentPassword);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getStudentPassword() {
-        return sharedPreferences.getString(PreferencesConstants.STUD_PASSWORD, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.STUD_PASSWORD, "");
     }
 
     public void setStudentId(String studentId) {
-        editor.putString(PreferencesConstants.STUDENT_ID, studentId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.STUDENT_ID, studentId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getStudentId() {
-        return sharedPreferences.getString(PreferencesConstants.STUDENT_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.STUDENT_ID, "");
     }
 
     public void setDMId(String dmId) {
-        editor.putString(PreferencesConstants.DM_ID, dmId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.DM_ID, dmId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getDmId() {
-        return sharedPreferences.getString(PreferencesConstants.DM_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.DM_ID, "");
     }
 
     public void setDmFullName(String dmFullName) {
-        editor.putString(PreferencesConstants.DM_FULL_NAME, dmFullName);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.DM_FULL_NAME, dmFullName);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getDmFullName() {
-        return sharedPreferences.getString(PreferencesConstants.DM_FULL_NAME, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.DM_FULL_NAME, "");
     }
 
     public void setCourseId(String courseId) {
-        editor.putString(PreferencesConstants.COURSE_ID, courseId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.COURSE_ID, courseId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getCourseId() {
-        return sharedPreferences.getString(PreferencesConstants.COURSE_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.COURSE_ID, "");
     }
 
     public void setCourseFullName(String courseFullName) {
-        editor.putString(PreferencesConstants.COURSE_FULL_NAME, courseFullName);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.COURSE_FULL_NAME, courseFullName);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getCourseFullName() {
-        return sharedPreferences.getString(PreferencesConstants.COURSE_FULL_NAME, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.COURSE_FULL_NAME, "");
     }
 
     public void setSmId(String smId) {
-        editor.putString(PreferencesConstants.SM_ID, smId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.SM_ID, smId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getSmId() {
-        return sharedPreferences.getString(PreferencesConstants.SM_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.SM_ID, "");
     }
 
     public void setSmName(String smName) {
-        editor.putString(PreferencesConstants.SM_NAME, smName);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.SM_NAME, smName);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getSmName() {
-        return sharedPreferences.getString(PreferencesConstants.SM_NAME, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.SM_NAME, "");
     }
 
     public void setAcId(String acId) {
-        editor.putString(PreferencesConstants.AC_ID, acId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.AC_ID, acId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getAcId() {
-        return sharedPreferences.getString(PreferencesConstants.AC_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.AC_ID, "");
     }
 
     public void setAcFullName(String acFullName) {
-        editor.putString(PreferencesConstants.AC_FULL_NAME, acFullName);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.AC_FULL_NAME, acFullName);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getAcFullName() {
-        return sharedPreferences.getString(PreferencesConstants.AC_FULL_NAME, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.AC_FULL_NAME, "");
     }
 
     public void setSwdYearId(String swdYearId) {
-        editor.putString(PreferencesConstants.SWD_YEAR_ID, swdYearId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.SWD_YEAR_ID, swdYearId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getSwdYearId() {
-        return sharedPreferences.getString(PreferencesConstants.SWD_YEAR_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.SWD_YEAR_ID, "");
     }
 
     public void setStatus(String status) {
-        editor.putString(PreferencesConstants.STATUS, status);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.STATUS, status);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getStatus() {
-        return sharedPreferences.getString(PreferencesConstants.STATUS, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.STATUS, "");
     }
 
     public void setAcCode(String acCode) {
-        editor.putString(PreferencesConstants.AC_CODE, acCode);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.AC_CODE, acCode);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getAcCode() {
-        return sharedPreferences.getString(PreferencesConstants.AC_CODE, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.AC_CODE, "");
     }
 
     public void setHostelCode(String hostelCode) {
-        editor.putString(PreferencesConstants.HOSTEL_CODE, hostelCode);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.HOSTEL_CODE, hostelCode);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getHostelCode() {
-        return sharedPreferences.getString(PreferencesConstants.HOSTEL_CODE, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.HOSTEL_CODE, "");
     }
 
     public void setStudentName(String studentName) {
-        editor.putString(PreferencesConstants.STUDENT_NAME, studentName);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.STUDENT_NAME, studentName);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getStudentName() {
-        return sharedPreferences.getString(PreferencesConstants.STUDENT_NAME, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.STUDENT_NAME, "");
     }
 
     public void setStudAdmissionNo(String studAdmissionNo) {
-        editor.putString(PreferencesConstants.STUD_ADMISSION_NO, studAdmissionNo);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.STUD_ADMISSION_NO, studAdmissionNo);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getStudAdmissionNo() {
-        return sharedPreferences.getString(PreferencesConstants.STUD_ADMISSION_NO, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.STUD_ADMISSION_NO, "");
     }
 
     public void setStudentEnrollmentNo(String studentAdmissionNo) {
-        editor.putString(PreferencesConstants.STUD_ENROLLMENT_NO, studentAdmissionNo);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.STUD_ENROLLMENT_NO, studentAdmissionNo);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getStudentEnrollmentNo() {
-        return sharedPreferences.getString(PreferencesConstants.STUD_ENROLLMENT_NO, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.STUD_ENROLLMENT_NO, "");
     }
 
     public void setStudentPhotoUrl(String studentPhotoUrl) {
-        editor.putString(PreferencesConstants.STUD_PHOTO, studentPhotoUrl);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.STUD_PHOTO, studentPhotoUrl);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getStudentPhotoUrl() {
-        return sharedPreferences.getString(PreferencesConstants.STUD_PHOTO, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.STUD_PHOTO, "");
     }
 
     public void setSwdDivisionId(String swdDivisionId) {
-        editor.putString(PreferencesConstants.SWD_DIVISION_ID, swdDivisionId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.SWD_DIVISION_ID, swdDivisionId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getSwdDivisionId() {
-        return sharedPreferences.getString(PreferencesConstants.SWD_DIVISION_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.SWD_DIVISION_ID, "");
     }
 
     public void setSwdBatchId(String swdBatchId) {
-        editor.putString(PreferencesConstants.SWD_BATCH_ID, swdBatchId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.SWD_BATCH_ID, swdBatchId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getSwdBatchId() {
-        return sharedPreferences.getString(PreferencesConstants.SWD_BATCH_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.SWD_BATCH_ID, "");
     }
 
     public void setShiftId(String shiftId) {
-        editor.putString(PreferencesConstants.SHIFT_ID, shiftId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.SHIFT_ID, shiftId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getShiftId() {
-        return sharedPreferences.getString(PreferencesConstants.SHIFT_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.SHIFT_ID, "");
     }
 
     public void setImDomainName(String imDomainName) {
-        editor.putString(PreferencesConstants.IM_DOMAIN_NAME, imDomainName);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.IM_DOMAIN_NAME, imDomainName);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getImDomainName() {
-        return sharedPreferences.getString(PreferencesConstants.IM_DOMAIN_NAME, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.IM_DOMAIN_NAME, "");
     }
 
     public void setInstituteId(String instituteId) {
-        editor.putString(PreferencesConstants.INSTITUTE_ID, instituteId);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.INSTITUTE_ID, instituteId);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getInstituteId() {
-        return sharedPreferences.getString(PreferencesConstants.INSTITUTE_ID, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.INSTITUTE_ID, "");
     }
 
     public void setFcFile(String fcFile) {
-        editor.putString(PreferencesConstants.FC_FILE, fcFile);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.FC_FILE, fcFile);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getFcFile() {
-        return sharedPreferences.getString(PreferencesConstants.FC_FILE, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.FC_FILE, "");
     }
 
     public void setImExamDbName(String imExamDbName) {
-        editor.putString(PreferencesConstants.IM_EXAM_DB_NAME, imExamDbName);
-        editor.apply();
+        editorForStudentOrFaculty.putString(PreferencesConstants.IM_EXAM_DB_NAME, imExamDbName);
+        editorForStudentOrFaculty.apply();
     }
 
     public String getImExamDbName() {
-        return sharedPreferences.getString(PreferencesConstants.IM_EXAM_DB_NAME, "");
+        return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.IM_EXAM_DB_NAME, "");
+    }
+
+
+    //=========  //CODE FOR STORING ONLY LOGGED IN STUDENT LIST //==================================================//
+
+    private static final String LOGGED_IN_STUDENT_LIST_PREFERENCES = "logged_in_student_list"; //Please do not use this preference name in other places
+
+
+    HashMap<String, ArrayList<String>> testHashMap = new HashMap();
+
+
+    Gson gson = new Gson();
+
+    public void storeStudentIdAndName(String studentEnNo, String studentPassword, String studentName, Context context) {
+
+
+        ArrayList<String> studentNameAndPassArrayList = new ArrayList<>();
+        studentNameAndPassArrayList.add(studentName);
+        studentNameAndPassArrayList.add(studentPassword);
+
+        testHashMap.put(studentEnNo, studentNameAndPassArrayList);
+
+        String hashMapString = gson.toJson(testHashMap);
+
+        SharedPreferences getReg = context.getSharedPreferences(LOGGED_IN_STUDENT_LIST_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editPref = getReg.edit();
+        HashMap<String, ArrayList<String>> existingHashMap = getStudentIdAndName(context);
+        if (existingHashMap == null) {
+            existingHashMap = new HashMap<>();
+        }
+        existingHashMap.putAll(jsonToMap(hashMapString));
+        hashMapString = gson.toJson(existingHashMap);
+        editPref.putString(PreferencesConstants.LOGGED_IN_STUDENT_PASSWORD_AND_NAME_JASON, hashMapString);
+        editPref.apply();
+
+    }
+
+    public HashMap<String, ArrayList<String>> getStudentIdAndName(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(LOGGED_IN_STUDENT_LIST_PREFERENCES, MODE_PRIVATE);
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, ArrayList<String>>>() {
+        }.getType();
+        String storedHashMapString = preferences.getString(PreferencesConstants.LOGGED_IN_STUDENT_PASSWORD_AND_NAME_JASON, "");
+        return gson.fromJson(storedHashMapString, type);
+    }
+
+    private Map<String, ArrayList<String>> jsonToMap(String jsonString) {
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
+        JSONObject jObject = null;
+        try {
+            jObject = new JSONObject(jsonString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Iterator<?> keys = jObject.keys();
+
+        while (keys.hasNext()) {
+
+            JSONArray studentNameAndPassArray;
+            ArrayList<String> studentNameAndPassArrayList = null;
+
+
+            String key = (String) keys.next();
+//            String value = null;
+            try {
+                studentNameAndPassArrayList = new ArrayList<>();
+                studentNameAndPassArray = jObject.getJSONArray(key);
+
+                for (int i = 0; i < studentNameAndPassArray.length(); i++) {
+                    studentNameAndPassArrayList.add(studentNameAndPassArray.getString(i));
+                }
+
+//                value = jObject.getString(key);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            map.put(key, studentNameAndPassArrayList);
+
+        }
+        return map;
+    }
+
+
+    public void deleteStudentNameAndId(String studentEnNo, Context context) {
+        HashMap<String, ArrayList<String>> existingHashMap = getStudentIdAndName(context);
+        if (existingHashMap != null && existingHashMap.size() > 0) {
+            existingHashMap.remove(studentEnNo);
+        }
+        SharedPreferences getReg = context.getSharedPreferences(LOGGED_IN_STUDENT_LIST_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editPref = getReg.edit();
+        String hashMapString = gson.toJson(existingHashMap);
+        editPref.putString(PreferencesConstants.LOGGED_IN_STUDENT_PASSWORD_AND_NAME_JASON, hashMapString);
+        editPref.apply();
     }
 
 

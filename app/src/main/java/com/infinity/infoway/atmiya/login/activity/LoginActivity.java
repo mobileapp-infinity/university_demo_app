@@ -1,5 +1,6 @@
 package com.infinity.infoway.atmiya.login.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -11,37 +12,92 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.RecyclerItemTouchHelper;
 import com.infinity.infoway.atmiya.login.adapter.LoginUserListAdapter;
+import com.infinity.infoway.atmiya.login.pojo.RegisterStudentDetailsModel;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
+import com.infinity.infoway.atmiya.services.MyFirebaseInstanceIdAndMessagingService;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener, View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener,
+        View.OnClickListener, LoginUserListAdapter.IOnLoggedInStudentItemClicked {
 
     AppCompatEditText edtLoginUserName, edtLoginUserPassword;
     LinearLayout llLogin, llForgotPassword;
     MySharedPreferences mySharedPreferences;
-
+    ConnectionDetector connectionDetector;
     RecyclerView rvLoginUserList;
+    LinearLayout llLoggedInStudentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+
+        try {
+            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(LoginActivity.this, new OnSuccessListener<InstanceIdResult>() {
+                @Override
+                public void onSuccess(InstanceIdResult instanceIdResult) {
+                    String fcmToken = instanceIdResult.getToken();
+                    if (fcmToken != null &&
+                            !fcmToken.isEmpty()) {
+                        mySharedPreferences.setFCMToken(fcmToken);
+                    }
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        if (mySharedPreferences.checkIsStudentCurrentlyLoggedIn() &&
+                mySharedPreferences.getLoginUserType() == CommonUtil.LOGIN_TYPE_STUDENT) {
+            redirectToStudentDashboard();
+        }
+        displayLoggedStudentList();
     }
+
+    private void displayLoggedStudentList() {
+        ArrayList<RegisterStudentDetailsModel> registerStudentDetailsModelArrayList = new ArrayList<>();
+        HashMap<String, ArrayList<String>> hashMap = mySharedPreferences.getStudentIdAndName(LoginActivity.this);
+        if (hashMap != null && hashMap.size() > 0 && hashMap.keySet() != null) {
+            for (String key : hashMap.keySet()) {
+                RegisterStudentDetailsModel registerStudentDetailsModel = new RegisterStudentDetailsModel();
+                registerStudentDetailsModel.setStuEnrollmentNo(key);
+                registerStudentDetailsModel.setStudentName(hashMap.get(key).get(0)); //0 For Student Name
+                registerStudentDetailsModel.setStuPassword(hashMap.get(key).get(1));//1 For Student Password
+                registerStudentDetailsModelArrayList.add(registerStudentDetailsModel);
+            }
+        }
+
+        if (registerStudentDetailsModelArrayList.size() > 0) {
+            llLoggedInStudentList.setVisibility(View.VISIBLE);
+            rvLoginUserList.setAdapter(new LoginUserListAdapter(LoginActivity.this, registerStudentDetailsModelArrayList));
+
+            ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, LoginActivity.this);
+            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(rvLoginUserList);
+        } else {
+            llLoggedInStudentList.setVisibility(View.GONE);
+        }
+
+    }
+
 
     private boolean isValid() {
         boolean isValid = true;
@@ -57,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
 
     private void initView() {
         mySharedPreferences = new MySharedPreferences(LoginActivity.this);
+        connectionDetector = new ConnectionDetector(LoginActivity.this);
         edtLoginUserName = findViewById(R.id.edtLoginUserName);
         edtLoginUserPassword = findViewById(R.id.edtLoginUserPassword);
         llLogin = findViewById(R.id.llLogin);
@@ -64,11 +121,8 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
         llForgotPassword = findViewById(R.id.llForgotPassword);
         llForgotPassword.setOnClickListener(this);
 
+        llLoggedInStudentList = findViewById(R.id.llLoggedInStudentList);
         rvLoginUserList = findViewById(R.id.rvLoginUserList);
-        rvLoginUserList.setAdapter(new LoginUserListAdapter(LoginActivity.this));
-
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, LoginActivity.this);
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(rvLoginUserList);
     }
 
     @Override
@@ -88,37 +142,48 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
         }
     }
 
+    private void redirectToStudentDashboard() {
+        Intent intent = new Intent(LoginActivity.this, StudentDashboardActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     private void checkLoginApiCall(String userName, String password) {
-        DialogUtil.showProgressDialogNotCancelable(LoginActivity.this, "");
-        HashMap<String, String> mParams = new HashMap();
-        mParams.put("username", userName);
-        mParams.put("password", password);
-        ApiImplementer.checkStudentLoginApiImplementer(mParams, new Callback<StudentLoginPojo>() {
-            @Override
-            public void onResponse(Call<StudentLoginPojo> call, Response<StudentLoginPojo> response) {
-                DialogUtil.hideProgressDialog();
-                if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getStatus().equalsIgnoreCase("1")) {
-                        StudentLoginPojo studentLoginPojo = response.body();
-                        setStudentLoginData(userName, password, studentLoginPojo);
-                        Intent intent = new Intent(LoginActivity.this, StudentDashboardActivity.class);
-                        startActivity(intent);
-                        finish();
+        if (connectionDetector.isConnectingToInternet()) {
+            DialogUtil.showProgressDialogNotCancelable(LoginActivity.this, "");
+            HashMap<String, String> mParams = new HashMap();
+            mParams.put("username", userName);
+            mParams.put("password", password);
+            ApiImplementer.checkStudentLoginApiImplementer(mParams, new Callback<StudentLoginPojo>() {
+                @Override
+                public void onResponse(Call<StudentLoginPojo> call, Response<StudentLoginPojo> response) {
+                    DialogUtil.hideProgressDialog();
+                    if (response.isSuccessful() && response.body() != null) {
+                        if (response.body().getStatus().equalsIgnoreCase("1")) {
+                            StudentLoginPojo studentLoginPojo = response.body();
+                            setStudentLoginData(userName, password, studentLoginPojo);
+                            if (response.body().getName() != null && !response.body().getName().isEmpty()) {
+                                mySharedPreferences.storeStudentIdAndName(userName, password, response.body().getName(), LoginActivity.this);
+                            }
+                            redirectToStudentDashboard();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(LoginActivity.this, "Some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<StudentLoginPojo> call, Throwable t) {
-                DialogUtil.hideProgressDialog();
-                Toast.makeText(LoginActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<StudentLoginPojo> call, Throwable t) {
+                    DialogUtil.hideProgressDialog();
+                    Toast.makeText(LoginActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "No internet connection, please try again later.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
 
@@ -126,6 +191,10 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
 
         mySharedPreferences.setStudentUsername(userName);
         mySharedPreferences.setStudentPassword(password);
+
+        if (studentLoginPojo.getLoginUserType() != null) {
+            mySharedPreferences.setLoginUserType(studentLoginPojo.getLoginUserType());
+        }
 
         if (studentLoginPojo.getStudId() != null) {
             mySharedPreferences.setStudentId(studentLoginPojo.getStudId());
@@ -225,4 +294,10 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
     }
 
 
+    @Override
+    public void onStudentItemClick(String studentName, String studentUserName, String studentPassword) {
+        edtLoginUserName.setText(studentUserName);
+        edtLoginUserPassword.setText(studentPassword);
+        checkLoginApiCall(studentUserName, studentPassword);
+    }
 }

@@ -10,15 +10,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infinity.infoway.atmiya.R;
+import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
+import com.infinity.infoway.atmiya.login.pojo.RegisterStudentDetailsModel;
+import com.infinity.infoway.atmiya.utils.CommonUtil;
+
+import java.util.ArrayList;
 
 public class LoginUserListAdapter extends RecyclerView.Adapter<LoginUserListAdapter.MyViewHolder> {
 
     Context context;
+    ArrayList<RegisterStudentDetailsModel> registerStudentDetailsModelArrayList;
     LayoutInflater layoutInflater;
+    IOnLoggedInStudentItemClicked iOnLoggedInStudentItemClicked;
 
-    public LoginUserListAdapter(Context context) {
+    public LoginUserListAdapter(Context context, ArrayList<RegisterStudentDetailsModel> registerStudentDetailsModelArrayList) {
         this.context = context;
+        this.registerStudentDetailsModelArrayList = registerStudentDetailsModelArrayList;
         layoutInflater = LayoutInflater.from(context);
+        iOnLoggedInStudentItemClicked = (IOnLoggedInStudentItemClicked) context;
     }
 
     @NonNull
@@ -30,22 +39,43 @@ public class LoginUserListAdapter extends RecyclerView.Adapter<LoginUserListAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        if (!CommonUtil.checkIsEmptyOrNullCommon(registerStudentDetailsModelArrayList.get(position).getStuEnrollmentNo()) &&
+                !CommonUtil.checkIsEmptyOrNullCommon(registerStudentDetailsModelArrayList.get(position).getStuPassword())) {
+            holder.tvLoggedInStudentName.setText(registerStudentDetailsModelArrayList.get(position).getStudentName());
+        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!CommonUtil.checkIsEmptyOrNullCommon(registerStudentDetailsModelArrayList.get(position).getStuEnrollmentNo()) &&
+                        !CommonUtil.checkIsEmptyOrNullCommon(registerStudentDetailsModelArrayList.get(position).getStuPassword())) {
+                    iOnLoggedInStudentItemClicked.onStudentItemClick(registerStudentDetailsModelArrayList.get(position).getStudentName(),
+                            registerStudentDetailsModelArrayList.get(position).getStuEnrollmentNo(),
+                            registerStudentDetailsModelArrayList.get(position).getStuPassword());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return registerStudentDetailsModelArrayList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
+        private TextViewRegularFont tvLoggedInStudentName;
         public LinearLayout view_background, view_foreground;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             view_background = itemView.findViewById(R.id.view_background);
             view_foreground = itemView.findViewById(R.id.view_foreground);
+            tvLoggedInStudentName = itemView.findViewById(R.id.tvLoggedInStudentName);
         }
     }
+
+    public interface IOnLoggedInStudentItemClicked {
+        void onStudentItemClick(String studentName, String studentUserName, String studentPassword);
+    }
+
 }

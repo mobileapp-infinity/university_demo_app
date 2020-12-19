@@ -1,6 +1,5 @@
 package com.infinity.infoway.atmiya.student.profile;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
@@ -9,14 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
@@ -24,11 +19,13 @@ import com.infinity.infoway.atmiya.custom_class.Animations;
 import com.infinity.infoway.atmiya.custom_class.CustomAnimationForDefaultExpandableCard;
 import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
-import com.infinity.infoway.atmiya.login.activity.LoginActivity;
+import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
+import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -86,6 +83,8 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
     private TextViewMediumFont mTvStudentStateName;
     private TextViewMediumFont mTvStudentCountryName;
 
+    ConnectionDetector connectionDetector;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +97,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
 
     private void initView() {
         mySharedPreferences = new MySharedPreferences(StudentProfileActivity.this);
+        connectionDetector = new ConnectionDetector(StudentProfileActivity.this);
         ivCloseProfile = findViewById(R.id.ivCloseProfile);
         ivCloseProfile.setOnClickListener(this);
 
@@ -167,10 +167,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            mySharedPreferences.logoutStudent();
-                            Intent intent = new Intent(StudentProfileActivity.this, StudentDashboardActivity.class);
-                            setResult(RESULT_OK, intent);
-                            finish();
+                            logoutUserApiCall();
                             dialog.dismiss();
                         }
                     })
@@ -186,44 +183,49 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
 
 
     private void getStudentProfileAndAttendanceData() {
-        DialogUtil.showProgressDialogNotCancelable(StudentProfileActivity.this, "");
-        HashMap<String, String> mParams = new HashMap<>();
-        mParams.put("stud_id", mySharedPreferences.getStudentId());
-        mParams.put("year_id", mySharedPreferences.getSwdYearId());
-        mParams.put("school_id", mySharedPreferences.getAcId());
-        ApiImplementer.getStudentProfileImplementer(mParams, new Callback<StudentProfilePojo>() {
-            @Override
-            public void onResponse(Call<StudentProfilePojo> call, Response<StudentProfilePojo> response) {
-                DialogUtil.hideProgressDialog();
-                if (response.isSuccessful() && response.body() != null) {
-                    StudentProfilePojo studentProfilePojo = response.body();
+        if (connectionDetector.isConnectingToInternet()) {
+            DialogUtil.showProgressDialogNotCancelable(StudentProfileActivity.this, "");
+            HashMap<String, String> mParams = new HashMap<>();
+            mParams.put("stud_id", mySharedPreferences.getStudentId());
+            mParams.put("year_id", mySharedPreferences.getSwdYearId());
+            mParams.put("school_id", mySharedPreferences.getAcId());
+            ApiImplementer.getStudentProfileImplementer(mParams, new Callback<StudentProfilePojo>() {
+                @Override
+                public void onResponse(Call<StudentProfilePojo> call, Response<StudentProfilePojo> response) {
+                    DialogUtil.hideProgressDialog();
+                    if (response.isSuccessful() && response.body() != null) {
+                        StudentProfilePojo studentProfilePojo = response.body();
 
-                    Glide.with(StudentProfileActivity.this)
-                            .asBitmap()
-                            .load(studentProfilePojo.getStudPhoto())
-                            .override(70, 70)
-                            .placeholder(R.drawable.person_img)
-                            .error(R.drawable.person_img)
-                            .into(student_profile_image);
+                        Glide.with(StudentProfileActivity.this)
+                                .asBitmap()
+                                .load(studentProfilePojo.getStudPhoto())
+                                .override(70, 70)
+                                .placeholder(R.drawable.person_img)
+                                .error(R.drawable.person_img)
+                                .into(student_profile_image);
 
-                    mTvStudentUserId.setText(mySharedPreferences.getStudentId());
+                        mTvStudentUserId.setText(mySharedPreferences.getStudentId());
 
-                    setProfileData(studentProfilePojo);
+                        setProfileData(studentProfilePojo);
 
 
-                } else {
-                    Toast.makeText(StudentProfileActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(StudentProfileActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<StudentProfilePojo> call, Throwable t) {
+                    DialogUtil.hideProgressDialog();
+                    Toast.makeText(StudentProfileActivity.this, "Request Failed,Please try again later", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-            }
+            });
+        } else {
+            Toast.makeText(this, "No internet connection,please try again later.", Toast.LENGTH_SHORT).show();
+        }
 
-            @Override
-            public void onFailure(Call<StudentProfilePojo> call, Throwable t) {
-                DialogUtil.hideProgressDialog();
-                Toast.makeText(StudentProfileActivity.this, "Request Failed,Please try again later", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
     }
 
     private void setProfileData(StudentProfilePojo studentProfilePojo) {
@@ -346,6 +348,37 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
             CustomAnimationForDefaultExpandableCard.collapse(layoutExpand);
         }
         return isExpanded;
+    }
+
+
+    private void logoutUserApiCall() {
+        if (connectionDetector.isConnectingToInternet()) {
+            DialogUtil.showProgressDialogNotCancelable(StudentProfileActivity.this, "");
+            ApiImplementer.logoutUserApiImplementer(mySharedPreferences.getLoginUserType(), mySharedPreferences.getStudentId(), new Callback<ArrayList<LogOutPojo>>() {
+                @Override
+                public void onResponse(Call<ArrayList<LogOutPojo>> call, Response<ArrayList<LogOutPojo>> response) {
+                    DialogUtil.hideProgressDialog();
+                    if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
+                        if (response.body().get(0).getStatus().equalsIgnoreCase("1")) {
+                            mySharedPreferences.logoutStudentOrFaulty();
+                            Intent intent = new Intent(StudentProfileActivity.this, StudentDashboardActivity.class);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        } else {
+                            Toast.makeText(StudentProfileActivity.this, "some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<LogOutPojo>> call, Throwable t) {
+                    DialogUtil.hideProgressDialog();
+                    Toast.makeText(StudentProfileActivity.this, "some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

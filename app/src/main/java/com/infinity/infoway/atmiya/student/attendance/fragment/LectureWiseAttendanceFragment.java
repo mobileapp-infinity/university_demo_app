@@ -24,9 +24,11 @@ import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.attendance.activity.StudentAttendanceActivity;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 import com.whiteelephant.monthpicker.MonthPickerDialog;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -51,6 +53,7 @@ public class LectureWiseAttendanceFragment extends Fragment implements View.OnCl
     LinearLayout llDayWiseProgressbar;
     MySharedPreferences mySharedPreferences;
     LinearLayout llNoDataFoundLectureWiseattendance;
+    ConnectionDetector connectionDetector;
 
 
     public LectureWiseAttendanceFragment() {
@@ -75,7 +78,7 @@ public class LectureWiseAttendanceFragment extends Fragment implements View.OnCl
     }
 
     private void initView(View view) {
-
+        connectionDetector = new ConnectionDetector(attendanceActivity);
         calendar = Calendar.getInstance();
         currentMonth = calendar.get(Calendar.MONTH);
         currentYear = calendar.get(Calendar.YEAR);
@@ -133,50 +136,55 @@ public class LectureWiseAttendanceFragment extends Fragment implements View.OnCl
 
 
     private void getStudentAttendance(String selectedYear, String selectedMonth) {
-        llAttendanceHeader.removeAllViewsInLayout();
-        llAttendanceValue.removeAllViewsInLayout();
-        cvStudentAttendance.setVisibility(View.GONE);
-        llDayWiseProgressbar.setVisibility(View.VISIBLE);
-        llNoDataFoundLectureWiseattendance.setVisibility(View.GONE);
-        HashMap<String, String> params = new HashMap<>();
-        params.put("year", selectedYear);
-        params.put("month", selectedMonth);
-        params.put("stud_id", mySharedPreferences.getStudentId());
-        params.put("course_id", mySharedPreferences.getCourseId());
-        params.put("div_id", mySharedPreferences.getSwdDivisionId());
-        params.put("shift_id", mySharedPreferences.getShiftId());
-        params.put("batch_id", mySharedPreferences.getSwdBatchId());
-        params.put("year_id", mySharedPreferences.getSwdYearId());
-        ApiImplementer.getStudentLectureWiseAttendanceApiImplementer(params, new Callback<ArrayList<StudentLectureWiseAttendancePojo>>() {
-            @Override
-            public void onResponse(Call<ArrayList<StudentLectureWiseAttendancePojo>> call, Response<ArrayList<StudentLectureWiseAttendancePojo>> response) {
-                try {
-                    if (response.isSuccessful() && response != null && response.body().size() > 0) {
-                        cvStudentAttendance.setVisibility(View.VISIBLE);
-                        llDayWiseProgressbar.setVisibility(View.GONE);
-                        llNoDataFoundLectureWiseattendance.setVisibility(View.GONE);
-                        int cellSpacing = convertDpToPxe(12);
-                        ArrayList<StudentLectureWiseAttendancePojo> studentLectureWiseAttendancePojoArrayList = response.body();
-                        generateHeader(studentLectureWiseAttendancePojoArrayList, cellSpacing);
-                        generateDynamicAttendance(studentLectureWiseAttendancePojoArrayList, cellSpacing);
-                    } else {
-                        llDayWiseProgressbar.setVisibility(View.GONE);
-                        cvStudentAttendance.setVisibility(View.GONE);
-                        llNoDataFoundLectureWiseattendance.setVisibility(View.VISIBLE);
+        if (connectionDetector.isConnectingToInternet()) {
+            llAttendanceHeader.removeAllViewsInLayout();
+            llAttendanceValue.removeAllViewsInLayout();
+            cvStudentAttendance.setVisibility(View.GONE);
+            llDayWiseProgressbar.setVisibility(View.VISIBLE);
+            llNoDataFoundLectureWiseattendance.setVisibility(View.GONE);
+            HashMap<String, String> params = new HashMap<>();
+            params.put("year", selectedYear);
+            params.put("month", selectedMonth);
+            params.put("stud_id", mySharedPreferences.getStudentId());
+            params.put("course_id", mySharedPreferences.getCourseId());
+            params.put("div_id", mySharedPreferences.getSwdDivisionId());
+            params.put("shift_id", mySharedPreferences.getShiftId());
+            params.put("batch_id", mySharedPreferences.getSwdBatchId());
+            params.put("year_id", mySharedPreferences.getSwdYearId());
+            ApiImplementer.getStudentLectureWiseAttendanceApiImplementer(params, new Callback<ArrayList<StudentLectureWiseAttendancePojo>>() {
+                @Override
+                public void onResponse(Call<ArrayList<StudentLectureWiseAttendancePojo>> call, Response<ArrayList<StudentLectureWiseAttendancePojo>> response) {
+                    try {
+                        if (response.isSuccessful() && response != null && response.body().size() > 0) {
+                            cvStudentAttendance.setVisibility(View.VISIBLE);
+                            llDayWiseProgressbar.setVisibility(View.GONE);
+                            llNoDataFoundLectureWiseattendance.setVisibility(View.GONE);
+                            int cellSpacing = convertDpToPxe(12);
+                            ArrayList<StudentLectureWiseAttendancePojo> studentLectureWiseAttendancePojoArrayList = response.body();
+                            generateHeader(studentLectureWiseAttendancePojoArrayList, cellSpacing);
+                            generateDynamicAttendance(studentLectureWiseAttendancePojoArrayList, cellSpacing);
+                        } else {
+                            llDayWiseProgressbar.setVisibility(View.GONE);
+                            cvStudentAttendance.setVisibility(View.GONE);
+                            llNoDataFoundLectureWiseattendance.setVisibility(View.VISIBLE);
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<StudentLectureWiseAttendancePojo>> call, Throwable t) {
-                llDayWiseProgressbar.setVisibility(View.GONE);
-                cvStudentAttendance.setVisibility(View.GONE);
-                llNoDataFoundLectureWiseattendance.setVisibility(View.VISIBLE);
-                Toast.makeText(attendanceActivity, "Request Failed:- "+t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<ArrayList<StudentLectureWiseAttendancePojo>> call, Throwable t) {
+                    llDayWiseProgressbar.setVisibility(View.GONE);
+                    cvStudentAttendance.setVisibility(View.GONE);
+                    llNoDataFoundLectureWiseattendance.setVisibility(View.VISIBLE);
+                    Toast.makeText(attendanceActivity, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(attendanceActivity, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+            attendanceActivity.finish();
+        }
     }
 
     private void generateHeader

@@ -37,10 +37,13 @@
             app:srcCompat="@drawable/ic_person"/>
 
         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            android:id="@+id/tvLoggedInStudentName"
             android:layout_alignRight="@+id/idPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PUJA MANUSHUKHBHAI VIDIYA"
+            android:text="-"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/white"
             android:layout_marginLeft="10dp"/>
 

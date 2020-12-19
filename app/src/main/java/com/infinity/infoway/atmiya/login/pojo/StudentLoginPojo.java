@@ -83,6 +83,17 @@ public class StudentLoginPojo {
     @SerializedName("im_exam_db_name")
     @Expose
     private String imExamDbName;
+    @SerializedName("login_user_type")
+    @Expose
+    private Integer loginUserType;
+
+    public Integer getLoginUserType() {
+        return loginUserType;
+    }
+
+    public void setLoginUserType(Integer loginUserType) {
+        this.loginUserType = loginUserType;
+    }
 
     public String getStudId() {
         return studId;

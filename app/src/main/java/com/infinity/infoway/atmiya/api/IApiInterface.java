@@ -1,5 +1,7 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
+import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
@@ -17,6 +19,13 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 
 public interface IApiInterface {
+
+    @GET("Logout_and_Clear_FCM_id_of_User")
+    Call<ArrayList<LogOutPojo>> logoutUser(@Query("login_user_type") int login_user_type,
+                                           @Query("user_id") String user_id);
+
+    @GET("check_version_api")
+    Call<CheckVersionApiPojo> checkVersionInfo(@Query("version") int version);
 
     @GET("student_login_check_api")
     Call<StudentLoginPojo> checkStudentLogin(@QueryMap Map<String, String> params);
@@ -48,7 +57,6 @@ public interface IApiInterface {
     @GET("get_subject_name_to_display_attendance_in_student_profile")
     @Streaming
     Call<ArrayList<StudentSubjectWiseAttendancePojo>> getStudentSubjectWiseAttendance(@QueryMap Map<String, String> params);
-
 
 
 }

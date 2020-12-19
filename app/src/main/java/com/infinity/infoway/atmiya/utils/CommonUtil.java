@@ -10,6 +10,26 @@ import java.util.Date;
 
 public class CommonUtil {
 
+    //don't change this param if need to change than ask to backed developer regarding login type pram value 1 or 2 etc..
+    // and also check that value in both login api student and faculty(employee).
+    public static final int LOGIN_TYPE_FACULTY = 1;
+    public static final int LOGIN_TYPE_STUDENT = 2;
+
+    public static boolean checkIsEmptyOrNullCommon(Object object) {
+        boolean isNullOrEmpty = false;
+        if (object == null) {
+            isNullOrEmpty = true;
+        } else if (object.getClass() == String.class ||
+                object.getClass() == CharSequence.class) {
+            if (object.toString().trim().isEmpty()) {
+                isNullOrEmpty = true;
+            }
+        } else if (object == "") {
+            isNullOrEmpty = true;
+        }
+
+        return isNullOrEmpty;
+    }
 
     public static String getMonthNameFromNumber(int monthNo) {
         String monthName = "";
@@ -109,11 +129,8 @@ public class CommonUtil {
             e.printStackTrace();
         }
         SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
-        String goal = outFormat.format(date).substring(0,3);
+        String goal = outFormat.format(date).substring(0, 3);
         return goal;
-
-
-
 
 
 //        if (dayOfMonth != 10 && String.valueOf(dayOfMonth).contains("0")) {
