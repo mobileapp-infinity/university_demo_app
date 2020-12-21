@@ -113,14 +113,18 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
                         spExaminationScheduleName.setAdapter(bankAdapter);
                         getExaminationScheduleWiseProgramTimetableApiCall(semId, yearId, repeaterStatus);
                     } else {
-                        Toast.makeText(ExaminationScheduleActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
-                        finish();
+                        llStudentExaminationSchedule.setVisibility(View.GONE);
+                        llExaminationScheduleProgressbar.setVisibility(View.GONE);
+                        llNoDataFoundExaminationSchedule.setVisibility(View.VISIBLE);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ExaminationScheduleDetailsPojo> call, Throwable t) {
-
+                    llStudentExaminationSchedule.setVisibility(View.GONE);
+                    llExaminationScheduleProgressbar.setVisibility(View.GONE);
+                    llNoDataFoundExaminationSchedule.setVisibility(View.VISIBLE);
+                    finish();
                 }
             });
         } else {
