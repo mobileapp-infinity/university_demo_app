@@ -28,6 +28,7 @@ import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
+import com.infinity.infoway.atmiya.utils.DialogUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -187,9 +188,23 @@ public class SplashActivity extends AppCompatActivity {
             if (pInfo == null) {
                 appVersionCode = BuildConfig.VERSION_CODE;
             }
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    DialogUtil.showProgressDialogNotCancelable(SplashActivity.this, "");
+                }
+            });
+
             ApiImplementer.checkVersionInfoApiImplementer(appVersionCode, new Callback<CheckVersionApiPojo>() {
                 @Override
                 public void onResponse(Call<CheckVersionApiPojo> call, Response<CheckVersionApiPojo> response) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DialogUtil.hideProgressDialog();
+                        }
+                    });
                     if (response.isSuccessful()) {
                         if (Integer.parseInt(response.body().getStatus()) == 1) {//1 For Opetional Update
                             new MaterialAlertDialogBuilder(SplashActivity.this)
@@ -243,6 +258,12 @@ public class SplashActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<CheckVersionApiPojo> call, Throwable t) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DialogUtil.hideProgressDialog();
+                        }
+                    });
                     redirectToLoginActivity();
                 }
             });

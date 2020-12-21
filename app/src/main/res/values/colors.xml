@@ -27,5 +27,6 @@
 
     <color name="lightgrey">#E0E0E0</color>
     <color name="green">#197319</color>
+    <color name="exam_module_row_color">#EEEEEE</color>
 
 </resources>

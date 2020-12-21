@@ -1,6 +1,7 @@
 package com.infinity.infoway.atmiya.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -14,6 +15,9 @@ public class CommonUtil {
     // and also check that value in both login api student and faculty(employee).
     public static final int LOGIN_TYPE_FACULTY = 1;
     public static final int LOGIN_TYPE_STUDENT = 2;
+
+    public static final String FOLDER_NAME = "Atmiya";
+
 
     public static boolean checkIsEmptyOrNullCommon(Object object) {
         boolean isNullOrEmpty = false;
@@ -156,5 +160,9 @@ public class CommonUtil {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    public static int convertDpToPxe(Context context,int dp) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
 
 }

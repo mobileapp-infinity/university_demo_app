@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/common_bg_color"
-    tools:context=".student.fee_details.activity.FeeDetailsActivity">
+    tools:context=".student.exam.activity.ExamActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivCloseFeeDetails"
+            android:id="@+id/ivCloseExam"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:text="Fee Details"
+            android:text="Exam"
             android:layout_marginLeft="10dp"
             android:textAllCaps="true"
             android:textColor="@color/white" />
@@ -54,6 +54,7 @@
             android:weightSum="3">
 
             <LinearLayout
+                android:id="@+id/llExamSchedule"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -73,14 +74,14 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_pdf_new"
+                        app:srcCompat="@drawable/ic_exam_schedule"
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"/>
 
                     <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Fee Circular"
+                        android:text="Exam Schedule"
                         android:textSize="10sp"
                         android:padding="8dp"
                         android:gravity="center_horizontal"
@@ -93,6 +94,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llExamResult"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -112,14 +114,14 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_pdf_new"
+                        app:srcCompat="@drawable/ic_result"
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"/>
 
                     <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Fee"
+                        android:text="Result"
                         android:textSize="10sp"
                         android:padding="8dp"
                         android:gravity="center_horizontal"
@@ -132,7 +134,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llStudentFeeReceipt"
+                android:id="@+id/llExamCIAMarks"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -152,14 +154,14 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_fee_receipt"
+                        app:srcCompat="@drawable/ic_cia_marks"
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"/>
 
                     <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Fee Receipt"
+                        android:text="Cia marks"
                         android:textSize="10sp"
                         android:padding="8dp"
                         android:gravity="center_horizontal"
@@ -173,131 +175,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <LinearLayout
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/border_for_fee_details_menu">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/axis_bank"
-                        android:paddingTop="18dp"
-                        android:paddingBottom="18dp"/>
-
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Pay Slip of Axis"
-                        android:textSize="10sp"
-                        android:padding="8dp"
-                        android:gravity="center_horizontal"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:background="@drawable/shape_fee_details_screen"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/border_for_fee_details_menu">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/hdfc_bank"
-                        android:paddingTop="18dp"
-                        android:paddingBottom="18dp"/>
-
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Pay slip of hdfc"
-                        android:textSize="10sp"
-                        android:padding="8dp"
-                        android:gravity="center_horizontal"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:background="@drawable/shape_fee_details_screen"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="12dp"
-                android:visibility="invisible">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/border_for_fee_details_menu">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_fee_receipt"
-                        android:paddingTop="18dp"
-                        android:paddingBottom="18dp"/>
-
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Fee Receipt"
-                        android:textSize="10sp"
-                        android:padding="8dp"
-                        android:gravity="center_horizontal"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:background="@drawable/shape_fee_details_screen"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 

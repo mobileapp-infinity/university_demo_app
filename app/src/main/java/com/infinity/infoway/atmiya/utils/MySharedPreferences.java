@@ -218,8 +218,8 @@ public class MySharedPreferences {
         return sharedPreferencesForStudentOrFaculty.getString(PreferencesConstants.STUD_ADMISSION_NO, "");
     }
 
-    public void setStudentEnrollmentNo(String studentAdmissionNo) {
-        editorForStudentOrFaculty.putString(PreferencesConstants.STUD_ENROLLMENT_NO, studentAdmissionNo);
+    public void setStudentEnrollmentNo(String studentEnrollmentNo) {
+        editorForStudentOrFaculty.putString(PreferencesConstants.STUD_ENROLLMENT_NO, studentEnrollmentNo);
         editorForStudentOrFaculty.apply();
     }
 

@@ -12,13 +12,11 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.api.Urls;
@@ -27,7 +25,8 @@ import com.infinity.infoway.atmiya.custom_class.TextViewBoldFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
 import com.infinity.infoway.atmiya.student.attendance.activity.StudentAttendanceActivity;
-import com.infinity.infoway.atmiya.student.fee_details.FeeDetailsActivity;
+import com.infinity.infoway.atmiya.student.exam.activity.ExamActivity;
+import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
@@ -42,7 +41,6 @@ import net.seifhadjhassen.recyclerviewpager.RecyclerViewPager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -187,7 +185,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         } else if (v.getId() == R.id.llAssignmentStudentSide) {
 
         } else if (v.getId() == R.id.llExamStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, ExamActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llHolidayStudentSide) {
 
         } else if (v.getId() == R.id.llSyllabusStudentSide) {

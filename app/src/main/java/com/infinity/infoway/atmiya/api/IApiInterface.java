@@ -5,6 +5,12 @@ import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
@@ -57,6 +63,34 @@ public interface IApiInterface {
     @GET("get_subject_name_to_display_attendance_in_student_profile")
     @Streaming
     Call<ArrayList<StudentSubjectWiseAttendancePojo>> getStudentSubjectWiseAttendance(@QueryMap Map<String, String> params);
+
+
+    @GET("Fee_Receipt_List")
+    Call<ArrayList<FeeReceiptPojo>> getFeeReceipt(@Query("stud_id") String stud_id);
+
+    @GET("Print_Fee_Receipt")
+    @Streaming
+    Call<PrintFeeReceiptPojo> downloadFeeReceipt(@Query("stud_id") String stud_id, @Query("Receipt_no") String receipt_no);
+
+    @GET("Get_Student_All_Exam_Detail_By_Enrollment_no")
+    Call<ArrayList<CIAMarkstPojo>> getStuedntCIAMarksList(@Query("enrollement_no") String enrollement_no);
+
+    @GET("Download_Student_Exam_Result")
+    @Streaming
+    Call<CIAExamResultPojo> downloadCIAExamResult(@Query("Collegeid") String Collegeid, @Query("Yearid") String Yearid, @Query("Semid") String Semid,
+                                                  @Query("Exam_id") String Exam_id, @Query("stud_id") String stud_id);
+
+
+    @GET("Get_Exam_Details_by_stud_id_API")
+    Call<ExaminationScheduleDetailsPojo> getExaminationScheduleDetails(@Query("stud_id") String stud_id,
+                                                                       @Query("exam_db") String exam_db);
+
+    @GET("Get_Program_wise_timetable_by_stud_id_API")
+    Call<ExaminationScheduleProgramWiseTimetablePojo> getExaminationScheduleProgramWiseTimetable(@Query("sem_id") String sem_id,
+                                                                                                 @Query("year_id") String year_id,
+                                                                                                 @Query("stud_id") String stud_id,
+                                                                                                 @Query("repeater_status") String repeater_status,
+                                                                                                 @Query("exam_db") String exam_db);
 
 
 }
