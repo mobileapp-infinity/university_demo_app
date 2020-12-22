@@ -3,14 +3,18 @@ package com.infinity.infoway.atmiya.api;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
+import com.infinity.infoway.atmiya.student.assignment.StudentAssignmentListPojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
@@ -112,6 +116,34 @@ public class ApiImplementer {
                                                                              Callback<ExaminationScheduleProgramWiseTimetablePojo> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<ExaminationScheduleProgramWiseTimetablePojo> call = apiService.getExaminationScheduleProgramWiseTimetable(sem_id, year_id, stud_id, repeater_status, exam_db);
+        call.enqueue(cb);
+    }
+
+    public static void downloadExaminationScheduleApiImplementer(String sem_id, String year_id, String stud_id, String repeater_status, String exam_db,
+                                                                 Callback<DownloadExaminationSchedulePojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<DownloadExaminationSchedulePojo> call = apiService.downloadExaminationSchedule(sem_id, year_id, stud_id, repeater_status, exam_db);
+        call.enqueue(cb);
+    }
+
+    public static void downloadPaySlipOfAxisApiImplementer(String stud_id,
+                                                           Callback<PaySlipOfAxisPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<PaySlipOfAxisPojo> call = apiService.downloadPaySlipOfAxis(stud_id);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentAssignmentListApiImplementer(String stud_id, String year_id,
+                                                              Callback<ArrayList<StudentAssignmentListPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<StudentAssignmentListPojo>> call = apiService.getStudentAssignmentList(stud_id, year_id);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentMessageHistoryListApiImplementer(String stud_id, String year_id,
+                                                              Callback<ArrayList<MessageHistoryListPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<MessageHistoryListPojo>> call = apiService.getStudentMessageHistory(stud_id, year_id);
         call.enqueue(cb);
     }
 

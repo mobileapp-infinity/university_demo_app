@@ -1,5 +1,6 @@
 package com.infinity.infoway.atmiya.student.exam.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
+import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
+import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 
 import java.util.ArrayList;
 
@@ -32,11 +35,16 @@ public class CIAMarksListAdapter extends RecyclerView.Adapter<CIAMarksListAdapte
     Context context;
     LayoutInflater layoutInflater;
     ArrayList<CIAMarkstPojo> ciaMarkstPojoArrayList;
+    ProgressDialog progressDialog;
 
     public CIAMarksListAdapter(Context context, ArrayList<CIAMarkstPojo> ciaMarkstPojoArrayList) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.ciaMarkstPojoArrayList = ciaMarkstPojoArrayList;
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     @NonNull
@@ -51,11 +59,11 @@ public class CIAMarksListAdapter extends RecyclerView.Adapter<CIAMarksListAdapte
 
         CIAMarkstPojo ciaMarkstPojo = ciaMarkstPojoArrayList.get(position);
 
-        if (position % 2 == 0) {
-            holder.llCIAMarksListMain.setBackground(ContextCompat.getDrawable(context, R.color.white));
-        } else {
-            holder.llCIAMarksListMain.setBackground(ContextCompat.getDrawable(context, R.color.exam_module_row_color));
-        }
+//        if (position % 2 == 0) {
+//            holder.llCIAMarksListMain.setBackground(ContextCompat.getDrawable(context, R.color.white));
+//        } else {
+//            holder.llCIAMarksListMain.setBackground(ContextCompat.getDrawable(context, R.color.exam_module_row_color));
+//        }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(ciaMarkstPojo.getProgramname())) {
             holder.tvCiaProgramName.setText(ciaMarkstPojo.getProgramname() + "");
@@ -80,20 +88,22 @@ public class CIAMarksListAdapter extends RecyclerView.Adapter<CIAMarksListAdapte
 
     private void downloadCIAResultApiCall(String Collegeid, String Yearid, String Semid,
                                           String Exam_id, String stud_id) {
-
-        DialogUtil.showProgressDialogNotCancelable(context, "");
+        progressDialog.show();
         ApiImplementer.downloadCIAExamResultApiImplementer(Collegeid, Yearid, Semid, Exam_id, stud_id, new Callback<CIAExamResultPojo>() {
             @Override
             public void onResponse(Call<CIAExamResultPojo> call, Response<CIAExamResultPojo> response) {
-                DialogUtil.hideProgressDialog();
-                if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 1) {
-                    Toast.makeText(context, "Result downloading...", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 1 &&
+                        response.body().getBase64string() != null && !response.body().getBase64string().isEmpty()) {
+                    new GeneratePDFFileFromBase64String(context, "CIA Marks", CommonUtil.generateUniqueFileName(response.body().getFilename()), response.body().getBase64string(), progressDialog);
+                } else {
+                    progressDialog.hide();
+                    Toast.makeText(context, "some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CIAExamResultPojo> call, Throwable t) {
-                DialogUtil.hideProgressDialog();
+                progressDialog.hide();
                 Toast.makeText(context, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -108,8 +118,9 @@ public class CIAMarksListAdapter extends RecyclerView.Adapter<CIAMarksListAdapte
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout llCIAMarksListMain;
-        TextViewRegularFont tvCiaProgramName, tvCIASemName, tvCIAExamination, tvCIAResult;
+        //        LinearLayout llCIAMarksListMain;
+        TextViewMediumFont tvCiaProgramName, tvCIASemName, tvCIAExamination;
+        TextViewRegularFont tvCIAResult;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,7 +128,7 @@ public class CIAMarksListAdapter extends RecyclerView.Adapter<CIAMarksListAdapte
             tvCIASemName = itemView.findViewById(R.id.tvCIASemName);
             tvCIAExamination = itemView.findViewById(R.id.tvCIAExamination);
             tvCIAResult = itemView.findViewById(R.id.tvCIAResult);
-            llCIAMarksListMain = itemView.findViewById(R.id.llCIAMarksListMain);
+//            llCIAMarksListMain = itemView.findViewById(R.id.llCIAMarksListMain);
         }
     }
 

@@ -1,23 +1,18 @@
 package com.infinity.infoway.atmiya.student.fee_details.adapter;
 
-import android.content.ActivityNotFoundException;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.util.Base64;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.content.FileProvider;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infinity.infoway.atmiya.R;
@@ -28,12 +23,9 @@ import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
-import com.infinity.infoway.atmiya.utils.DialogUtil;
+import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -46,12 +38,17 @@ public class FeeReceiptListAdapter extends RecyclerView.Adapter<FeeReceiptListAd
     LayoutInflater layoutInflater;
     ArrayList<FeeReceiptPojo> feeReceiptPojoArrayList;
     MySharedPreferences mySharedPreferences;
+    ProgressDialog progressDialog;
 
     public FeeReceiptListAdapter(Context context, ArrayList<FeeReceiptPojo> feeReceiptPojoArrayList) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.feeReceiptPojoArrayList = feeReceiptPojoArrayList;
         mySharedPreferences = new MySharedPreferences(context);
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     @NonNull
@@ -74,8 +71,8 @@ public class FeeReceiptListAdapter extends RecyclerView.Adapter<FeeReceiptListAd
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(feeReceiptPojo.getFeeAmt())) {
-            holder.tvFeeAmount.setText(feeReceiptPojo.getFeeAmt() + "");
-            holder.tvFeeAmount_.setText(feeReceiptPojo.getFeeAmt() + "");
+            holder.tvFeeAmount.setText("Rs. " + feeReceiptPojo.getFeeAmt() + "/-");
+            holder.tvFeeAmount_.setText("Rs. " + feeReceiptPojo.getFeeAmt() + "/-");
         }
         if (!CommonUtil.checkIsEmptyOrNullCommon(feeReceiptPojo.getFeeReceiptNo())) {
             holder.tvFeeReceiptNo.setText(feeReceiptPojo.getFeeReceiptNo() + "");
@@ -116,118 +113,31 @@ public class FeeReceiptListAdapter extends RecyclerView.Adapter<FeeReceiptListAd
 
 
     private void downloadFeeReceiptApiCall(String feeReceiptNo) {
-        DialogUtil.showProgressDialogNotCancelable(context, "");
+        progressDialog.show();
         ApiImplementer.downloadFeeReceiptApiImplementer(mySharedPreferences.getStudentId(), feeReceiptNo, new Callback<PrintFeeReceiptPojo>() {
             @Override
             public void onResponse(Call<PrintFeeReceiptPojo> call, Response<PrintFeeReceiptPojo> response) {
-                DialogUtil.hideProgressDialog();
-                if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 1) {
-                    downloadFeeReceipt(response.body().getBase64string(), response.body().getFilename());
-                } else {
-                    Toast.makeText(context, "Some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
+                try {
+                    if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 1 &&
+                            response.body().getBase64string() != null && !response.body().getBase64string().isEmpty()) {
+                        new GeneratePDFFileFromBase64String(context, "Fee Receipt", response.body().getFilename(),
+                                response.body().getBase64string(), progressDialog);
+                    } else {
+                        progressDialog.hide();
+                        Toast.makeText(context, "Some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception ex) {
+                    progressDialog.hide();
+                    ex.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(Call<PrintFeeReceiptPojo> call, Throwable t) {
-                DialogUtil.hideProgressDialog();
+                progressDialog.hide();
                 Toast.makeText(context, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void downloadFeeReceipt(String getbytearr, String fileName) {
-        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CommonUtil.FOLDER_NAME + "/" + "Fee_Receipt/" + "" + fileName);
-
-        if (file.exists()) {
-            File file11 = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CommonUtil.FOLDER_NAME + "/" + "Fee_Receipt/" + fileName);
-
-            Intent target = new Intent(Intent.ACTION_VIEW);
-
-            if (Build.VERSION.SDK_INT > 24) {
-                Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file11);
-
-
-                target.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                target.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                target.setDataAndType(uri, "application/pdf");
-                Intent intent = Intent.createChooser(target, "Open File");
-                try {
-                    context.startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    Toast.makeText(context, "No Apps can performs This action", Toast.LENGTH_LONG).show();
-                }
-            } else {
-                target.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                target.setDataAndType(Uri.fromFile(file11), "application/pdf");
-                target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                Intent intent = Intent.createChooser(target, "Open File");
-                try {
-                    context.startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    Toast.makeText(context, "No Apps can performs This action", Toast.LENGTH_LONG).show();
-                }
-
-
-            }
-        } else {
-            try {
-                byte data[] = new byte[1024];
-
-                long total = 0;
-                data = getbytearr.getBytes("UTF-8");
-                //data = response.body().getbytearr();
-                File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + CommonUtil.FOLDER_NAME);
-                dir.mkdirs();
-                //File outputFile = new File(createfile, "Sample.pdf");
-//                                      FileOutputStream fos = new FileOutputStream(dir);
-
-                                     /* //Writing into the PDF File
-                                      strByte = (xpp.getText().toString());
-                                      bytes = Base64.decode(strByte.toString(),Base64.DEFAULT);//Converting Base64 to byte
-                                     */
-
-                String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + CommonUtil.FOLDER_NAME + "/" + fileName;
-                byte[] pdfAsBytes = Base64.decode(getbytearr, 0);
-                FileOutputStream os;
-                os = new FileOutputStream(filepath, false);
-                os.write(pdfAsBytes);
-                os.flush();
-                os.close();
-                File file11 = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CommonUtil.FOLDER_NAME + "/" + fileName);
-
-                DialogUtil.hideProgressDialog();
-
-                Intent target = new Intent(Intent.ACTION_VIEW);
-
-                if (Build.VERSION.SDK_INT > 24) {
-                    Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file11);
-
-                    target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    target.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    target.setDataAndType(uri, "application/pdf");
-                    Intent intent = Intent.createChooser(target, "Open File");
-                    try {
-                        context.startActivity(intent);
-                    } catch (ActivityNotFoundException e) {
-                        Toast.makeText(context, "No Apps can performs This actton", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    target.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    target.setDataAndType(Uri.fromFile(file11), "application/pdf");
-                    target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Intent intent = Intent.createChooser(target, "Open File");
-                    try {
-                        context.startActivity(intent);
-                    } catch (ActivityNotFoundException e) {
-                        Toast.makeText(context, "No Apps can performs This action", Toast.LENGTH_LONG).show();
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
     }
 
 

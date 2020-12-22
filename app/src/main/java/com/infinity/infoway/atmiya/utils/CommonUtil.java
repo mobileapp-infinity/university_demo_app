@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 public class CommonUtil {
 
@@ -18,6 +19,10 @@ public class CommonUtil {
 
     public static final String FOLDER_NAME = "Atmiya";
 
+
+    public static String generateUniqueFileName(String fileName) {
+        return UUID.randomUUID().toString() + "_"  + fileName;
+    }
 
     public static boolean checkIsEmptyOrNullCommon(Object object) {
         boolean isNullOrEmpty = false;

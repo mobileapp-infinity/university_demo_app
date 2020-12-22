@@ -3,14 +3,18 @@ package com.infinity.infoway.atmiya.api;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
+import com.infinity.infoway.atmiya.student.assignment.StudentAssignmentListPojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
@@ -91,6 +95,27 @@ public interface IApiInterface {
                                                                                                  @Query("stud_id") String stud_id,
                                                                                                  @Query("repeater_status") String repeater_status,
                                                                                                  @Query("exam_db") String exam_db);
+
+    @GET("Download_AU_Examination_Schedule")
+    Call<DownloadExaminationSchedulePojo> downloadExaminationSchedule(@Query("sem_id") String sem_id,
+                                                                      @Query("year_id") String year_id,
+                                                                      @Query("stud_id") String stud_id,
+                                                                      @Query("repeater_status") String repeater_status,
+                                                                      @Query("exam_db") String exam_db);
+
+
+    @GET("Print_Axis_Payslip")
+    @Streaming
+    Call<PaySlipOfAxisPojo> downloadPaySlipOfAxis(@Query("stud_id") String stud_id);
+
+    @GET("Get_Student_Assignment_Detail")
+    @Streaming
+    Call<ArrayList<StudentAssignmentListPojo>> getStudentAssignmentList(@Query("stud_id") String stud_id, @Query("year_id") String year_id);
+
+
+    @GET("get_student_sms_send_detail_with_content")
+    @Streaming
+    Call<ArrayList<MessageHistoryListPojo>> getStudentMessageHistory(@Query("stud_id") String stud_id, @Query("year_id") String year_id);
 
 
 }

@@ -38,12 +38,14 @@
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvSelectExam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="12dp"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="360dp"
         app:cardElevation="7dp">
@@ -59,15 +61,15 @@
                 android:orientation="horizontal">
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_examination_schedule_select_exam"
+                    android:gravity="center"
                     android:padding="8dp"
-                    android:gravity="center_vertical"
-                    android:text="Select Exam"
+                    android:text="Exam"
                     android:textAllCaps="true"
-                    android:textSize="12sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -97,7 +99,7 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/llStudentExaminationSchedule"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -227,33 +229,40 @@
                 </LinearLayout>
 
                 <ScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:fillViewport="true"
                     android:scrollbars="vertical">
 
                     <LinearLayout
                         android:id="@+id/llExaminationScheduleList"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="vertical" />
 
                 </ScrollView>
 
             </LinearLayout>
 
-
         </HorizontalScrollView>
 
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/efabDownloadExaminationSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="18dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableRight="@drawable/ic_download"
+            android:fontFamily="@font/ubuntu_r"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="Download"
+            android:textColor="@color/white" />
 
-        <!--        <androidx.recyclerview.widget.RecyclerView-->
-        <!--            android:id="@+id/rvExaminationScheduleStudent"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:scrollbars="none"-->
-        <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
-
-
-    </LinearLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/llExaminationScheduleProgressbar"

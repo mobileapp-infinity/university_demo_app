@@ -3,8 +3,8 @@ package com.infinity.infoway.atmiya.student.exam.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -12,17 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
-import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
+import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
+import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -38,7 +42,8 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
     AppCompatImageView ivCloseExaminationSchedule;
     ConnectionDetector connectionDetector;
     //    RecyclerView rvExaminationScheduleStudent;
-    LinearLayout llStudentExaminationSchedule, llExaminationScheduleProgressbar, llNoDataFoundExaminationSchedule;
+    FrameLayout llStudentExaminationSchedule;
+    LinearLayout llExaminationScheduleProgressbar, llNoDataFoundExaminationSchedule;
     String yearId = "";
     String semId = "";
     String repeaterStatus = "";
@@ -47,6 +52,9 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
     SearchableSpinner spExaminationScheduleName;
     LinearLayout llExaminationScheduleList;
     ArrayList<String> examId;
+    MaterialCardView cvSelectExam;
+    ExtendedFloatingActionButton efabDownloadExaminationSchedule;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +75,6 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -78,20 +85,29 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
         connectionDetector = new ConnectionDetector(ExaminationScheduleActivity.this);
         ivCloseExaminationSchedule = findViewById(R.id.ivCloseExaminationSchedule);
         ivCloseExaminationSchedule.setOnClickListener(this);
+        cvSelectExam = findViewById(R.id.cvSelectExam);
+        efabDownloadExaminationSchedule = findViewById(R.id.efabDownloadExaminationSchedule);
+        efabDownloadExaminationSchedule.setOnClickListener(this);
 //        rvExaminationScheduleStudent = findViewById(R.id.rvExaminationScheduleStudent);
         llStudentExaminationSchedule = findViewById(R.id.llStudentExaminationSchedule);
         llExaminationScheduleProgressbar = findViewById(R.id.llExaminationScheduleProgressbar);
         llNoDataFoundExaminationSchedule = findViewById(R.id.llNoDataFoundExaminationSchedule);
         spExaminationScheduleName = findViewById(R.id.spExaminationScheduleName);
         llExaminationScheduleList = findViewById(R.id.llExaminationScheduleList);
+        progressDialog = new ProgressDialog(ExaminationScheduleActivity.this);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     private void getExaminationScheduleDetailsListForDropdownApiCall() {
         if (connectionDetector.isConnectingToInternet()) {
+            cvSelectExam.setVisibility(View.GONE);
             ApiImplementer.examinationScheduleDetailsApiImplementer(mySharedPreferences.getStudentId(), mySharedPreferences.getImExamDbName(), new Callback<ExaminationScheduleDetailsPojo>() {
                 @Override
                 public void onResponse(Call<ExaminationScheduleDetailsPojo> call, Response<ExaminationScheduleDetailsPojo> response) {
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
+                        cvSelectExam.setVisibility(View.VISIBLE);
                         examNameArrayList = new ArrayList<>();
                         examId = new ArrayList<>();
                         String[] examIdArray = response.body().getTable().get(0).getExamId().split("_");
@@ -113,6 +129,7 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
                         spExaminationScheduleName.setAdapter(bankAdapter);
                         getExaminationScheduleWiseProgramTimetableApiCall(semId, yearId, repeaterStatus);
                     } else {
+                        cvSelectExam.setVisibility(View.GONE);
                         llStudentExaminationSchedule.setVisibility(View.GONE);
                         llExaminationScheduleProgressbar.setVisibility(View.GONE);
                         llNoDataFoundExaminationSchedule.setVisibility(View.VISIBLE);
@@ -121,6 +138,7 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
 
                 @Override
                 public void onFailure(Call<ExaminationScheduleDetailsPojo> call, Throwable t) {
+                    cvSelectExam.setVisibility(View.GONE);
                     llStudentExaminationSchedule.setVisibility(View.GONE);
                     llExaminationScheduleProgressbar.setVisibility(View.GONE);
                     llNoDataFoundExaminationSchedule.setVisibility(View.VISIBLE);
@@ -131,7 +149,6 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
             Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     private void getExaminationScheduleWiseProgramTimetableApiCall(String semId, String yearId, String repeaterStatus) {
         llExaminationScheduleList.removeAllViewsInLayout();
@@ -314,10 +331,40 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
 
     }
 
+    private void downloadExaminationSchedule(String semId, String yearId, String repeaterStatus) {
+        progressDialog.show();
+        ApiImplementer.downloadExaminationScheduleApiImplementer(semId, yearId,
+                mySharedPreferences.getStudentId(), repeaterStatus, mySharedPreferences.getImExamDbName(), new Callback<DownloadExaminationSchedulePojo>() {
+                    @Override
+                    public void onResponse(Call<DownloadExaminationSchedulePojo> call, Response<DownloadExaminationSchedulePojo> response) {
+                        try {
+                            if (response.isSuccessful() && response.body() != null && response.body().getBase64string() != null &&
+                                    !response.body().getBase64string().isEmpty()) {
+                                new GeneratePDFFileFromBase64String(ExaminationScheduleActivity.this, "Exam Schedule", CommonUtil.generateUniqueFileName(response.body().getFilename()),
+                                        response.body().getBase64string(), progressDialog);
+                            } else {
+                                progressDialog.hide();
+                                Toast.makeText(ExaminationScheduleActivity.this, "Some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception ex) {
+                            progressDialog.hide();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DownloadExaminationSchedulePojo> call, Throwable t) {
+                        progressDialog.hide();
+                        Toast.makeText(ExaminationScheduleActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.ivCloseExaminationSchedule) {
             onBackPressed();
+        } else if (v.getId() == R.id.efabDownloadExaminationSchedule) {
+            downloadExaminationSchedule(semId, yearId, repeaterStatus);
         }
     }
 

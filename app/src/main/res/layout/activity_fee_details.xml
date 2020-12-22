@@ -54,6 +54,7 @@
             android:weightSum="3">
 
             <LinearLayout
+                android:id="@+id/llFeeCircularFeeDetails"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -180,6 +181,7 @@
             android:weightSum="3">
 
             <LinearLayout
+                android:id="@+id/llPaySlipOfAxisFeeDetails"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -219,6 +221,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llDownloadPaySlipOfHdfc"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_width="0dp"
                 android:layout_weight="1"

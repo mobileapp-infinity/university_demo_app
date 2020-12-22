@@ -24,9 +24,11 @@ import com.infinity.infoway.atmiya.custom_class.ProgressBarAnimation;
 import com.infinity.infoway.atmiya.custom_class.TextViewBoldFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
+import com.infinity.infoway.atmiya.student.assignment.AssignmentActivity;
 import com.infinity.infoway.atmiya.student.attendance.activity.StudentAttendanceActivity;
 import com.infinity.infoway.atmiya.student.exam.activity.ExamActivity;
 import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
+import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivity;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
@@ -183,7 +185,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         } else if (v.getId() == R.id.llELearningStudentSide) {
 
         } else if (v.getId() == R.id.llAssignmentStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, AssignmentActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llExamStudentSide) {
             Intent intent = new Intent(StudentDashboardActivity.this, ExamActivity.class);
             startActivity(intent);
@@ -201,7 +204,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         } else if (v.getId() == R.id.llActivityStudentSide) {
 
         } else if (v.getId() == R.id.llMessageHistoryStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, MessageHistoryActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llAttendanceStudentSide) {
             if (connectionDetector.isConnectingToInternet()) {
                 Intent studentAttendanceIntent = new Intent(StudentDashboardActivity.this, StudentAttendanceActivity.class);
