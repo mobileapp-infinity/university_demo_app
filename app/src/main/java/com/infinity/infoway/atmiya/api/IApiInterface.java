@@ -14,6 +14,9 @@ import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramW
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.KindOfLeaveListPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.SelectLectureForPartialLeavePojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUploadPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
@@ -116,6 +119,20 @@ public interface IApiInterface {
     @GET("get_student_sms_send_detail_with_content")
     @Streaming
     Call<ArrayList<MessageHistoryListPojo>> getStudentMessageHistory(@Query("stud_id") String stud_id, @Query("year_id") String year_id);
+
+
+    @GET("get_leave_type_institute_wise_for_student")
+    Call<KindOfLeaveListPojo> getKindOfLeaveList(@Query("institute_id") String institute_id);
+
+    @GET("get_leave_type_file_upload")
+    Call<TypeOfFileUploadPojo> getTypeOfLeaveFileUpload(@Query("leave_type_id") String leave_type_id);
+
+    @GET("Get_Date_Wise_Lecture_List_for_student_leave")
+    Call<SelectLectureForPartialLeavePojo> selectLectureForPartialLeaveList(@Query("institute_id") String institute_id, @Query("sem_id") String sem_id,
+                                                                            @Query("div_id") String div_id, @Query("stud_id") String stud_id,
+                                                                            @Query("from_date") String from_date, @Query("year_id") String year_id);
+
+
 
 
 }

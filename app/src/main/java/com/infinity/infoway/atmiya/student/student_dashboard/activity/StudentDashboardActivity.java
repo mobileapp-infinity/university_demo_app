@@ -28,6 +28,7 @@ import com.infinity.infoway.atmiya.student.assignment.AssignmentActivity;
 import com.infinity.infoway.atmiya.student.attendance.activity.StudentAttendanceActivity;
 import com.infinity.infoway.atmiya.student.exam.activity.ExamActivity;
 import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
+import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivity;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
@@ -181,7 +182,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         } else if (v.getId() == R.id.llTimeTableStudentSide) {
 
         } else if (v.getId() == R.id.llLeaveApplicationStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, LeaveApplicationActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llELearningStudentSide) {
 
         } else if (v.getId() == R.id.llAssignmentStudentSide) {

@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
 import com.infinity.infoway.atmiya.R;
-import com.infinity.infoway.atmiya.student.attendance.adapter.AttendanceViewPager;
+import com.infinity.infoway.atmiya.student.attendance.adapter.AttendanceViewPagerAdapter;
 import com.infinity.infoway.atmiya.student.attendance.fragment.LectureWiseAttendanceFragment;
 import com.infinity.infoway.atmiya.student.attendance.fragment.SubjectWiseAttendanceFragment;
 
@@ -41,7 +41,7 @@ public class StudentAttendanceActivity extends AppCompatActivity implements View
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        AttendanceViewPager adapter = new AttendanceViewPager(getSupportFragmentManager());
+        AttendanceViewPagerAdapter adapter = new AttendanceViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new LectureWiseAttendanceFragment(), "Lecture Wise");
         adapter.addFragment(new SubjectWiseAttendanceFragment(), "Subject wise");
         viewPager.setAdapter(adapter);

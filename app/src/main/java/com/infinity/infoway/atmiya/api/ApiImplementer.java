@@ -14,6 +14,9 @@ import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramW
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.KindOfLeaveListPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.SelectLectureForPartialLeavePojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUploadPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
@@ -141,9 +144,36 @@ public class ApiImplementer {
     }
 
     public static void getStudentMessageHistoryListApiImplementer(String stud_id, String year_id,
-                                                              Callback<ArrayList<MessageHistoryListPojo>> cb) {
+                                                                  Callback<ArrayList<MessageHistoryListPojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<MessageHistoryListPojo>> call = apiService.getStudentMessageHistory(stud_id, year_id);
+        call.enqueue(cb);
+    }
+
+
+    public static void getKindOfLeaveListApiImplementer(String institute_id,
+                                                        Callback<KindOfLeaveListPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<KindOfLeaveListPojo> call = apiService.getKindOfLeaveList(institute_id);
+        call.enqueue(cb);
+    }
+
+    public static void getTypeOfFileUploadApiImplementer(String leave_type_id,
+                                                         Callback<TypeOfFileUploadPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<TypeOfFileUploadPojo> call = apiService.getTypeOfLeaveFileUpload(leave_type_id);
+        call.enqueue(cb);
+    }
+
+    public static void selectLectureListApiImplementer(String institute_id,
+                                                       String sem_id,
+                                                       String div_id,
+                                                       String stud_id,
+                                                       String from_date,
+                                                       String year_id,
+                                                       Callback<SelectLectureForPartialLeavePojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<SelectLectureForPartialLeavePojo> call = apiService.selectLectureForPartialLeaveList(institute_id, sem_id, div_id, stud_id, from_date, year_id);
         call.enqueue(cb);
     }
 

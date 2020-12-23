@@ -606,7 +606,7 @@
                         android:id="@+id/btnViewAllStudentSide"
                         android:layout_width="wrap_content"
                         android:layout_height="34dp"
-                        android:background="@drawable/btn_capsual_shape"
+                        android:background="@drawable/btn_capsual_shape_accent"
                         android:elevation="0dp"
                         android:text="View All"
                         android:textAllCaps="false"

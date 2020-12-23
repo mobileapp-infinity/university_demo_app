@@ -48,7 +48,7 @@
                     android:drawablePadding="4dp"
                     android:focusableInTouchMode="false"
                     android:fontFamily="@font/ubuntu_r"
-                    android:text="December - 2020"
+                    android:text="-"
                     android:textColor="#252258"
                     android:textCursorDrawable="@null"
                     android:textSize="14sp" />

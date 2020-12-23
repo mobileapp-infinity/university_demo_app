@@ -1,4 +1,4 @@
-package com.infinity.infoway.atmiya.student.activity;
+package com.infinity.infoway.atmiya.student.student_activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
