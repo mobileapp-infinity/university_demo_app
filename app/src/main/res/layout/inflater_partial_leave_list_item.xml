@@ -27,7 +27,6 @@
             android:id="@+id/ivSelectLecture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tint="@color/gray"
             app:srcCompat="@drawable/ic_close_new" />
 
     </LinearLayout>

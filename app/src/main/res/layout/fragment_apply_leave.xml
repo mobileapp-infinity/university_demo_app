@@ -28,7 +28,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical">
 
                 <Spinner
@@ -49,8 +49,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical">
 
                 <Spinner
@@ -71,8 +71,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -147,8 +147,8 @@
                 android:id="@+id/llSelectLecture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -173,8 +173,8 @@
                 android:id="@+id/llUploadFile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -200,7 +200,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -216,6 +216,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ubuntu_r"
                         android:hint="Remarks"
+                        android:text="   "
                         android:minLines="2"
                         android:textColor="@color/colorPrimary"
                         android:textColorHint="@color/colorAccent"
@@ -228,12 +229,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                     android:id="@+id/tvSaveLeave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -250,6 +250,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
 
     </ScrollView>
 

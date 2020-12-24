@@ -1,66 +1,112 @@
 package com.infinity.infoway.atmiya.student.leave_application.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.infinity.infoway.atmiya.R;
+import com.infinity.infoway.atmiya.api.ApiImplementer;
+import com.infinity.infoway.atmiya.login.adapter.LoginUserListAdapter;
+import com.infinity.infoway.atmiya.student.assignment.AssignmentActivity;
+import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
+import com.infinity.infoway.atmiya.student.leave_application.adapter.StudentLeaveApplicationHistoryAdapter;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.LeaveApplicationHistoryPojo;
+import com.infinity.infoway.atmiya.utils.ConnectionDetector;
+import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LeaveHistoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LeaveHistoryFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    LeaveApplicationActivity leaveApplicationActivity;
+    ConnectionDetector connectionDetector;
+    MySharedPreferences mySharedPreferences;
+    private static LeaveHistoryFragment leaveHistoryFragment = null;
+    LinearLayout llStudentLeaveList, llLeaveHistoryProgressbar, llNoDataFoundLeaveHistory;
+    RecyclerView rvStudentLeaveList;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public LeaveHistoryFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LeaveHistoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LeaveHistoryFragment newInstance(String param1, String param2) {
-        LeaveHistoryFragment fragment = new LeaveHistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static LeaveHistoryFragment newInstance() {
+        if (leaveHistoryFragment == null) {
+            leaveHistoryFragment = new LeaveHistoryFragment();
+        }
+        return leaveHistoryFragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getStudentLeaveApplicationHistoryListApiCall();
         }
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        leaveApplicationActivity = (LeaveApplicationActivity) context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_leave_history, container, false);
+        View view = inflater.inflate(R.layout.fragment_leave_history, container, false);
+        initView(view);
+        return view;
     }
+
+    private void initView(View view) {
+        mySharedPreferences = new MySharedPreferences(leaveApplicationActivity);
+        connectionDetector = new ConnectionDetector(leaveApplicationActivity);
+        llStudentLeaveList = view.findViewById(R.id.llStudentLeaveList);
+        llLeaveHistoryProgressbar = view.findViewById(R.id.llLeaveHistoryProgressbar);
+        llNoDataFoundLeaveHistory = view.findViewById(R.id.llNoDataFoundLeaveHistory);
+        rvStudentLeaveList = view.findViewById(R.id.rvStudentLeaveList);
+    }
+
+
+    private void getStudentLeaveApplicationHistoryListApiCall() {
+        if (connectionDetector.isConnectingToInternet()) {
+            llStudentLeaveList.setVisibility(View.GONE);
+            llLeaveHistoryProgressbar.setVisibility(View.VISIBLE);
+            llNoDataFoundLeaveHistory.setVisibility(View.GONE);
+            ApiImplementer.getStudentLeaveApplicationHistoryApiImplementer(mySharedPreferences.getStudentId(), mySharedPreferences.getSwdYearId(), new Callback<LeaveApplicationHistoryPojo>() {
+                @Override
+                public void onResponse(Call<LeaveApplicationHistoryPojo> call, Response<LeaveApplicationHistoryPojo> response) {
+                    llLeaveHistoryProgressbar.setVisibility(View.GONE);
+                    if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
+                        llStudentLeaveList.setVisibility(View.VISIBLE);
+                        rvStudentLeaveList.setAdapter(new StudentLeaveApplicationHistoryAdapter(leaveApplicationActivity, (ArrayList<LeaveApplicationHistoryPojo.TableBean>) response.body().getTable()));
+                    } else {
+                        llStudentLeaveList.setVisibility(View.GONE);
+                        llNoDataFoundLeaveHistory.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LeaveApplicationHistoryPojo> call, Throwable t) {
+                    llStudentLeaveList.setVisibility(View.GONE);
+                    llLeaveHistoryProgressbar.setVisibility(View.GONE);
+                    llNoDataFoundLeaveHistory.setVisibility(View.VISIBLE);
+                    Toast.makeText(leaveApplicationActivity, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(leaveApplicationActivity, "No internet connection Please try again later.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 }

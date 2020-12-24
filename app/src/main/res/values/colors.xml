@@ -13,6 +13,7 @@
 
     <color name="white_color_with_85_opacity">#26FFFFFF</color>
     <color name="color_primary_with_75_opacity">#BF252258</color>
+    <color name="color_primary_with_80_opacity">#CC252258</color>
 
     <color name="profile_heading_color">@color/colorAccent</color>
     <color name="profile_heading_value_color">@color/colorPrimary</color>

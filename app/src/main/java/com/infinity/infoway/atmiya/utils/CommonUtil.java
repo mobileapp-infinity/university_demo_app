@@ -26,7 +26,7 @@ public class CommonUtil {
 
 
     public static String generateUniqueFileName(String fileName) {
-        return UUID.randomUUID().toString() + "_"  + fileName;
+        return UUID.randomUUID().toString() + "_" + fileName;
     }
 
     public static boolean checkIsEmptyOrNullCommon(Object object) {
@@ -170,7 +170,7 @@ public class CommonUtil {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public static int convertDpToPxe(Context context,int dp) {
+    public static int convertDpToPxe(Context context, int dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
@@ -201,6 +201,24 @@ public class CommonUtil {
             }
         }
         return ous.toByteArray();
+    }
+
+
+    public static boolean checkIsFromDateGraterThanToDate(String fromDate, String toDate, String dateFormat) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        boolean isValid = true;
+        try {
+            if (simpleDateFormat.parse(fromDate).after(simpleDateFormat.parse(toDate))) {
+                isValid = false;//If start date is before end date
+            } else if (simpleDateFormat.parse(fromDate).equals(simpleDateFormat.parse(toDate))) {
+                isValid = true;//If two dates are equal
+            } else {
+                isValid = true; //If start date is after the end date
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return isValid;
     }
 
 }

@@ -14,12 +14,17 @@ import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramW
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.CheckStudentLeaveExistPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.InsertStudentLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.KindOfLeaveListPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.LeaveApplicationHistoryPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.SelectLectureForPartialLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUploadPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.UploadStudentLeaveDocumentPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
+import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
 
 import java.util.ArrayList;
@@ -132,7 +137,31 @@ public interface IApiInterface {
                                                                             @Query("div_id") String div_id, @Query("stud_id") String stud_id,
                                                                             @Query("from_date") String from_date, @Query("year_id") String year_id);
 
+    @GET("Check_Student_Leave_Exist_API")
+    Call<CheckStudentLeaveExistPojo> checkStudentLeaveExistOrNot(@Query("stud_id") String stud_id, @Query("year_id") String year_id,
+                                                                 @Query("leave_from_date") String leave_from_date, @Query("leave_to_date") String leave_to_date,
+                                                                 @Query("leave_day_type") String leave_day_type, @Query("lect_no") String lect_no);
 
 
+    @GET("insert_student_leave_API")
+    Call<InsertStudentLeavePojo> insertStudentLeave(@Query("student_id") String student_id, @Query("leave_type_id") String leave_type_id,
+                                                    @Query("from_date") String from_date, @Query("to_date") String to_date,
+                                                    @Query("leave_day_type") String leave_day_type, @Query("lecture_date") String lecture_date,
+                                                    @Query("lecture_no") String lecture_no, @Query("Remarks") String Remarks,
+                                                    @Query("year_id") String year_id, @Query("created_by") String created_by,
+                                                    @Query("created_ip") String created_ip, @Query("leave_taken_by") String leave_taken_by);
+
+    @GET("Upload_Student_Leave_Document")
+    Call<UploadStudentLeaveDocumentPojo> uploadStudentLeaveDocument(@Query("name") String name,
+                                                                    @Query("image") String image,
+                                                                    @Query("stud_leave_id") String stud_leave_id);
+
+    @GET("get_student_leave_application_data_API")
+    Call<LeaveApplicationHistoryPojo> getStudentLeaveApplicationHistory(@Query("stud_id") String stud_id,
+                                                                        @Query("year_id") String year_id);
+
+    @GET("Get_Student_Wise_Division_Wise_Student_Activity_API")
+    Call<ArrayList<StudentActivityPojo>> getStudentActivityList(@Query("stud_id") String stud_id,
+                                                                @Query("url") String url);
 
 }

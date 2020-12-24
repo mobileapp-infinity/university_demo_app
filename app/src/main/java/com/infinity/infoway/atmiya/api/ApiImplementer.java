@@ -14,12 +14,17 @@ import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramW
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.CheckStudentLeaveExistPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.InsertStudentLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.KindOfLeaveListPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.LeaveApplicationHistoryPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.SelectLectureForPartialLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUploadPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.UploadStudentLeaveDocumentPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
+import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
 
 import java.util.ArrayList;
@@ -174,6 +179,60 @@ public class ApiImplementer {
                                                        Callback<SelectLectureForPartialLeavePojo> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<SelectLectureForPartialLeavePojo> call = apiService.selectLectureForPartialLeaveList(institute_id, sem_id, div_id, stud_id, from_date, year_id);
+        call.enqueue(cb);
+    }
+
+
+    public static void checkStudentLeaveExisOrNotApiImplementer(String stud_id,
+                                                                String year_id,
+                                                                String leave_from_date,
+                                                                String leave_to_date,
+                                                                String leave_day_type,
+                                                                String lect_no,
+                                                                Callback<CheckStudentLeaveExistPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<CheckStudentLeaveExistPojo> call = apiService.checkStudentLeaveExistOrNot(stud_id, year_id, leave_from_date, leave_to_date, leave_day_type, lect_no);
+        call.enqueue(cb);
+    }
+
+    public static void insertStudentLeaveApiImplementer(String student_id,
+                                                        String leave_type_id,
+                                                        String from_date,
+                                                        String to_date,
+                                                        String leave_day_type,
+                                                        String lecture_date,
+                                                        String lecture_no,
+                                                        String Remarks,
+                                                        String year_id,
+                                                        String created_by,
+                                                        String created_ip,
+                                                        String leave_taken_by,
+                                                        Callback<InsertStudentLeavePojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<InsertStudentLeavePojo> call = apiService.insertStudentLeave(student_id, leave_type_id, from_date, to_date, leave_day_type,
+                lecture_date, lecture_no, Remarks, year_id, created_by, created_ip, leave_taken_by);
+        call.enqueue(cb);
+    }
+
+
+    public static void uploadStudentLeaveDocumentApiImplementer(String fileName, String image, String stud_leave_id,
+                                                                Callback<UploadStudentLeaveDocumentPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<UploadStudentLeaveDocumentPojo> call = apiService.uploadStudentLeaveDocument(fileName, image, stud_leave_id);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentLeaveApplicationHistoryApiImplementer(String stud_id, String year_id,
+                                                                       Callback<LeaveApplicationHistoryPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<LeaveApplicationHistoryPojo> call = apiService.getStudentLeaveApplicationHistory(stud_id, year_id);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentActivityListApiImplementer(String stud_id, String url,
+                                                            Callback<ArrayList<StudentActivityPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<StudentActivityPojo>> call = apiService.getStudentActivityList(stud_id, url);
         call.enqueue(cb);
     }
 

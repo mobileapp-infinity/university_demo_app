@@ -23,13 +23,13 @@ public class PartialLeaveLectureListAdapter extends RecyclerView.Adapter<Partial
     Context context;
     LayoutInflater layoutInflater;
     ArrayList<SelectLectureForPartialLeavePojo.TableBean> tableBeanArrayList;
-//    ISelectLecture iSelectLecture;
+    ISelectLecture iSelectLecture;
 
     public PartialLeaveLectureListAdapter(Context context, ApplyILeaveFragment applyLeaveFragment, ArrayList<SelectLectureForPartialLeavePojo.TableBean> tableBeanArrayList) {
         this.context = context;
         this.tableBeanArrayList = tableBeanArrayList;
         layoutInflater = LayoutInflater.from(context);
-//        iSelectLecture = (ISelectLecture) applyLeaveFragment;
+        iSelectLecture = (ISelectLecture) applyLeaveFragment;
     }
 
     @NonNull
@@ -57,7 +57,7 @@ public class PartialLeaveLectureListAdapter extends RecyclerView.Adapter<Partial
             @Override
             public void onClick(View v) {
                 tableBeanArrayList.get(position).setSelected(!tableBeanArrayList.get(position).isSelected());
-//                iSelectLecture.onLectureSelected();
+                iSelectLecture.onLectureSelected(tableBeanArrayList);
                 notifyDataSetChanged();
             }
         });
@@ -84,7 +84,7 @@ public class PartialLeaveLectureListAdapter extends RecyclerView.Adapter<Partial
     }
 
     public interface ISelectLecture {
-        void onLectureSelected();
+        void onLectureSelected(ArrayList<SelectLectureForPartialLeavePojo.TableBean> tableBeanArrayList);
     }
 
 }

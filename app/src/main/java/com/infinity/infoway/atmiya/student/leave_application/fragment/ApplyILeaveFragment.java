@@ -22,18 +22,20 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.SpinnerSimpleAdapter;
-import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
+import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.leave_application.adapter.PartialLeaveLectureListAdapter;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.CheckStudentLeaveExistPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.InsertStudentLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.KindOfLeaveListPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.SelectLectureForPartialLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUploadPojo;
+import com.infinity.infoway.atmiya.student.leave_application.pojo.UploadStudentLeaveDocumentPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,10 +51,16 @@ import retrofit2.Response;
 
 public class ApplyILeaveFragment extends Fragment implements View.OnClickListener,
         UploadFileBottomSheetDialog.CloseUploadFileDialog,
-        LeaveApplicationActivity.ILeaveApplicationFileUpload, PartialLeaveLectureListAdapter.ISelectLecture {
+        LeaveApplicationActivity.ILeaveApplicationFileUpload,
+        PartialLeaveLectureListAdapter.ISelectLecture {
 
     private static final String SELECT_TYPE_OF_LEAVE = "Select Type Of Leave";
     private static final String SELECT_KIND_OF_LEAVE = "Select Kind Of Leave";
+
+    private static final String LEAVE_TYPE_PARTIAL = "Partially Leave";
+    private static final int LEAVE_TYPE_PARTIAL_ID = 1;
+    private static final String LEAVE_TYPE_FULL = "Full Leave";
+    private static final int LEAVE_TYPE_FULL_ID = 2;
 
     LeaveApplicationActivity leaveApplicationActivity;
     MySharedPreferences mySharedPreferences;
@@ -65,7 +73,7 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
     SpinnerSimpleAdapter spinnerAdapterKindOfLeave, spinnerAdapterTypeOfLeave;
     AppCompatEditText edtFromDate, edtToDate, edtUploadFile;
     TextInputEditText tilNote;
-    TextViewMediumFont tvSaveLeave;
+    TextViewRegularFont tvSaveLeave;
 
     ArrayList<String> typeOfLeaveArrayList;
     ArrayList<String> kindOfLeaveArrayList;
@@ -78,59 +86,13 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
     UploadFileBottomSheetDialog uploadFileBottomSheetDialog;
     RecyclerView rvLectureList;
     LinearLayout llSelectLecture;
-    DateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+    ArrayList<SelectLectureForPartialLeavePojo.TableBean> tableBeanArrayList;
+    String selectedLectureNo = "";
+    private boolean isLectureSelected = false;
+    private boolean isLectureFound = false;
 
-
-    final DatePickerDialog.OnDateSetListener fromDateListener = new DatePickerDialog.OnDateSetListener() {
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            myCalendarFromDate.set(Calendar.YEAR, year);
-            myCalendarFromDate.set(Calendar.MONTH, monthOfYear);
-            myCalendarFromDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-            String myFormat = "yyyy-MM-dd";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
-            Date fromDate = null;
-            try {
-                fromDate = simpleDateFormat.parse(simpleDateFormat.format(myCalendarFromDate.getTime()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            edtFromDate.setText(simpleDateFormat.format(fromDate));
-
-            if (!CommonUtil.checkIsEmptyOrNullCommon(edtFromDate.getText().toString())) {
-                String fromDateArray[] = edtFromDate.getText().toString().split("-");
-                selectLectureListApiCall(fromDateArray[2] + "/" + fromDateArray[1] + "/" + fromDateArray[0]);
-            }
-
-        }
-    };
-
-    final DatePickerDialog.OnDateSetListener toDateListener = new DatePickerDialog.OnDateSetListener() {
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            // TODO Auto-generated method stub
-            myCalendarToDate.set(Calendar.YEAR, year);
-            myCalendarToDate.set(Calendar.MONTH, monthOfYear);
-            myCalendarToDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-            String myFormat = "yyyy-MM-dd";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
-            Date toDate = null;
-            try {
-                toDate = simpleDateFormat.parse(simpleDateFormat.format(myCalendarToDate.getTime()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            edtToDate.setText(simpleDateFormat.format(toDate));
-        }
-    };
-
+    String leave_day_type = "";
+    String uploadedFileByteArray = "";
 
     private static ApplyILeaveFragment fragment = null;
 
@@ -168,13 +130,16 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
             Toast.makeText(leaveApplicationActivity, "Please Select Kind Of Leave.", Toast.LENGTH_SHORT).show();
             isValid = false;
         } else if (spLeaveType.getSelectedItemPosition() == 0) {
-            Toast.makeText(leaveApplicationActivity, "Please Select Leave Type Of Leave.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(leaveApplicationActivity, "Please Select Type Of Leave.", Toast.LENGTH_SHORT).show();
             isValid = false;
         } else if (CommonUtil.checkIsEmptyOrNullCommon(edtFromDate.getText().toString())) {
             Toast.makeText(leaveApplicationActivity, "Please Select From-Date.", Toast.LENGTH_SHORT).show();
             isValid = false;
         } else if (CommonUtil.checkIsEmptyOrNullCommon(edtToDate.getText().toString())) {
             Toast.makeText(leaveApplicationActivity, "Please Select To-Date.", Toast.LENGTH_SHORT).show();
+            isValid = false;
+        } else if (isLectureFound && (!isLectureSelected || CommonUtil.checkIsEmptyOrNullCommon(selectedLectureNo))) {
+            Toast.makeText(leaveApplicationActivity, "Please Select Lecture.", Toast.LENGTH_SHORT).show();
             isValid = false;
         } else if (isFileUploadCompulsory && CommonUtil.checkIsEmptyOrNullCommon(edtUploadFile.getText().toString())) {
             Toast.makeText(leaveApplicationActivity, "Please upload file.", Toast.LENGTH_SHORT).show();
@@ -219,6 +184,13 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
         });
     }
 
+    private void callSelectLectureApi() {
+        if (LEAVE_TYPE_PARTIAL.equalsIgnoreCase(typeOfLeaveArrayList.get(spLeaveType.getSelectedItemPosition())) && !CommonUtil.checkIsEmptyOrNullCommon(edtFromDate.getText().toString())) {
+            String fromDateArray[] = edtFromDate.getText().toString().split("-");
+            selectLectureListApiCall(fromDateArray[2] + "/" + fromDateArray[1] + "/" + fromDateArray[0]);
+        }
+    }
+
     private void getTypeOfFileUpload(String leave_type_id) {
         ApiImplementer.getTypeOfFileUploadApiImplementer(leave_type_id, new Callback<TypeOfFileUploadPojo>() {
             @Override
@@ -258,15 +230,22 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
                             llSelectLecture.setVisibility(View.VISIBLE);
                             ArrayList<SelectLectureForPartialLeavePojo.TableBean> tableBeanArrayList = (ArrayList<SelectLectureForPartialLeavePojo.TableBean>) response.body().getTable();
                             tableBeanArrayList.get(0).setSelected(true);
+                            selectedLectureNo = tableBeanArrayList.get(0).getDLLECNO() + "";
+                            isLectureSelected = true;
+                            isLectureFound = true;
                             rvLectureList.setAdapter(new PartialLeaveLectureListAdapter(leaveApplicationActivity, ApplyILeaveFragment.this, tableBeanArrayList));
                         } else {
                             llSelectLecture.setVisibility(View.GONE);
+                            isLectureSelected = false;
+                            isLectureFound = false;
                         }
                     }
 
                     @Override
                     public void onFailure(Call<SelectLectureForPartialLeavePojo> call, Throwable t) {
                         llSelectLecture.setVisibility(View.GONE);
+                        isLectureFound = false;
+                        isLectureSelected = false;
                     }
                 });
     }
@@ -293,8 +272,8 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
 
         typeOfLeaveArrayList = new ArrayList<>();
         typeOfLeaveArrayList.add(SELECT_TYPE_OF_LEAVE);
-        typeOfLeaveArrayList.add("Partially Leave");
-        typeOfLeaveArrayList.add("Full Leave");
+        typeOfLeaveArrayList.add(LEAVE_TYPE_PARTIAL);
+        typeOfLeaveArrayList.add(LEAVE_TYPE_FULL);
 
         spinnerAdapterTypeOfLeave = new SpinnerSimpleAdapter(leaveApplicationActivity, typeOfLeaveArrayList);
         spLeaveType.setAdapter(spinnerAdapterTypeOfLeave);
@@ -318,26 +297,99 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
             }
         });
 
+        spLeaveType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+
+                    if (typeOfLeaveArrayList.get(spLeaveType.getSelectedItemPosition()).equalsIgnoreCase(LEAVE_TYPE_PARTIAL)) {
+                        leave_day_type = LEAVE_TYPE_PARTIAL_ID + "";
+                    } else {
+                        leave_day_type = LEAVE_TYPE_FULL_ID + "";
+                    }
+                    if (LEAVE_TYPE_PARTIAL.equalsIgnoreCase(typeOfLeaveArrayList.get(position))) {
+                        callSelectLectureApi();
+                    } else {
+                        llSelectLecture.setVisibility(View.GONE);
+                        isLectureFound = false;
+                    }
+                } else {
+                    llSelectLecture.setVisibility(View.GONE);
+                    isLectureFound = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.tvSaveLeave) {
             if (isValid()) {
+                Toast.makeText(leaveApplicationActivity, "Validation Correct", Toast.LENGTH_SHORT).show();
+                checkStudentLeaveIsExistOrNotApiCall(edtFromDate.getText().toString(), edtToDate.getText().toString(), leave_day_type, selectedLectureNo);
             }
         } else if (v.getId() == R.id.edtFromDate) {
-            Date fromDate = myCalendarFromDate.getTime();
-            DatePickerDialog datePickerDialogFromDate = new DatePickerDialog(leaveApplicationActivity, fromDateListener, myCalendarFromDate
-                    .get(Calendar.YEAR), myCalendarFromDate.get(Calendar.MONTH),
-                    myCalendarFromDate.get(Calendar.DAY_OF_MONTH));
-            datePickerDialogFromDate.getDatePicker().setMinDate(fromDate.getTime());
+
+            DatePickerDialog datePickerDialogFromDate = new DatePickerDialog(leaveApplicationActivity,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            myCalendarFromDate.set(Calendar.YEAR, year);
+                            myCalendarFromDate.set(Calendar.MONTH, monthOfYear);
+                            myCalendarFromDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                            String myFormat = "yyyy-MM-dd";
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
+                            Date fromDate = null;
+                            try {
+                                fromDate = simpleDateFormat.parse(simpleDateFormat.format(myCalendarFromDate.getTime()));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            edtFromDate.setText(simpleDateFormat.format(fromDate));
+                            callSelectLectureApi();
+                        }
+                    }, myCalendarFromDate.get(Calendar.YEAR), myCalendarFromDate.get(Calendar.MONTH), myCalendarFromDate.get(Calendar.DAY_OF_MONTH));
+            datePickerDialogFromDate.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialogFromDate.show();
+
+
         } else if (v.getId() == R.id.edtToDate) {
-            Date result = myCalendarToDate.getTime();
-            DatePickerDialog datePickerDialogToDate = new DatePickerDialog(leaveApplicationActivity, toDateListener, myCalendarToDate
-                    .get(Calendar.YEAR), myCalendarToDate.get(Calendar.MONTH),
-                    myCalendarToDate.get(Calendar.DAY_OF_MONTH));
-            datePickerDialogToDate.getDatePicker().setMinDate(result.getTime());
+            DatePickerDialog datePickerDialogToDate = new DatePickerDialog(leaveApplicationActivity,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            myCalendarToDate.set(Calendar.YEAR, year);
+                            myCalendarToDate.set(Calendar.MONTH, monthOfYear);
+                            myCalendarToDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                            String myFormat = "yyyy-MM-dd";
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
+                            Date toDate = null;
+                            try {
+                                toDate = simpleDateFormat.parse(simpleDateFormat.format(myCalendarToDate.getTime()));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            edtToDate.setText(simpleDateFormat.format(toDate));
+
+
+                        }
+                    }, myCalendarToDate.get(Calendar.YEAR), myCalendarToDate.get(Calendar.MONTH), myCalendarToDate.get(Calendar.DAY_OF_MONTH));
+            datePickerDialogToDate.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialogToDate.show();
         } else if (v.getId() == R.id.edtUploadFile) {
             uploadFileBottomSheetDialog = new UploadFileBottomSheetDialog(leaveApplicationActivity, ApplyILeaveFragment.this);
@@ -345,8 +397,120 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
         }
     }
 
+    private void checkStudentLeaveIsExistOrNotApiCall(String leaveFromDate, String leaveToDate, String leaveDayType, String lectureNo) {
+        DialogUtil.showProgressDialogNotCancelable(leaveApplicationActivity, "");
+        ApiImplementer.checkStudentLeaveExisOrNotApiImplementer(mySharedPreferences.getStudentId(), mySharedPreferences.getSwdYearId(),
+                leaveFromDate, leaveToDate, leaveDayType, lectureNo, new Callback<CheckStudentLeaveExistPojo>() {
+                    @Override
+                    public void onResponse(Call<CheckStudentLeaveExistPojo> call, Response<CheckStudentLeaveExistPojo> response) {
+                        if (response.isSuccessful() && response.body() != null &&
+                                response.body().getTable() != null && response.body().getTable().size() > 0) {
+                            if (response.body().getTable().get(0).getExist_status().equalsIgnoreCase("0")) {
+                                String leave_type_id = hashMapKindOfLeave.get(kindOfLeaveArrayList.get(spKindOfLeave.getSelectedItemPosition()));
+                                String lectureNoDate = "";
+                                String lectureNoDateArray[] = edtFromDate.getText().toString().split("-");
+                                lectureNoDate = lectureNoDateArray[2] + "-" + lectureNoDateArray[1] + "-" + lectureNoDateArray[0];
+                                if (leave_day_type.equalsIgnoreCase("2")) {
+                                    if (CommonUtil.checkIsFromDateGraterThanToDate(edtFromDate.getText().toString(), edtToDate.getText().toString(), "yyyy-MM-dd")) {
+                                        //call insert api
+                                        insertStudentLeaveApiCall(false, false, leave_type_id, edtFromDate.getText().toString(), edtToDate.getText().toString(), leave_day_type,
+                                                lectureNoDate, lectureNo, tilNote.getText().toString());
+                                    } else {
+                                        DialogUtil.hideProgressDialog();
+                                        Toast.makeText(leaveApplicationActivity, "To-Date Should Be Greater Than From-Date", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    //call insert api
+                                    insertStudentLeaveApiCall(false, false, leave_type_id, edtFromDate.getText().toString(), edtToDate.getText().toString(), leave_day_type,
+                                            lectureNoDate, lectureNo, tilNote.getText().toString());
+                                }
+                            } else {
+                                DialogUtil.hideProgressDialog();
+                                Toast.makeText(leaveApplicationActivity, "Leave Already Exist.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            DialogUtil.hideProgressDialog();
+                            Toast.makeText(leaveApplicationActivity, "Something went wrong please try again later.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CheckStudentLeaveExistPojo> call, Throwable t) {
+                        DialogUtil.hideProgressDialog();
+                        Toast.makeText(leaveApplicationActivity, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void insertStudentLeaveApiCall(boolean isPdShow, boolean isPdHide, String leave_type_id, String from_date, String to_date, String leave_day_type,
+                                           String lecture_date, String lecture_no, String Remarks) {
+        if (isPdShow) {
+            DialogUtil.showProgressDialogNotCancelable(leaveApplicationActivity, "");
+        }
+        ApiImplementer.insertStudentLeaveApiImplementer(mySharedPreferences.getStudentId(), leave_type_id, from_date, to_date, leave_day_type, lecture_date, lecture_no,
+                Remarks, mySharedPreferences.getSwdYearId(), mySharedPreferences.getStudentId(), "1", "student", new Callback<InsertStudentLeavePojo>() {
+                    @Override
+                    public void onResponse(Call<InsertStudentLeavePojo> call, Response<InsertStudentLeavePojo> response) {
+                        if (isPdHide) {
+                            DialogUtil.hideProgressDialog();
+                        }
+
+                        if (response.isSuccessful() && response.body() != null && response.body().getTable() != null &&
+                                Integer.parseInt(response.body().getTable().get(0).getInsert_status()) > 0) {
+                            if (isFileUploadCompulsory && !CommonUtil.checkIsEmptyOrNullCommon(uploadedFileByteArray)) {
+                                String fileName = tilNote.getText().toString();
+
+                                String fileExtension = fileName.substring(fileName.lastIndexOf("."));
+                                uploadStudentLeaveDocumentApiImplementer(false, true,
+                                        response.body().getTable().get(0).getInsert_status() + fileExtension,
+                                        uploadedFileByteArray,
+                                        response.body().getTable().get(0).getInsert_status());
+                            }
+                        } else {
+                            DialogUtil.hideProgressDialog();
+                            Toast.makeText(leaveApplicationActivity, "Something went wrong please try again later.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<InsertStudentLeavePojo> call, Throwable t) {
+                        DialogUtil.hideProgressDialog();
+                        Toast.makeText(leaveApplicationActivity, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void uploadStudentLeaveDocumentApiImplementer(boolean isPdShow, boolean isPdHide, String fileName, String fileArray, String studentLeaveId) {
+
+        if (isPdShow) {
+            DialogUtil.showProgressDialogNotCancelable(leaveApplicationActivity, "");
+        }
+
+        ApiImplementer.uploadStudentLeaveDocumentApiImplementer(fileName, fileArray, studentLeaveId, new Callback<UploadStudentLeaveDocumentPojo>() {
+            @Override
+            public void onResponse(Call<UploadStudentLeaveDocumentPojo> call, Response<UploadStudentLeaveDocumentPojo> response) {
+                if (isPdHide) {
+                    DialogUtil.hideProgressDialog();
+                }
+                if (response.isSuccessful() && response.body() != null && response.body().getStatus().equalsIgnoreCase("1")) {
+                    Toast.makeText(leaveApplicationActivity, "Leave Added Successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(leaveApplicationActivity, "Something went wrong please try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UploadStudentLeaveDocumentPojo> call, Throwable t) {
+                DialogUtil.hideProgressDialog();
+                Toast.makeText(leaveApplicationActivity, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
-    public void onFileSelectOrCapture(String fileName, String byteArayOfFile) {
+    public void onFileSelectOrCapture(String fileName, String byteArrayOfImg) {
+        uploadedFileByteArray = byteArrayOfImg;
         if (!CommonUtil.checkIsEmptyOrNullCommon(fileName)) {
             edtUploadFile.setText(fileName);
         }
@@ -357,8 +521,23 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
         uploadFileBottomSheetDialog.dismiss();
     }
 
+
     @Override
-    public void onLectureSelected() {
-        Toast.makeText(leaveApplicationActivity, "Lecture Selected", Toast.LENGTH_SHORT).show();
+    public void onLectureSelected(ArrayList<SelectLectureForPartialLeavePojo.TableBean> tableBeanArrayListNew) {
+        selectedLectureNo = "";
+        this.tableBeanArrayList = tableBeanArrayListNew;
+        for (int i = 0; i < tableBeanArrayList.size(); i++) {
+            if (tableBeanArrayList.get(i).isSelected()) {
+                selectedLectureNo = selectedLectureNo + "," + tableBeanArrayList.get(i).getDLLECNO() + "";
+            }
+        }
+        selectedLectureNo = selectedLectureNo.replaceFirst(",", "");
+        if (CommonUtil.checkIsEmptyOrNullCommon(selectedLectureNo)) {
+            isLectureSelected = false;
+        } else {
+            isLectureSelected = true;
+        }
     }
+
+
 }

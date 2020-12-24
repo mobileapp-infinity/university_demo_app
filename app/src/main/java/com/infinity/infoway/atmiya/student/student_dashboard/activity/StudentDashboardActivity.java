@@ -33,6 +33,7 @@ import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivit
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
+import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.adapter.NewsOrNotificationListAdapter;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
@@ -204,7 +205,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             Intent feeDetailsIntent = new Intent(StudentDashboardActivity.this, FeeDetailsActivity.class);
             startActivity(feeDetailsIntent);
         } else if (v.getId() == R.id.llActivityStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, StudentActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llMessageHistoryStudentSide) {
             Intent intent = new Intent(StudentDashboardActivity.this, MessageHistoryActivity.class);
             startActivity(intent);
