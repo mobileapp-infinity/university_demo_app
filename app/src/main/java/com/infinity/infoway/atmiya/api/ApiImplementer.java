@@ -6,6 +6,12 @@ import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
 import com.infinity.infoway.atmiya.student.assignment.StudentAssignmentListPojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.CheckIsELearningManagementGroupIsCompulsoryOrNot;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.ELearningYearListPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.GroupWiseSubjectlistPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.JoinGroupListPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.LearningManagementGroupDetailsPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.StudentWiseLearningGroupPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
@@ -233,6 +239,50 @@ public class ApiImplementer {
                                                             Callback<ArrayList<StudentActivityPojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<StudentActivityPojo>> call = apiService.getStudentActivityList(stud_id, url);
+        call.enqueue(cb);
+    }
+
+    public static void getELearningYearListApiImplementer(String institute_id,
+                                                          Callback<ELearningYearListPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ELearningYearListPojo> call = apiService.getELearningYear(institute_id);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentWiseLearningGroupApiImplementer(String stud_id,
+                                                                 Callback<StudentWiseLearningGroupPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<StudentWiseLearningGroupPojo> call = apiService.getStudentWiseLearningGroup(stud_id);
+        call.enqueue(cb);
+    }
+
+    public static void checkIsELearningGroupIsCompulsoryOrNotApiImplementer(String grp_id,
+                                                                            Callback<ArrayList<CheckIsELearningManagementGroupIsCompulsoryOrNot>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<CheckIsELearningManagementGroupIsCompulsoryOrNot>> call = apiService.checkIsELearningGroupIsCompulsoryOrNot(grp_id);
+        call.enqueue(cb);
+    }
+
+    public static void getJoinLearningManagementGroupsApiImplementer(String stud_id, String year_id,
+                                                                     Callback<ArrayList<JoinGroupListPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<JoinGroupListPojo>> call = apiService.getJoinLearningManagementGroups(stud_id, year_id);
+        call.enqueue(cb);
+    }
+
+    public static void groupWiseLearningManagementSubjectListApiImplementer(String stud_id, String sem_id, String year_id, String grp_id,
+                                                                            Callback<ArrayList<GroupWiseSubjectlistPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<GroupWiseSubjectlistPojo>> call = apiService.groupWiseLearningManagementSubjectList(stud_id, sem_id, year_id, grp_id);
+        call.enqueue(cb);
+    }
+
+    public static void groupWiseLearningManagementSubjectListApiImplementer(String grp_id, String stud_id, String sem_id, String year_id,
+                                                                            String from_date, String to_date, String sub_id,
+                                                                            Callback<ArrayList<LearningManagementGroupDetailsPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<LearningManagementGroupDetailsPojo>> call = apiService.groupWiseLearningManagementSubjectList(grp_id, stud_id, sem_id, year_id,
+                from_date, to_date, sub_id);
         call.enqueue(cb);
     }
 

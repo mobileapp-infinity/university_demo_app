@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg_color"
     android:orientation="vertical"
-    tools:context=".student.exam.activity.CIAMarksActivity">
+    tools:context=".student.exam.activity.StudentResultActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

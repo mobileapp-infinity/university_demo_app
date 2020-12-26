@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
-import com.infinity.infoway.atmiya.student.exam.adapter.CIAMarksListAdapter;
+import com.infinity.infoway.atmiya.student.exam.adapter.ResultListAdapter;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
@@ -23,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CIAMarksActivity extends AppCompatActivity implements View.OnClickListener {
+public class StudentResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     MySharedPreferences mySharedPreferences;
     AppCompatImageView ivCloseCIAMarks;
@@ -40,8 +40,8 @@ public class CIAMarksActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-        mySharedPreferences = new MySharedPreferences(CIAMarksActivity.this);
-        connectionDetector = new ConnectionDetector(CIAMarksActivity.this);
+        mySharedPreferences = new MySharedPreferences(StudentResultActivity.this);
+        connectionDetector = new ConnectionDetector(StudentResultActivity.this);
         ivCloseCIAMarks = findViewById(R.id.ivCloseCIAMarks);
         ivCloseCIAMarks.setOnClickListener(this);
         rvCIAMarksStudent = findViewById(R.id.rvCIAMarksStudent);
@@ -78,7 +78,7 @@ public class CIAMarksActivity extends AppCompatActivity implements View.OnClickL
                                 response.body().size() > 0) {
                             llStudentCIAMarksList.setVisibility(View.VISIBLE);
                             llNoDataFoundCIAMarks.setVisibility(View.GONE);
-                            rvCIAMarksStudent.setAdapter(new CIAMarksListAdapter(CIAMarksActivity.this, response.body()));
+                            rvCIAMarksStudent.setAdapter(new ResultListAdapter(StudentResultActivity.this, response.body()));
                         } else {
                             llStudentCIAMarksList.setVisibility(View.GONE);
                             llNoDataFoundCIAMarks.setVisibility(View.VISIBLE);
@@ -90,7 +90,7 @@ public class CIAMarksActivity extends AppCompatActivity implements View.OnClickL
                         llStudentCIAMarksList.setVisibility(View.GONE);
                         llCIAMarksProgressbar.setVisibility(View.GONE);
                         llNoDataFoundCIAMarks.setVisibility(View.VISIBLE);
-                        Toast.makeText(CIAMarksActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StudentResultActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {

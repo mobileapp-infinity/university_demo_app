@@ -26,6 +26,7 @@ import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
 import com.infinity.infoway.atmiya.student.assignment.AssignmentActivity;
 import com.infinity.infoway.atmiya.student.attendance.activity.StudentAttendanceActivity;
+import com.infinity.infoway.atmiya.student.e_learning.activity.ELearningActivity;
 import com.infinity.infoway.atmiya.student.exam.activity.ExamActivity;
 import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
@@ -186,7 +187,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             Intent intent = new Intent(StudentDashboardActivity.this, LeaveApplicationActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.llELearningStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, ELearningActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llAssignmentStudentSide) {
             Intent intent = new Intent(StudentDashboardActivity.this, AssignmentActivity.class);
             startActivity(intent);
@@ -256,39 +258,45 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             ApiImplementer.getStudentProfileImplementer(mParams, new Callback<StudentProfilePojo>() {
                 @Override
                 public void onResponse(Call<StudentProfilePojo> call, Response<StudentProfilePojo> response) {
-                    llStudentDashboradProgressbar.setVisibility(View.GONE);
-                    if (response.isSuccessful() && response.body() != null) {
-                        StudentProfilePojo studentProfilePojo = response.body();
-                        if (studentProfilePojo.getStudName() != null && !studentProfilePojo.getStudName().isEmpty()) {
-                            tvStudentName.setText("Hello, " + studentProfilePojo.getStudName());
-                        }
-                        String studentSemAndDesignation = "Sem - ";
-                        if (studentProfilePojo.getSmName() != null && !studentProfilePojo.getSmName().isEmpty()) {
-                            studentSemAndDesignation += studentProfilePojo.getSmName().split("-")[1];
-                        }
+                    try {
+                        llStudentDashboradProgressbar.setVisibility(View.GONE);
+                        if (response.isSuccessful() && response.body() != null) {
+                            StudentProfilePojo studentProfilePojo = response.body();
+                            if (studentProfilePojo.getStudName() != null && !studentProfilePojo.getStudName().isEmpty()) {
+                                tvStudentName.setText("Hello, " + studentProfilePojo.getStudName());
+                            }
+//                            String studentSemAndDesignation = "Sem - ";
+                            String studentSemAndDesignation = "";
+                            if (studentProfilePojo.getSmName() != null && !studentProfilePojo.getSmName().isEmpty()) {
+//                                studentSemAndDesignation += studentProfilePojo.getSmName().split("-")[1];
+                                studentSemAndDesignation = studentProfilePojo.getSmName();
+                            }
 
-                        if (studentProfilePojo.getCourseFullname() != null && !studentProfilePojo.getCourseFullname().isEmpty()) {
-                            studentSemAndDesignation += ", " + studentProfilePojo.getCourseFullname();
+                            if (studentProfilePojo.getCourseFullname() != null && !studentProfilePojo.getCourseFullname().isEmpty()) {
+                                studentSemAndDesignation += ", " + studentProfilePojo.getCourseFullname();
+                            }
+                            tvStudentSemAndDesignation.setText(studentSemAndDesignation);
+
+                            Glide.with(StudentDashboardActivity.this)
+                                    .asBitmap()
+                                    .load(studentProfilePojo.getStudPhoto())
+                                    .override(46, 46)
+                                    .placeholder(R.drawable.person_img)
+                                    .error(R.drawable.person_img)
+                                    .into(cImgProfileStudentSide);
+
+                            svStudentDashboard.setVisibility(View.VISIBLE);
+                            llAttendanceStudentSide.startAnimation(AnimationUtils.loadAnimation(StudentDashboardActivity.this, R.anim.attendance_left_to_right));
+                            getSliderImagesApiCall();
+                            loadStudentAttendanceProgress(studentProfilePojo.getCurrentMonthAvgAtt(),
+                                    studentProfilePojo.getPreviousMonthAvgAtt(),
+                                    studentProfilePojo.getSemesterAvgAtt());
+                            getStudentNewsOrNotificationListApiCall();
+                        } else {
+                            Toast.makeText(StudentDashboardActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
                         }
-                        tvStudentSemAndDesignation.setText(studentSemAndDesignation);
-
-                        Glide.with(StudentDashboardActivity.this)
-                                .asBitmap()
-                                .load(studentProfilePojo.getStudPhoto())
-                                .override(46, 46)
-                                .placeholder(R.drawable.person_img)
-                                .error(R.drawable.person_img)
-                                .into(cImgProfileStudentSide);
-
-                        svStudentDashboard.setVisibility(View.VISIBLE);
-                        llAttendanceStudentSide.startAnimation(AnimationUtils.loadAnimation(StudentDashboardActivity.this, R.anim.attendance_left_to_right));
-                        getSliderImagesApiCall();
-                        loadStudentAttendanceProgress(studentProfilePojo.getCurrentMonthAvgAtt(),
-                                studentProfilePojo.getPreviousMonthAvgAtt(),
-                                studentProfilePojo.getSemesterAvgAtt());
-                        getStudentNewsOrNotificationListApiCall();
-                    } else {
-                        Toast.makeText(StudentDashboardActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
+                    }catch (Exception ex){
+                     ex.printStackTrace();
                     }
                 }
 

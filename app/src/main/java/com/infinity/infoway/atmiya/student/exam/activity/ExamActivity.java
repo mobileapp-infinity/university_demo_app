@@ -41,10 +41,10 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(ExamActivity.this, ExaminationScheduleActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.llExamResult) {
-
-        } else if (v.getId() == R.id.llExamCIAMarks) {
-            Intent intent = new Intent(ExamActivity.this, CIAMarksActivity.class);
+            Intent intent = new Intent(ExamActivity.this, StudentResultActivity.class);
             startActivity(intent);
+        } else if (v.getId() == R.id.llExamCIAMarks) {
+
         }
     }
 

@@ -5,11 +5,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infinity.infoway.atmiya.R;
@@ -19,25 +17,22 @@ import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
-import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 
 import java.util.ArrayList;
-
-import javax.crypto.ExemptionMechanism;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CIAMarksListAdapter extends RecyclerView.Adapter<CIAMarksListAdapter.MyViewHolder> {
+public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.MyViewHolder> {
 
     Context context;
     LayoutInflater layoutInflater;
     ArrayList<CIAMarkstPojo> ciaMarkstPojoArrayList;
     ProgressDialog progressDialog;
 
-    public CIAMarksListAdapter(Context context, ArrayList<CIAMarkstPojo> ciaMarkstPojoArrayList) {
+    public ResultListAdapter(Context context, ArrayList<CIAMarkstPojo> ciaMarkstPojoArrayList) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.ciaMarkstPojoArrayList = ciaMarkstPojoArrayList;

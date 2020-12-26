@@ -6,6 +6,12 @@ import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
 import com.infinity.infoway.atmiya.student.assignment.StudentAssignmentListPojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.CheckIsELearningManagementGroupIsCompulsoryOrNot;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.ELearningYearListPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.GroupWiseSubjectlistPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.JoinGroupListPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.LearningManagementGroupDetailsPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.StudentWiseLearningGroupPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
@@ -163,5 +169,33 @@ public interface IApiInterface {
     @GET("Get_Student_Wise_Division_Wise_Student_Activity_API")
     Call<ArrayList<StudentActivityPojo>> getStudentActivityList(@Query("stud_id") String stud_id,
                                                                 @Query("url") String url);
+
+    @GET("Get_Year_Master_At_Learning_Managemnt_API")
+    Call<ELearningYearListPojo> getELearningYear(@Query("institute_id") String institute_id);
+
+    @GET("Get_Student_Wise_Learning_Management_Group_API")
+    Call<StudentWiseLearningGroupPojo> getStudentWiseLearningGroup(@Query("stud_id") String stud_id);
+
+    @GET("Check_Learning_Management_Group_is_Compulsory_or_Not_API")
+    Call<ArrayList<CheckIsELearningManagementGroupIsCompulsoryOrNot>> checkIsELearningGroupIsCompulsoryOrNot(@Query("grp_id") String grp_id);
+
+    @GET("Get_Learning_Management_Groups_For_Students_API")
+    Call<ArrayList<JoinGroupListPojo>> getJoinLearningManagementGroups(@Query("stud_id") String stud_id,
+                                                                       @Query("year_id") String year_id);
+
+    @GET("Get_Group_Wise_Learning_Management_Subject_Details_API")
+    Call<ArrayList<GroupWiseSubjectlistPojo>> groupWiseLearningManagementSubjectList(@Query("stud_id") String stud_id,
+                                                                                     @Query("sem_id") String sem_id,
+                                                                                     @Query("year_id") String year_id,
+                                                                                     @Query("grp_id") String grp_id);
+
+    @GET("Get_Learning_Management_Group_Details_Group_Wise_New_API")
+    Call<ArrayList<LearningManagementGroupDetailsPojo>> groupWiseLearningManagementSubjectList(@Query("grp_id") String grp_id,
+                                                                                               @Query("stud_id") String stud_id,
+                                                                                               @Query("sem_id") String sem_id,
+                                                                                               @Query("year_id") String year_id,
+                                                                                               @Query("from_date") String from_date,
+                                                                                               @Query("to_date") String to_date,
+                                                                                               @Query("sub_id") String sub_id);
 
 }
