@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class GroupWiseSubjectlistPojo {
-       
+
     @SerializedName("sub_id")
     @Expose
     private String subId;
