@@ -1,5 +1,8 @@
 package com.infinity.infoway.atmiya.student.leave_application.pojo;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class UploadStudentLeaveDocumentPojo {
 
     /**
@@ -7,7 +10,11 @@ public class UploadStudentLeaveDocumentPojo {
      * msg : Photo Upload successfully
      */
 
+    @SerializedName("status")
+    @Expose
     private String status;
+    @SerializedName("msg")
+    @Expose
     private String msg;
 
     public String getStatus() {

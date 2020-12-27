@@ -331,7 +331,7 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         if (v.getId() == R.id.tvSaveLeave) {
             if (isValid()) {
-                Toast.makeText(leaveApplicationActivity, "Validation Correct", Toast.LENGTH_SHORT).show();
+                CommonUtil.hideKeyboardCommon(leaveApplicationActivity);
                 checkStudentLeaveIsExistOrNotApiCall(edtFromDate.getText().toString(), edtToDate.getText().toString(), leave_day_type, selectedLectureNo);
             }
         } else if (v.getId() == R.id.edtFromDate) {
@@ -458,7 +458,7 @@ public class ApplyILeaveFragment extends Fragment implements View.OnClickListene
                         if (response.isSuccessful() && response.body() != null && response.body().getTable() != null &&
                                 Integer.parseInt(response.body().getTable().get(0).getInsert_status()) > 0) {
                             if (isFileUploadCompulsory && !CommonUtil.checkIsEmptyOrNullCommon(uploadedFileByteArray)) {
-                                String fileName = tilNote.getText().toString();
+                                String fileName = edtUploadFile.getText().toString();
 
                                 String fileExtension = fileName.substring(fileName.lastIndexOf("."));
                                 uploadStudentLeaveDocumentApiImplementer(false, true,

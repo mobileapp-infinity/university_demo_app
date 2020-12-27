@@ -250,6 +250,7 @@
                     android:layout_marginTop="2dp"
                     android:orientation="vertical"
                     android:text="-"
+                    android:gravity="center"
                     android:textAllCaps="true"
                     android:textColor="@color/profile_heading_value_color"
                     android:textSize="12sp" />

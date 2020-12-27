@@ -7,8 +7,11 @@ import com.infinity.infoway.atmiya.student.assignment.StudentAssignmentListPojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.CheckIsELearningManagementGroupIsCompulsoryOrNot;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.CheckIsLearningManagementGroupIsExistOrNotPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.ELearningYearListPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.EnrollToGroupPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.GroupWiseSubjectlistPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.InsertStudentLearningManagementPushNotificationPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.JoinGroupListPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.LearningManagementGroupDetailsPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.StudentWiseLearningGroupPojo;
@@ -20,6 +23,7 @@ import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramW
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.holiday.HolidayListPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.CheckStudentLeaveExistPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.InsertStudentLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.KindOfLeaveListPojo;
@@ -37,7 +41,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
@@ -157,10 +164,11 @@ public interface IApiInterface {
                                                     @Query("year_id") String year_id, @Query("created_by") String created_by,
                                                     @Query("created_ip") String created_ip, @Query("leave_taken_by") String leave_taken_by);
 
-    @GET("Upload_Student_Leave_Document")
-    Call<UploadStudentLeaveDocumentPojo> uploadStudentLeaveDocument(@Query("name") String name,
-                                                                    @Query("image") String image,
-                                                                    @Query("stud_leave_id") String stud_leave_id);
+    @FormUrlEncoded
+    @POST("Upload_Student_Leave_Document")
+    Call<UploadStudentLeaveDocumentPojo> uploadStudentLeaveDocument(@Field("name") String name,
+                                                                    @Field("image") String image,
+                                                                    @Field("stud_leave_id") String stud_leave_id);
 
     @GET("get_student_leave_application_data_API")
     Call<LeaveApplicationHistoryPojo> getStudentLeaveApplicationHistory(@Query("stud_id") String stud_id,
@@ -197,5 +205,35 @@ public interface IApiInterface {
                                                                                                @Query("from_date") String from_date,
                                                                                                @Query("to_date") String to_date,
                                                                                                @Query("sub_id") String sub_id);
+
+    @GET("Check_Exist_Learning_Mangement_Group_Wise_Student_Master_API")
+    Call<CheckIsLearningManagementGroupIsExistOrNotPojo> checkIsLearningManagementGroupIsExistOrNot(@Query("grp_id") String grp_id,
+                                                                                                    @Query("stud_id") String stud_id);
+
+
+    @GET("Insert_Student_To_Learning_Management_Group_Wise_Student_Master_API")
+    Call<EnrollToGroupPojo> enrollToGroup(@Query("grp_id") String grp_id,
+                                          @Query("stud_id") String stud_id,
+                                          @Query("created_by") String created_by,
+                                          @Query("created_ip") String created_ip,
+                                          @Query("lm_grpws_is_enroll_status") String lm_grpws_is_enroll_status);
+
+
+    @GET("Insert_Student_Learning_Management_Push_Notification_API")
+    Call<InsertStudentLearningManagementPushNotificationPojo> insertStudentLearningManagementPushNotification(
+            @Query("grp_id") String grp_id,
+            @Query("year_id") String year_id,
+            @Query("stud_id") String stud_id,
+            @Query("sem_id") String sem_id,
+            @Query("nt_type") String nt_type,
+            @Query("notif_desc") String notif_desc,
+            @Query("read_status") String read_status,
+            @Query("created_by") String created_by,
+            @Query("created_ip") String created_ip,
+            @Query("institute_id") String institute_id);
+
+    @GET("Get_Student_Wise_Holidays_Detail_API")
+    Call<ArrayList<HolidayListPojo>> getStudentHolidayList(
+            @Query("stud_id") String stud_id);
 
 }

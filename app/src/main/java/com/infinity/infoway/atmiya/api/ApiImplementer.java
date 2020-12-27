@@ -7,8 +7,11 @@ import com.infinity.infoway.atmiya.student.assignment.StudentAssignmentListPojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentLectureWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.attendance.pojo.StudentSubjectWiseAttendancePojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.CheckIsELearningManagementGroupIsCompulsoryOrNot;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.CheckIsLearningManagementGroupIsExistOrNotPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.ELearningYearListPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.EnrollToGroupPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.GroupWiseSubjectlistPojo;
+import com.infinity.infoway.atmiya.student.e_learning.pojo.InsertStudentLearningManagementPushNotificationPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.JoinGroupListPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.LearningManagementGroupDetailsPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.StudentWiseLearningGroupPojo;
@@ -20,6 +23,7 @@ import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramW
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.holiday.HolidayListPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.CheckStudentLeaveExistPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.InsertStudentLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.KindOfLeaveListPojo;
@@ -283,6 +287,40 @@ public class ApiImplementer {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<LearningManagementGroupDetailsPojo>> call = apiService.groupWiseLearningManagementSubjectList(grp_id, stud_id, sem_id, year_id,
                 from_date, to_date, sub_id);
+        call.enqueue(cb);
+    }
+
+    public static void checkIsLearningManagementGroupIsExistOrNotApiImplementer(String grp_id, String stud_id,
+                                                                                Callback<CheckIsLearningManagementGroupIsExistOrNotPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<CheckIsLearningManagementGroupIsExistOrNotPojo> call = apiService.checkIsLearningManagementGroupIsExistOrNot(grp_id, stud_id);
+        call.enqueue(cb);
+    }
+
+    public static void enrollToGroupApiImplementer(String grp_id, String stud_id, String created_by,
+                                                   String created_ip, String lm_grpws_is_enroll_status,
+                                                   Callback<EnrollToGroupPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<EnrollToGroupPojo> call = apiService.enrollToGroup(grp_id, stud_id, created_by, created_ip, lm_grpws_is_enroll_status);
+        call.enqueue(cb);
+    }
+
+
+    public static void insertStudentLearningManagementPushNotificationApiImplementer(
+            String grp_id, String year_id, String stud_id, String sem_id, String nt_type,
+            String notif_desc, String read_status, String created_by, String created_ip,
+            String institute_id,
+            Callback<InsertStudentLearningManagementPushNotificationPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<InsertStudentLearningManagementPushNotificationPojo> call = apiService.insertStudentLearningManagementPushNotification(
+                grp_id, year_id, stud_id, sem_id, nt_type, notif_desc, read_status, created_by,
+                created_ip, institute_id);
+        call.enqueue(cb);
+    }
+
+    public static void studentHolidayListApiImplementer(String student_id, Callback<ArrayList<HolidayListPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<HolidayListPojo>> call = apiInterface.getStudentHolidayList(student_id);
         call.enqueue(cb);
     }
 

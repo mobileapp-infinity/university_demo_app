@@ -160,15 +160,18 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
                     mySharedPreferences.getStudentId(), repeaterStatus, mySharedPreferences.getImExamDbName(), new Callback<ExaminationScheduleProgramWiseTimetablePojo>() {
                         @Override
                         public void onResponse(Call<ExaminationScheduleProgramWiseTimetablePojo> call, Response<ExaminationScheduleProgramWiseTimetablePojo> response) {
-                            llExaminationScheduleProgressbar.setVisibility(View.GONE);
-                            if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
-                                llStudentExaminationSchedule.setVisibility(View.VISIBLE);
-                                generateDynamicExaminationScheduleListRow((ArrayList<ExaminationScheduleProgramWiseTimetablePojo.Table>) response.body().getTable());
-                            } else {
-                                llNoDataFoundExaminationSchedule.setVisibility(View.VISIBLE);
+                            try {
+                                llExaminationScheduleProgressbar.setVisibility(View.GONE);
+                                if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
+                                    llStudentExaminationSchedule.setVisibility(View.VISIBLE);
+                                    generateDynamicExaminationScheduleListRow((ArrayList<ExaminationScheduleProgramWiseTimetablePojo.Table>) response.body().getTable());
+                                } else {
+                                    llNoDataFoundExaminationSchedule.setVisibility(View.VISIBLE);
+                                }
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
                             }
                         }
-
                         @Override
                         public void onFailure(Call<ExaminationScheduleProgramWiseTimetablePojo> call, Throwable t) {
                             llStudentExaminationSchedule.setVisibility(View.GONE);

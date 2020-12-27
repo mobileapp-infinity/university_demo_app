@@ -19,26 +19,25 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivCloseCIAMarks"
+            android:id="@+id/ivCloseResultMarks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_back" />
 
         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-            android:id="@+id/tvProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
-            android:text="CIA Marks"
+            android:text="Result"
             android:textAllCaps="true"
             android:textColor="@color/white" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llStudentCIAMarksList"
+        android:id="@+id/llStudentResultMarksList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -131,7 +130,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCIAMarksStudent"
+            android:id="@+id/rvResultMarksStudent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
@@ -142,7 +141,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llCIAMarksProgressbar"
+        android:id="@+id/llResultProgressbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -159,7 +158,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llNoDataFoundCIAMarks"
+        android:id="@+id/llNoDataFoundResult"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

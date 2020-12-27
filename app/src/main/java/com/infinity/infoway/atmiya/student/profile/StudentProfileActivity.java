@@ -60,7 +60,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
     private TextViewRegularFont mTvStudentName;
     private TextViewRegularFont mTvStudentEmail;
     private TextViewMediumFont mTvStudentUserId;
-    private TextViewMediumFont mTvStudentenrollmentNo;
+    private TextViewMediumFont mTvStudentEnrollmentNo;
     private TextViewMediumFont mTvStudentSem;
     private TextViewMediumFont mTvStudentGender;
     private TextViewMediumFont mTvStudentDOB;
@@ -123,7 +123,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
         mTvStudentName = findViewById(R.id.tvStudentName);
         mTvStudentEmail = findViewById(R.id.tvStudentEmail);
         mTvStudentUserId = findViewById(R.id.tvStudentUserId);
-        mTvStudentenrollmentNo = findViewById(R.id.tvStudentenrollmentNo);
+        mTvStudentEnrollmentNo = findViewById(R.id.tvStudentenrollmentNo);
         mTvStudentSem = findViewById(R.id.tvStudentSem);
         mTvStudentGender = findViewById(R.id.tvStudentGender);
         mTvStudentDOB = findViewById(R.id.tvStudentDOB);
@@ -240,10 +240,10 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
 
         //for academic Details
         if (studentProfilePojo.getStudEnrollmentNo() != null && !studentProfilePojo.getStudEnrollmentNo().toString().isEmpty()) {
-            mTvStudentenrollmentNo.setText(studentProfilePojo.getStudEnrollmentNo() + "");
+            mTvStudentEnrollmentNo.setText(studentProfilePojo.getStudEnrollmentNo() + "");
         }
         if (studentProfilePojo.getSmName() != null && !studentProfilePojo.getSmName().isEmpty()) {
-            mTvStudentSem.setText(studentProfilePojo.getSmName().split("-")[1] + "");
+            mTvStudentSem.setText(studentProfilePojo.getSmName()+ "");
         }
         if (studentProfilePojo.getGenName() != null && !studentProfilePojo.getGenName().toString().isEmpty()) {
             mTvStudentGender.setText(studentProfilePojo.getGenName() + "");

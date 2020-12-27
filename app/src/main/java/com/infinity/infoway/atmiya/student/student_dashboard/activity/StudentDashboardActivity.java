@@ -29,6 +29,7 @@ import com.infinity.infoway.atmiya.student.attendance.activity.StudentAttendance
 import com.infinity.infoway.atmiya.student.e_learning.activity.ELearningActivity;
 import com.infinity.infoway.atmiya.student.exam.activity.ExamActivity;
 import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
+import com.infinity.infoway.atmiya.student.holiday.HolidayActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivity;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
@@ -37,6 +38,7 @@ import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.adapter.NewsOrNotificationListAdapter;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
+import com.infinity.infoway.atmiya.student.student_timetable.StudentTimeTableActivity;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
@@ -182,7 +184,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             startActivityForResult(profileActivityStudentSide, IntentConstants.REQUEST_CODE_STUDENT_LOGOUT);
             overridePendingTransition(R.anim.slide_in_left, 0);
         } else if (v.getId() == R.id.llTimeTableStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, StudentTimeTableActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llLeaveApplicationStudentSide) {
             Intent intent = new Intent(StudentDashboardActivity.this, LeaveApplicationActivity.class);
             startActivity(intent);
@@ -196,7 +199,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             Intent intent = new Intent(StudentDashboardActivity.this, ExamActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.llHolidayStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, HolidayActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llSyllabusStudentSide) {
 
         } else if (v.getId() == R.id.llLeassonPlanStudentSide) {
@@ -295,8 +299,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
                         } else {
                             Toast.makeText(StudentDashboardActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
                         }
-                    }catch (Exception ex){
-                     ex.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
                 }
 

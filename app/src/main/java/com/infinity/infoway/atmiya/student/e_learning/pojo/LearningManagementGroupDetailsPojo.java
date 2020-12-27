@@ -7,6 +7,17 @@ import java.util.List;
 
 public class LearningManagementGroupDetailsPojo {
 
+    boolean isExpanded = false;
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
+    }
+
+
     @SerializedName("group_id")
     @Expose
     private String groupId;

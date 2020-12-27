@@ -26,15 +26,15 @@ import retrofit2.Response;
 public class StudentResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     MySharedPreferences mySharedPreferences;
-    AppCompatImageView ivCloseCIAMarks;
+    AppCompatImageView ivCloseResult;
     ConnectionDetector connectionDetector;
-    LinearLayout llStudentCIAMarksList, llCIAMarksProgressbar, llNoDataFoundCIAMarks;
-    RecyclerView rvCIAMarksStudent;
+    LinearLayout llStudentResultMarksList, llResultMarksProgressbar, llNoDataFoundResultMarks;
+    RecyclerView rvResultMarksStudent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_c_i_a_marks);
+        setContentView(R.layout.activity_result);
         initView();
         getStudentCIAMarksListApiCall();
     }
@@ -42,17 +42,17 @@ public class StudentResultActivity extends AppCompatActivity implements View.OnC
     private void initView() {
         mySharedPreferences = new MySharedPreferences(StudentResultActivity.this);
         connectionDetector = new ConnectionDetector(StudentResultActivity.this);
-        ivCloseCIAMarks = findViewById(R.id.ivCloseCIAMarks);
-        ivCloseCIAMarks.setOnClickListener(this);
-        rvCIAMarksStudent = findViewById(R.id.rvCIAMarksStudent);
-        llStudentCIAMarksList = findViewById(R.id.llStudentCIAMarksList);
-        llCIAMarksProgressbar = findViewById(R.id.llCIAMarksProgressbar);
-        llNoDataFoundCIAMarks = findViewById(R.id.llNoDataFoundCIAMarks);
+        ivCloseResult = findViewById(R.id.ivCloseResultMarks);
+        ivCloseResult.setOnClickListener(this);
+        rvResultMarksStudent = findViewById(R.id.rvResultMarksStudent);
+        llStudentResultMarksList = findViewById(R.id.llStudentResultMarksList);
+        llResultMarksProgressbar = findViewById(R.id.llResultProgressbar);
+        llNoDataFoundResultMarks = findViewById(R.id.llNoDataFoundResult);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.ivCloseCIAMarks) {
+        if (v.getId() == R.id.ivCloseResultMarks) {
             onBackPressed();
         }
     }
@@ -67,29 +67,29 @@ public class StudentResultActivity extends AppCompatActivity implements View.OnC
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(mySharedPreferences.getStudentEnrollmentNo())) {
             if (connectionDetector.isConnectingToInternet()) {
-                llStudentCIAMarksList.setVisibility(View.GONE);
-                llCIAMarksProgressbar.setVisibility(View.VISIBLE);
-                llNoDataFoundCIAMarks.setVisibility(View.GONE);
+                llStudentResultMarksList.setVisibility(View.GONE);
+                llResultMarksProgressbar.setVisibility(View.VISIBLE);
+                llNoDataFoundResultMarks.setVisibility(View.GONE);
                 ApiImplementer.getCIAMarksListApiImplementer(mySharedPreferences.getStudentEnrollmentNo(), new Callback<ArrayList<CIAMarkstPojo>>() {
                     @Override
                     public void onResponse(Call<ArrayList<CIAMarkstPojo>> call, Response<ArrayList<CIAMarkstPojo>> response) {
-                        llCIAMarksProgressbar.setVisibility(View.GONE);
+                        llResultMarksProgressbar.setVisibility(View.GONE);
                         if (response.isSuccessful() && response.body() != null &&
                                 response.body().size() > 0) {
-                            llStudentCIAMarksList.setVisibility(View.VISIBLE);
-                            llNoDataFoundCIAMarks.setVisibility(View.GONE);
-                            rvCIAMarksStudent.setAdapter(new ResultListAdapter(StudentResultActivity.this, response.body()));
+                            llStudentResultMarksList.setVisibility(View.VISIBLE);
+                            llNoDataFoundResultMarks.setVisibility(View.GONE);
+                            rvResultMarksStudent.setAdapter(new ResultListAdapter(StudentResultActivity.this, response.body()));
                         } else {
-                            llStudentCIAMarksList.setVisibility(View.GONE);
-                            llNoDataFoundCIAMarks.setVisibility(View.VISIBLE);
+                            llStudentResultMarksList.setVisibility(View.GONE);
+                            llNoDataFoundResultMarks.setVisibility(View.VISIBLE);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<CIAMarkstPojo>> call, Throwable t) {
-                        llStudentCIAMarksList.setVisibility(View.GONE);
-                        llCIAMarksProgressbar.setVisibility(View.GONE);
-                        llNoDataFoundCIAMarks.setVisibility(View.VISIBLE);
+                        llStudentResultMarksList.setVisibility(View.GONE);
+                        llResultMarksProgressbar.setVisibility(View.GONE);
+                        llNoDataFoundResultMarks.setVisibility(View.VISIBLE);
                         Toast.makeText(StudentResultActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -97,9 +97,9 @@ public class StudentResultActivity extends AppCompatActivity implements View.OnC
                 Toast.makeText(this, "No internet connection,please try again later", Toast.LENGTH_SHORT).show();
             }
         } else {
-            llStudentCIAMarksList.setVisibility(View.GONE);
-            llCIAMarksProgressbar.setVisibility(View.GONE);
-            llNoDataFoundCIAMarks.setVisibility(View.VISIBLE);
+            llStudentResultMarksList.setVisibility(View.GONE);
+            llResultMarksProgressbar.setVisibility(View.GONE);
+            llNoDataFoundResultMarks.setVisibility(View.VISIBLE);
             Toast.makeText(this, "Enrollment no not generated!", Toast.LENGTH_SHORT).show();//As per talk with priyanka madam 21-12-2020 if enrollment no not found then display this massage
         }
 

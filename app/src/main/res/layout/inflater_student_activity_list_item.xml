@@ -22,20 +22,20 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:padding="2dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date : "
+                android:text="Date"
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp" />
 
             <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                android:layout_marginTop="4dp"
                 android:id="@+id/tvActivityDate"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="07/12/2020"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
@@ -48,20 +48,20 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:padding="2dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description : "
+                android:text="Description"
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp" />
 
             <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                android:layout_marginTop="4dp"
                 android:id="@+id/tvActivityDescription"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Test"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />

@@ -9,17 +9,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.student.e_learning.activity.ELearningActivity;
+import com.infinity.infoway.atmiya.student.e_learning.adapter.JoinGroupListAdapter;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.JoinGroupListPojo;
+import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +43,7 @@ public class JoinGroupFragment extends Fragment {
 
     LinearLayout llJoinGroupList, llJoinGroupProgressbar, llNoDataFoundJoinGroup;
 
+    ExpandableListView elvJoinGroup;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -74,6 +79,7 @@ public class JoinGroupFragment extends Fragment {
         llJoinGroupList = view.findViewById(R.id.llJoinGroupList);
         llJoinGroupProgressbar = view.findViewById(R.id.llJoinGroupProgressbar);
         llNoDataFoundJoinGroup = view.findViewById(R.id.llNoDataFoundJoinGroup);
+        elvJoinGroup = view.findViewById(R.id.elvJoinGroup);
     }
 
 
@@ -85,12 +91,27 @@ public class JoinGroupFragment extends Fragment {
             ApiImplementer.getJoinLearningManagementGroupsApiImplementer(mySharedPreferences.getStudentId(), mySharedPreferences.getSwdYearId(), new Callback<ArrayList<JoinGroupListPojo>>() {
                 @Override
                 public void onResponse(Call<ArrayList<JoinGroupListPojo>> call, Response<ArrayList<JoinGroupListPojo>> response) {
-                    llJoinGroupProgressbar.setVisibility(View.GONE);
-                    if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
-                        llJoinGroupList.setVisibility(View.VISIBLE);
-                    } else {
-                        llJoinGroupList.setVisibility(View.GONE);
-                        llNoDataFoundJoinGroup.setVisibility(View.VISIBLE);
+                    try {
+                        llJoinGroupProgressbar.setVisibility(View.GONE);
+                        if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
+                            llJoinGroupList.setVisibility(View.VISIBLE);
+                            ArrayList<JoinGroupListPojo> joinGroupListPojoArrayList = response.body();
+                            HashMap<String, ArrayList<JoinGroupListPojo.DetailsArray>> childHashMap = new HashMap<>();
+                            for (int i = 0; i < joinGroupListPojoArrayList.size(); i++) {
+                                String grpName = joinGroupListPojoArrayList.get(i).getGroupName();
+                                if (!CommonUtil.checkIsEmptyOrNullCommon(grpName)) {
+                                    childHashMap.put(grpName, (ArrayList<JoinGroupListPojo.DetailsArray>) joinGroupListPojoArrayList.get(i).getDetailsArray());
+                                }
+                            }
+                            JoinGroupListAdapter joinGroupListAdapter = new JoinGroupListAdapter(eLearningActivity,
+                                    joinGroupListPojoArrayList, childHashMap);
+                            elvJoinGroup.setAdapter(joinGroupListAdapter);
+                        } else {
+                            llJoinGroupList.setVisibility(View.GONE);
+                            llNoDataFoundJoinGroup.setVisibility(View.VISIBLE);
+                        }
+                    }catch (Exception ex){
+                        ex.printStackTrace();
                     }
                 }
 
