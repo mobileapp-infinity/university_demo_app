@@ -36,12 +36,12 @@ public class HolidayActivity extends AppCompatActivity implements View.OnClickLi
     AppCompatEditText edSearchHolidayName;
     HolidayListAdapter holidayListAdapter;
     ArrayList<HolidayListPojo> holidayListStudentModelArrayList;
- 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holiday);
-        initView();
+        initView(); 
         getHolidayListApiCall();
     }
 
