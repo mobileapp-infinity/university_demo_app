@@ -1,53 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:clickToClose="true"
     android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp">
+    android:layout_marginBottom="8dp"
+    android:orientation="horizontal"
+    android:weightSum="1">
 
-   <LinearLayout
-       android:id="@+id/view_background"
-       android:layout_width="wrap_content"
-       android:layout_height="match_parent"
-       android:padding="8dp"
-       android:orientation="vertical"
-       android:background="@color/colorAccent">
+    <!--   <LinearLayout-->
+    <!--       android:id="@+id/view_background"-->
+    <!--       android:layout_width="wrap_content"-->
+    <!--       android:layout_height="match_parent"-->
+    <!--       android:padding="8dp"-->
+    <!--       android:orientation="vertical"-->
+    <!--       android:background="@color/colorAccent">-->
 
-       <androidx.appcompat.widget.AppCompatImageView
-           android:layout_centerInParent="true"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           app:srcCompat="@drawable/ic_delete"/>
+    <!--       <androidx.appcompat.widget.AppCompatImageView-->
+    <!--           android:layout_centerInParent="true"-->
+    <!--           android:layout_width="wrap_content"-->
+    <!--           android:layout_height="wrap_content"-->
+    <!--           app:srcCompat="@drawable/ic_delete"/>-->
 
-   </LinearLayout>
+    <!--   </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/view_foreground"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0.75"
         android:background="@drawable/shape_login_user_list_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="8dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/idPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_person"/>
+            app:srcCompat="@drawable/ic_person" />
 
         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
             android:id="@+id/tvLoggedInStudentName"
-            android:layout_alignRight="@+id/idPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
-            android:gravity="center_vertical"
+            android:layout_alignRight="@+id/idPerson"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/white"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="-"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<ru.rambler.libs.swipe_layout.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_marginTop="8dp"-->
+    <!--    android:layout_marginBottom="8dp"-->
+    <!--    app:left_swipe_enabled="true"-->
+    <!--    android:orientation="horizontal"-->
+    <!--    app:right_swipe_enabled="false">-->
+
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:gravity="left">-->
+
+    <!--        <androidx.appcompat.widget.AppCompatImageView-->
+    <!--            android:layout_width="50dp"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="@color/colorAccent"-->
+    <!--            app:srcCompat="@drawable/ic_delete" />-->
+
+    <!--    </FrameLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/view_foreground"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_weight="0.75"-->
+    <!--        android:background="@drawable/shape_login_user_list_item"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:padding="8dp">-->
+
+    <!--        <androidx.appcompat.widget.AppCompatImageView-->
+    <!--            android:id="@+id/idPerson"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            app:srcCompat="@drawable/ic_person" />-->
+
+    <!--        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
+    <!--            android:id="@+id/tvLoggedInStudentName"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_alignRight="@+id/idPerson"-->
+    <!--            android:layout_gravity="center_vertical"-->
+    <!--            android:layout_marginLeft="10dp"-->
+    <!--            android:gravity="center_vertical"-->
+    <!--            android:text="-"-->
+    <!--            android:textColor="@color/white" />-->
+
+
+    <!--    </LinearLayout>-->
+
+    <!--</ru.rambler.libs.swipe_layout.SwipeLayout>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:weightSum="1"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_marginTop="8dp"-->
+    <!--    android:orientation="horizontal"-->
+    <!--    android:layout_marginBottom="8dp">-->
+
+    <!--&lt;!&ndash;   <LinearLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;       android:id="@+id/view_background"&ndash;&gt;-->
+    <!--&lt;!&ndash;       android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;       android:layout_height="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;       android:padding="8dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;       android:orientation="vertical"&ndash;&gt;-->
+    <!--&lt;!&ndash;       android:background="@color/colorAccent">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;       <androidx.appcompat.widget.AppCompatImageView&ndash;&gt;-->
+    <!--&lt;!&ndash;           android:layout_centerInParent="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;           android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;           android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;           app:srcCompat="@drawable/ic_delete"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;   </LinearLayout>&ndash;&gt;-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/view_foreground"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_weight="0.75"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:background="@drawable/shape_login_user_list_item"-->
+    <!--        android:padding="8dp">-->
+
+    <!--        <androidx.appcompat.widget.AppCompatImageView-->
+    <!--            android:id="@+id/idPerson"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            app:srcCompat="@drawable/ic_person"/>-->
+
+    <!--        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
+    <!--            android:id="@+id/tvLoggedInStudentName"-->
+    <!--            android:layout_alignRight="@+id/idPerson"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="-"-->
+    <!--            android:gravity="center_vertical"-->
+    <!--            android:layout_gravity="center_vertical"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:layout_marginLeft="10dp"/>-->
+
+
+    <!--    </LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+
+    <!--////OLDCODE-->
+    <!--    <?xml version="1.0" encoding="utf-8"?>-->
+    <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:clickToClose="true"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:layout_marginBottom="8dp">-->
+
+    <!--<LinearLayout-->
+    <!--    android:id="@+id/view_background"-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:padding="8dp"-->
+    <!--    android:orientation="vertical"-->
+    <!--    android:background="@color/colorAccent">-->
+
+    <!--    <androidx.appcompat.widget.AppCompatImageView-->
+    <!--        android:layout_centerInParent="true"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:srcCompat="@drawable/ic_delete"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--    android:id="@+id/view_foreground"-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:background="@drawable/shape_login_user_list_item"-->
+    <!--    android:padding="8dp">-->
+
+    <!--    <androidx.appcompat.widget.AppCompatImageView-->
+    <!--        android:id="@+id/idPerson"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:srcCompat="@drawable/ic_person"/>-->
+
+    <!--    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
+    <!--        android:id="@+id/tvLoggedInStudentName"-->
+    <!--        android:layout_alignRight="@+id/idPerson"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="-"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:layout_gravity="center_vertical"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:layout_marginLeft="10dp"/>-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--</FrameLayout>-->

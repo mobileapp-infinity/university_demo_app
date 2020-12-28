@@ -31,6 +31,7 @@ import com.infinity.infoway.atmiya.student.exam.activity.ExamActivity;
 import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
 import com.infinity.infoway.atmiya.student.holiday.HolidayActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
+import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivity;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
@@ -38,6 +39,7 @@ import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.adapter.NewsOrNotificationListAdapter;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
+import com.infinity.infoway.atmiya.student.student_syllabus.StudentSyllabusActivity;
 import com.infinity.infoway.atmiya.student.student_timetable.activity.StudentTimeTableActivity;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.IntentConstants;
@@ -202,9 +204,11 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             Intent intent = new Intent(StudentDashboardActivity.this, HolidayActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.llSyllabusStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, StudentSyllabusActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llLeassonPlanStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, StudentLessonPlanActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llHomeWorkStudentSide) {
 
         } else if (v.getId() == R.id.llFeeDetailsStudentSide) {

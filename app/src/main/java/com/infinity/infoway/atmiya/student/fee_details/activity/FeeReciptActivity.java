@@ -79,6 +79,7 @@ public class FeeReciptActivity extends AppCompatActivity implements View.OnClick
                     llFeeReceiptProgressbar.setVisibility(View.GONE);
                     llStudentFeeReceiptList.setVisibility(View.GONE);
                     llNoDataFoundFeeReceipt.setVisibility(View.VISIBLE);
+                    Toast.makeText(FeeReciptActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,17 +52,22 @@ public class StudentAssignmentListAdapter extends RecyclerView.Adapter<StudentAs
             holder.tvAssignmentSubjectDate.setText(studentAssignmentListPojo.getAmLastSeenDate() + "");
         }
 
-        holder.tvDownloadAssignment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!CommonUtil.checkIsEmptyOrNullCommon(studentAssignmentListPojo.getPDFURL()) &&
-                        studentAssignmentListPojo.getPDFURL().endsWith(".pdf")) {
+        if (!CommonUtil.checkIsEmptyOrNullCommon(studentAssignmentListPojo.getPDFURL()) &&
+                studentAssignmentListPojo.getPDFURL().endsWith(".pdf")) {
+            holder.llDownloadStudentAssignments.setVisibility(View.VISIBLE);
+            holder.tvDownloadAssignment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     String fileUrl = studentAssignmentListPojo.getPDFURL();
                     String fileExtension = fileUrl.substring(fileUrl.lastIndexOf("."));
                     new DownloadPdfFromUrl(context, studentAssignmentListPojo.getPDFURL(), fileExtension, "Assignments");
                 }
-            }
-        });
+
+            });
+        } else {
+            holder.llDownloadStudentAssignments.setVisibility(View.GONE);
+        }
+
 
     }
 
@@ -74,6 +80,7 @@ public class StudentAssignmentListAdapter extends RecyclerView.Adapter<StudentAs
 
         TextViewMediumFont tvAssignmentSubjectName, tvAssignmentSubjectDate, tvAssignmentName;
         TextViewRegularFont tvDownloadAssignment;
+        LinearLayout llDownloadStudentAssignments;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +88,7 @@ public class StudentAssignmentListAdapter extends RecyclerView.Adapter<StudentAs
             tvAssignmentSubjectDate = itemView.findViewById(R.id.tvAssignmentSubjectDate);
             tvAssignmentName = itemView.findViewById(R.id.tvAssignmentName);
             tvDownloadAssignment = itemView.findViewById(R.id.tvDownloadAssignment);
+            llDownloadStudentAssignments = itemView.findViewById(R.id.llDownloadStudentAssignments);
         }
     }
 }

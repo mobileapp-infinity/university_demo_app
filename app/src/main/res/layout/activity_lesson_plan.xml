@@ -6,57 +6,56 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg_color"
     android:orientation="vertical"
-    tools:context=".student.assignment.AssignmentActivity">
+    tools:context=".student.lesson_plan.StudentLessonPlanActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="12dp">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivCloseAssignment"
+            android:id="@+id/ivCloseLessonPlan"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_back" />
 
         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-            android:id="@+id/tvProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:text="Assignment"
+            android:layout_marginLeft="8dp"
+            android:text="Lesson Plan"
             android:textAllCaps="true"
             android:textColor="@color/white" />
 
-
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llStudentAssignmentList"
+        android:id="@+id/llStudentLessonPlan"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:visibility="gone"
-        android:layout_margin="8dp"
-        android:orientation="vertical">
+        android:background="@color/common_bg_color"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:visibility="gone">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvStudentAssignmentList"
+            android:id="@+id/rvStudentLessonPlan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
             android:layoutAnimation="@anim/layout_animation"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llStudentAssignmentProgressbar"
+        android:id="@+id/llStudentLessonPlanProgressbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -73,7 +72,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llNoDataFoundStudentAssignment"
+        android:id="@+id/llNoDataFoundStudentLessonPlan"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

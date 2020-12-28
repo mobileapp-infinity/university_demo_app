@@ -3,6 +3,7 @@ package com.infinity.infoway.atmiya.login.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -94,49 +95,45 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
             rvLoginUserList.setAdapter(new LoginUserListAdapter(LoginActivity.this, registerStudentDetailsModelArrayList));
 
 
-            SwipeHelper swipeHelper = new SwipeHelper(this, rvLoginUserList) {
-                @Override
-                public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
-                    underlayButtons.add(new SwipeHelper.UnderlayButton(
-                            "Delete",
-                            0,
-                            Color.parseColor("#FF3C30"),
-                            new SwipeHelper.UnderlayButtonClickListener() {
-                                @Override
-                                public void onClick(int pos) {
-                                    // TODO: onDelete
-                                }
-                            }
-                    ));
-
-                    underlayButtons.add(new SwipeHelper.UnderlayButton(
-                            "Transfer",
-                            0,
-                            Color.parseColor("#FF9502"),
-                            new SwipeHelper.UnderlayButtonClickListener() {
-                                @Override
-                                public void onClick(int pos) {
-                                    // TODO: OnTransfer
-                                }
-                            }
-                    ));
-                    underlayButtons.add(new SwipeHelper.UnderlayButton(
-                            "Unshare",
-                            0,
-                            Color.parseColor("#C7C7CB"),
-                            new SwipeHelper.UnderlayButtonClickListener() {
-                                @Override
-                                public void onClick(int pos) {
-                                    // TODO: OnUnshare
-                                }
-                            }
-                    ));
-                }
-            };
-
-
-
-
+//            SwipeHelper swipeHelper = new SwipeHelper(this, rvLoginUserList) {
+//                @Override
+//                public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
+//                    underlayButtons.add(new SwipeHelper.UnderlayButton(
+//                            "DELETE",
+//                            0,
+//                            Color.parseColor("#CEA955"),
+//                            new SwipeHelper.UnderlayButtonClickListener() {
+//                                @Override
+//                                public void onClick(int pos) {
+//                                    // TODO: OnTransfer
+//                                }
+//                            }
+//                    ));
+//
+////                    underlayButtons.add(new SwipeHelper.UnderlayButton(
+////                            "Transfer",
+////                            0,
+////                            Color.parseColor("#FF9502"),
+////                            new SwipeHelper.UnderlayButtonClickListener() {
+////                                @Override
+////                                public void onClick(int pos) {
+////                                    // TODO: OnTransfer
+////                                }
+////                            }
+////                    ));
+////                    underlayButtons.add(new SwipeHelper.UnderlayButton(
+////                            "Unshare",
+////                            0,
+////                            Color.parseColor("#C7C7CB"),
+////                            new SwipeHelper.UnderlayButtonClickListener() {
+////                                @Override
+////                                public void onClick(int pos) {
+////                                    // TODO: OnUnshare
+////                                }
+////                            }
+////                    ));
+//                }
+//            };
 
 
 //            ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, LoginActivity.this);

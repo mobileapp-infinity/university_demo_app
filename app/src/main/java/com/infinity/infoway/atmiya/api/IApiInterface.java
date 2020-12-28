@@ -31,11 +31,14 @@ import com.infinity.infoway.atmiya.student.leave_application.pojo.LeaveApplicati
 import com.infinity.infoway.atmiya.student.leave_application.pojo.SelectLectureForPartialLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUploadPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.UploadStudentLeaveDocumentPojo;
+import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanListPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
+import com.infinity.infoway.atmiya.student.student_syllabus.SyllabusListPojo;
+import com.infinity.infoway.atmiya.student.student_timetable.pojo.StudentTimeTablePojo;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -234,6 +237,25 @@ public interface IApiInterface {
 
     @GET("Get_Student_Wise_Holidays_Detail_API")
     Call<ArrayList<HolidayListPojo>> getStudentHolidayList(
+            @Query("stud_id") String stud_id);
+
+
+    @GET("get_student_timetable_api_lopgin")
+    Call<ArrayList<StudentTimeTablePojo>> getStudentTimetable(
+            @Query("stud_id") String stud_id,
+            @Query("course_id") String course_id,
+            @Query("div_id") String div_id,
+            @Query("shift_id") String shift_id,
+            @Query("batch_id") String batch_id,
+            @Query("year_id") String year_id);
+
+
+    @GET("Get_Student_Current_sem_syllabus")
+    Call<ArrayList<SyllabusListPojo>> getStudentSyllabusList(
+            @Query("stud_id") String stud_id);
+
+    @GET("Student_Lesson_Planning_API")
+    Call<ArrayList<StudentLessonPlanListPojo>> getStudentLessonPlanList(
             @Query("stud_id") String stud_id);
 
 }

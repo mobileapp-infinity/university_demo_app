@@ -31,11 +31,14 @@ import com.infinity.infoway.atmiya.student.leave_application.pojo.LeaveApplicati
 import com.infinity.infoway.atmiya.student.leave_application.pojo.SelectLectureForPartialLeavePojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUploadPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.UploadStudentLeaveDocumentPojo;
+import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanListPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
 import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
+import com.infinity.infoway.atmiya.student.student_syllabus.SyllabusListPojo;
+import com.infinity.infoway.atmiya.student.student_timetable.pojo.StudentTimeTablePojo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -321,6 +324,25 @@ public class ApiImplementer {
     public static void studentHolidayListApiImplementer(String student_id, Callback<ArrayList<HolidayListPojo>> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<HolidayListPojo>> call = apiInterface.getStudentHolidayList(student_id);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentTimetableApiImplementer(String stud_id, String course_id, String div_id, String shift_id,
+                                                         String batch_id, String year_id, Callback<ArrayList<StudentTimeTablePojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<StudentTimeTablePojo>> call = apiInterface.getStudentTimetable(stud_id, course_id, div_id, shift_id, batch_id, year_id);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentSyllabusListApiImplementer(String stud_id, Callback<ArrayList<SyllabusListPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<SyllabusListPojo>> call = apiInterface.getStudentSyllabusList(stud_id);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentLessonPlanListApiImplementer(String stud_id, Callback<ArrayList<StudentLessonPlanListPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<StudentLessonPlanListPojo>> call = apiInterface.getStudentLessonPlanList(stud_id);
         call.enqueue(cb);
     }
 

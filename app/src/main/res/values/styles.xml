@@ -22,7 +22,7 @@
     <style name="AttendanceTextStyle" >
         <item name="fontFamily">@font/ubuntu_r</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="textAllCaps">true</item>
     </style>
 
@@ -56,4 +56,26 @@
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
+
+<!--    //dummy-->
+    <style name="SwipeLayout">
+        <item name="android:paddingBottom">1px</item>
+        <item name="android:background">#e5e5e5</item>
+    </style>
+
+    <style name="CenterTextView">
+        <item name="android:padding">6dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="RightTextView">
+        <item name="android:padding">6dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="LeftTextView">
+        <item name="android:padding">6dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 </resources>

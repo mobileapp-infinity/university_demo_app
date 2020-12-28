@@ -13,10 +13,7 @@
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        android:padding="14dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="14dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCloseHolidays"
@@ -40,21 +37,21 @@
         android:id="@+id/llStudentHolidayList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="8dp"
         android:layout_weight="1"
         android:background="@color/common_bg_color"
         android:orientation="vertical"
-        android:layout_margin="8dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
+            android:id="@+id/llSearchViewHolidayList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="8dp"
-            android:id="@+id/llSearchViewHolidayList"
-            android:visibility="visible"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/border_holiday_search">
+            android:background="@drawable/border_holiday_search"
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
@@ -62,21 +59,21 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                app:srcCompat="@drawable/ic_search"
-                android:tint="@color/colorPrimary"/>
+                android:tint="@color/colorPrimary"
+                app:srcCompat="@drawable/ic_search" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edSearchHolidayName"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
+                android:hint="Search..."
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:hint="Search..."
+                android:queryHint="Search by holiday name"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
-                android:layout_height="wrap_content"
-                android:queryHint="Search by holiday name" />
+                android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imClearSearch"
@@ -84,8 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="10dp"
-                android:visibility="gone"
                 android:tint="@color/colorPrimary"
+                android:visibility="gone"
                 app:srcCompat="@drawable/ic_close" />
 
         </LinearLayout>
@@ -94,8 +91,8 @@
             android:id="@+id/cvStudentHolidayListHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="7dp"
             android:layout_marginTop="8dp"
+            android:elevation="7dp"
             android:visibility="visible"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="7dp">
@@ -113,9 +110,9 @@
                     android:layout_weight="1.3"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:textSize="12sp"
                     android:text="Holiday Name"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
                 <View
                     android:layout_width="1dp"
@@ -130,8 +127,8 @@
                     android:gravity="center"
                     android:padding="4dp"
                     android:text="From Date"
-                    android:textSize="12sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
                 <View
                     android:layout_width="1dp"
@@ -146,8 +143,8 @@
                     android:gravity="center"
                     android:padding="4dp"
                     android:text="To Date"
-                    android:textSize="12sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
                 <View
                     android:layout_width="1dp"
@@ -162,8 +159,8 @@
                     android:gravity="center"
                     android:padding="4dp"
                     android:text="Description"
-                    android:textSize="12sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -173,8 +170,8 @@
             android:id="@+id/rvHolidayStudent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
             android:layoutAnimation="@anim/layout_animation"
+            android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
@@ -186,7 +183,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <ProgressBar
             android:layout_width="wrap_content"
