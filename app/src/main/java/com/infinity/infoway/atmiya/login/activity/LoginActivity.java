@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,6 +19,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.RecyclerItemTouchHelper;
+import com.infinity.infoway.atmiya.custom_class.SwipeHelper;
 import com.infinity.infoway.atmiya.login.adapter.LoginUserListAdapter;
 import com.infinity.infoway.atmiya.login.pojo.RegisterStudentDetailsModel;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
@@ -30,6 +32,7 @@ import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,8 +93,54 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
             llLoggedInStudentList.setVisibility(View.VISIBLE);
             rvLoginUserList.setAdapter(new LoginUserListAdapter(LoginActivity.this, registerStudentDetailsModelArrayList));
 
-            ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, LoginActivity.this);
-            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(rvLoginUserList);
+
+            SwipeHelper swipeHelper = new SwipeHelper(this, rvLoginUserList) {
+                @Override
+                public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
+                    underlayButtons.add(new SwipeHelper.UnderlayButton(
+                            "Delete",
+                            0,
+                            Color.parseColor("#FF3C30"),
+                            new SwipeHelper.UnderlayButtonClickListener() {
+                                @Override
+                                public void onClick(int pos) {
+                                    // TODO: onDelete
+                                }
+                            }
+                    ));
+
+                    underlayButtons.add(new SwipeHelper.UnderlayButton(
+                            "Transfer",
+                            0,
+                            Color.parseColor("#FF9502"),
+                            new SwipeHelper.UnderlayButtonClickListener() {
+                                @Override
+                                public void onClick(int pos) {
+                                    // TODO: OnTransfer
+                                }
+                            }
+                    ));
+                    underlayButtons.add(new SwipeHelper.UnderlayButton(
+                            "Unshare",
+                            0,
+                            Color.parseColor("#C7C7CB"),
+                            new SwipeHelper.UnderlayButtonClickListener() {
+                                @Override
+                                public void onClick(int pos) {
+                                    // TODO: OnUnshare
+                                }
+                            }
+                    ));
+                }
+            };
+
+
+
+
+
+
+//            ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, LoginActivity.this);
+//            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(rvLoginUserList);
         } else {
             llLoggedInStudentList.setVisibility(View.GONE);
         }
