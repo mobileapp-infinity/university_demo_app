@@ -30,7 +30,7 @@ public class FeeDetailsActivity extends AppCompatActivity implements View.OnClic
     AppCompatImageView ivCloseFeeDetails;
     LinearLayout llStudentFeeReceipt;
     ProgressDialog progressDialog;
-    LinearLayout llPaySlipOfAxisFeeDetails, llDownloadPaySlipOfHdfc, llFeeCircularFeeDetails;
+    LinearLayout llPaySlipOfAxisFeeDetails, llDownloadPaySlipOfHdfc, llFeeCircularFeeDetails, llPayFee;
 
 
     @Override
@@ -54,6 +54,9 @@ public class FeeDetailsActivity extends AppCompatActivity implements View.OnClic
         llDownloadPaySlipOfHdfc.setOnClickListener(this);
         llFeeCircularFeeDetails = findViewById(R.id.llFeeCircularFeeDetails);
         llFeeCircularFeeDetails.setOnClickListener(this);
+
+        llPayFee = findViewById(R.id.llPayFee);
+        llPayFee.setOnClickListener(this);
 
         progressDialog = new ProgressDialog(FeeDetailsActivity.this);
         progressDialog.setMessage("Please wait....");
@@ -79,6 +82,9 @@ public class FeeDetailsActivity extends AppCompatActivity implements View.OnClic
             } else {
                 Toast.makeText(this, "Circular Not Found!", Toast.LENGTH_SHORT).show();
             }
+        } else if (v.getId() == R.id.llPayFee) {
+            Intent intent = new Intent(FeeDetailsActivity.this, PayFeeActivity.class);
+            startActivity(intent);
         }
     }
 

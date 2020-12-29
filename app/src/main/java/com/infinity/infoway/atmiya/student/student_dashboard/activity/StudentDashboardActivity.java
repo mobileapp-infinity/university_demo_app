@@ -30,6 +30,7 @@ import com.infinity.infoway.atmiya.student.e_learning.activity.ELearningActivity
 import com.infinity.infoway.atmiya.student.exam.activity.ExamActivity;
 import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
 import com.infinity.infoway.atmiya.student.holiday.HolidayActivity;
+import com.infinity.infoway.atmiya.student.home_work.StudentHomeWorkActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivity;
@@ -96,6 +97,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
     LinearLayout llNewsOrNotificationListStudentDashboard;
 
     ConnectionDetector connectionDetector;
+    private Boolean exit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,7 +212,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             Intent intent = new Intent(StudentDashboardActivity.this, StudentLessonPlanActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.llHomeWorkStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, StudentHomeWorkActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llFeeDetailsStudentSide) {
             Intent feeDetailsIntent = new Intent(StudentDashboardActivity.this, FeeDetailsActivity.class);
             startActivity(feeDetailsIntent);
@@ -354,6 +357,24 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             Intent intent = new Intent(StudentDashboardActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
         }
     }
 }

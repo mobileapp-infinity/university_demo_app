@@ -21,6 +21,8 @@ import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedule
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeUrlPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.PayFeeTypePojoList;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.holiday.HolidayListPojo;
@@ -343,6 +345,21 @@ public class ApiImplementer {
     public static void getStudentLessonPlanListApiImplementer(String stud_id, Callback<ArrayList<StudentLessonPlanListPojo>> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<StudentLessonPlanListPojo>> call = apiInterface.getStudentLessonPlanList(stud_id);
+        call.enqueue(cb);
+    }
+
+    public static void getPendingFeeTypeApiImplementer(String StudId, String YearId, String AdmissionNo,
+                                                       String CompanyCode, String hostel_code, Callback<ArrayList<PayFeeTypePojoList>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<PayFeeTypePojoList>> call = apiInterface.getPendingFeeType(StudId, YearId, AdmissionNo, CompanyCode, hostel_code);
+        call.enqueue(cb);
+    }
+
+    public static void feeUrlPojoApiImplementer(String Ord_stud_id, String Ord_year_id, String Ord_Exam_id,
+                                                String Ord_sem_id, String Ord_Fee_Source, String Ord_Fee_Type, String Ord_created_ip,
+                                                Callback<FeeUrlPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<FeeUrlPojo> call = apiInterface.feeUrlPojo(Ord_stud_id, Ord_year_id, Ord_Exam_id, Ord_sem_id, Ord_Fee_Source, Ord_Fee_Type, Ord_created_ip);
         call.enqueue(cb);
     }
 

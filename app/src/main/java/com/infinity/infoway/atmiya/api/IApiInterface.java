@@ -21,6 +21,8 @@ import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedule
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeUrlPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.PayFeeTypePojoList;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.holiday.HolidayListPojo;
@@ -257,5 +259,23 @@ public interface IApiInterface {
     @GET("Student_Lesson_Planning_API")
     Call<ArrayList<StudentLessonPlanListPojo>> getStudentLessonPlanList(
             @Query("stud_id") String stud_id);
+
+    @GET("GetPendingFeeType")
+    Call<ArrayList<PayFeeTypePojoList>> getPendingFeeType(
+            @Query("StudId") String StudId,
+            @Query("YearId") String YearId,
+            @Query("AdmissionNo") String AdmissionNo,
+            @Query("CompanyCode") String CompanyCode,
+            @Query("hostel_code") String hostel_code);
+
+    @GET("GetPendingFeeStudentURL")
+    Call<FeeUrlPojo> feeUrlPojo(
+            @Query("Ord_stud_id") String Ord_stud_id,
+            @Query("Ord_year_id") String Ord_year_id,
+            @Query("Ord_Exam_id") String Ord_Exam_id,
+            @Query("Ord_sem_id") String Ord_sem_id,
+            @Query("Ord_Fee_Source") String Ord_Fee_Source,
+            @Query("Ord_Fee_Type") String Ord_Fee_Type,
+            @Query("Ord_created_ip") String Ord_created_ip);
 
 }
