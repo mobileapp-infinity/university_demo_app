@@ -3,9 +3,11 @@ package com.infinity.infoway.atmiya.student.lesson_plan;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class StudentLessonPlanListPojo {
+public class StudentLessonPlanListPojo implements Serializable {
 
     boolean isExpanded = true;
 
@@ -106,7 +108,7 @@ public class StudentLessonPlanListPojo {
         this.lpDetails = lpDetails;
     }
 
-    public class LpDetail {
+    public class LpDetail implements Serializable{
 
         @SerializedName("topic_Name")
         @Expose
@@ -134,7 +136,7 @@ public class StudentLessonPlanListPojo {
     }
 
 
-    public class LpSubTopic {
+    public class LpSubTopic implements Serializable{
 
         @SerializedName("sub_sr_no")
         @Expose

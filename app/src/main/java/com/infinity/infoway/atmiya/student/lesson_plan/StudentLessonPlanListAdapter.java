@@ -16,7 +16,9 @@ import com.infinity.infoway.atmiya.custom_class.Animations;
 import com.infinity.infoway.atmiya.custom_class.CustomAnimationForDefaultExpandableCard;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.IntentConstants;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class StudentLessonPlanListAdapter extends RecyclerView.Adapter<StudentLessonPlanListAdapter.MyViewHolder> {
@@ -76,7 +78,7 @@ public class StudentLessonPlanListAdapter extends RecyclerView.Adapter<StudentLe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, StudentLessonPlanDetailActivity.class);
-
+                intent.putExtra(IntentConstants.STUDENT_LECTURE_DETAILS_LIST, studentLessonPlanListPojoArrayList.get(position));
                 context.startActivity(intent);
             }
         });
