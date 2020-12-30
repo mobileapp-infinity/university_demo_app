@@ -301,7 +301,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Android_Sdk/icons/material/materialicons/assignment/baseline_assignment_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Android_Sdk/icons/material/materialicons/check_circle/baseline_check_circle_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -311,8 +311,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="252258" />
-                            <entry key="outputName" value="ic_faq" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_checked_cb" />
                             <entry key="sourceFile" value="C:\Users\iipl\Downloads\filter.svg" />
                           </map>
                         </option>

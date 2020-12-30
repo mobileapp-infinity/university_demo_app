@@ -22,6 +22,9 @@ import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsP
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeUrlPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.GetAllPendingFeeStudentPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.GetPaymentButtonHideShowPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.GetPaymentSingleButtonHideShowPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayFeeTypePojoList;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
@@ -277,5 +280,24 @@ public interface IApiInterface {
             @Query("Ord_Fee_Source") String Ord_Fee_Source,
             @Query("Ord_Fee_Type") String Ord_Fee_Type,
             @Query("Ord_created_ip") String Ord_created_ip);
+
+    @GET("GetPaymentButtonHideShow")
+    Call<ArrayList<GetPaymentButtonHideShowPojo>> getPaymentButtonHideShow(
+            @Query("StudId") String StudId,
+            @Query("FeeType") String FeeType);
+
+    @GET("GetPaymentSingleButtonHideShow")
+    Call<ArrayList<GetPaymentSingleButtonHideShowPojo>> getPaymentSingleButtonHideShow();
+
+    @GET("GetAllPendingFeeStudent")
+    Call<ArrayList<GetAllPendingFeeStudentPojo>> getAllPendingFeeStudent(
+            @Query("StudId") String StudId,
+            @Query("YearId") String YearId,
+            @Query("AdmissionNo") String AdmissionNo,
+            @Query("ClassName") String ClassName,
+            @Query("CompanyCode") String CompanyCode,
+            @Query("FeeType") String FeeType,
+            @Query("hostel_code") String hostel_code);
+
 
 }

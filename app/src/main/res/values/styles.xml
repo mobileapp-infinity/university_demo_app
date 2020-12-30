@@ -19,21 +19,21 @@
         <item name="android:windowBackground">@drawable/shape_alert_dialog</item>
     </style>
 
-    <style name="AttendanceTextStyle" >
+    <style name="AttendanceTextStyle">
         <item name="fontFamily">@font/ubuntu_r</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">12sp</item>
         <item name="textAllCaps">true</item>
     </style>
 
-    <style name="TimeTableTextStyle" >
+    <style name="TimeTableTextStyle">
         <item name="fontFamily">@font/ubuntu_r</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">12sp</item>
         <item name="textAllCaps">true</item>
     </style>
 
-    <style name="TimeTableTabStyle" parent="Widget.MaterialComponents.TabLayout" >
+    <style name="TimeTableTabStyle" parent="Widget.MaterialComponents.TabLayout">
         <item name="fontFamily">@font/ubuntu_r</item>
         <item name="tabBackground">@drawable/timetable_tab_selector</item>
         <item name="android:textColor">@color/white</item>
@@ -44,6 +44,7 @@
     <style name="CustomBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
     </style>
+
     <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
         <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>
     </style>
@@ -57,7 +58,7 @@
     </style>
 
 
-<!--    //dummy-->
+    <!--    //dummy-->
     <style name="SwipeLayout">
         <item name="android:paddingBottom">1px</item>
         <item name="android:background">#e5e5e5</item>
@@ -68,14 +69,23 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
     <style name="RightTextView">
         <item name="android:padding">6dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
     <style name="LeftTextView">
         <item name="android:padding">6dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
+
+    <style name="CustomCheckboxStyle" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_selector</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

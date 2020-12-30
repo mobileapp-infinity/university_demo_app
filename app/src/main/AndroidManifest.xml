@@ -43,6 +43,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".student.exam.activity.CIAExamMarksActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".student.news_or_notificaions.NewsOrNotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".student.fee_details.activity.PayFeeActivity"
             android:screenOrientation="portrait" />
         <activity

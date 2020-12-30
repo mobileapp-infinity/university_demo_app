@@ -22,6 +22,9 @@ import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsP
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeUrlPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.GetAllPendingFeeStudentPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.GetPaymentButtonHideShowPojo;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.GetPaymentSingleButtonHideShowPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayFeeTypePojoList;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
@@ -360,6 +363,27 @@ public class ApiImplementer {
                                                 Callback<FeeUrlPojo> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
         Call<FeeUrlPojo> call = apiInterface.feeUrlPojo(Ord_stud_id, Ord_year_id, Ord_Exam_id, Ord_sem_id, Ord_Fee_Source, Ord_Fee_Type, Ord_created_ip);
+        call.enqueue(cb);
+    }
+
+    public static void getPaymentButtonHideShowApiImplementer(String StudId, String FeeType, Callback<ArrayList<GetPaymentButtonHideShowPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<GetPaymentButtonHideShowPojo>> call = apiInterface.getPaymentButtonHideShow(StudId, FeeType);
+        call.enqueue(cb);
+    }
+
+    public static void getPaymentSingleButtonHideShowApiImplementer(Callback<ArrayList<GetPaymentSingleButtonHideShowPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<GetPaymentSingleButtonHideShowPojo>> call = apiInterface.getPaymentSingleButtonHideShow();
+        call.enqueue(cb);
+    }
+
+    public static void getAllPendingFeeStudentApiImplementer(String StudId, String YearId, String AdmissionNo,
+                                                             String ClassName, String CompanyCode, String FeeType, String hostel_code,
+                                                             Callback<ArrayList<GetAllPendingFeeStudentPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<GetAllPendingFeeStudentPojo>> call = apiInterface.getAllPendingFeeStudent(StudId, YearId, AdmissionNo,
+                ClassName, CompanyCode, FeeType, hostel_code);
         call.enqueue(cb);
     }
 

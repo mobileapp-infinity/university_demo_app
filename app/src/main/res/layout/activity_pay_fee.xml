@@ -43,11 +43,11 @@
         android:padding="16dp">
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/llPayFeeDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -81,193 +81,303 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
+                android:id="@+id/llContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:orientation="vertical"
-                app:cardCornerRadius="7dp"
-                app:cardElevation="10dp"
-                app:cardPreventCornerOverlap="true">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvPaymentDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:layout_marginTop="40dp"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:visibility="gone"
+                    app:cardCornerRadius="7dp"
+                    app:cardElevation="10dp"
+                    app:cardPreventCornerOverlap="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="vertical">
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="vertical">
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fee Date"
+                                android:textColor="@color/profile_heading_color"
+                                android:textSize="10sp" />
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                android:id="@+id/tvFeeDatePayFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textColor="@color/profile_heading_value_color"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="vertical">
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fee Type"
+                                android:textColor="@color/profile_heading_color"
+                                android:textSize="10sp" />
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                android:id="@+id/tvFeeTypePayFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textColor="@color/profile_heading_value_color"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="vertical">
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total Fee"
+                                android:textColor="@color/profile_heading_color"
+                                android:textSize="10sp" />
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                android:id="@+id/tvTotalFeePayFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textColor="@color/profile_heading_value_color"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="vertical">
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Paid Fee"
+                                android:textColor="@color/profile_heading_color"
+                                android:textSize="10sp" />
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                android:id="@+id/tvPaidFeePayFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textColor="@color/profile_heading_value_color"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="vertical">
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pending Fee"
+                                android:textColor="@color/profile_heading_color"
+                                android:textSize="10sp" />
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                android:id="@+id/tvPendingFeePayFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textColor="@color/profile_heading_value_color"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="vertical">
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pending Fee Refund"
+                                android:textColor="@color/profile_heading_color"
+                                android:textSize="10sp" />
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                android:id="@+id/tvPendingFeeRefundPayFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textColor="@color/profile_heading_value_color"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="vertical">
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Due Date"
+                                android:textColor="@color/profile_heading_color"
+                                android:textSize="10sp" />
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                android:id="@+id/tvDueDatePayFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textColor="@color/profile_heading_value_color"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:id="@+id/llPendingFeeList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPendingFeeList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPaymentButtons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Fee Date"
-                            android:textColor="@color/profile_heading_color"
-                            android:textSize="10sp" />
+                            android:id="@+id/btnPayWithHDFC"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="12dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_pay_fee_payment_btn_type_i"
+                            android:elevation="7dp"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Pay With HDFC"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                            android:id="@+id/tvFeeDatePayFee"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textColor="@color/profile_heading_value_color"
-                            android:textSize="12sp" />
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:id="@+id/btnPayWithAxis"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="12dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_pay_fee_payment_btn_type_ii"
+                            android:elevation="7dp"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Pay With AXIS"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="vertical">
+                        android:layout_gravity="center"
+                        android:layout_marginTop="18dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Fee Type"
-                            android:textColor="@color/profile_heading_color"
-                            android:textSize="10sp" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                            android:id="@+id/tvFeeTypePayFee"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textColor="@color/profile_heading_value_color"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="vertical">
+                            android:id="@+id/btnPayNow"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="12dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_pay_fee_payment_btn_type_ii"
+                            android:elevation="7dp"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Pay Now"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total Fee"
-                            android:textColor="@color/profile_heading_color"
-                            android:textSize="10sp" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                            android:id="@+id/tvTotalFeePayFee"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textColor="@color/profile_heading_value_color"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="vertical">
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Paid Fee"
-                            android:textColor="@color/profile_heading_color"
-                            android:textSize="10sp" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                            android:id="@+id/tvPaidFeePayFee"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textColor="@color/profile_heading_value_color"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="vertical">
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pending Fee"
-                            android:textColor="@color/profile_heading_color"
-                            android:textSize="10sp" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                            android:id="@+id/tvPendingFeePayFee"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textColor="@color/profile_heading_value_color"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="vertical">
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pending Fee Refund"
-                            android:textColor="@color/profile_heading_color"
-                            android:textSize="10sp" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                            android:id="@+id/tvPendingFeeRefundPayFee"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textColor="@color/profile_heading_value_color"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="vertical">
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Due Date"
-                            android:textColor="@color/profile_heading_color"
-                            android:textSize="10sp" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                            android:id="@+id/tvDueDatePayFee"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textColor="@color/profile_heading_value_color"
-                            android:textSize="12sp" />
+                            android:id="@+id/btnPayWithPaytm"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="12dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_pay_fee_payment_btn_type_i"
+                            android:elevation="7dp"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Pay With Paytm"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:visibility="visible" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -278,7 +388,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ProgressBar
                 android:layout_width="wrap_content"

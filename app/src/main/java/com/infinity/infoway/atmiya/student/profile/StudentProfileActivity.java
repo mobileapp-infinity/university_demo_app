@@ -211,7 +211,6 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
 
                     } else {
                         Toast.makeText(StudentProfileActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
-                        finish();
                     }
                 }
 
@@ -219,7 +218,6 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
                 public void onFailure(Call<StudentProfilePojo> call, Throwable t) {
                     DialogUtil.hideProgressDialog();
                     Toast.makeText(StudentProfileActivity.this, "Request Failed,Please try again later", Toast.LENGTH_SHORT).show();
-                    finish();
                 }
             });
         } else {
