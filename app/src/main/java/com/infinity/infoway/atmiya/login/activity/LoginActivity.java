@@ -1,16 +1,16 @@
 package com.infinity.infoway.atmiya.login.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -20,11 +20,10 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.RecyclerItemTouchHelper;
-import com.infinity.infoway.atmiya.custom_class.SwipeHelper;
 import com.infinity.infoway.atmiya.login.adapter.LoginUserListAdapter;
 import com.infinity.infoway.atmiya.login.pojo.RegisterStudentDetailsModel;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
-import com.infinity.infoway.atmiya.services.MyFirebaseInstanceIdAndMessagingService;
+import com.infinity.infoway.atmiya.student.forgot_password.activity.ForgotPasswordActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
@@ -33,7 +32,6 @@ import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
     ConnectionDetector connectionDetector;
     RecyclerView rvLoginUserList;
     LinearLayout llLoggedInStudentList;
+    AppCompatCheckBox chk_show_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,9 +165,23 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
         llLogin.setOnClickListener(this);
         llForgotPassword = findViewById(R.id.llForgotPassword);
         llForgotPassword.setOnClickListener(this);
-
+        chk_show_password = findViewById(R.id.chk_show_password);
         llLoggedInStudentList = findViewById(R.id.llLoggedInStudentList);
         rvLoginUserList = findViewById(R.id.rvLoginUserList);
+
+
+        chk_show_password.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked) {
+                    edtLoginUserPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    edtLoginUserPassword.setSelection(edtLoginUserPassword.getText().toString().length());
+                } else {
+                    edtLoginUserPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    edtLoginUserPassword.setSelection(edtLoginUserPassword.getText().toString().length());
+                }
+            }
+        });
     }
 
     @Override
@@ -184,7 +197,8 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
                 checkLoginApiCall(edtLoginUserName.getText().toString().trim(), edtLoginUserPassword.getText().toString().trim());
             }
         } else if (v.getId() == R.id.llForgotPassword) {
-
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
         }
     }
 

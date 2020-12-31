@@ -12,4 +12,6 @@ public class Urls {
 
 //    public static final String BASE_URL_FOR_FEE_RECEIPT = "https://cms.atmiya.edu.in/API_Fees_Collection.asmx/"; //Unused
 
+    public static final String DOMAIN_NAME_URL_FOR_FORGOT_PASSWORD = "https://cms.atmiya.edu.in";
+
 }

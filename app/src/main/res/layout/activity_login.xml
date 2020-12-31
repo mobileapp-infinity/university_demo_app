@@ -52,11 +52,10 @@
                 android:orientation="vertical"
                 android:padding="27dp">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_login_username_bg"
-                    android:orientation="vertical">
+                    android:background="@drawable/shape_login_username_bg">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtLoginUserName"
@@ -73,20 +72,27 @@
                         android:textColorHint="@color/white"
                         android:textSize="14sp" />
 
-                </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        app:srcCompat="@drawable/ic_person"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginRight="12dp"/>
 
-                <LinearLayout
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginBottom="22dp"
-                    android:background="@drawable/shape_login_username_bg"
-                    android:orientation="vertical">
+                    android:background="@drawable/shape_login_username_bg">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtLoginUserPassword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@null"
                         android:fontFamily="@font/ubuntu_r"
                         android:gravity="center"
@@ -98,7 +104,17 @@
                         android:textColorHint="@color/white"
                         android:textSize="14sp" />
 
-                </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/chk_show_password"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:button="@drawable/show_hide_password"
+                        android:buttonTint="@color/white"
+                        android:gravity="center" />
+
+                </FrameLayout>
 
                 <LinearLayout
                     android:id="@+id/llLogin"

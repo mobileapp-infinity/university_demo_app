@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
-import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 
 public class NewsOrNotificationListAdapter extends RecyclerView.Adapter<NewsOrNotificationListAdapter.MyViewHolder> {

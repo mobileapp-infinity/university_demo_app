@@ -1,4 +1,4 @@
-package com.infinity.infoway.atmiya.student.news_or_notificaions;
+package com.infinity.infoway.atmiya.student.news_or_notification;
 
 import androidx.appcompat.app.AppCompatActivity;
 

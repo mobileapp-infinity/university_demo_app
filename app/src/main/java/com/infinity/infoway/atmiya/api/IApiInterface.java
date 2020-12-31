@@ -32,6 +32,10 @@ import com.infinity.infoway.atmiya.student.fee_details.pojo.GetPaymentSingleButt
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayFeeTypePojoList;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetForgetPasswordDetailsByStudentEmployeeIdPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetInstituteFromDomainPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetSMSApiForApplicationPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetStudentForgotPasswordDetailsPojo;
 import com.infinity.infoway.atmiya.student.holiday.HolidayListPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.CheckStudentLeaveExistPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.InsertStudentLeavePojo;
@@ -42,7 +46,7 @@ import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUplo
 import com.infinity.infoway.atmiya.student.leave_application.pojo.UploadStudentLeaveDocumentPojo;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanListPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
-import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
@@ -332,5 +336,23 @@ public interface IApiInterface {
             @Query("stud_id") String stud_id,
             @Query("dept_id") String dept_id,
             @Query("course_id") String course_id);
+
+
+    @GET("Get_Institute_From_Domain_API")
+    Call<GetInstituteFromDomainPojo> getInstituteFromDomain(
+            @Query("domain_name") String domain_name);
+
+    @GET("get_student_forget_password_detail")
+    Call<ArrayList<GetStudentForgotPasswordDetailsPojo>> getStudentForgetPassDeail(@Query("email") String email);
+
+    @GET("get_forget_password_detail_by_Student_Employee_ID")
+    Call<ArrayList<GetForgetPasswordDetailsByStudentEmployeeIdPojo>> getForgotPasswordDetailsByStudentOrEmpId(
+            @Query("emp_stud_id") String emp_stud_id,
+            @Query("emp_stud_status") String emp_stud_status,
+            @Query("institute_id") String institute_id);
+
+    @GET("GET_SMS_API_For_Application")
+    Call<ArrayList<GetSMSApiForApplicationPojo>> getSMSApiForApplication(
+            @Query("institute_id") String institute_id);
 
 }

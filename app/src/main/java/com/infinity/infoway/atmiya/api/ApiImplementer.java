@@ -32,6 +32,10 @@ import com.infinity.infoway.atmiya.student.fee_details.pojo.GetPaymentSingleButt
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayFeeTypePojoList;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetForgetPasswordDetailsByStudentEmployeeIdPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetInstituteFromDomainPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetSMSApiForApplicationPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetStudentForgotPasswordDetailsPojo;
 import com.infinity.infoway.atmiya.student.holiday.HolidayListPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.CheckStudentLeaveExistPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.InsertStudentLeavePojo;
@@ -42,7 +46,7 @@ import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUplo
 import com.infinity.infoway.atmiya.student.leave_application.pojo.UploadStudentLeaveDocumentPojo;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanListPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
-import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
@@ -418,5 +422,30 @@ public class ApiImplementer {
         Call<DownloadStudentMidResultPojo> call = apiInterface.downloadStudentMidResult(sem_id, srpc_id, stud_id, dept_id, course_id);
         call.enqueue(cb);
     }
+
+    public static void getInstituteFromDomainApiImplementer(String domain_name, Callback<GetInstituteFromDomainPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<GetInstituteFromDomainPojo> call = apiInterface.getInstituteFromDomain(domain_name);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentForgetPasswordDetailsApiImplementer(String email, Callback<ArrayList<GetStudentForgotPasswordDetailsPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<GetStudentForgotPasswordDetailsPojo>> call = apiInterface.getStudentForgetPassDeail(email);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentForgetPasswordDetailsApiImplementer(String emp_stud_id, String emp_stud_status, String institute_id, Callback<ArrayList<GetForgetPasswordDetailsByStudentEmployeeIdPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<GetForgetPasswordDetailsByStudentEmployeeIdPojo>> call = apiInterface.getForgotPasswordDetailsByStudentOrEmpId(emp_stud_id, emp_stud_status, institute_id);
+        call.enqueue(cb);
+    }
+
+    public static void getSMSApiForApplicationApiImplementer(String institute_id, Callback<ArrayList<GetSMSApiForApplicationPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<GetSMSApiForApplicationPojo>> call = apiInterface.getSMSApiForApplication(institute_id);
+        call.enqueue(cb);
+    }
+
 
 }

@@ -34,7 +34,7 @@ import com.infinity.infoway.atmiya.student.home_work.StudentHomeWorkActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivity;
-import com.infinity.infoway.atmiya.student.news_or_notificaions.StudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
