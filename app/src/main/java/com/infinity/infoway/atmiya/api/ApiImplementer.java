@@ -16,10 +16,14 @@ import com.infinity.infoway.atmiya.student.e_learning.pojo.JoinGroupListPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.LearningManagementGroupDetailsPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.StudentWiseLearningGroupPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamSemesterPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.DownloadStudentMidResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.MidResultPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.StudentCIAMarksPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeUrlPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.GetAllPendingFeeStudentPojo;
@@ -384,6 +388,34 @@ public class ApiImplementer {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<GetAllPendingFeeStudentPojo>> call = apiInterface.getAllPendingFeeStudent(StudId, YearId, AdmissionNo,
                 ClassName, CompanyCode, FeeType, hostel_code);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentCIAMarksApiImplementer(String stud_id, String sem_id, String exam_type,
+                                                        Callback<ArrayList<StudentCIAMarksPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<StudentCIAMarksPojo>> call = apiInterface.getStudentCIAMarks(stud_id, sem_id, exam_type);
+        call.enqueue(cb);
+    }
+
+    public static void getCIAExamSemesterApiImplementer(String course_id, String sem_id, String dept_id,
+                                                        Callback<CIAExamSemesterPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<CIAExamSemesterPojo> call = apiInterface.getCIAExamSemester(course_id, sem_id, dept_id);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentMidResultApiImplementer(String institute_id, String dept_id, String course_id,
+                                                         String sem_id, String stud_id, String srpc_id, Callback<ArrayList<MidResultPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<MidResultPojo>> call = apiInterface.getStudentMidResult(institute_id, dept_id, course_id, sem_id, stud_id, srpc_id);
+        call.enqueue(cb);
+    }
+
+    public static void downloadStudentMidResultApiImplementer(String sem_id, String srpc_id, String stud_id,
+                                                              String dept_id, String course_id, Callback<DownloadStudentMidResultPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<DownloadStudentMidResultPojo> call = apiInterface.downloadStudentMidResult(sem_id, srpc_id, stud_id, dept_id, course_id);
         call.enqueue(cb);
     }
 

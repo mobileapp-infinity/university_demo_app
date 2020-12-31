@@ -16,10 +16,14 @@ import com.infinity.infoway.atmiya.student.e_learning.pojo.JoinGroupListPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.LearningManagementGroupDetailsPojo;
 import com.infinity.infoway.atmiya.student.e_learning.pojo.StudentWiseLearningGroupPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamSemesterPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.DownloadStudentMidResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.MidResultPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.StudentCIAMarksPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeUrlPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.GetAllPendingFeeStudentPojo;
@@ -299,5 +303,34 @@ public interface IApiInterface {
             @Query("FeeType") String FeeType,
             @Query("hostel_code") String hostel_code);
 
+
+    @GET("Get_Student_CIA_Marks")
+    Call<ArrayList<StudentCIAMarksPojo>> getStudentCIAMarks(
+            @Query("stud_id") String stud_id,
+            @Query("sem_id") String sem_id,
+            @Query("exam_type") String exam_type);
+
+    @GET("Get_Semester_By_Course_Marks_Display")
+    Call<CIAExamSemesterPojo> getCIAExamSemester(
+            @Query("course_id") String course_id,
+            @Query("sem_id") String sem_id,
+            @Query("dept_id") String dept_id);
+
+    @GET("get_result_publish_configuration_semester_wise_for_api")
+    Call<ArrayList<MidResultPojo>> getStudentMidResult(
+            @Query("institute_id") String institute_id,
+            @Query("dept_id") String dept_id,
+            @Query("course_id") String course_id,
+            @Query("sem_id") String sem_id,
+            @Query("stud_id") String stud_id,
+            @Query("srpc_id") String srpc_id);
+
+    @GET("get_stud_publish_result_download")
+    Call<DownloadStudentMidResultPojo> downloadStudentMidResult(
+            @Query("sem_id") String sem_id,
+            @Query("srpc_id") String srpc_id,
+            @Query("stud_id") String stud_id,
+            @Query("dept_id") String dept_id,
+            @Query("course_id") String course_id);
 
 }
