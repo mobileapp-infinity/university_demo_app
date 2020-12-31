@@ -1,10 +1,12 @@
 package com.infinity.infoway.atmiya.student.exam.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -18,6 +20,8 @@ import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadStudentMidResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.MidResultPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.ConnectionDetector;
+import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
@@ -32,12 +36,19 @@ public class StudentMidResultListAdapter extends RecyclerView.Adapter<StudentMid
     ArrayList<MidResultPojo> midResultPojoArrayList;
     LayoutInflater layoutInflater;
     MySharedPreferences mySharedPreferences;
+    ProgressDialog progressDialog;
+    ConnectionDetector connectionDetector;
 
     public StudentMidResultListAdapter(Context context, ArrayList<MidResultPojo> midResultPojoArrayList) {
         this.context = context;
         this.midResultPojoArrayList = midResultPojoArrayList;
         layoutInflater = LayoutInflater.from(context);
+        connectionDetector = new ConnectionDetector(context);
         mySharedPreferences = new MySharedPreferences(context);
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     @NonNull
@@ -74,6 +85,14 @@ public class StudentMidResultListAdapter extends RecyclerView.Adapter<StudentMid
             }
         });
 
+        holder.btnDownloadMidResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!CommonUtil.checkIsEmptyOrNullCommon(midResultPojoArrayList.get(position).getSrpcId())) {
+                    downloadStudentMidResultApiCall(midResultPojoArrayList.get(position).getSrpcId() + "");
+                }
+            }
+        });
     }
 
     @Override
@@ -124,18 +143,30 @@ public class StudentMidResultListAdapter extends RecyclerView.Adapter<StudentMid
     }
 
     private void downloadStudentMidResultApiCall(String srpcId) {
-        ApiImplementer.downloadStudentMidResultApiImplementer(mySharedPreferences.getSmId(), srpcId, mySharedPreferences.getStudentId(), mySharedPreferences.getDmId(),
-                mySharedPreferences.getCourseId(), new Callback<DownloadStudentMidResultPojo>() {
-                    @Override
-                    public void onResponse(Call<DownloadStudentMidResultPojo> call, Response<DownloadStudentMidResultPojo> response) {
+        if (connectionDetector.isConnectingToInternet()) {
+            progressDialog.show();
+            ApiImplementer.downloadStudentMidResultApiImplementer(mySharedPreferences.getSmId(), srpcId, mySharedPreferences.getStudentId(), mySharedPreferences.getDmId(),
+                    mySharedPreferences.getCourseId(), new Callback<DownloadStudentMidResultPojo>() {
+                        @Override
+                        public void onResponse(Call<DownloadStudentMidResultPojo> call, Response<DownloadStudentMidResultPojo> response) {
+                            if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 1 &&
+                                    response.body().getBase64string() != null && !response.body().getBase64string().isEmpty()) {
+                                new GeneratePDFFileFromBase64String(context, "Mid Result", CommonUtil.generateUniqueFileName(response.body().getFilename()), response.body().getBase64string(), progressDialog);
+                            } else {
+                                progressDialog.hide();
+                                Toast.makeText(context, "some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-                    }
-
-                    @Override
-                    public void onFailure(Call<DownloadStudentMidResultPojo> call, Throwable t) {
-
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<DownloadStudentMidResultPojo> call, Throwable t) {
+                            progressDialog.hide();
+                            Toast.makeText(context, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(context, "No internet connection,Please try again later", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
