@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg_color"
     android:orientation="vertical"
-    tools:context=".student.forgot_password.activity.ForgotPasswordActivity">
+    tools:context=".student.forgot_password.activity.VerifyOTPActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:padding="8dp">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivCloseForgotPassword"
+            android:id="@+id/ivCloseVerifyOTP"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -28,10 +28,9 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="Forgot Password"
+            android:text="Verify OTP"
             android:textAllCaps="true"
             android:textColor="@color/white" />
-
 
     </LinearLayout>
 
@@ -61,26 +60,44 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/ic_forgot_password" />
+                    app:srcCompat="@drawable/ic_verify_otp" />
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:gravity="center"
-                    android:text="Forgot Your Password ?"
+                    android:text="OTP Verification"
                     android:textColor="@color/colorPrimary"
                     android:textSize="22sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:lineSpacingMultiplier="1.1"
-                    android:text="You will receive your Username And Password \nto your register mobile no."
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="1.1"
+                        android:text="Enter the OTP send to "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="13sp" />
+
+                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="1.1"
+                        android:text="+91 - 9865102547"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 

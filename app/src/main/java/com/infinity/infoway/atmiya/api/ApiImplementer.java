@@ -1,5 +1,6 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
@@ -447,5 +448,11 @@ public class ApiImplementer {
         call.enqueue(cb);
     }
 
+    public static void updateStudentFcmTokenApiImplementer(String stud_id, String FCM_ID,
+                                                           String KEY, Callback<UpdateStudentFCMTokenPojo> cb) {
+        final IApiInterface apiInterface = ApiClientForStudentAndEmployeeFcmApi.getClient().create(IApiInterface.class);
+        Call<UpdateStudentFCMTokenPojo> call = apiInterface.updateStudentFcmToken(stud_id, FCM_ID, KEY);
+        call.enqueue(cb);
+    }
 
 }
