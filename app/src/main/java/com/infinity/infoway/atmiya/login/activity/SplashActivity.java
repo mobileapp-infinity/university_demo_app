@@ -6,13 +6,11 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -35,15 +33,14 @@ import com.infinity.infoway.atmiya.student.holiday.HolidayActivity;
 import com.infinity.infoway.atmiya.student.home_work.StudentHomeWorkActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
-import com.infinity.infoway.atmiya.student.news_or_notification.NewsOrNotificationActivity;
-import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
-import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.student.student_syllabus.StudentSyllabusActivity;
 import com.infinity.infoway.atmiya.student.student_timetable.activity.StudentTimeTableActivity;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.DynamicActivityName;
+import com.infinity.infoway.atmiya.utils.IntentConstants;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,7 +85,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else if (clickAction.equalsIgnoreCase(DynamicActivityName.NEWS_ACTIVITY_FOR_STUDENT)) {
-                intent = new Intent(SplashActivity.this, NewsOrNotificationActivity.class);
+                intent = new Intent(SplashActivity.this, ViewAllNewsOrNotificationActivity.class);
                 startActivity(intent);
                 finish();
             } else if (clickAction.equalsIgnoreCase(DynamicActivityName.ACTIVITY_FOR_STUDENT)) {
@@ -286,48 +283,20 @@ public class SplashActivity extends AppCompatActivity {
                         }
                     });
                     if (response.isSuccessful()) {
-                        if (Integer.parseInt(response.body().getStatus()) == 1) {//1 For Opetional Update
-                            new MaterialAlertDialogBuilder(SplashActivity.this)
-                                    .setMessage("New version available.Would you like to update your app ?")
-                                    .setCancelable(false)
-                                    .setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            try {
-                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
-                                                finish();
-                                            } catch (android.content.ActivityNotFoundException anfe) {
-                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
-                                                finish();
-                                            }
-                                        }
-                                    })
-                                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            redirectToLoginActivity();
-                                        }
-                                    })
-                                    .show();
+                        if (Integer.parseInt(response.body().getStatus()) == 1) {//1 For Optional Update
+
+                            Intent intent = new Intent(SplashActivity.this, UpdateAppActivity.class);
+                            intent.putExtra(IntentConstants.IS_FORCE_UPDATE, false);
+                            intent.putExtra(IntentConstants.APP_UPDATE_TYPE, IntentConstants.OPTIONAL_UPDATE);
+                            startActivity(intent);
+                            finish();
                         } else if (Integer.parseInt(response.body().getStatus()) == 2) {//2 For Force Update
-                            new MaterialAlertDialogBuilder(SplashActivity.this)
-                                    .setMessage("New version available.Would you like to update your app ?")
-                                    .setCancelable(false)
-                                    .setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            try {
-                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
-                                                finish();
-                                            } catch (android.content.ActivityNotFoundException anfe) {
-                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
-                                                finish();
-                                            }
-                                        }
-                                    }).show();
+
+                            Intent intent = new Intent(SplashActivity.this, UpdateAppActivity.class);
+                            intent.putExtra(IntentConstants.IS_FORCE_UPDATE, true);
+                            intent.putExtra(IntentConstants.APP_UPDATE_TYPE, IntentConstants.FORCE_UPDATE);
+                            startActivity(intent);
+                            finish();
                         } else {// 0 for app is already up to date redirect to login activity
                             redirectToLoginActivity();
                         }

@@ -20,7 +20,7 @@
                 android:layout_height="30dp"
                 android:layout_margin="2sp"
                 android:adjustViewBounds="true"
-                app:srcCompat="@drawable/atmiya_login_screen_logo" />
+                app:srcCompat="@drawable/logo" />
 
         </LinearLayout>
 

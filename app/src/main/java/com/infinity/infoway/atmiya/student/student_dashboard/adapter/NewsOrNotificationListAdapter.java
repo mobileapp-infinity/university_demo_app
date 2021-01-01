@@ -41,9 +41,16 @@ public class NewsOrNotificationListAdapter extends RecyclerView.Adapter<NewsOrNo
         }
 
         if (data.getNt_date() != null && !data.getNt_date().isEmpty()) {
-            String dateArray[] = data.getNt_date().split("/");
-            String date = dateArray[0] + " " + CommonUtil.getMonthSortNameFromNumber(Integer.parseInt(dateArray[1])) + "," + "\n" + dateArray[2];
-            holder.tvNewsOrNotificationDate.setText(date);
+            String date = "";
+            try {
+                if (data.getNt_date().contains("/")) {
+                    String dateArray[] = data.getNt_date().split("/");
+                    date = dateArray[0] + " " + CommonUtil.getMonthSortNameFromNumber(Integer.parseInt(dateArray[1])) + "," + "\n" + dateArray[2];
+                }
+                holder.tvNewsOrNotificationDate.setText(date);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
 
         if (data.getNt_desc() != null && !data.getNt_desc().isEmpty()) {

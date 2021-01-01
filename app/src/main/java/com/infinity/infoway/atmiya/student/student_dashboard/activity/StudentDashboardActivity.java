@@ -35,6 +35,7 @@ import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveAppli
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivity;
 import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
@@ -231,7 +232,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
                 Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
             }
         } else if (v.getId() == R.id.btnViewAllStudentSide) {
-
+            Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -326,7 +328,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
     }
 
     private void getStudentNewsOrNotificationListApiCall() {
-        //2 for student login //0 for student login
+        //2 for faculty login //0 for student login
         llNewsOrNotificationListStudentDashboard.setVisibility(View.GONE);
         ApiImplementer.getStudentNewsOrNotificationImplementer("2", "0", mySharedPreferences.getStudentId(),
                 mySharedPreferences.getAcId(), mySharedPreferences.getDmId(),
