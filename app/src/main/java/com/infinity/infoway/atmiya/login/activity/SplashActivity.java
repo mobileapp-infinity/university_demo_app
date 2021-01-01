@@ -25,10 +25,25 @@ import com.infinity.infoway.atmiya.BuildConfig;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
+import com.infinity.infoway.atmiya.student.assignment.AssignmentActivity;
+import com.infinity.infoway.atmiya.student.attendance.activity.StudentAttendanceActivity;
+import com.infinity.infoway.atmiya.student.e_learning.activity.ELearningActivity;
+import com.infinity.infoway.atmiya.student.exam.activity.StudentResultActivity;
+import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
+import com.infinity.infoway.atmiya.student.fee_details.activity.PayFeeActivity;
+import com.infinity.infoway.atmiya.student.holiday.HolidayActivity;
+import com.infinity.infoway.atmiya.student.home_work.StudentHomeWorkActivity;
+import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
+import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.NewsOrNotificationActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
+import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
+import com.infinity.infoway.atmiya.student.student_syllabus.StudentSyllabusActivity;
+import com.infinity.infoway.atmiya.student.student_timetable.activity.StudentTimeTableActivity;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
+import com.infinity.infoway.atmiya.utils.DynamicActivityName;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,7 +71,72 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         initView();
-        loadSplashScreenAnimationAndAskForPermission();
+
+        if (getIntent().getAction() != null && !getIntent().getAction().isEmpty()) {
+            Intent intent = null;
+            String clickAction = getIntent().getAction().trim();
+            if (clickAction.equalsIgnoreCase(DynamicActivityName.FEES_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, PayFeeActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.ATTENDANCE_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, StudentAttendanceActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.LESSON_PLAN_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, StudentLessonPlanActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.NEWS_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, NewsOrNotificationActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, StudentActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.HOMEWORK_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, StudentHomeWorkActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.SYLLABUS_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, StudentSyllabusActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.RESULT_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, StudentResultActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.ASSIGNMENT_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, AssignmentActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.EXAM_TIMETABLE_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, StudentTimeTableActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.FEE_CIRCULAR_ACTIVITY_FOR_STUDENt)) {
+                intent = new Intent(SplashActivity.this, FeeDetailsActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.LEAVE_APPLICATION_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, LeaveApplicationActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.E_LEARNING_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, ELearningActivity.class);
+                startActivity(intent);
+                finish();
+            } else if (clickAction.equalsIgnoreCase(DynamicActivityName.HOLIDAY_LIST_ACTIVITY_FOR_STUDENT)) {
+                intent = new Intent(SplashActivity.this, HolidayActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                loadSplashScreenAnimationAndAskForPermission();
+            }
+        } else {
+            loadSplashScreenAnimationAndAskForPermission();
+        }
     }
 
     private void initView() {
@@ -65,7 +145,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void loadSplashScreenAnimationAndAskForPermission() {
-        Animation slide_up = AnimationUtils.loadAnimation(getApplicationContext(),
+        Animation slide_up = AnimationUtils.loadAnimation(SplashActivity.this,
                 R.anim.slide_up);
         ivSplashLogo.startAnimation(slide_up);
         Thread timer = new Thread() {

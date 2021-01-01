@@ -7,6 +7,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.infinity.infoway.atmiya.utils.AppController;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
+import com.infinity.infoway.atmiya.utils.NotificationUtils;
 
 public class MyFirebaseInstanceIdAndMessagingService extends FirebaseMessagingService {
 
@@ -31,6 +32,9 @@ public class MyFirebaseInstanceIdAndMessagingService extends FirebaseMessagingSe
         super.onMessageReceived(remoteMessage);
         try {
             mySharedPreferences = new MySharedPreferences(AppController.getAppContext());
+
+            new NotificationUtils(remoteMessage);
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }

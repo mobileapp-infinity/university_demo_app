@@ -9,7 +9,7 @@ import android.os.Build;
 public class AppController extends Application {
 
     private static Context context;
-    public static final String NOTIFICATION_CHANNEL_NAME = "atmiya_push_notificaion";
+    public static final String NOTIFICATION_CHANNEL_NAME = "atmiya_push_notification";
     public static final String NOTIFICATION_CHANNEL_ID = "com.infinity.infoway.atmiya";
 
     @Override
@@ -25,7 +25,7 @@ public class AppController extends Application {
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }

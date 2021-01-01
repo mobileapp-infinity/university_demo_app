@@ -107,8 +107,25 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="Fees Activity For Student" />
+                <action android:name="Attendance Activity For Student" />
+                <action android:name="Lesson Plan Activity For Student" />
+                <action android:name="News Activity For Student" />
+                <action android:name="Activity For Student" />
+                <action android:name="Homework Activity For Student" />
+                <action android:name="Syllabus Activity For Student" />
+                <action android:name="Result Activity For Student" />
+                <action android:name="Assignment Activity For Student" />
+                <action android:name="Exam Timetable Activity For Student" />
+                <action android:name="Fee Circular Activity For Student" />
+                <action android:name="Leave Activity For Student" />
+                <action android:name="E-Learning Management For Student" />
+                <action android:name="Holiday Activity For Student" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
             </intent-filter>
         </activity>
         <activity
@@ -151,6 +168,14 @@
  Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more.
         -->
+        <!--        <service-->
+        <!--            android:name=".services.MyFirebaseInstanceIdAndMessagingService"-->
+        <!--            android:exported="false">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+        <!--            </intent-filter>-->
+        <!--        </service>-->
+
         <service
             android:name=".services.MyFirebaseInstanceIdAndMessagingService"
             android:exported="false">
@@ -158,6 +183,18 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <!--        <service-->
+        <!--            android:name=".services.MyFirebaseInstanceIdAndMessagingService"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="true"-->
+        <!--            android:permission="com.google.android.c2dm.permission.SEND"-->
+        <!--            android:stopWithTask="false">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+        <!--                <action android:name="com.google.c2dm.intent.RECEIVE" />-->
+        <!--            </intent-filter>-->
+        <!--        </service>-->
     </application>
 
 </manifest>
