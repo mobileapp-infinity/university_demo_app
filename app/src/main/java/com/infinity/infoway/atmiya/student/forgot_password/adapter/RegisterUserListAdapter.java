@@ -65,10 +65,14 @@ public class RegisterUserListAdapter extends RecyclerView.Adapter<RegisterUserLi
                             iUserListDialog.closeUserListDialog(String.valueOf(getStudentForgotPasswordDetailsPojoArrayList.get(position).getId()),
                                     String.valueOf(getStudentForgotPasswordDetailsPojoArrayList.get(position).getEmpStudStatus()));
                         }
-                    }, 120);
+                    }, 150);
                 }
             }
         });
+
+        if (position == getStudentForgotPasswordDetailsPojoArrayList.size() - 1) {
+            holder.line.setVisibility(View.GONE);
+        }
 
     }
 
@@ -81,11 +85,13 @@ public class RegisterUserListAdapter extends RecyclerView.Adapter<RegisterUserLi
 
         TextViewRegularFont tvRegisterUsername;
         AppCompatCheckBox cbSelectRegisterUser;
+        View line;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvRegisterUsername = itemView.findViewById(R.id.tvRegisterUsername);
             cbSelectRegisterUser = itemView.findViewById(R.id.cbSelectRegisterUser);
+            line = itemView.findViewById(R.id.line);
         }
     }
 

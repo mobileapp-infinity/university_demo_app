@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.infinity.infoway.atmiya.R;
+import com.infinity.infoway.atmiya.api.ApiClientForStudentAndEmployeeFcmApi;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.api.Urls;
 import com.infinity.infoway.atmiya.custom_class.ProgressBarAnimation;
@@ -41,8 +42,10 @@ import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.adapter.NewsOrNotificationListAdapter;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
+import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.student.student_syllabus.StudentSyllabusActivity;
 import com.infinity.infoway.atmiya.student.student_timetable.activity.StudentTimeTableActivity;
+import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
@@ -50,6 +53,7 @@ import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 import net.seifhadjhassen.recyclerviewpager.PagerModel;
 import net.seifhadjhassen.recyclerviewpager.RecyclerViewPager;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -106,6 +110,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_student_dashboard);
         initView();
         getStudentProfileAndAttendanceData();
+        sendStudentFCMTokenToServer();
     }
 
     private void loadStudentAttendanceProgress(int currentMonthAttendance, int previousMonthAttendance, int avgPercentage) {
@@ -361,6 +366,29 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             finish();
         }
     }
+
+
+    private void sendStudentFCMTokenToServer() {
+        if (!CommonUtil.checkIsEmptyOrNullCommon(mySharedPreferences.getFCMToken())) {
+            if (connectionDetector.isConnectingToInternet()) {
+                ApiImplementer.updateStudentFcmTokenApiImplementer(mySharedPreferences.getStudentId(), mySharedPreferences.getFCMToken(),
+                        ApiClientForStudentAndEmployeeFcmApi.ENCODED_KEY_FOR_STUDENT_AND_EMPLOYEE_FCM_REGISTRATION, new Callback<UpdateStudentFCMTokenPojo>() {
+                            @Override
+                            public void onResponse(Call<UpdateStudentFCMTokenPojo> call, Response<UpdateStudentFCMTokenPojo> response) {
+//                                if (response.isSuccessful() && response.body() != null) {
+//                                    Toast.makeText(StudentDashboardActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+//                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<UpdateStudentFCMTokenPojo> call, Throwable t) {
+
+                            }
+                        });
+            }
+        }
+    }
+
 
     @Override
     public void onBackPressed() {

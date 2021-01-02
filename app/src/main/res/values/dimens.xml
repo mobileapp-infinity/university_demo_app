@@ -16,4 +16,11 @@
     <dimen name="FONT_SIZE">13dp</dimen>
     <dimen name="text_size_u">14dp</dimen>
     <dimen name="Font_size">12dp</dimen>
+
+    <dimen name="otp_view_item_size">30dp</dimen>
+    <dimen name="otp_view_item_radius">4dp</dimen>
+    <dimen name="otp_view_item_spacing">2dp</dimen>
+    <dimen name="otp_view_item_line_width">2dp</dimen>
+    <dimen name="otp_view_cursor_width">2dp</dimen>
+
 </resources>

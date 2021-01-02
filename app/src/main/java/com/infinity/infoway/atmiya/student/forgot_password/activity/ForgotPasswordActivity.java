@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -50,14 +51,11 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     AppCompatImageView ivCloseForgotPassword;
     AppCompatEditText edtEnterRegisterMobileNo;
     TextViewRegularFont btnSendMsg;
-    AlertDialog dialog;
-    RecyclerView rvRegisterUserList;
-    RegisterUserListAdapter registerUserListAdapter;
     WebView webview;
     private String SMS_URL = "";
     ArrayList<GetForgetPasswordDetailsByStudentEmployeeIdPojo> getForgetPasswordDetailsByStudentEmployeeIdPojoArrayList;
     RequestQueue queue;
-
+    private RegisterStudentListBottomSheetDialog registerStudentListBottomSheetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +106,9 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         } else if (v.getId() == R.id.btnSendMsg) {
             if (isValid()) {
                 CommonUtil.hideKeyboardCommon(ForgotPasswordActivity.this);
-                getInstituteFromDomainUrlApiCall();
+                Intent intent = new Intent(ForgotPasswordActivity.this,VerifyOTPActivity.class);
+                startActivity(intent);
+//                getInstituteFromDomainUrlApiCall();
             }
         }
     }
@@ -189,8 +189,8 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
 
     @Override
     public void closeUserListDialog(String emp_stud_id, String emp_stud_status) {
-        if (dialog != null) {
-            dialog.dismiss();
+        if (registerStudentListBottomSheetDialog != null) {
+            registerStudentListBottomSheetDialog.dismiss();
             getForgetPasswordDetailByStudentEmpIdApi(emp_stud_id, emp_stud_status, "0");
         }
     }
@@ -310,27 +310,8 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     }
 
     private void showRegisterUserListDialog(ArrayList<GetStudentForgotPasswordDetailsPojo> getStudentForgotPasswordDetailsPojoArrayList) {
-
-        View dialogTitle = getLayoutInflater().inflate(R.layout.dialog_title_layout_register_user, null);
-        AlertDialog.Builder alertDialog = new
-                AlertDialog.Builder(ForgotPasswordActivity.this);
-        alertDialog.setTitle("Select User");
-        alertDialog.setCustomTitle(dialogTitle);
-        alertDialog.setCancelable(false);
-        alertDialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        View rowList = getLayoutInflater().inflate(R.layout.dialog_layout_register_user_list, null);
-        rvRegisterUserList = rowList.findViewById(R.id.rvRegisterUserList);
-        registerUserListAdapter = new RegisterUserListAdapter(ForgotPasswordActivity.this, getStudentForgotPasswordDetailsPojoArrayList);
-        rvRegisterUserList.setAdapter(registerUserListAdapter);
-
-        alertDialog.setView(rowList);
-        dialog = alertDialog.create();
-        dialog.show();
+        registerStudentListBottomSheetDialog = new RegisterStudentListBottomSheetDialog(ForgotPasswordActivity.this, getStudentForgotPasswordDetailsPojoArrayList);
+        registerStudentListBottomSheetDialog.show(this.getSupportFragmentManager(), "Select Register Student");
     }
 
 }

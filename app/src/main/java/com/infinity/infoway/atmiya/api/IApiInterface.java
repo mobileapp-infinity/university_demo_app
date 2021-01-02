@@ -1,5 +1,6 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
@@ -354,5 +355,11 @@ public interface IApiInterface {
     @GET("GET_SMS_API_For_Application")
     Call<ArrayList<GetSMSApiForApplicationPojo>> getSMSApiForApplication(
             @Query("institute_id") String institute_id);
+
+    @GET("Update_Isrp_Student_FCM_Id")
+    Call<UpdateStudentFCMTokenPojo> updateStudentFcmToken(
+            @Query("stud_id") String stud_id,
+            @Query("FCM_ID") String FCM_ID,
+            @Query(value = "KEY", encoded = true) String KEY);
 
 }
