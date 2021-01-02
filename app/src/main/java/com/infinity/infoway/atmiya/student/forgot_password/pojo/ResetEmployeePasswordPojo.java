@@ -5,20 +5,19 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class UpdateStudentForgotPasswordOtpPojo {
+public class ResetEmployeePasswordPojo {
 
-    private List<UpdateStudentForgotPasswordOtpPojo.TableBean> Table;
+    private List<ResetEmployeePasswordPojo.TableBean> Table;
 
-    public List<UpdateStudentForgotPasswordOtpPojo.TableBean> getTable() {
+    public List<ResetEmployeePasswordPojo.TableBean> getTable() {
         return Table;
     }
 
-    public void setTable(List<UpdateStudentForgotPasswordOtpPojo.TableBean> Table) {
+    public void setTable(List<ResetEmployeePasswordPojo.TableBean> Table) {
         this.Table = Table;
     }
 
     public class TableBean {
-
         @SerializedName("Error_code")
         @Expose
         private Integer errorCode;
@@ -41,8 +40,6 @@ public class UpdateStudentForgotPasswordOtpPojo {
         public void setErrorMsg(String errorMsg) {
             this.errorMsg = errorMsg;
         }
-
-
     }
 
 }

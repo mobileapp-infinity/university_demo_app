@@ -8,13 +8,13 @@ import java.util.List;
 public class CheckOTPVerificationForStudentPojo {
 
 
-    private List<CheckOTPVerificationForEmployeePojo.TableBean> Table;
+    private List<CheckOTPVerificationForStudentPojo.TableBean> Table;
 
-    public List<CheckOTPVerificationForEmployeePojo.TableBean> getTable() {
+    public List<CheckOTPVerificationForStudentPojo.TableBean> getTable() {
         return Table;
     }
 
-    public void setTable(List<CheckOTPVerificationForEmployeePojo.TableBean> Table) {
+    public void setTable(List<CheckOTPVerificationForStudentPojo.TableBean> Table) {
         this.Table = Table;
     }
 

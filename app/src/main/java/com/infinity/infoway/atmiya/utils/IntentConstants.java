@@ -16,8 +16,9 @@ public class IntentConstants {
 
     public static final String INSTITUTE_ID_FOR_VERIFY_OTP = "InstituteIdForVerifyOtp";
     public static final String USERNAME_FOR_VERIFY_OTP = "UsernameForVerifyOtp";
-    public static final String IS_EMPLOYEE_FORGOT_PASSWORD = "0";
-    public static final String IS_STUDENT_FORGOT_PASSWORD = "0";
+    public static final String IS_EMPLOYEE_FORGOT_PASSWORD = "IsEmployeeForgotPassword";
+    public static final String IS_STUDENT_FORGOT_PASSWORD = "IsStudentForgotPassword";
+    public static final String ENTERED_MOBILE_NO = "EnteredMobileNo";
 
 
 }

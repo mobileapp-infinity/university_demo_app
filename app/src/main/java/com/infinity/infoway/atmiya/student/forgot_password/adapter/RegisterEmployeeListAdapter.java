@@ -75,7 +75,7 @@ public class RegisterEmployeeListAdapter extends RecyclerView.Adapter<RegisterEm
                         public void run() {
                             iRegisterEmployeeList.onRegisterEmployeeSelected(tableBean, instituteId);
                         }
-                    }, 100);
+                    }, 80);
                 }
             }
         });

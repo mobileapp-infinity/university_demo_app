@@ -71,7 +71,7 @@ public class RegisterStudentListIfOTPBasedVerificationAdapter extends RecyclerVi
                         public void run() {
                             iSelectRegisterStudentIfOTPBasedLogin.onOtpBasedVerificationRegisteredStudentSelected(tableBean, instituteId);
                         }
-                    }, 100);
+                    }, 80);
                 }
             }
         });

@@ -9,13 +9,13 @@ public class InsertStudentPasswordAndSMSAbsentApiCall {
 
     @SerializedName("Table")
     @Expose
-    private List<Table> table = null;
+    private List<InsertStudentPasswordAndSMSAbsentApiCall.Table> table = null;
 
-    public List<Table> getTable() {
+    public List<InsertStudentPasswordAndSMSAbsentApiCall.Table> getTable() {
         return table;
     }
 
-    public void setTable(List<Table> table) {
+    public void setTable(List<InsertStudentPasswordAndSMSAbsentApiCall.Table> table) {
         this.table = table;
     }
 

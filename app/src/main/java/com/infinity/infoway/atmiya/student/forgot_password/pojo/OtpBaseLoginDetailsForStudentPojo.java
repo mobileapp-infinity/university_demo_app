@@ -8,13 +8,13 @@ import java.util.List;
 public class OtpBaseLoginDetailsForStudentPojo {
 
 
-    private List<TableBean> Table;
+    private List<OtpBaseLoginDetailsForStudentPojo.TableBean> Table;
 
-    public List<TableBean> getTable() {
+    public List<OtpBaseLoginDetailsForStudentPojo.TableBean> getTable() {
         return Table;
     }
 
-    public void setTable(List<TableBean> Table) {
+    public void setTable(List<OtpBaseLoginDetailsForStudentPojo.TableBean> Table) {
         this.Table = Table;
     }
 

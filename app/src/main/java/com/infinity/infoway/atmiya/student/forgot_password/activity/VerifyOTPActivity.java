@@ -1,5 +1,6 @@
 package com.infinity.infoway.atmiya.student.forgot_password.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -9,6 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
+import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
@@ -35,6 +37,8 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
     String userName = "";
     String IS_EMPLOYEE_FORGOT_PASSWORD;
     String IS_STUDENT_FORGOT_PASSWORD;
+    String mobileNo = "";
+    TextViewMediumFont tvEnteredMobileNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,13 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
             IS_STUDENT_FORGOT_PASSWORD = getIntent().getStringExtra(IntentConstants.IS_STUDENT_FORGOT_PASSWORD);
         }
 
+        if (getIntent().hasExtra(IntentConstants.ENTERED_MOBILE_NO)) {
+            mobileNo = getIntent().getStringExtra(IntentConstants.ENTERED_MOBILE_NO);
+            tvEnteredMobileNo.setText("+91  - " + mobileNo);
+        } else {
+            tvEnteredMobileNo.setText("+91  - " + "xxxxxxxxxx");
+        }
+
 
     }
 
@@ -69,6 +80,7 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
         otp_view = findViewById(R.id.otp_view);
         btnVerifyOtpAndProceed = findViewById(R.id.btnVerifyOtpAndProceed);
         btnVerifyOtpAndProceed.setOnClickListener(this);
+        tvEnteredMobileNo = findViewById(R.id.tvEnteredMobileNo);
     }
 
     @Override
@@ -106,6 +118,8 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                 public void onResponse(Call<CheckOTPVerificationForStudentPojo> call, Response<CheckOTPVerificationForStudentPojo> response) {
                     DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
+                        CheckOTPVerificationForStudentPojo.TableBean checkOTPVerificationForStudentPojo = response.body().getTable().get(0);
+                        redirectToResetPasswordActivity(checkOTPVerificationForStudentPojo.getStudId() + "", checkOTPVerificationForStudentPojo.getStudUserName() + "");
                         Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(VerifyOTPActivity.this, "Incorrect OTP,Please enter correct OTP.", Toast.LENGTH_SHORT).show();
@@ -132,7 +146,9 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                 public void onResponse(Call<CheckOTPVerificationForEmployeePojo> call, Response<CheckOTPVerificationForEmployeePojo> response) {
                     DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
+                        CheckOTPVerificationForEmployeePojo.TableBean checkOTPVerificationForEmployeePojo = response.body().getTable().get(0);
                         Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
+                        redirectToResetPasswordActivity(checkOTPVerificationForEmployeePojo.getEmpId() + "", checkOTPVerificationForEmployeePojo.getEmpUsername() + "");
                     } else {
                         Toast.makeText(VerifyOTPActivity.this, "Incorrect OTP,Please enter correct OTP.", Toast.LENGTH_SHORT).show();
                     }
@@ -147,6 +163,13 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
         } else {
             Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    private void redirectToResetPasswordActivity(String userId, String userName) {
+        Intent intent = new Intent(VerifyOTPActivity.this, ResetPasswordActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 

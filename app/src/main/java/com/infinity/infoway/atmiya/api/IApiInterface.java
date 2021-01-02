@@ -6,6 +6,8 @@ import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertForgotPass
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertStudentPasswordAndSMSAbsentApiCall;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForStudentPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetEmployeePasswordPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetStudentPasswordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.UpdateStudentForgotPasswordOtpPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
@@ -415,5 +417,21 @@ public interface IApiInterface {
             @Query("otp") String otp,
             @Query("institute_id") String institute_id,
             @Query("ip_addr") String ip_addr);
+
+    @GET("Reset_Student_Password_API")
+    Call<ResetStudentPasswordPojo> resetStudentPassword(
+            @Query("stud_id") String stud_id,
+            @Query("institute_id") String institute_id,
+            @Query("password") String password,
+            @Query("modify_by") String modify_by,
+            @Query("modify_ip") String modify_ip);
+
+    @GET("Reset_Employee_Password_API")
+    Call<ResetEmployeePasswordPojo> resetEmployeePassword(
+            @Query("emp_id") String emp_id,
+            @Query("institute_id") String institute_id,
+            @Query("password") String password,
+            @Query("modify_by") String modify_by,
+            @Query("modify_ip") String modify_ip);
 
 }

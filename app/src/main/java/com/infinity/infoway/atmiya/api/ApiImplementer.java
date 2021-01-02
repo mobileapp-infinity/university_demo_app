@@ -6,6 +6,8 @@ import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertForgotPass
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertStudentPasswordAndSMSAbsentApiCall;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForStudentPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetEmployeePasswordPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetStudentPasswordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.UpdateStudentForgotPasswordOtpPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
@@ -510,6 +512,20 @@ public class ApiImplementer {
                                                                     Callback<CheckOTPVerificationForStudentPojo> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
         Call<CheckOTPVerificationForStudentPojo> call = apiInterface.checkOTPVerificationForStudent(username, otp, institute_id, ip_addr);
+        call.enqueue(cb);
+    }
+
+    public static void resetStudentPasswordApiImplementer(String stud_id, String institute_id, String password, String modify_by,
+                                                          String modify_ip, Callback<ResetStudentPasswordPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ResetStudentPasswordPojo> call = apiInterface.resetStudentPassword(stud_id, institute_id, password, modify_by, modify_ip);
+        call.enqueue(cb);
+    }
+
+    public static void resetEmployeePasswordApiImplementer(String emp_id, String institute_id, String password, String modify_by,
+                                                           String modify_ip, Callback<ResetEmployeePasswordPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ResetEmployeePasswordPojo> call = apiInterface.resetEmployeePassword(emp_id, institute_id, password, modify_by, modify_ip);
         call.enqueue(cb);
     }
 

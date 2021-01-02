@@ -7,13 +7,13 @@ import java.util.List;
 
 public class InsertForgotPasswordOTPSmsRecordPojo {
 
-    private List<TableBean> Table;
+    private List<InsertForgotPasswordOTPSmsRecordPojo.TableBean> Table;
 
-    public List<TableBean> getTable() {
+    public List<InsertForgotPasswordOTPSmsRecordPojo.TableBean> getTable() {
         return Table;
     }
 
-    public void setTable(List<TableBean> Table) {
+    public void setTable(List<InsertForgotPasswordOTPSmsRecordPojo.TableBean> Table) {
         this.Table = Table;
     }
 

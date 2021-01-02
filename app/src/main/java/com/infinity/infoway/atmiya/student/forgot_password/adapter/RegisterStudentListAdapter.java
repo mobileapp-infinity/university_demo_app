@@ -64,7 +64,7 @@ public class RegisterStudentListAdapter extends RecyclerView.Adapter<RegisterStu
                             iUserListDialog.closeUserListDialog(String.valueOf(getStudentForgotPasswordDetailsPojoArrayList.get(position).getId()),
                                     String.valueOf(getStudentForgotPasswordDetailsPojoArrayList.get(position).getEmpStudStatus()));
                         }
-                    }, 100);
+                    }, 80);
                 }
             }
         });

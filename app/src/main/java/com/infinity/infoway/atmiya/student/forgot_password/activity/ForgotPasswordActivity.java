@@ -458,7 +458,6 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                                 msg = SMS_URL.replace("addmessage", otpText + " is your One Time Password for Login " +
                                         "in CMS. Do not share this with anyone." + "");
                                 msg = msg.replace("addmobileno", edtEnterRegisterMobileNo.getText().toString().trim());
-                                msg += otpText + " is your One Time Password for Login in CMS. Do not share this with anyone. " + "";
 
                                 URL url = new URL(msg);
                                 URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
@@ -471,7 +470,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                                 StringRequest request = new StringRequest(Request.Method.GET, url.toString(), new com.android.volley.Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
-                                        redirectToOTPVerificationScreen(institute_id, userTypeId, isEmp + "", isStudent + "");
+                                        redirectToOTPVerificationScreen(institute_id, userName, isEmp + "", isStudent + "", mobileNo);
                                         insertStudentPasswordAndSmsAbsentApiCall(sendUrlToServer, userTypeId, isEmp, isStudent, mobileNo, msg, "1", userTypeId, otpText);
                                         Toast.makeText(ForgotPasswordActivity.this, "SMS sent", Toast.LENGTH_LONG).show();
                                     }
@@ -556,10 +555,12 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         });
     }
 
-    private void redirectToOTPVerificationScreen(String instituteId, String userName, String isEmployeeForgotPassword, String isStudentForgotPassword) {
+    private void redirectToOTPVerificationScreen(String instituteId, String userName, String isEmployeeForgotPassword,
+                                                 String isStudentForgotPassword, String mobileNo) {
         Intent intent = new Intent(ForgotPasswordActivity.this, VerifyOTPActivity.class);
         intent.putExtra(IntentConstants.INSTITUTE_ID_FOR_VERIFY_OTP, instituteId);
         intent.putExtra(IntentConstants.USERNAME_FOR_VERIFY_OTP, userName);
+        intent.putExtra(IntentConstants.ENTERED_MOBILE_NO, mobileNo);
         intent.putExtra(IntentConstants.IS_EMPLOYEE_FORGOT_PASSWORD, isEmployeeForgotPassword);
         intent.putExtra(IntentConstants.IS_STUDENT_FORGOT_PASSWORD, isStudentForgotPassword);
         startActivity(intent);

@@ -9,13 +9,13 @@ public class GetInstituteFromDomainPojo {
 
     @SerializedName("Table")
     @Expose
-    private List<Table> table = null;
+    private List<GetInstituteFromDomainPojo.Table> table = null;
 
-    public List<Table> getTable() {
+    public List<GetInstituteFromDomainPojo.Table> getTable() {
         return table;
     }
 
-    public void setTable(List<Table> table) {
+    public void setTable(List<GetInstituteFromDomainPojo.Table> table) {
         this.table = table;
     }
 
