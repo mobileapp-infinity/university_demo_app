@@ -14,7 +14,10 @@ public class IntentConstants {
     public static final String IS_FORCE_UPDATE = "IsForceUpdate";
     public static final String APP_UPDATE_TYPE = "AppUpdateType";
 
-    public static final String OTP_TEXT = "OtpText";
+    public static final String INSTITUTE_ID_FOR_VERIFY_OTP = "InstituteIdForVerifyOtp";
+    public static final String USERNAME_FOR_VERIFY_OTP = "UsernameForVerifyOtp";
+    public static final String IS_EMPLOYEE_FORGOT_PASSWORD = "0";
+    public static final String IS_STUDENT_FORGOT_PASSWORD = "0";
 
 
 }

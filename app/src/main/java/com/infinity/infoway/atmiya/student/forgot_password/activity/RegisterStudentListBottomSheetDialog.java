@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.infinity.infoway.atmiya.R;
-import com.infinity.infoway.atmiya.student.forgot_password.adapter.RegisterUserListAdapter;
+import com.infinity.infoway.atmiya.student.forgot_password.adapter.RegisterStudentListAdapter;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetStudentForgotPasswordDetailsPojo;
-import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
-import com.infinity.infoway.atmiya.student.leave_application.fragment.ApplyILeaveFragment;
 
 import java.util.ArrayList;
 
@@ -50,8 +48,8 @@ public class RegisterStudentListBottomSheetDialog extends BottomSheetDialogFragm
 
     private void initView(View view) {
         rvRegisterStudentList = view.findViewById(R.id.rvRegisterStudentList);
-        RegisterUserListAdapter registerUserListAdapter = new RegisterUserListAdapter(context, getStudentForgotPasswordDetailsPojoArrayList);
-        rvRegisterStudentList.setAdapter(registerUserListAdapter);
+        RegisterStudentListAdapter registerStudentListAdapter = new RegisterStudentListAdapter(context, getStudentForgotPasswordDetailsPojoArrayList);
+        rvRegisterStudentList.setAdapter(registerStudentListAdapter);
     }
 
 

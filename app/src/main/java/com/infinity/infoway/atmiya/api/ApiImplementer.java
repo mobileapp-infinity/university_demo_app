@@ -1,5 +1,7 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertForgotPasswordOTPSmsRecordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertStudentPasswordAndSMSAbsentApiCall;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
@@ -494,6 +496,20 @@ public class ApiImplementer {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
         Call<UpdateStudentForgotPasswordOtpPojo> call = apiInterface.updateStudentEmpForgotPasswordOTP(user_id, is_emp, is_stud,
                 otp, modify_ip, modify_by);
+        call.enqueue(cb);
+    }
+
+    public static void checkOTPVerificationForEmployeeApiImplementer(String username, String otp, String institute_id, String ip_addr,
+                                                                     Callback<CheckOTPVerificationForEmployeePojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<CheckOTPVerificationForEmployeePojo> call = apiInterface.checkOTPVerificationForEmployee(username, otp, institute_id, ip_addr);
+        call.enqueue(cb);
+    }
+
+    public static void checkOTPVerificationForStudentApiImplementer(String username, String otp, String institute_id, String ip_addr,
+                                                                    Callback<CheckOTPVerificationForStudentPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<CheckOTPVerificationForStudentPojo> call = apiInterface.checkOTPVerificationForStudent(username, otp, institute_id, ip_addr);
         call.enqueue(cb);
     }
 

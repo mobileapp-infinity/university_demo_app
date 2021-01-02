@@ -46,6 +46,10 @@ public class RegisterEmployeeListAdapter extends RecyclerView.Adapter<RegisterEm
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         OtpBaseLoginDetailsForEmployeePojo.TableBean tableBean = tableBeanArrayList.get(position);
 
+        if (position == tableBeanArrayList.size() - 1) {
+            holder.line.setVisibility(View.GONE);
+        }
+
         String userName = "";
         if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getEmpName())) {
             userName = tableBean.getEmpName() + " ";
@@ -71,7 +75,7 @@ public class RegisterEmployeeListAdapter extends RecyclerView.Adapter<RegisterEm
                         public void run() {
                             iRegisterEmployeeList.onRegisterEmployeeSelected(tableBean, instituteId);
                         }
-                    }, 150);
+                    }, 100);
                 }
             }
         });
@@ -87,12 +91,14 @@ public class RegisterEmployeeListAdapter extends RecyclerView.Adapter<RegisterEm
 
         TextViewRegularFont tvRegisterEmpUsername, tvRegisterEmpMobileNo;
         AppCompatCheckBox cbSelectRegisterEmp;
+        View line;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvRegisterEmpUsername = itemView.findViewById(R.id.tvRegisterEmpUsername);
             tvRegisterEmpMobileNo = itemView.findViewById(R.id.tvRegisterEmpMobileNo);
             cbSelectRegisterEmp = itemView.findViewById(R.id.cbSelectRegisterEmp);
+            line = itemView.findViewById(R.id.line);
         }
     }
 

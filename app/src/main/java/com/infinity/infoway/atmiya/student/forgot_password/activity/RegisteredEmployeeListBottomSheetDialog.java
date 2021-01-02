@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.student.forgot_password.adapter.RegisterEmployeeListAdapter;
-import com.infinity.infoway.atmiya.student.forgot_password.adapter.RegisterUserListAdapter;
-import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetStudentForgotPasswordDetailsPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
 
 import java.util.ArrayList;

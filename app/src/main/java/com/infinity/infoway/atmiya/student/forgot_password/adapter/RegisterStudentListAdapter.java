@@ -15,18 +15,17 @@ import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.GetStudentForgotPasswordDetailsPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
-import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 
 import java.util.ArrayList;
 
-public class RegisterUserListAdapter extends RecyclerView.Adapter<RegisterUserListAdapter.MyViewHolder> {
+public class RegisterStudentListAdapter extends RecyclerView.Adapter<RegisterStudentListAdapter.MyViewHolder> {
 
     Context context;
     LayoutInflater layoutInflater;
     ArrayList<GetStudentForgotPasswordDetailsPojo> getStudentForgotPasswordDetailsPojoArrayList;
     private IUserListDialog iUserListDialog;
 
-    public RegisterUserListAdapter(Context context, ArrayList<GetStudentForgotPasswordDetailsPojo> getStudentForgotPasswordDetailsPojoArrayList) {
+    public RegisterStudentListAdapter(Context context, ArrayList<GetStudentForgotPasswordDetailsPojo> getStudentForgotPasswordDetailsPojoArrayList) {
         this.context = context;
         this.getStudentForgotPasswordDetailsPojoArrayList = getStudentForgotPasswordDetailsPojoArrayList;
         layoutInflater = LayoutInflater.from(context);
@@ -65,7 +64,7 @@ public class RegisterUserListAdapter extends RecyclerView.Adapter<RegisterUserLi
                             iUserListDialog.closeUserListDialog(String.valueOf(getStudentForgotPasswordDetailsPojoArrayList.get(position).getId()),
                                     String.valueOf(getStudentForgotPasswordDetailsPojoArrayList.get(position).getEmpStudStatus()));
                         }
-                    }, 150);
+                    }, 100);
                 }
             }
         });

@@ -1,5 +1,7 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertForgotPasswordOTPSmsRecordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertStudentPasswordAndSMSAbsentApiCall;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
@@ -399,5 +401,19 @@ public interface IApiInterface {
             @Query("otp") String otp,
             @Query("modify_ip") String modify_ip,
             @Query("modify_by") String modify_by);
+
+    @GET("check_otp_base_login_with_emp_uname_API")
+    Call<CheckOTPVerificationForEmployeePojo> checkOTPVerificationForEmployee(
+            @Query("username") String username,
+            @Query("otp") String otp,
+            @Query("institute_id") String institute_id,
+            @Query("ip_addr") String ip_addr);
+
+    @GET("check_otp_base_login_with_stud_uname_API")
+    Call<CheckOTPVerificationForStudentPojo> checkOTPVerificationForStudent(
+            @Query("username") String username,
+            @Query("otp") String otp,
+            @Query("institute_id") String institute_id,
+            @Query("ip_addr") String ip_addr);
 
 }
