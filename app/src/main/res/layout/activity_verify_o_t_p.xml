@@ -132,8 +132,7 @@
                             android:itemBackground="@color/colorPrimary"
                             android:textColor="@color/colorPrimary"
                             app:length="6"
-                            app:width="40dp"
-                            />
+                            app:width="40dp" />
 
                     </LinearLayout>
 
