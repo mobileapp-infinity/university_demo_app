@@ -14,5 +14,7 @@ public class IntentConstants {
     public static final String IS_FORCE_UPDATE = "IsForceUpdate";
     public static final String APP_UPDATE_TYPE = "AppUpdateType";
 
+    public static final String OTP_TEXT = "OtpText";
+
 
 }

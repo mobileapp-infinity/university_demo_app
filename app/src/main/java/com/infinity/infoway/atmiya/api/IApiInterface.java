@@ -1,5 +1,10 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertForgotPasswordOTPSmsRecordPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertStudentPasswordAndSMSAbsentApiCall;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForStudentPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.UpdateStudentForgotPasswordOtpPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
@@ -361,5 +366,38 @@ public interface IApiInterface {
             @Query("stud_id") String stud_id,
             @Query("FCM_ID") String FCM_ID,
             @Query(value = "KEY", encoded = true) String KEY);
+
+    @GET("get_otp_base_login_details_for_emp_API")
+    Call<OtpBaseLoginDetailsForEmployeePojo> getOTPBaseLoginDetailsForEmployee(
+            @Query("uname_mobile") String uname_mobile,
+            @Query("institute_id") String institute_id);
+
+    @GET("get_otp_base_login_details_for_stud_API")
+    Call<OtpBaseLoginDetailsForStudentPojo> getOTPBaseLoginDetailsForStudent(
+            @Query("uname_mobile") String uname_mobile,
+            @Query("institute_id") String institute_id);
+
+    @GET("insert_stduent_password_send_sms_absent_API")
+    Call<InsertStudentPasswordAndSMSAbsentApiCall> insertStudentPasswordAndSendSmsAbsent(
+            @Query("sms") String sms);
+
+    @GET("Insert_Forget_Password_OTP_SMS_Record_API")
+    Call<InsertForgotPasswordOTPSmsRecordPojo> insertForgotPasswordOTPSmsRecordApi(
+            @Query("user_id") String user_id,
+            @Query("is_emp") String is_emp,
+            @Query("is_stud") String is_stud,
+            @Query("mobile_no") String mobile_no,
+            @Query("otp_msg") String otp_msg,
+            @Query("created_ip") String created_ip,
+            @Query("created_by") String created_by);
+
+    @GET("Update_Stud_Emp_Forget_Password_OTP_API")
+    Call<UpdateStudentForgotPasswordOtpPojo> updateStudentEmpForgotPasswordOTP(
+            @Query("user_id") String user_id,
+            @Query("is_emp") String is_emp,
+            @Query("is_stud") String is_stud,
+            @Query("otp") String otp,
+            @Query("modify_ip") String modify_ip,
+            @Query("modify_by") String modify_by);
 
 }

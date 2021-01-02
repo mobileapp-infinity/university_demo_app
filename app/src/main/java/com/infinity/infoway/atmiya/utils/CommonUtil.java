@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class CommonUtil {
@@ -248,6 +249,12 @@ public class CommonUtil {
             }
         }
         return isInBackground;
+    }
+
+    public static String getRandom6DigitOTP() {
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        return String.format("%06d", number);
     }
 
 }

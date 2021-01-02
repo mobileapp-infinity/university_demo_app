@@ -1,5 +1,10 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertForgotPasswordOTPSmsRecordPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertStudentPasswordAndSMSAbsentApiCall;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForStudentPojo;
+import com.infinity.infoway.atmiya.student.forgot_password.pojo.UpdateStudentForgotPasswordOtpPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
@@ -452,6 +457,43 @@ public class ApiImplementer {
                                                            String KEY, Callback<UpdateStudentFCMTokenPojo> cb) {
         final IApiInterface apiInterface = ApiClientForStudentAndEmployeeFcmApi.getClient().create(IApiInterface.class);
         Call<UpdateStudentFCMTokenPojo> call = apiInterface.updateStudentFcmToken(stud_id, FCM_ID, KEY);
+        call.enqueue(cb);
+    }
+
+
+    public static void getOTPBaseLoginDetailsForEmployeeApiImplementer(String uname_mobile, String institute_id, Callback<OtpBaseLoginDetailsForEmployeePojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<OtpBaseLoginDetailsForEmployeePojo> call = apiInterface.getOTPBaseLoginDetailsForEmployee(uname_mobile, institute_id);
+        call.enqueue(cb);
+    }
+
+    public static void getOTPBaseLoginDetailsForStudentApiImplementer(String uname_mobile, String institute_id, Callback<OtpBaseLoginDetailsForStudentPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<OtpBaseLoginDetailsForStudentPojo> call = apiInterface.getOTPBaseLoginDetailsForStudent(uname_mobile, institute_id);
+        call.enqueue(cb);
+    }
+
+    public static void insertStudentPasswordAndSendSmsAbsentApiImplementer(String sms, Callback<InsertStudentPasswordAndSMSAbsentApiCall> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<InsertStudentPasswordAndSMSAbsentApiCall> call = apiInterface.insertStudentPasswordAndSendSmsAbsent(sms);
+        call.enqueue(cb);
+    }
+
+    public static void insertForgotPasswordOTPSmsRecordApiApiImplementer(String user_id, String is_emp, String is_stud,
+                                                                         String mobile_no, String otp_msg, String created_ip,
+                                                                         String created_by, Callback<InsertForgotPasswordOTPSmsRecordPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<InsertForgotPasswordOTPSmsRecordPojo> call = apiInterface.insertForgotPasswordOTPSmsRecordApi(user_id, is_emp,
+                is_stud, mobile_no, otp_msg, created_ip, created_by);
+        call.enqueue(cb);
+    }
+
+    public static void updateStudentEmpForgotPasswordOTPApiImplementer(String user_id, String is_emp, String is_stud,
+                                                                       String otp, String modify_ip, String modify_by,
+                                                                       Callback<UpdateStudentForgotPasswordOtpPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<UpdateStudentForgotPasswordOtpPojo> call = apiInterface.updateStudentEmpForgotPasswordOTP(user_id, is_emp, is_stud,
+                otp, modify_ip, modify_by);
         call.enqueue(cb);
     }
 
