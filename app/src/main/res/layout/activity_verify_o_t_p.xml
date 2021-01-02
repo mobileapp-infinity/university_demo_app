@@ -107,52 +107,64 @@
                 android:layout_weight="1.2"
                 android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="4dp"
-                    app:contentPadding="18dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/edtEnterRegisterMobileNo"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@null"
-                            android:hint="Enter Your Register Mobile No."
-                            android:inputType="number"
-                            android:maxLength="10"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="14sp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_height="0dp"
+                    android:layout_weight="1.8"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:id="@+id/btnSendMsg"
-                        android:layout_width="120dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/btn_capsual_shape_accent"
-                        android:elevation="4dp"
-                        android:layout_margin="4dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="22dp"
                         android:gravity="center"
-                        android:text="SEND"
-                        android:textColor="@color/white"
-                        android:textSize="13sp" />
+                        android:orientation="horizontal">
+
+                        <com.mukesh.OtpView
+                            android:gravity="center_horizontal"
+                            android:id="@+id/otp_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:itemBackground="@color/colorPrimary"
+                            android:textColor="@color/colorPrimary"
+                            app:length="6"
+                            app:width="40dp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:padding="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="180dp"
+                            android:layout_height="36dp"
+                            android:background="@drawable/btn_capsual_shape_accent"
+                            android:elevation="4dp"
+                            android:layout_margin="6dp"
+                            android:gravity="center"
+                            android:text="VERIFY &amp; PROCEED"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:orientation="vertical">
 
                 </LinearLayout>
 
