@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewBoldFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
@@ -66,33 +67,43 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
             } else {
                 holder.llBreakTime.setVisibility(View.GONE);
                 holder.imgStudentBreak.setVisibility(View.GONE);
+
                 if (!CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getLectName()) &&
                         (inoutArray1.getLabArray() == null || inoutArray1.getLabArray().size() == 0)) {
-                    holder.tvStudentLectureNoIndex.setVisibility(View.VISIBLE);
-                    holder.llContent.setVisibility(View.VISIBLE);
 
-                    if (!CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getEmpName())) {
-                        holder.tvStudentFacultyName.setText(inoutArray1.getEmpName() + "");
+                    if (position > 0 && studentTimeTablePojoArrayList.get(position - 1).getLabArray() != null &&
+                            studentTimeTablePojoArrayList.get(position - 1).getLabArray().size() > 0
+                            && (inoutArray1.getLabArray() == null || inoutArray1.getLabArray().size() == 0)) {
+                        holder.cvData.setVisibility(View.GONE);
+                        holder.tvStudentLectureNoIndex.setVisibility(View.GONE);
+                        holder.horizontalLine.setVisibility(View.GONE);
                     } else {
-                        holder.tvStudentFacultyName.setText("-");
-                    }
+                        holder.tvStudentLectureNoIndex.setVisibility(View.VISIBLE);
+                        holder.llContent.setVisibility(View.VISIBLE);
 
-                    String lectureNoForIndex = "-";
+                        if (!CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getEmpName())) {
+                            holder.tvStudentFacultyName.setText(inoutArray1.getEmpName() + "");
+                        } else {
+                            holder.tvStudentFacultyName.setText("-");
+                        }
 
-                    if (inoutArray1.getLectName().contains("-")) {
-                        lectureNoForIndex = inoutArray1.getLectName().split("-")[1];
-                    }
-                    holder.tvStudentLectureNoIndex.setText(lectureNoForIndex);
-                    if (!CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getSubShortName())) {
-                        holder.tvStudentSubjectName.setText(inoutArray1.getSubShortName());
-                    } else {
-                        holder.tvStudentSubjectName.setText("-");
-                    }
+                        String lectureNoForIndex = "-";
 
-                    if (!CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getRmName())) {
-                        holder.tvStudentClassRoom.setText(inoutArray1.getRmName() + "");
-                    } else {
-                        holder.tvStudentClassRoom.setText("-");
+                        if (inoutArray1.getLectName().contains("-")) {
+                            lectureNoForIndex = inoutArray1.getLectName().split("-")[1];
+                        }
+                        holder.tvStudentLectureNoIndex.setText(lectureNoForIndex);
+                        if (!CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getSubShortName())) {
+                            holder.tvStudentSubjectName.setText(inoutArray1.getSubShortName());
+                        } else {
+                            holder.tvStudentSubjectName.setText("-");
+                        }
+
+                        if (!CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getRmName())) {
+                            holder.tvStudentClassRoom.setText(inoutArray1.getRmName() + "");
+                        } else {
+                            holder.tvStudentClassRoom.setText("-");
+                        }
                     }
                 } else {
                     holder.llStaticLayoutStudentTimetable.setVisibility(View.GONE);
@@ -175,6 +186,8 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
         //For Left Side
         TextViewBoldFont tvStudentLectureNoIndex;
         AppCompatImageView imgStudentBreak;
+        MaterialCardView cvData;
+        View horizontalLine;
 
         //For Right Side Lecture Content Layout
         LinearLayout llContent;
@@ -197,6 +210,8 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
             super(itemView);
             tvStudentLectureNoIndex = itemView.findViewById(R.id.tvStudentLectureNoIndex);
             imgStudentBreak = itemView.findViewById(R.id.imgStudentBreak);
+            cvData = itemView.findViewById(R.id.cvData);
+            horizontalLine = itemView.findViewById(R.id.horizontalLine);
 
             llContent = itemView.findViewById(R.id.llContent);
             tvStudentFacultyName = itemView.findViewById(R.id.tvStudentFacultyName);
