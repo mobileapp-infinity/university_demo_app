@@ -172,6 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:orientation="vertical"
+                    android:layoutAnimation="@anim/layout_animation_slid_from_right_to_left_for_list"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </LinearLayout>

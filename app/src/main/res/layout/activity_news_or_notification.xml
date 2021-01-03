@@ -47,7 +47,7 @@
             android:id="@+id/rvNewsOrNotification"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layoutAnimation="@anim/layout_animation"
+            android:layoutAnimation="@anim/layout_animation_from_bottom_for_list"
             android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
