@@ -1,10 +1,12 @@
 package com.infinity.infoway.atmiya.login.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -28,6 +30,7 @@ import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDas
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
+import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
@@ -198,7 +201,7 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
             }
         } else if (v.getId() == R.id.llForgotPassword) {
             Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD);
         }
     }
 
@@ -359,5 +362,30 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
         edtLoginUserName.setText(studentUserName);
         edtLoginUserPassword.setText(studentPassword);
         checkLoginApiCall(studentUserName, studentPassword);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK &&
+                requestCode == IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD) {
+            String userName = "";
+            String password = "";
+
+            if (data.hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
+                userName = data.getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
+            }
+
+            if (data.hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
+                password = data.getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
+            }
+
+            if (!CommonUtil.checkIsEmptyOrNullCommon(userName) &&
+                    !CommonUtil.checkIsEmptyOrNullCommon(password)) {
+                edtLoginUserName.setText(userName + "");
+                edtLoginUserPassword.setText(password + "");
+                llLogin.performClick();
+            }
+        }
     }
 }

@@ -1,9 +1,11 @@
 package com.infinity.infoway.atmiya.student.forgot_password.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.api.Urls;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
+import com.infinity.infoway.atmiya.login.activity.LoginActivity;
 import com.infinity.infoway.atmiya.student.forgot_password.adapter.RegisterEmployeeListAdapter;
 import com.infinity.infoway.atmiya.student.forgot_password.adapter.RegisterStudentListAdapter;
 import com.infinity.infoway.atmiya.student.forgot_password.adapter.RegisterStudentListIfOTPBasedVerificationAdapter;
@@ -563,7 +566,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         intent.putExtra(IntentConstants.ENTERED_MOBILE_NO, mobileNo);
         intent.putExtra(IntentConstants.IS_EMPLOYEE_FORGOT_PASSWORD, isEmployeeForgotPassword);
         intent.putExtra(IntentConstants.IS_STUDENT_FORGOT_PASSWORD, isStudentForgotPassword);
-        startActivity(intent);
+        startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VERIFY_OTP);
     }
 
     @Override
@@ -571,7 +574,31 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         registerStudentListIfOTPBasedVerificationBottomSheet.dismiss();
         final String RANDOM_6_DIGIT_OTP = CommonUtil.getRandom6DigitOTP();
         getSMSApiForApplicationApiCallIfLoginIsOTPBased(true, true, instituteId, RANDOM_6_DIGIT_OTP,
-                tableBean.getStudId().toString(), tableBean.getStudMobileNo().toString(), "0", "1",
+                tableBean.getStudId().toString(), tableBean.getStudMobileNo(), "0", "1",
                 tableBean.getStudUserName() + "");
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK &&
+                requestCode == IntentConstants.REQUEST_CODE_FOR_VERIFY_OTP) {
+            Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+            String userName = "";
+            String password = "";
+
+            if (data.hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
+                userName = data.getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
+            }
+
+            if (data.hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
+                password = data.getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
+            }
+            intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userName);
+            intent.putExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS, password);
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        }
     }
 }

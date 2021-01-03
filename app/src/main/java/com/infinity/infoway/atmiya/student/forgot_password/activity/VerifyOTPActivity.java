@@ -1,10 +1,12 @@
 package com.infinity.infoway.atmiya.student.forgot_password.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
@@ -12,6 +14,7 @@ import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
+import com.infinity.infoway.atmiya.login.activity.LoginActivity;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
@@ -119,8 +122,14 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                     DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
                         CheckOTPVerificationForStudentPojo.TableBean checkOTPVerificationForStudentPojo = response.body().getTable().get(0);
-                        redirectToResetPasswordActivity(checkOTPVerificationForStudentPojo.getStudId() + "", checkOTPVerificationForStudentPojo.getStudUserName() + "");
+                        String userName = checkOTPVerificationForStudentPojo.getStudUserName().toString().trim();
+                        String userId = checkOTPVerificationForStudentPojo.getStudId() + "";
+                        String password = checkOTPVerificationForStudentPojo.getStudPassword().toString().trim();
+                        String isEmp = "0";
+                        String isStudent = "1";
+                        String instituteId = institute_id;
                         Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
+                        redirectToResetPasswordActivity(userName, userId, password, isEmp, isStudent, instituteId);
                     } else {
                         Toast.makeText(VerifyOTPActivity.this, "Incorrect OTP,Please enter correct OTP.", Toast.LENGTH_SHORT).show();
                     }
@@ -148,7 +157,14 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
                         CheckOTPVerificationForEmployeePojo.TableBean checkOTPVerificationForEmployeePojo = response.body().getTable().get(0);
                         Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
-                        redirectToResetPasswordActivity(checkOTPVerificationForEmployeePojo.getEmpId() + "", checkOTPVerificationForEmployeePojo.getEmpUsername() + "");
+
+                        String userName = checkOTPVerificationForEmployeePojo.getEmpUsername().trim();
+                        String userId = checkOTPVerificationForEmployeePojo.getEmpId() + "";
+                        String password = checkOTPVerificationForEmployeePojo.getEmpPassword().toString().trim();
+                        String isEmp = "1";
+                        String isStudent = "0";
+                        String instituteId = institute_id;
+                        redirectToResetPasswordActivity(userName, userId, password, isEmp, isStudent, instituteId);
                     } else {
                         Toast.makeText(VerifyOTPActivity.this, "Incorrect OTP,Please enter correct OTP.", Toast.LENGTH_SHORT).show();
                     }
@@ -166,11 +182,38 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-    private void redirectToResetPasswordActivity(String userId, String userName) {
+    private void redirectToResetPasswordActivity(String userName, String userId, String password,
+                                                 String isEmp, String isStudent, String instituteId) {
         Intent intent = new Intent(VerifyOTPActivity.this, ResetPasswordActivity.class);
-        startActivity(intent);
-        finish();
+        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userName);
+        intent.putExtra(IntentConstants.RESET_PASS_USER_ID, userId);
+        intent.putExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS, password);
+        intent.putExtra(IntentConstants.IS_EMPLOYEE_RESET_PASSWORD, isEmp);
+        intent.putExtra(IntentConstants.IS_STUDENT_RESET_PASSWORD, isStudent);
+        intent.putExtra(IntentConstants.RESET_PASS_INSTITUTE_ID, instituteId);
+        startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_RESET_PASSWORD);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK &&
+                requestCode == IntentConstants.REQUEST_CODE_FOR_RESET_PASSWORD) {
+            Intent intent = new Intent(VerifyOTPActivity.this, ForgotPasswordActivity.class);
+            String userName = "";
+            String password = "";
 
+            if (data.hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
+                userName = data.getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
+            }
+
+            if (data.hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
+                password = data.getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
+            }
+            intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userName);
+            intent.putExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS, password);
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        }
+    }
 }
