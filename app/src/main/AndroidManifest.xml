@@ -65,7 +65,7 @@
             android:name=".student.fee_details.activity.PayFeeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.home_work.StudentHomeWorkActivity"
+            android:name=".student.home_work.activity.StudentHomeWorkActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".student.lesson_plan.StudentLessonPlanDetailActivity"

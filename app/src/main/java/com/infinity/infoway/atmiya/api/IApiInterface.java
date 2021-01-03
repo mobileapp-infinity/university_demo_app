@@ -9,6 +9,7 @@ import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDeta
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetEmployeePasswordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetStudentPasswordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.UpdateStudentForgotPasswordOtpPojo;
+import com.infinity.infoway.atmiya.student.home_work.pojo.StudentHomeWorkPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
@@ -434,4 +435,9 @@ public interface IApiInterface {
             @Query("modify_by") String modify_by,
             @Query("modify_ip") String modify_ip);
 
+    @GET("get_homework_and_content_delivered_API")
+    Call<ArrayList<StudentHomeWorkPojo>> getStudentHomeWork(
+            @Query("stud_id") String stud_id,
+            @Query("year_id") String year_id,
+            @Query("div_id") String div_id);
 }

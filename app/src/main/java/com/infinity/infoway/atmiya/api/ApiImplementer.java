@@ -9,6 +9,7 @@ import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDeta
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetEmployeePasswordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetStudentPasswordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.UpdateStudentForgotPasswordOtpPojo;
+import com.infinity.infoway.atmiya.student.home_work.pojo.StudentHomeWorkPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
@@ -526,6 +527,13 @@ public class ApiImplementer {
                                                            String modify_ip, Callback<ResetEmployeePasswordPojo> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
         Call<ResetEmployeePasswordPojo> call = apiInterface.resetEmployeePassword(emp_id, institute_id, password, modify_by, modify_ip);
+        call.enqueue(cb);
+    }
+
+    public static void getStudentHomeWorkApiImplementer(String stud_id, String year_id, String div_id,
+                                                        Callback<ArrayList<StudentHomeWorkPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<StudentHomeWorkPojo>> call = apiInterface.getStudentHomeWork(stud_id, year_id, div_id);
         call.enqueue(cb);
     }
 

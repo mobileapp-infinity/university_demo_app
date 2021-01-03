@@ -17,7 +17,7 @@ import com.infinity.infoway.atmiya.student.exam.activity.StudentResultActivity;
 import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
 import com.infinity.infoway.atmiya.student.fee_details.activity.PayFeeActivity;
 import com.infinity.infoway.atmiya.student.holiday.HolidayActivity;
-import com.infinity.infoway.atmiya.student.home_work.StudentHomeWorkActivity;
+import com.infinity.infoway.atmiya.student.home_work.activity.StudentHomeWorkActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
 import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;

@@ -31,7 +31,7 @@ import com.infinity.infoway.atmiya.student.e_learning.activity.ELearningActivity
 import com.infinity.infoway.atmiya.student.exam.activity.ExamActivity;
 import com.infinity.infoway.atmiya.student.fee_details.activity.FeeDetailsActivity;
 import com.infinity.infoway.atmiya.student.holiday.HolidayActivity;
-import com.infinity.infoway.atmiya.student.home_work.StudentHomeWorkActivity;
+import com.infinity.infoway.atmiya.student.home_work.activity.StudentHomeWorkActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivity;
@@ -53,7 +53,6 @@ import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 import net.seifhadjhassen.recyclerviewpager.PagerModel;
 import net.seifhadjhassen.recyclerviewpager.RecyclerViewPager;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 

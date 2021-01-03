@@ -15,6 +15,7 @@ public class IntentConstants {
     public static final String USERNAME_AFTER_FORGOT_PASS = "UsernameAfterForgot";
     public static final String PASSWORD_AFTER_FORGOT_PASS = "PasswordAfterForgot";
 
+    public static final String STUDENT_HOME_WORK_DAY_WISE_LIST = "StudentHomeWorkDayWiseList";
     public static final String STUDENT_TIME_TABLE_DAY_WISE_LIST = "StudentDayWiseTimeTable";
     public static final String STUDENT_LECTURE_DETAILS_LIST = "StudentLectureDetailsList";
     public static final String IS_FORCE_UPDATE = "IsForceUpdate";

@@ -67,17 +67,7 @@ public class StudentTimeTableActivity extends AppCompatActivity implements View.
         vpTimeTable = findViewById(R.id.vpTimeTable);
 
         tlTimeTable.setupWithViewPager(vpTimeTable);
-
-//        setupViewPager(vpTimeTable);
-
     }
-
-//    private void setupViewPager(ViewPager viewPager) {
-//        TimeTableViewPagerAdapter adapter = new TimeTableViewPagerAdapter(getSupportFragmentManager());
-//        adapter.addFragment(TimeTableFragment.newInstance(), " Mon ");
-//        adapter.addFragment(TimeTableFragment.newInstance(), " Tue ");
-//        viewPager.setAdapter(adapter);
-//    }
 
     @Override
     public void onClick(View view) {
