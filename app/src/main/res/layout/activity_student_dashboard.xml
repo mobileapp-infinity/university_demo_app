@@ -42,7 +42,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
-                android:text="Hello, Ram"
+                android:text=""
                 android:textColor="@color/colorPrimary" />
 
             <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
@@ -51,9 +51,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="top"
-                android:textSize="12sp"
-                android:text="Sem 8, Computer Engg."
-                android:textColor="@color/colorPrimary" />
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -67,10 +67,10 @@
 
     <ScrollView
         android:id="@+id/svStudentDashboard"
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -269,143 +269,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/llAttendanceStudentSide"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/dashboard_attendance_shape"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="Your Attendance!"
-                        android:textColor="@color/colorPrimary" />
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
-
-                        <ProgressBar
-                            android:id="@+id/cpCurrentMonthStudentSide"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="54dp"
-                            android:layout_height="54dp"
-                            android:layout_centerInParent="true"
-                            android:indeterminate="false"
-                            android:max="100"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/custom_progressbar"
-                            android:rotation="-90" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:id="@+id/tvPercentageCurrentMonthStudentSide"
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/custom_circle"
-                            android:gravity="center"
-                            android:text="0%"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/cpCurrentMonthStudentSide"
-                            android:gravity="center"
-                            android:text="@string/current_month"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="10sp" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
-
-                        <ProgressBar
-                            android:id="@+id/cpPreviousMonthStudentSide"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="54dp"
-                            android:layout_height="54dp"
-                            android:layout_centerInParent="true"
-                            android:indeterminate="false"
-                            android:max="100"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/custom_progressbar"
-                            android:rotation="-90" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:id="@+id/tvPercentagePreviousMonthStudentSide"
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/custom_circle"
-                            android:gravity="center"
-                            android:text="0%"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/cpPreviousMonthStudentSide"
-                            android:gravity="center"
-                            android:text="@string/previous_month"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="10sp" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="4dp"
-                        android:layout_weight="1">
-
-                        <ProgressBar
-                            android:id="@+id/cpAvgStudentSide"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="54dp"
-                            android:layout_height="54dp"
-                            android:layout_centerInParent="true"
-                            android:indeterminate="false"
-                            android:max="100"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/custom_progressbar"
-                            android:rotation="-90" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:id="@+id/tvPercentageAvgStudentSide"
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/custom_circle"
-                            android:gravity="center"
-                            android:text="0%"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/cpAvgStudentSide"
-                            android:gravity="center"
-                            android:text="@string/average"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="10sp" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
+                <include layout="@layout/student_side_attendace_layout" />
 
             </LinearLayout>
 
@@ -623,7 +487,7 @@
                         android:id="@+id/rvNewsOrNotificationListStudentSide"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scrollbars="none"/>
+                        android:scrollbars="none" />
 
                 </LinearLayout>
 
@@ -635,13 +499,13 @@
     </ScrollView>
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/llStudentDashboradProgressbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

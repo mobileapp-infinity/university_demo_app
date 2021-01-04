@@ -87,6 +87,14 @@ public class StudentLectureDetailsAdapter extends BaseExpandableListAdapter {
             viewLine.setVisibility(View.VISIBLE);
         }
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
         tvLectureDetailsTopicsNo.setText((groupPosition + 1) + "");
 
         return view;

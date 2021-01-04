@@ -44,7 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener,
+public class LoginActivity extends AppCompatActivity implements
         View.OnClickListener, LoginUserListAdapter.IOnLoggedInStudentItemClicked {
 
     AppCompatEditText edtLoginUserName, edtLoginUserPassword;
@@ -99,55 +99,7 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
         if (registerStudentDetailsModelArrayList.size() > 0) {
             llLoggedInStudentList.setVisibility(View.VISIBLE);
             rvLoginUserList.setAdapter(new LoginUserListAdapter(LoginActivity.this, registerStudentDetailsModelArrayList));
-
-
-            SwipeHelper swipeHelper = new SwipeHelper(this, rvLoginUserList) {
-                @Override
-                public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
-                    underlayButtons.add(new SwipeHelper.UnderlayButton(
-                            "DELETE",
-                            0,
-                            Color.parseColor("#CEA955"),
-                            new SwipeHelper.UnderlayButtonClickListener() {
-                                @Override
-                                public void onClick(int pos) {
-                                    // TODO: OnTransfer
-                                }
-                            }
-                    ));
-
-//                    underlayButtons.add(new SwipeHelper.UnderlayButton(
-//                            "Transfer",
-//                            0,
-//                            Color.parseColor("#FF9502"),
-//                            new SwipeHelper.UnderlayButtonClickListener() {
-//                                @Override
-//                                public void onClick(int pos) {
-//                                    // TODO: OnTransfer
-//                                }
-//                            }
-//                    ));
-//                    underlayButtons.add(new SwipeHelper.UnderlayButton(
-//                            "Unshare",
-//                            0,
-//                            Color.parseColor("#C7C7CB"),
-//                            new SwipeHelper.UnderlayButtonClickListener() {
-//                                @Override
-//                                public void onClick(int pos) {
-//                                    // TODO: OnUnshare
-//                                }
-//                            }
-//                    ));
-                }
-            };
-
-
-            ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, LoginActivity.this);
-            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(rvLoginUserList);
-        } else {
-            llLoggedInStudentList.setVisibility(View.GONE);
         }
-
     }
 
 
@@ -191,10 +143,10 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
         });
     }
 
-    @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-
-    }
+//    @Override
+//    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+//
+//    }
 
     @Override
     public void onClick(View v) {
@@ -366,6 +318,27 @@ public class LoginActivity extends AppCompatActivity implements RecyclerItemTouc
         edtLoginUserName.setText(studentUserName);
         edtLoginUserPassword.setText(studentPassword);
         checkLoginApiCall(studentUserName, studentPassword);
+    }
+
+    @Override
+    public void onDeleteLoggedInStudentClick(String studentName, String studentUserName, String studentPassword) {
+        mySharedPreferences.deleteStudentNameAndId(studentUserName, LoginActivity.this);
+        ArrayList<RegisterStudentDetailsModel> registerStudentDetailsModelArrayList = new ArrayList<>();
+        HashMap<String, ArrayList<String>> hashMap = mySharedPreferences.getStudentIdAndName(LoginActivity.this);
+        if (hashMap != null && hashMap.size() > 0 && hashMap.keySet() != null) {
+            for (String key : hashMap.keySet()) {
+                RegisterStudentDetailsModel registerStudentDetailsModel = new RegisterStudentDetailsModel();
+                registerStudentDetailsModel.setStuEnrollmentNo(key);
+                registerStudentDetailsModel.setStudentName(hashMap.get(key).get(0)); //0 For Student Name
+                registerStudentDetailsModel.setStuPassword(hashMap.get(key).get(1));//1 For Student Password
+                registerStudentDetailsModelArrayList.add(registerStudentDetailsModel);
+            }
+        }
+
+        if (registerStudentDetailsModelArrayList.size() > 0) {
+            llLoggedInStudentList.setVisibility(View.VISIBLE);
+            rvLoginUserList.setAdapter(new LoginUserListAdapter(LoginActivity.this, registerStudentDetailsModelArrayList));
+        }
     }
 
     @Override

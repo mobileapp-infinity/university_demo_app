@@ -38,17 +38,22 @@ public class StudentSyllabusListAdapter extends RecyclerView.Adapter<StudentSyll
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         SyllabusListPojo syllabusListPojo = syllabusListPojoArrayList.get(position);
-        if (!CommonUtil.checkIsEmptyOrNullCommon(syllabusListPojo.getSmName())) {
-            holder.tvSemStudentSyllabus.setText(syllabusListPojo.getSmName() + "");
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(syllabusListPojo.getSubjectName())) {
+            holder.tvStudentSubjectNameSyllabus.setText(syllabusListPojo.getSubjectName() + "");
         }
+
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(syllabusListPojo.getSmName())) {
+//            holder.tvSemStudentSyllabus.setText(syllabusListPojo.getSmName() + "");
+//        }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(syllabusListPojo.getSubCode())) {
             holder.tvSubjectCodeStudentSyllabus.setText(syllabusListPojo.getSubCode() + "");
         }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(syllabusListPojo.getCourseFullname())) {
-            holder.tvCourseNameStudentSyllabus.setText(syllabusListPojo.getCourseFullname() + "");
-        }
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(syllabusListPojo.getCourseFullname())) {
+//            holder.tvCourseNameStudentSyllabus.setText(syllabusListPojo.getCourseFullname() + "");
+//        }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(syllabusListPojo.getPDFURL())) {
             holder.llDownloadDocumentsStudentSyllabus.setVisibility(View.VISIBLE);
@@ -74,19 +79,21 @@ public class StudentSyllabusListAdapter extends RecyclerView.Adapter<StudentSyll
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextViewRegularFont tvSemStudentSyllabus;
+//        TextViewRegularFont tvSemStudentSyllabus;
         TextViewRegularFont tvSubjectCodeStudentSyllabus;
-        TextViewRegularFont tvCourseNameStudentSyllabus;
+//        TextViewRegularFont tvCourseNameStudentSyllabus;
         LinearLayout llDownloadDocumentsStudentSyllabus;
         TextViewRegularFont btnDownloadStudentSyllabus;
+        TextViewRegularFont tvStudentSubjectNameSyllabus;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvSemStudentSyllabus = itemView.findViewById(R.id.tvSemStudentSyllabus);
+//            tvSemStudentSyllabus = itemView.findViewById(R.id.tvSemStudentSyllabus);
             tvSubjectCodeStudentSyllabus = itemView.findViewById(R.id.tvSubjectCodeStudentSyllabus);
-            tvCourseNameStudentSyllabus = itemView.findViewById(R.id.tvCourseNameStudentSyllabus);
+//            tvCourseNameStudentSyllabus = itemView.findViewById(R.id.tvCourseNameStudentSyllabus);
             llDownloadDocumentsStudentSyllabus = itemView.findViewById(R.id.llDownloadDocumentsStudentSyllabus);
             btnDownloadStudentSyllabus = itemView.findViewById(R.id.btnDownloadStudentSyllabus);
+            tvStudentSubjectNameSyllabus = itemView.findViewById(R.id.tvStudentSubjectNameSyllabus);
         }
     }
 

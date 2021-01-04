@@ -243,6 +243,28 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
+<!--                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Ref.Date. : "-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont-->
+<!--                            android:id="@+id/tvFeeReceiptDate"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="-"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:textSize="12sp" />-->
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -254,7 +276,7 @@
                             android:id="@+id/tvFeeReceiptDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="-"
+                            android:text="  -"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 

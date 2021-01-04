@@ -86,7 +86,7 @@ public class FeeReceiptListAdapter extends RecyclerView.Adapter<FeeReceiptListAd
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(feeReceiptPojo.getFeeRefNo())) {
-            holder.tvReferenceNo.setText(feeReceiptPojo.getFeeRefNo() + ", ");
+            holder.tvReferenceNo.setText(feeReceiptPojo.getFeeRefNo() + "");
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(feeReceiptPojo.getFeeBankName())) {

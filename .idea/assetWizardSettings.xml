@@ -311,9 +311,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_lock" />
-                            <entry key="sourceFile" value="C:\Users\iipl\Downloads\filter.svg" />
+                            <entry key="outputName" value="ic_delete_outline" />
+                            <entry key="sourceFile" value="C:\Users\iipl\Downloads\delete_outline.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -51,6 +51,11 @@ public class StudentLessonPlanListAdapter extends RecyclerView.Adapter<StudentLe
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(studentLessonPlanListPojo.getSemester())) {
             String semAndDiv = studentLessonPlanListPojo.getSemester() + "";
+
+            if (semAndDiv.contains("-")) {
+                semAndDiv = semAndDiv.split("-")[1].trim();
+            }
+
             if (!CommonUtil.checkIsEmptyOrNullCommon(studentLessonPlanListPojo.getDivision())) {
                 semAndDiv += " (" + studentLessonPlanListPojo.getDivision() + ")";
             }
