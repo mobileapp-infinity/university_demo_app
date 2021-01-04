@@ -1,6 +1,7 @@
 package com.infinity.infoway.atmiya.student.student_dashboard.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
+import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 
 public class NewsOrNotificationListAdapter extends RecyclerView.Adapter<NewsOrNotificationListAdapter.MyViewHolder> {
@@ -56,6 +59,15 @@ public class NewsOrNotificationListAdapter extends RecyclerView.Adapter<NewsOrNo
         if (data.getNt_desc() != null && !data.getNt_desc().isEmpty()) {
             holder.tvNewsOrNotificationDescription.setText(data.getNt_desc());
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewAllNewsOrNotificationActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override

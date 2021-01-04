@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -102,6 +103,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
 
     ConnectionDetector connectionDetector;
     private Boolean exit = false;
+    private AppCompatImageView imgNotificationBell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +163,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         tvPercentagePreviousMonthStudentSide = findViewById(R.id.tvPercentagePreviousMonthStudentSide);
         cpAvgStudentSide = findViewById(R.id.cpAvgStudentSide);
         tvPercentageAvgStudentSide = findViewById(R.id.tvPercentageAvgStudentSide);
+        imgNotificationBell = findViewById(R.id.imgNotificationBell);
+        imgNotificationBell.setOnClickListener(this);
 
         cImgProfileStudentSide.setOnClickListener(this);
 
@@ -236,6 +240,9 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
                 Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
             }
         } else if (v.getId() == R.id.btnViewAllStudentSide) {
+            Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationActivity.class);
+            startActivity(intent);
+        } else if (v.getId() == R.id.imgNotificationBell) {
             Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationActivity.class);
             startActivity(intent);
         }
