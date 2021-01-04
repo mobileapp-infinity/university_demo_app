@@ -1,5 +1,6 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertForgotPasswordOTPSmsRecordPojo;
@@ -534,6 +535,13 @@ public class ApiImplementer {
                                                         Callback<ArrayList<StudentHomeWorkPojo>> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<StudentHomeWorkPojo>> call = apiInterface.getStudentHomeWork(stud_id, year_id, div_id);
+        call.enqueue(cb);
+    }
+
+    public static void payWithPaytmApiImplementer(String SchoolId, String AdmissionNo,
+                                                  Callback<PayWithPaytmPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<PayWithPaytmPojo> call = apiInterface.payWithPaytm(SchoolId, AdmissionNo);
         call.enqueue(cb);
     }
 

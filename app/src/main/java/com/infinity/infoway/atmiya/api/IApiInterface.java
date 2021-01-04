@@ -1,5 +1,6 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.InsertForgotPasswordOTPSmsRecordPojo;
@@ -440,4 +441,9 @@ public interface IApiInterface {
             @Query("stud_id") String stud_id,
             @Query("year_id") String year_id,
             @Query("div_id") String div_id);
+
+    @GET("Paynow_PAYTM")
+    Call<PayWithPaytmPojo> payWithPaytm(
+            @Query("SchoolId") String SchoolId,
+            @Query("AdmissionNo") String AdmissionNo);
 }

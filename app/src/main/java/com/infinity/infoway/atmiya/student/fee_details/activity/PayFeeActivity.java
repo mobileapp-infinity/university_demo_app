@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -16,7 +19,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
@@ -27,6 +32,7 @@ import com.infinity.infoway.atmiya.student.fee_details.pojo.GetAllPendingFeeStud
 import com.infinity.infoway.atmiya.student.fee_details.pojo.GetPaymentButtonHideShowPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.GetPaymentSingleButtonHideShowPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayFeeTypePojoList;
+import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
@@ -62,8 +68,8 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
     RequestQueue queue;
 
     private static String IP = "";
-    private LinearLayout llPaymentButtons;
-    TextViewRegularFont btnPayWithHDFC, btnPayWithAxis, btnPayWithPaytm, btnPayNow;
+    private MaterialCardView cvPaymentOpetions;
+    //    TextViewRegularFont btnPayWithHDFC, btnPayWithAxis, btnPayWithPaytm, btnPayNow;
     LinearLayout llContent;
     MaterialCardView cvPaymentDetails;
     LinearLayout llPendingFeeList;
@@ -72,6 +78,11 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
     private boolean isMultiplePendingFeePayEnabled = false;
     private String multiplePendingFeePayListItemIds = "";
     private boolean isMultiplePendingFeePaySelected = false;
+    private MaterialRadioButton rbtnPayNow;
+    private MaterialRadioButton rbtnPayWithPaytm;
+    private MaterialRadioButton rbtnPayWithHDFC;
+    private MaterialRadioButton rbtnPayWithAxis;
+    private RadioGroup rGroupPaymentOpetions;
 
 
     @Override
@@ -103,16 +114,13 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
         llNoDataFoundPayFee = findViewById(R.id.llNoDataFoundPayFee);
 
         spFeeTypePayFee = findViewById(R.id.spFeeTypePayFee);
-        llPaymentButtons = findViewById(R.id.llPaymentButtons);
+        cvPaymentOpetions = findViewById(R.id.cvPaymentOpetions);
 
-        btnPayWithHDFC = findViewById(R.id.btnPayWithHDFC);
-        btnPayWithHDFC.setOnClickListener(PayFeeActivity.this);
-        btnPayWithAxis = findViewById(R.id.btnPayWithAxis);
-        btnPayWithAxis.setOnClickListener(PayFeeActivity.this);
-        btnPayWithPaytm = findViewById(R.id.btnPayWithPaytm);
-        btnPayWithPaytm.setOnClickListener(PayFeeActivity.this);
-        btnPayNow = findViewById(R.id.btnPayNow);
-        btnPayNow.setOnClickListener(PayFeeActivity.this);
+        rbtnPayNow = findViewById(R.id.rbtnPayNow);
+        rbtnPayWithPaytm = findViewById(R.id.rbtnPayWithPaytm);
+        rbtnPayWithHDFC = findViewById(R.id.rbtnPayWithHDFC);
+        rbtnPayWithAxis = findViewById(R.id.rbtnPayWithAxis);
+
         llContent = findViewById(R.id.llContent);
         cvPaymentDetails = findViewById(R.id.cvPaymentDetails);
         llPendingFeeList = findViewById(R.id.llPendingFeeList);
@@ -128,7 +136,7 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                     getPaymentButtonHideShowApiCall(feeTypeId);
                     getAllPendingFeeStudentListApiCall(feeType, feeTypeId);
                 } else {
-                    llPaymentButtons.setVisibility(View.GONE);
+                    cvPaymentOpetions.setVisibility(View.GONE);
                     llContent.setVisibility(View.GONE);
                 }
             }
@@ -137,6 +145,69 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        rGroupPaymentOpetions = findViewById(R.id.rGroupPaymentOpetions);
+        rGroupPaymentOpetions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                if (checkedId == R.id.rbtnPayNow) {
+//
+//                } else
+                if (checkedId == R.id.rbtnPayWithPaytm) {
+                    if (isValid()) {
+                        String feeType = feeTypeNameArrayList.get(spFeeTypePayFee.getSelectedItemPosition()).trim() + "";
+                        String feeTypeId = feeTypeAndIdHashMap.get(feeType).trim() + "";
+                        if (isMultiplePendingFeePayEnabled && feeTypeId.equalsIgnoreCase("1")) {
+                            if (!CommonUtil.checkIsEmptyOrNullCommon(multiplePendingFeePayListItemIds)) {
+                                payWithPayTmApiCall();
+                            } else {
+                                Toast.makeText(PayFeeActivity.this, "Please Select Fee", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            payWithPayTmApiCall();
+                        }
+                    }
+
+                } else if (checkedId == R.id.rbtnPayWithHDFC) {
+                    if (isValid()) {
+                        String feeType = feeTypeNameArrayList.get(spFeeTypePayFee.getSelectedItemPosition()).trim() + "";
+                        String feeTypeId = feeTypeAndIdHashMap.get(feeType).trim() + "";
+                        if (isMultiplePendingFeePayEnabled && feeTypeId.equalsIgnoreCase("1")) {
+                            if (!CommonUtil.checkIsEmptyOrNullCommon(multiplePendingFeePayListItemIds) &&
+                                    !multiplePendingFeePayListItemIds.contains("0")) {
+                                sendFeeData(multiplePendingFeePayListItemIds, "HDFC", feeTypeId, IP);
+                            } else {
+                                Toast.makeText(PayFeeActivity.this, "Please Select Fee", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            if (!feeTypeId.equalsIgnoreCase("0")) {
+                                sendFeeDataTerm(multiplePendingFeePayListItemIds, "HDFC", feeTypeId, IP);
+                            }
+                        }
+                    }
+                } else if (checkedId == R.id.rbtnPayWithAxis) {
+
+                    if (isValid()) {
+                        String feeType = feeTypeNameArrayList.get(spFeeTypePayFee.getSelectedItemPosition()).trim() + "";
+                        String feeTypeId = feeTypeAndIdHashMap.get(feeType).trim() + "";
+                        if (isMultiplePendingFeePayEnabled && feeTypeId.equalsIgnoreCase("1")) {
+                            if (!CommonUtil.checkIsEmptyOrNullCommon(multiplePendingFeePayListItemIds) &&
+                                    !multiplePendingFeePayListItemIds.contains("0")) {
+                                sendFeeData(multiplePendingFeePayListItemIds, "AXIS", feeTypeId, IP);
+                            } else {
+                                Toast.makeText(PayFeeActivity.this, "Please Select Fee", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            if (!feeTypeId.equalsIgnoreCase("0")) {
+                                sendFeeDataTerm(multiplePendingFeePayListItemIds, "AXIS", feeTypeId, IP);
+                            }
+                        }
+                    }
+
+                }
+            }
+        });
+
     }
 
     private void getIp() {
@@ -168,29 +239,6 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if (v.getId() == R.id.ivClosePayFee) {
             onBackPressed();
-        } else if (v.getId() == R.id.btnPayWithHDFC) {
-
-        } else if (v.getId() == R.id.btnPayWithAxis) {
-
-            if (isValid()) {
-                String feeType = feeTypeNameArrayList.get(spFeeTypePayFee.getSelectedItemPosition()).trim() + "";
-                String feeTypeId = feeTypeAndIdHashMap.get(feeType).trim() + "";
-                if (isMultiplePendingFeePayEnabled && feeTypeId.equalsIgnoreCase("1")) {
-                    if (!CommonUtil.checkIsEmptyOrNullCommon(multiplePendingFeePayListItemIds)) {
-                        //Send Fee Data Api Call
-                    } else {
-                        Toast.makeText(this, "Please Select Fee", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    if (feeTypeId.equalsIgnoreCase("0")) {
-
-                    }
-                }
-            }
-        } else if (v.getId() == R.id.btnPayWithPaytm) {
-
-        } else if (v.getId() == R.id.btnPayNow) {
-
         }
     }
 
@@ -205,6 +253,38 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    private void payWithPayTmApiCall() {
+        if (connectionDetector.isConnectingToInternet()) {
+            DialogUtil.showProgressDialogNotCancelable(PayFeeActivity.this, "");
+            ApiImplementer.payWithPaytmApiImplementer(mySharedPreferences.getAcId(), mySharedPreferences.getStudAdmissionNo(), new Callback<PayWithPaytmPojo>() {
+                @Override
+                public void onResponse(Call<PayWithPaytmPojo> call, Response<PayWithPaytmPojo> response) {
+                    DialogUtil.hideProgressDialog();
+                    if (response.isSuccessful() && response.body() != null && response.body().getStatus().trim().equalsIgnoreCase("Success")) {
+                        PayWithPaytmPojo payWithPaytmPojo = response.body();
+                        String url = payWithPaytmPojo.getResponse();
+                        if (url.length() > 5) {
+                            Intent intent = new Intent(PayFeeActivity.this, FeePayment.class);
+                            intent.putExtra("res_status", "0");
+                            intent.putExtra("url", url);
+                            startActivity(intent);
+                        }
+                    } else {
+                        Toast.makeText(PayFeeActivity.this, "Status:- " + response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<PayWithPaytmPojo> call, Throwable t) {
+                    DialogUtil.hideProgressDialog();
+                    Toast.makeText(PayFeeActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void getPendingFeeTypeApiCall() {
@@ -272,7 +352,21 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                     public void onResponse(Call<FeeUrlPojo> call, Response<FeeUrlPojo> response) {
                         DialogUtil.hideProgressDialog();
                         if (response.isSuccessful() && response.body() != null) {
+                            FeeUrlPojo feeUrlPojo = response.body();
 
+                            if (feeUrlPojo.getResStatus() != null && feeUrlPojo.getResStatus().toString().trim().compareToIgnoreCase("1") == 0) {
+                                Intent intent = new Intent(PayFeeActivity.this, PaymentActivityFinalfees.class);
+                                intent.putExtra("res_status", feeUrlPojo.getResStatus() + "");
+                                intent.putExtra("url", feeUrlPojo.getResMessage() + "");
+                                startActivity(intent);
+                            } else if (feeUrlPojo.getResStatus() != null && feeUrlPojo.getResStatus().toString().trim().compareToIgnoreCase("0") == 0) {
+                                if (feeUrlPojo.getResMessage() != null && feeUrlPojo.getResMessage().length() > 5) {
+                                    Intent intent = new Intent(PayFeeActivity.this, PaymentActivityFinalfees.class);
+                                    intent.putExtra("res_status", feeUrlPojo.getResStatus() + "");
+                                    intent.putExtra("url", feeUrlPojo.getResMessage() + "");
+                                    startActivity(intent);
+                                }
+                            }
                         } else {
                             Toast.makeText(PayFeeActivity.this, "No Data Fond!", Toast.LENGTH_SHORT).show();
                         }
@@ -294,7 +388,24 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                     public void onResponse(Call<FeeUrlPojo> call, Response<FeeUrlPojo> response) {
                         DialogUtil.hideProgressDialog();
                         if (response.isSuccessful() && response.body() != null) {
+                            FeeUrlPojo feeUrlPojo = response.body();
+                            if (feeUrlPojo.getResStatus() != null && feeUrlPojo.getResStatus().toString().trim().compareToIgnoreCase("1") == 0) {
 
+                                Intent intent = new Intent(PayFeeActivity.this, PaymentActivityFinalfees.class);
+                                intent.putExtra("res_status", feeUrlPojo.getResStatus() + "");
+                                intent.putExtra("url", feeUrlPojo.getResMessage() + "");
+                                startActivity(intent);
+
+                            } else if (feeUrlPojo.getResStatus() != null && feeUrlPojo.getResStatus().toString().trim().compareToIgnoreCase("0") == 0) {
+
+
+                                if (feeUrlPojo.getResMessage() != null && feeUrlPojo.getResMessage().length() > 5) {
+                                    Intent intent = new Intent(PayFeeActivity.this, PaymentActivityFinalfees.class);
+                                    intent.putExtra("res_status", feeUrlPojo.getResStatus() + "");
+                                    intent.putExtra("url", feeUrlPojo.getResMessage() + "");
+                                    startActivity(intent);
+                                }
+                            }
                         } else {
                             Toast.makeText(PayFeeActivity.this, "No Data Fond!", Toast.LENGTH_SHORT).show();
                         }
@@ -312,16 +423,27 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
         ApiImplementer.getPaymentButtonHideShowApiImplementer(mySharedPreferences.getStudentId(), feeType, new Callback<ArrayList<GetPaymentButtonHideShowPojo>>() {
             @Override
             public void onResponse(Call<ArrayList<GetPaymentButtonHideShowPojo>> call, Response<ArrayList<GetPaymentButtonHideShowPojo>> response) {
-                if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
-                    if (response.body().get(0).getStatus().equalsIgnoreCase("0")) {
-                        llPaymentButtons.setVisibility(View.GONE);
-                        Toast.makeText(PayFeeActivity.this, "" + response.body().get(0).getMsg(), Toast.LENGTH_SHORT).show();
-                    } else if (response.body().get(0).getStatus().equalsIgnoreCase("1")) {
-                        llPaymentButtons.setVisibility(View.VISIBLE);
-                        getPaymentSingleButtonHideShowApiCall();
-                    } else {
-                        llPaymentButtons.setVisibility(View.GONE);
+                try {
+                    if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
+//                    if (response.body().get(0).getStatus().equalsIgnoreCase("0")) {
+////                        cvPaymentOpetions.setVisibility(View.GONE);
+//                        Toast.makeText(PayFeeActivity.this, "" + response.body().get(0).getMsg(), Toast.LENGTH_SHORT).show();
+//                    } else if (response.body().get(0).getStatus().equalsIgnoreCase("1")) {
+////                        cvPaymentOpetions.setVisibility(View.VISIBLE);
+//                        getPaymentSingleButtonHideShowApiCall();
+//                    } else {
+////                        cvPaymentOpetions.setVisibility(View.GONE);
+//                    }
+
+                        if (response.body().get(0).getStatus().equalsIgnoreCase("0")) {
+                            Toast.makeText(PayFeeActivity.this, "" + response.body().get(0).getMsg(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        getPaymentSingleButtonHideShowApiCall(response.body().get(0).getStatus().trim() + "");
+
                     }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
 
@@ -332,34 +454,40 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    private void getPaymentSingleButtonHideShowApiCall() {
+    private void getPaymentSingleButtonHideShowApiCall(String paymentButtonOptionStatus) {
         ApiImplementer.getPaymentSingleButtonHideShowApiImplementer(new Callback<ArrayList<GetPaymentSingleButtonHideShowPojo>>() {
             @Override
             public void onResponse(Call<ArrayList<GetPaymentSingleButtonHideShowPojo>> call, Response<ArrayList<GetPaymentSingleButtonHideShowPojo>> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
                     GetPaymentSingleButtonHideShowPojo getPaymentSingleButtonHideShowPojo = response.body().get(0);
 
-                    if (getPaymentSingleButtonHideShowPojo.getHDFC().equalsIgnoreCase("0")) {
-                        btnPayWithHDFC.setVisibility(View.GONE);
 
+                    if (paymentButtonOptionStatus.compareToIgnoreCase("1") == 0) {
+                        cvPaymentOpetions.setVisibility(View.VISIBLE);
                     } else {
-                        btnPayWithHDFC.setVisibility(View.VISIBLE);
+                        cvPaymentOpetions.setVisibility(View.GONE);
+                    }
+
+                    if (getPaymentSingleButtonHideShowPojo.getHDFC().equalsIgnoreCase("0")) {
+                        rbtnPayWithHDFC.setVisibility(View.GONE);
+                    } else {
+                        rbtnPayWithHDFC.setVisibility(View.VISIBLE);
                     }
 
 
                     if (getPaymentSingleButtonHideShowPojo.getAXIS().equalsIgnoreCase("0")) {
 
-                        btnPayWithAxis.setVisibility(View.GONE);
+                        rbtnPayWithAxis.setVisibility(View.GONE);
                     } else {
-                        btnPayWithAxis.setVisibility(View.VISIBLE);
+                        rbtnPayWithAxis.setVisibility(View.VISIBLE);
                     }
 
 
                     if (getPaymentSingleButtonHideShowPojo.getPAYTM().equalsIgnoreCase("0")) {
 
-                        btnPayWithPaytm.setVisibility(View.GONE);
+                        rbtnPayWithPaytm.setVisibility(View.GONE);
                     } else {
-                        btnPayWithPaytm.setVisibility(View.VISIBLE);
+                        rbtnPayWithPaytm.setVisibility(View.VISIBLE);
                     }
 
                 }

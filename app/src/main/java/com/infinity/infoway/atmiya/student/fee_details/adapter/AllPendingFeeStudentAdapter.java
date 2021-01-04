@@ -1,6 +1,9 @@
 package com.infinity.infoway.atmiya.student.fee_details.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +51,20 @@ public class AllPendingFeeStudentAdapter extends RecyclerView.Adapter<AllPending
         String fees_status = "";
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(getAllPendingFeeStudentPojo.getFeePayStatus())) {
+
             fees_status = getAllPendingFeeStudentPojo.getFeePayStatus().toString();
+
+            if (fees_status != null && !fees_status.contentEquals("")) {
+                if (fees_status.contains("&lt;")) {
+                    fees_status = fees_status.replace("&lt;", "<");
+                }
+
+                if (fees_status.contains("&gt;")) {
+                    fees_status = fees_status.replace("&gt;", ">");
+                }
+            }
+
+            holder.tvFeeStatusPayFee.setText(Html.fromHtml(fees_status + "") + "");
         }
 
 
@@ -72,8 +88,6 @@ public class AllPendingFeeStudentAdapter extends RecyclerView.Adapter<AllPending
             holder.tvLateFeePayFee.setText(getAllPendingFeeStudentPojo.getFeeLateFee() + "");
         }
 
-        holder.tvFeeStatusPayFee.setText(fees_status);
-
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(getAllPendingFeeStudentPojo.getFeeViewFile())) {
             holder.llDownloadPayFeeDocument.setVisibility(View.VISIBLE);
@@ -81,8 +95,11 @@ public class AllPendingFeeStudentAdapter extends RecyclerView.Adapter<AllPending
                 @Override
                 public void onClick(View v) {
                     String fileUrl = getAllPendingFeeStudentPojo.getFeeViewFile().toString();
-                    String fileExtension = fileUrl.substring(fileUrl.lastIndexOf("."));
-                    new DownloadPdfFromUrl(context, fileUrl, fileExtension, "Pay Fee");
+//                    String fileExtension = fileUrl.substring(fileUrl.lastIndexOf("."));
+                    Intent i = new Intent(Intent.ACTION_VIEW);//redirect to chrome instead of downloading because pdf content is text/html instead of application/pdf
+                    i.setData(Uri.parse(fileUrl.trim()));
+                    context.startActivity(i);
+//                    new DownloadPdfFromUrl(context, fileUrl, fileExtension, "Pay Fee");
                 }
             });
         } else {

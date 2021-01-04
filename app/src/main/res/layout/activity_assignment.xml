@@ -40,18 +40,18 @@
         android:id="@+id/llStudentAssignmentList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:visibility="gone"
         android:layout_margin="8dp"
-        android:orientation="vertical">
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvStudentAssignmentList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
             android:layoutAnimation="@anim/layout_animation"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
 
