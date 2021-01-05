@@ -78,7 +78,7 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
     private boolean isMultiplePendingFeePayEnabled = false;
     private String multiplePendingFeePayListItemIds = "";
     private boolean isMultiplePendingFeePaySelected = false;
-    private MaterialRadioButton rbtnPayNow;
+    //    private MaterialRadioButton rbtnPayNow;
     private MaterialRadioButton rbtnPayWithPaytm;
     private MaterialRadioButton rbtnPayWithHDFC;
     private MaterialRadioButton rbtnPayWithAxis;
@@ -116,7 +116,7 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
         spFeeTypePayFee = findViewById(R.id.spFeeTypePayFee);
         cvPaymentOpetions = findViewById(R.id.cvPaymentOpetions);
 
-        rbtnPayNow = findViewById(R.id.rbtnPayNow);
+//        rbtnPayNow = findViewById(R.id.rbtnPayNow);
         rbtnPayWithPaytm = findViewById(R.id.rbtnPayWithPaytm);
         rbtnPayWithHDFC = findViewById(R.id.rbtnPayWithHDFC);
         rbtnPayWithAxis = findViewById(R.id.rbtnPayWithAxis);
@@ -266,7 +266,7 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                         PayWithPaytmPojo payWithPaytmPojo = response.body();
                         String url = payWithPaytmPojo.getResponse();
                         if (url.length() > 5) {
-                            Intent intent = new Intent(PayFeeActivity.this, FeePayment.class);
+                            Intent intent = new Intent(PayFeeActivity.this, PaytmPaymentActivity.class);
                             intent.putExtra("res_status", "0");
                             intent.putExtra("url", url);
                             startActivity(intent);
@@ -355,13 +355,13 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                             FeeUrlPojo feeUrlPojo = response.body();
 
                             if (feeUrlPojo.getResStatus() != null && feeUrlPojo.getResStatus().toString().trim().compareToIgnoreCase("1") == 0) {
-                                Intent intent = new Intent(PayFeeActivity.this, PaymentActivityFinalfees.class);
+                                Intent intent = new Intent(PayFeeActivity.this, AxisAndHdfcPaymentWebViewActivity.class);
                                 intent.putExtra("res_status", feeUrlPojo.getResStatus() + "");
                                 intent.putExtra("url", feeUrlPojo.getResMessage() + "");
                                 startActivity(intent);
                             } else if (feeUrlPojo.getResStatus() != null && feeUrlPojo.getResStatus().toString().trim().compareToIgnoreCase("0") == 0) {
                                 if (feeUrlPojo.getResMessage() != null && feeUrlPojo.getResMessage().length() > 5) {
-                                    Intent intent = new Intent(PayFeeActivity.this, PaymentActivityFinalfees.class);
+                                    Intent intent = new Intent(PayFeeActivity.this, AxisAndHdfcPaymentWebViewActivity.class);
                                     intent.putExtra("res_status", feeUrlPojo.getResStatus() + "");
                                     intent.putExtra("url", feeUrlPojo.getResMessage() + "");
                                     startActivity(intent);
@@ -391,7 +391,7 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                             FeeUrlPojo feeUrlPojo = response.body();
                             if (feeUrlPojo.getResStatus() != null && feeUrlPojo.getResStatus().toString().trim().compareToIgnoreCase("1") == 0) {
 
-                                Intent intent = new Intent(PayFeeActivity.this, PaymentActivityFinalfees.class);
+                                Intent intent = new Intent(PayFeeActivity.this, AxisAndHdfcPaymentWebViewActivity.class);
                                 intent.putExtra("res_status", feeUrlPojo.getResStatus() + "");
                                 intent.putExtra("url", feeUrlPojo.getResMessage() + "");
                                 startActivity(intent);
@@ -400,7 +400,7 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
 
 
                                 if (feeUrlPojo.getResMessage() != null && feeUrlPojo.getResMessage().length() > 5) {
-                                    Intent intent = new Intent(PayFeeActivity.this, PaymentActivityFinalfees.class);
+                                    Intent intent = new Intent(PayFeeActivity.this, AxisAndHdfcPaymentWebViewActivity.class);
                                     intent.putExtra("res_status", feeUrlPojo.getResStatus() + "");
                                     intent.putExtra("url", feeUrlPojo.getResMessage() + "");
                                     startActivity(intent);

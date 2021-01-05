@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg_color"
     android:orientation="vertical"
-    tools:context=".student.fee_details.activity.FeeReciptActivity">
+    tools:context=".student.fee_details.activity.AxisAndHdfcPaymentWebViewActivity">
 
     <LinearLayout
-        android:id="@+id/llProfileActionbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
@@ -17,50 +16,35 @@
         android:padding="12dp">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivCloseFeeReceipt"
+            android:id="@+id/ivCloseAxisHdfcPayment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_back" />
 
         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-            android:id="@+id/tvProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
-            android:text="Fee Receipt"
+            android:text="Payment"
             android:textAllCaps="true"
             android:textColor="@color/white" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/llStudentFeeReceiptList"
+    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        android:id="@+id/tvMsg"
+        android:textColor="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/common_bg_color"
-        android:orientation="vertical"
-        android:padding="12dp"
-        android:visibility="gone">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvFeeReceiptStudent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none"
-            android:layoutAnimation="@anim/layout_animation"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-
-    </LinearLayout>
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/llAxisHdfcPaymentProgressbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="visible">
@@ -73,29 +57,10 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/llNoDataFoundFeeReceipt"
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_no_data_found" />
-
-        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="No Data Found !"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp" />
-
-    </LinearLayout>
+        android:layout_weight="1"/>
 
 </LinearLayout>

@@ -2,7 +2,6 @@ package com.infinity.infoway.atmiya.student.fee_details.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -14,9 +13,7 @@ import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.student.fee_details.adapter.FeeReceiptListAdapter;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
-import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
-import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
@@ -46,7 +43,7 @@ public class FeeReciptActivity extends AppCompatActivity implements View.OnClick
         connectionDetector = new ConnectionDetector(FeeReciptActivity.this);
         ivCloseFeeReceipt = findViewById(R.id.ivCloseFeeReceipt);
         ivCloseFeeReceipt.setOnClickListener(this);
-        llFeeReceiptProgressbar = findViewById(R.id.llFeeReceiptProgressbar);
+        llFeeReceiptProgressbar = findViewById(R.id.llAxisHdfcPaymentProgressbar);
         llNoDataFoundFeeReceipt = findViewById(R.id.llNoDataFoundFeeReceipt);
         llStudentFeeReceiptList = findViewById(R.id.llStudentFeeReceiptList);
         rvFeeReceiptStudent = findViewById(R.id.rvFeeReceiptStudent);
