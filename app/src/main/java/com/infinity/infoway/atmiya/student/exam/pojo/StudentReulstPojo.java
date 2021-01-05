@@ -3,7 +3,7 @@ package com.infinity.infoway.atmiya.student.exam.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CIAMarkstPojo {
+public class StudentReulstPojo {
 
 
     @SerializedName("exam_id")

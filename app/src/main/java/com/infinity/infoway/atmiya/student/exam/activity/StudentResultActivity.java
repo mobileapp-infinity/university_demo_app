@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.student.exam.adapter.ResultListAdapter;
-import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.StudentReulstPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
@@ -70,9 +70,9 @@ public class StudentResultActivity extends AppCompatActivity implements View.OnC
                 llStudentResultMarksList.setVisibility(View.GONE);
                 llResultMarksProgressbar.setVisibility(View.VISIBLE);
                 llNoDataFoundResultMarks.setVisibility(View.GONE);
-                ApiImplementer.getCIAMarksListApiImplementer(mySharedPreferences.getStudentEnrollmentNo(), new Callback<ArrayList<CIAMarkstPojo>>() {
+                ApiImplementer.getStudentResultListApiImplementer(mySharedPreferences.getStudentEnrollmentNo(), new Callback<ArrayList<StudentReulstPojo>>() {
                     @Override
-                    public void onResponse(Call<ArrayList<CIAMarkstPojo>> call, Response<ArrayList<CIAMarkstPojo>> response) {
+                    public void onResponse(Call<ArrayList<StudentReulstPojo>> call, Response<ArrayList<StudentReulstPojo>> response) {
                         llResultMarksProgressbar.setVisibility(View.GONE);
                         if (response.isSuccessful() && response.body() != null &&
                                 response.body().size() > 0) {
@@ -86,7 +86,7 @@ public class StudentResultActivity extends AppCompatActivity implements View.OnC
                     }
 
                     @Override
-                    public void onFailure(Call<ArrayList<CIAMarkstPojo>> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<StudentReulstPojo>> call, Throwable t) {
                         llStudentResultMarksList.setVisibility(View.GONE);
                         llResultMarksProgressbar.setVisibility(View.GONE);
                         llNoDataFoundResultMarks.setVisibility(View.VISIBLE);

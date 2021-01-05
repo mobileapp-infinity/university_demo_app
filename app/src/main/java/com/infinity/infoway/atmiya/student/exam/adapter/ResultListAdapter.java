@@ -15,7 +15,7 @@ import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
-import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.StudentReulstPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 
@@ -29,13 +29,13 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.My
 
     Context context;
     LayoutInflater layoutInflater;
-    ArrayList<CIAMarkstPojo> ciaMarkstPojoArrayList;
+    ArrayList<StudentReulstPojo> studentReulstPojoArrayList;
     ProgressDialog progressDialog;
 
-    public ResultListAdapter(Context context, ArrayList<CIAMarkstPojo> ciaMarkstPojoArrayList) {
+    public ResultListAdapter(Context context, ArrayList<StudentReulstPojo> studentReulstPojoArrayList) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
-        this.ciaMarkstPojoArrayList = ciaMarkstPojoArrayList;
+        this.studentReulstPojoArrayList = studentReulstPojoArrayList;
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please wait....");
         progressDialog.setCancelable(false);
@@ -52,7 +52,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        CIAMarkstPojo ciaMarkstPojo = ciaMarkstPojoArrayList.get(position);
+        StudentReulstPojo studentReulstPojo = studentReulstPojoArrayList.get(position);
 
 //        if (position % 2 == 0) {
 //            holder.llCIAMarksListMain.setBackground(ContextCompat.getDrawable(context, R.color.white));
@@ -60,22 +60,22 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.My
 //            holder.llCIAMarksListMain.setBackground(ContextCompat.getDrawable(context, R.color.exam_module_row_color));
 //        }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(ciaMarkstPojo.getProgramname())) {
-            holder.tvCiaProgramName.setText(ciaMarkstPojo.getProgramname() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(studentReulstPojo.getProgramname())) {
+            holder.tvCiaProgramName.setText(studentReulstPojo.getProgramname() + "");
         }
-        if (!CommonUtil.checkIsEmptyOrNullCommon(ciaMarkstPojo.getSemesterName())) {
-            holder.tvCIASemName.setText(ciaMarkstPojo.getSemesterName() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(studentReulstPojo.getSemesterName())) {
+            holder.tvCIASemName.setText(studentReulstPojo.getSemesterName() + "");
         }
-        if (!CommonUtil.checkIsEmptyOrNullCommon(ciaMarkstPojo.getYearName())) {
-            holder.tvCIAExamination.setText(ciaMarkstPojo.getYearName() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(studentReulstPojo.getYearName())) {
+            holder.tvCIAExamination.setText(studentReulstPojo.getYearName() + "");
         }
 
         holder.tvCIAResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                downloadCIAResultApiCall(ciaMarkstPojo.getSwdCollegeId() + "",
-                        ciaMarkstPojo.getSwdYearId() + "", ciaMarkstPojo.getSwdSemId() + "",
-                        ciaMarkstPojo.getExamId() + "", ciaMarkstPojo.getStudentId() + "");
+                downloadCIAResultApiCall(studentReulstPojo.getSwdCollegeId() + "",
+                        studentReulstPojo.getSwdYearId() + "", studentReulstPojo.getSwdSemId() + "",
+                        studentReulstPojo.getExamId() + "", studentReulstPojo.getStudentId() + "");
             }
         });
 
@@ -108,7 +108,7 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.My
 
     @Override
     public int getItemCount() {
-        return ciaMarkstPojoArrayList.size();
+        return studentReulstPojoArrayList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

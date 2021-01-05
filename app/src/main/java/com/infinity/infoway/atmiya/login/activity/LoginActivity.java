@@ -4,12 +4,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -23,9 +21,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
-import com.infinity.infoway.atmiya.custom_class.RecyclerItemTouchHelper;
-import com.infinity.infoway.atmiya.custom_class.SwipeHelper;
+import com.infinity.infoway.atmiya.faculty.faculty_dashboard.activity.FacultyDashboardActivity;
 import com.infinity.infoway.atmiya.login.adapter.LoginUserListAdapter;
+import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.login.pojo.RegisterStudentDetailsModel;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.activity.ForgotPasswordActivity;
@@ -38,7 +36,6 @@ import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,6 +76,9 @@ public class LoginActivity extends AppCompatActivity implements
         if (mySharedPreferences.checkIsStudentCurrentlyLoggedIn() &&
                 mySharedPreferences.getLoginUserType() == CommonUtil.LOGIN_TYPE_STUDENT) {
             redirectToStudentDashboard();
+        } else if (mySharedPreferences.checkIsFacultyCurrentlyLoggedIn() &&
+                mySharedPreferences.getLoginUserType() == CommonUtil.LOGIN_TYPE_FACULTY) {
+            redirectToFacultyDashboard();
         }
         displayLoggedStudentList();
     }
@@ -143,17 +143,12 @@ public class LoginActivity extends AppCompatActivity implements
         });
     }
 
-//    @Override
-//    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-//
-//    }
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.llLogin) {
             if (isValid()) {
                 CommonUtil.hideKeyboardCommon(LoginActivity.this);
-                checkLoginApiCall(edtLoginUserName.getText().toString().trim(), edtLoginUserPassword.getText().toString().trim());
+                checkStudentLoginCheckApiCall(edtLoginUserName.getText().toString().trim(), edtLoginUserPassword.getText().toString().trim());
             }
         } else if (v.getId() == R.id.llForgotPassword) {
             Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
@@ -167,7 +162,7 @@ public class LoginActivity extends AppCompatActivity implements
         finish();
     }
 
-    private void checkLoginApiCall(String userName, String password) {
+    private void checkStudentLoginCheckApiCall(String userName, String password) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(LoginActivity.this, "");
             HashMap<String, String> mParams = new HashMap();
@@ -176,9 +171,10 @@ public class LoginActivity extends AppCompatActivity implements
             ApiImplementer.checkStudentLoginApiImplementer(mParams, new Callback<StudentLoginPojo>() {
                 @Override
                 public void onResponse(Call<StudentLoginPojo> call, Response<StudentLoginPojo> response) {
-                    DialogUtil.hideProgressDialog();
+//                    DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null) {
                         if (response.body().getStatus().equalsIgnoreCase("1")) {
+                            DialogUtil.hideProgressDialog();
                             StudentLoginPojo studentLoginPojo = response.body();
                             setStudentLoginData(userName, password, studentLoginPojo);
                             if (response.body().getName() != null && !response.body().getName().isEmpty()) {
@@ -186,9 +182,10 @@ public class LoginActivity extends AppCompatActivity implements
                             }
                             redirectToStudentDashboard();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                            checkEmployeeLoginCheckApiCall(false, true, userName, password);
                         }
                     } else {
+                        DialogUtil.hideProgressDialog();
                         Toast.makeText(LoginActivity.this, "Some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -204,7 +201,6 @@ public class LoginActivity extends AppCompatActivity implements
             finish();
         }
     }
-
 
     private void setStudentLoginData(String userName, String password, StudentLoginPojo studentLoginPojo) {
 
@@ -312,12 +308,141 @@ public class LoginActivity extends AppCompatActivity implements
         }
     }
 
+    private void checkEmployeeLoginCheckApiCall(boolean isPdShow, boolean isPdHide, String empUsername, String empPassword) {
+        if (connectionDetector.isConnectingToInternet()) {
+            if (isPdShow) {
+                DialogUtil.showProgressDialogNotCancelable(LoginActivity.this, "");
+            }
+            ApiImplementer.employeeLoginCheckApiImplementer(empUsername, empPassword, new Callback<EmployeeLoginPojo>() {
+                @Override
+                public void onResponse(Call<EmployeeLoginPojo> call, Response<EmployeeLoginPojo> response) {
+                    if (isPdHide) {
+                        DialogUtil.hideProgressDialog();
+                    }
+                    try {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getStatus().toString().trim().equalsIgnoreCase("1")) {
+                                if (response.body().getIsDirector().toString().trim().equalsIgnoreCase("0")) {
+                                    EmployeeLoginPojo employeeLoginPojo = response.body();
+                                    setEmployeeLoginData(empUsername, empPassword, employeeLoginPojo);
+                                    redirectToFacultyDashboard();
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Director Login Not Allowed", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Invalid Username/Password", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<EmployeeLoginPojo> call, Throwable t) {
+                    DialogUtil.hideProgressDialog();
+                    Toast.makeText(LoginActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void setEmployeeLoginData(String empUserName, String empPassword, EmployeeLoginPojo employeeLoginPojo) {
+
+        mySharedPreferences.setEmpUserName(empUserName);
+        mySharedPreferences.setEmpPassword(empPassword);
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getLoginUserType())) {
+            mySharedPreferences.setLoginUserType(employeeLoginPojo.getLoginUserType());
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getEmpId())) {
+            mySharedPreferences.setEmpId(employeeLoginPojo.getEmpId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getEmpNumber())) {
+            mySharedPreferences.setEmpNumber(employeeLoginPojo.getEmpNumber() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getName())) {
+            mySharedPreferences.setEmpName(employeeLoginPojo.getName() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getEmpMainSchoolId())) {
+            mySharedPreferences.setEmpMainSchoolId(employeeLoginPojo.getEmpMainSchoolId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getAcFullName())) {
+            mySharedPreferences.setAcFullName(employeeLoginPojo.getAcFullName() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getAcLogo())) {
+            mySharedPreferences.setEmpAcLogo(employeeLoginPojo.getAcLogo() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getStudPhoto())) {
+            mySharedPreferences.setStudentPhotoUrl(employeeLoginPojo.getStudPhoto() + "");
+        }
+
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getStatus())) {
+//            mySharedPreferences.setEmpStatus(employeeLoginPojo.getStatus() + "");
+//        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getAcCode())) {
+            mySharedPreferences.setEmpAcCode(employeeLoginPojo.getAcCode() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getIsDirector())) {
+            mySharedPreferences.setEmpIsDirectory(employeeLoginPojo.getIsDirector() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getEmpId())) {
+            mySharedPreferences.setEmpId(employeeLoginPojo.getEmpId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getEmpYearId())) {
+            mySharedPreferences.setEmpYearId(employeeLoginPojo.getEmpYearId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getInstituteId())) {
+            mySharedPreferences.setEmpInstituteId(employeeLoginPojo.getInstituteId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getImDomainName())) {
+            mySharedPreferences.setEmpImDomainName(employeeLoginPojo.getImDomainName() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getEmpUserStatus())) {
+            mySharedPreferences.setEmpUserStatus(employeeLoginPojo.getEmpUserStatus() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getEmpPermenantCollege())) {
+            mySharedPreferences.setEmpPermanentCollege(employeeLoginPojo.getEmpPermenantCollege() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(employeeLoginPojo.getEmpDepartmentId())) {
+            mySharedPreferences.setEmpDepartmentId(employeeLoginPojo.getEmpDepartmentId() + "");
+        }
+
+    }
+
+    private void redirectToFacultyDashboard() {
+        Intent intent = new Intent(LoginActivity.this, FacultyDashboardActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     @Override
     public void onStudentItemClick(String studentName, String studentUserName, String studentPassword) {
         edtLoginUserName.setText(studentUserName);
         edtLoginUserPassword.setText(studentPassword);
-        checkLoginApiCall(studentUserName, studentPassword);
+        checkStudentLoginCheckApiCall(studentUserName, studentPassword);
     }
 
     @Override

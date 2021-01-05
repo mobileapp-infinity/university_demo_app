@@ -1,5 +1,8 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
+import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
@@ -29,7 +32,7 @@ import com.infinity.infoway.atmiya.student.e_learning.pojo.LearningManagementGro
 import com.infinity.infoway.atmiya.student.e_learning.pojo.StudentWiseLearningGroupPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamSemesterPojo;
-import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.StudentReulstPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadStudentMidResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
@@ -73,6 +76,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class ApiImplementer {
+
+    //TODO Student side module implementers
 
     public static void logoutUserApiImplementer(int loginUserType, String userId, Callback<ArrayList<LogOutPojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
@@ -138,9 +143,9 @@ public class ApiImplementer {
     }
 
 
-    public static void getCIAMarksListApiImplementer(String enrollement_no, Callback<ArrayList<CIAMarkstPojo>> cb) {
+    public static void getStudentResultListApiImplementer(String enrollement_no, Callback<ArrayList<StudentReulstPojo>> cb) {
         final IApiInterface apiService = ApiClientForCIAMarks.getClient().create(IApiInterface.class);
-        Call<ArrayList<CIAMarkstPojo>> call = apiService.getStuedntCIAMarksList(enrollement_no);
+        Call<ArrayList<StudentReulstPojo>> call = apiService.getStuedntResultList(enrollement_no);
         call.enqueue(cb);
     }
 
@@ -542,6 +547,29 @@ public class ApiImplementer {
                                                   Callback<PayWithPaytmPojo> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
         Call<PayWithPaytmPojo> call = apiInterface.payWithPaytm(SchoolId, AdmissionNo);
+        call.enqueue(cb);
+    }
+
+
+    //TODO Employee Side Implementers
+
+    public static void employeeLoginCheckApiImplementer(String username, String password,
+                                                        Callback<EmployeeLoginPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<EmployeeLoginPojo> call = apiInterface.employeeLoginCheck(username, password);
+        call.enqueue(cb);
+    }
+
+    public static void updateFacultyFcmTokenApiImplementer(String emp_id, String FCM_ID,
+                                                           String KEY, Callback<UpdateFaultyFCMTokenPojo> cb) {
+        final IApiInterface apiInterface = ApiClientForStudentAndEmployeeFcmApi.getClient().create(IApiInterface.class);
+        Call<UpdateFaultyFCMTokenPojo> call = apiInterface.updateFacultyFcmToken(emp_id, FCM_ID, KEY);
+        call.enqueue(cb);
+    }
+
+    public static void getFacultyProfileDetailsApiImplementer(String emp_id, Callback<ArrayList<FacultyProfilePojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<FacultyProfilePojo>> call = apiService.getFacultyProfileDetails(emp_id);
         call.enqueue(cb);
     }
 

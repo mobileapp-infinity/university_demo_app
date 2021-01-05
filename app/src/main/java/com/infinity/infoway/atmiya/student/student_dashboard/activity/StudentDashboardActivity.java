@@ -378,7 +378,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         if (!CommonUtil.checkIsEmptyOrNullCommon(mySharedPreferences.getFCMToken())) {
             if (connectionDetector.isConnectingToInternet()) {
                 ApiImplementer.updateStudentFcmTokenApiImplementer(mySharedPreferences.getStudentId(), mySharedPreferences.getFCMToken(),
-                        ApiClientForStudentAndEmployeeFcmApi.ENCODED_KEY_FOR_STUDENT_AND_EMPLOYEE_FCM_REGISTRATION, new Callback<UpdateStudentFCMTokenPojo>() {
+                        ApiClientForStudentAndEmployeeFcmApi.ENCODED_KEY_FOR_STUDENT_FCM_REGISTRATION, new Callback<UpdateStudentFCMTokenPojo>() {
                             @Override
                             public void onResponse(Call<UpdateStudentFCMTokenPojo> call, Response<UpdateStudentFCMTokenPojo> response) {
 //                                if (response.isSuccessful() && response.body() != null) {

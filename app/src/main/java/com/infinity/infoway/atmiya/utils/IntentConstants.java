@@ -5,6 +5,10 @@ public class IntentConstants {
     public static final String FORCE_UPDATE = "ForceUpdate";
     public static final String OPTIONAL_UPDATE = "OptionalUpdate";
 
+
+
+    //For Student
+
     public static final int REQUEST_CODE_STUDENT_LOGOUT = 1001;
     public static final int REQUEST_CODE_FOR_ATTACH_FILE = 1002;
     public static final int REQUEST_CODE_FOR_CAPTURE_IMAGE = 1003;
@@ -30,6 +34,10 @@ public class IntentConstants {
     public static final String IS_STUDENT_RESET_PASSWORD = "IsStudentResetPassword";
     public static final String RESET_PASS_USER_ID = "ResetPassUserId";
     public static final String RESET_PASS_INSTITUTE_ID = "ResetPassInstituteId";
+
+
+    //For Employee
+    public static final int REQUEST_CODE_FOR_FACULTY_LOGOUT = 1007;
 
 
 }

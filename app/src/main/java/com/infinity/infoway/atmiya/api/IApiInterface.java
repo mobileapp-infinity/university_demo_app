@@ -1,5 +1,8 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
+import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
@@ -29,7 +32,7 @@ import com.infinity.infoway.atmiya.student.e_learning.pojo.LearningManagementGro
 import com.infinity.infoway.atmiya.student.e_learning.pojo.StudentWiseLearningGroupPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamSemesterPojo;
-import com.infinity.infoway.atmiya.student.exam.pojo.CIAMarkstPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.StudentReulstPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadStudentMidResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
@@ -79,6 +82,8 @@ import retrofit2.http.Streaming;
 
 public interface IApiInterface {
 
+    //TODO below API are for student side modules
+
     @GET("Logout_and_Clear_FCM_id_of_User")
     Call<ArrayList<LogOutPojo>> logoutUser(@Query("login_user_type") int login_user_type,
                                            @Query("user_id") String user_id);
@@ -126,7 +131,7 @@ public interface IApiInterface {
     Call<PrintFeeReceiptPojo> downloadFeeReceipt(@Query("stud_id") String stud_id, @Query("Receipt_no") String receipt_no);
 
     @GET("Get_Student_All_Exam_Detail_By_Enrollment_no")
-    Call<ArrayList<CIAMarkstPojo>> getStuedntCIAMarksList(@Query("enrollement_no") String enrollement_no);
+    Call<ArrayList<StudentReulstPojo>> getStuedntResultList(@Query("enrollement_no") String enrollement_no);
 
     @GET("Download_Student_Exam_Result")
     @Streaming
@@ -446,4 +451,22 @@ public interface IApiInterface {
     Call<PayWithPaytmPojo> payWithPaytm(
             @Query("SchoolId") String SchoolId,
             @Query("AdmissionNo") String AdmissionNo);
+
+    //TODO Below API are for employee side modules
+
+    @GET("login_user_new_api")
+    Call<EmployeeLoginPojo> employeeLoginCheck(
+            @Query("username") String username,
+            @Query("password") String password);
+
+    @GET("Update_Isrp_employee_FCM_Id")
+    Call<UpdateFaultyFCMTokenPojo> updateFacultyFcmToken(
+            @Query("emp_id") String emp_id,
+            @Query("FCM_ID") String FCM_ID,
+            @Query(value = "KEY", encoded = true) String KEY);
+
+    @GET("employee_profile_api")
+    Call<ArrayList<FacultyProfilePojo>> getFacultyProfileDetails(
+            @Query("emp_id") String emp_id);
+
 }

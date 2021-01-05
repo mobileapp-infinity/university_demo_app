@@ -365,6 +365,8 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
                         } else {
                             Toast.makeText(StudentProfileActivity.this, "some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
                         }
+                    }else {
+                        Toast.makeText(StudentProfileActivity.this, "some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
                     }
                 }
 
