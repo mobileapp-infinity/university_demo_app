@@ -125,7 +125,7 @@ public class JoinGroupListAdapter extends BaseExpandableListAdapter {
                 if (!CommonUtil.checkIsEmptyOrNullCommon(joinGroupHeaderListPojoArrayList.get(groupPosition).getGroupName())) {
                     grp_name = joinGroupHeaderListPojoArrayList.get(groupPosition).getGroupName();
                 }
-                if (!CommonUtil.checkIsEmptyOrNullCommon(grp_id)){
+                if (!CommonUtil.checkIsEmptyOrNullCommon(grp_id)) {
                     checkIsGroupIsExistOrNotApiCall(grp_id, grp_name);
                 }
             }
@@ -234,6 +234,7 @@ public class JoinGroupListAdapter extends BaseExpandableListAdapter {
                                 response.body().getTable().size() > 0) {
                             if (response.body().getTable().get(0).getErrorCode().equalsIgnoreCase("1")) {
                                 Toast.makeText(context, "Enroll Successfully", Toast.LENGTH_SHORT).show();
+                                context.finish();
                             }
                         }
                     }
@@ -259,6 +260,7 @@ public class JoinGroupListAdapter extends BaseExpandableListAdapter {
                                     response.body().getTable().size() > 0) {
                                 if (response.body().getTable().get(0).getErrorCode().equalsIgnoreCase("1")) {
                                     Toast.makeText(context, "Group Decline Successfully.", Toast.LENGTH_SHORT).show();
+                                    context.finish();
                                 }
                             } else {
                                 Toast.makeText(context, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();

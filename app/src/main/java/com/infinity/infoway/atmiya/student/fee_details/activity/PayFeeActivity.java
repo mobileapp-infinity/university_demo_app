@@ -161,11 +161,14 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                             if (!CommonUtil.checkIsEmptyOrNullCommon(multiplePendingFeePayListItemIds)) {
                                 payWithPayTmApiCall();
                             } else {
+                                rbtnPayWithPaytm.setChecked(false);
                                 Toast.makeText(PayFeeActivity.this, "Please Select Fee", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             payWithPayTmApiCall();
                         }
+                    } else {
+                        rbtnPayWithPaytm.setChecked(false);
                     }
 
                 } else if (checkedId == R.id.rbtnPayWithHDFC) {
@@ -177,6 +180,7 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                                     !multiplePendingFeePayListItemIds.contains("0")) {
                                 sendFeeData(multiplePendingFeePayListItemIds, "HDFC", feeTypeId, IP);
                             } else {
+                                rbtnPayWithHDFC.setChecked(false);
                                 Toast.makeText(PayFeeActivity.this, "Please Select Fee", Toast.LENGTH_SHORT).show();
                             }
                         } else {
@@ -184,9 +188,10 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                                 sendFeeDataTerm(multiplePendingFeePayListItemIds, "HDFC", feeTypeId, IP);
                             }
                         }
+                    } else {
+                        rbtnPayWithHDFC.setChecked(false);
                     }
                 } else if (checkedId == R.id.rbtnPayWithAxis) {
-
                     if (isValid()) {
                         String feeType = feeTypeNameArrayList.get(spFeeTypePayFee.getSelectedItemPosition()).trim() + "";
                         String feeTypeId = feeTypeAndIdHashMap.get(feeType).trim() + "";
@@ -195,6 +200,7 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                                     !multiplePendingFeePayListItemIds.contains("0")) {
                                 sendFeeData(multiplePendingFeePayListItemIds, "AXIS", feeTypeId, IP);
                             } else {
+                                rbtnPayWithAxis.setChecked(false);
                                 Toast.makeText(PayFeeActivity.this, "Please Select Fee", Toast.LENGTH_SHORT).show();
                             }
                         } else {
@@ -202,6 +208,8 @@ public class PayFeeActivity extends AppCompatActivity implements View.OnClickLis
                                 sendFeeDataTerm(multiplePendingFeePayListItemIds, "AXIS", feeTypeId, IP);
                             }
                         }
+                    }else {
+                        rbtnPayWithAxis.setChecked(false);
                     }
 
                 }

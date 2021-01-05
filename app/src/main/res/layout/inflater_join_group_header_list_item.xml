@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/profile_personal_details_shape"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
             android:id="@+id/tvJoinGroupNameHeader"
@@ -20,8 +20,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left"
-            android:padding="8dp"
             android:maxLines="1"
+            android:padding="8dp"
             android:text="-"
             android:textAllCaps="false"
             android:textColor="@color/white" />
