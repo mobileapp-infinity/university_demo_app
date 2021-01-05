@@ -20,7 +20,7 @@
             android:id="@+id/elvJoinGroup"
             android:layout_width="match_parent"
             android:visibility="visible"
-            android:groupIndicator="@color/common_bg_color"
+            android:groupIndicator="@null"
             android:divider="@color/common_bg_color"
             android:childDivider="@color/common_bg_color"
             android:dividerHeight="10dp"

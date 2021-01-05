@@ -228,68 +228,68 @@
                 android:childDivider="@color/common_bg_color"
                 android:divider="@color/common_bg_color"
                 android:dividerHeight="10dp"
-                android:groupIndicator="@drawable/group_indicator"
+                android:groupIndicator="@null"
                 android:scrollbars="none"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
         </LinearLayout>
 
-<!--        <FrameLayout-->
-<!--            -->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:background="@color/common_bg_color"-->
-<!--            android:orientation="vertical"-->
-<!--            android:visibility="visible">-->
+        <!--        <FrameLayout-->
+        <!--            -->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:background="@color/common_bg_color"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:visibility="visible">-->
 
-<!--            <ExpandableListView-->
-<!--                android:id="@+id/elvGroupWiseSubjectDetails"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:childDivider="@color/common_bg_color"-->
-<!--                android:divider="@color/common_bg_color"-->
-<!--                android:dividerHeight="10dp"-->
-<!--                android:groupIndicator="@color/common_bg_color"-->
-<!--                android:scrollbars="none"-->
-<!--                android:visibility="visible" />-->
+        <!--            <ExpandableListView-->
+        <!--                android:id="@+id/elvGroupWiseSubjectDetails"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:childDivider="@color/common_bg_color"-->
+        <!--                android:divider="@color/common_bg_color"-->
+        <!--                android:dividerHeight="10dp"-->
+        <!--                android:groupIndicator="@color/common_bg_color"-->
+        <!--                android:scrollbars="none"-->
+        <!--                android:visibility="visible" />-->
 
 
-<!--            &lt;!&ndash;            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:id="@+id/efabApplyFilterEnrollToGroup"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:layout_height="40dp"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:layout_gravity="bottom|center_horizontal"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:layout_marginRight="4dp"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:layout_marginBottom="22dp"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:backgroundTint="@color/colorPrimary"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:drawableRight="@drawable/ic_filter"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:drawableTint="@color/white"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:fontFamily="@font/ubuntu_r"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:paddingLeft="6dp"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:paddingRight="6dp"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:text="Apply Filter"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:visibility="gone" />&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:id="@+id/efabApplyFilterEnrollToGroup"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_height="40dp"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_gravity="bottom|center_horizontal"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_marginRight="4dp"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_marginBottom="22dp"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:backgroundTint="@color/colorPrimary"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:drawableRight="@drawable/ic_filter"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:drawableTint="@color/white"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:fontFamily="@font/ubuntu_r"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:paddingLeft="6dp"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:paddingRight="6dp"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:text="Apply Filter"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:visibility="gone" />&ndash;&gt;-->
 
-<!--            &lt;!&ndash;            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:id="@+id/efabClearFilterEnrollToGroup"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:layout_height="40dp"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:layout_gravity="bottom|center_horizontal"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:layout_marginBottom="22dp"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:backgroundTint="@android:color/holo_red_dark"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:drawableRight="@drawable/ic_close"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:drawableTint="@color/white"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:fontFamily="@font/ubuntu_r"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:paddingLeft="6dp"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:paddingRight="6dp"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:text="Clear Filter"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
-<!--            &lt;!&ndash;                android:visibility="gone" />&ndash;&gt;-->
+        <!--            &lt;!&ndash;            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:id="@+id/efabClearFilterEnrollToGroup"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_height="40dp"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_gravity="bottom|center_horizontal"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_marginBottom="22dp"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:backgroundTint="@android:color/holo_red_dark"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:drawableRight="@drawable/ic_close"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:drawableTint="@color/white"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:fontFamily="@font/ubuntu_r"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:paddingLeft="6dp"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:paddingRight="6dp"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:text="Clear Filter"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:visibility="gone" />&ndash;&gt;-->
 
-<!--        </FrameLayout>-->
+        <!--        </FrameLayout>-->
 
     </LinearLayout>
 
