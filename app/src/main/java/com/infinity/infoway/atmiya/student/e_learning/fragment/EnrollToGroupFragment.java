@@ -7,9 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,19 +21,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.Api;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
-import com.infinity.infoway.atmiya.custom_class.Animations;
 import com.infinity.infoway.atmiya.custom_class.SpinnerSimpleAdapter;
-import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.e_learning.activity.ELearningActivity;
 import com.infinity.infoway.atmiya.student.e_learning.adapter.GroupWiseSubjectDetailsAdapter;
@@ -80,15 +75,20 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
     Calendar myCalendarFromDate = Calendar.getInstance();
     Calendar myCalendarToDate = Calendar.getInstance();
     AlertDialog applyFilterDialog;
-    ExtendedFloatingActionButton efabApplyFilterEnrollToGroup, efabClearFilterEnrollToGroup;
+    //    ExtendedFloatingActionButton efabApplyFilterEnrollToGroup, efabClearFilterEnrollToGroup;
     //    FrameLayout flStudentExaminationSchedule;
     LinearLayout llSubjectName;
     ArrayList<String> subjectNameArrayList;
     HashMap<String, String> subjectNameAndIdHashMap;
 
-    String FROM_DATE = "";
-    String TO_DATE = "";
+    //    String FROM_DATE = "";
+//    String TO_DATE = "";
     String SUBJECT_ID = "0";
+    AppCompatEditText edtFromDateEnrollToGroup;
+    AppCompatEditText edtToDateEnrollToGroup;
+    AppCompatImageView imgClearFromToDateFilter;
+    AppCompatImageView imgClearSubjectFilter;
+    LinearLayout llFromDateToDateFilterOption;
 
     public EnrollToGroupFragment() {
         // Required empty public constructor
@@ -131,12 +131,22 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
         llEnrollToGroup = view.findViewById(R.id.llEnrollToGroup);
         llEnrollToGroupProgressbar = view.findViewById(R.id.llEnrollToGroupProgressbar);
         llNoDataFoundEnrollToGroup = view.findViewById(R.id.llNoDataFoundEnrollToGroup);
-        efabApplyFilterEnrollToGroup = view.findViewById(R.id.efabApplyFilterEnrollToGroup);
-        efabApplyFilterEnrollToGroup.setOnClickListener(this);
-        efabClearFilterEnrollToGroup = view.findViewById(R.id.efabClearFilterEnrollToGroup);
-        efabClearFilterEnrollToGroup.setOnClickListener(this);
+//        efabApplyFilterEnrollToGroup = view.findViewById(R.id.efabApplyFilterEnrollToGroup);
+//        efabApplyFilterEnrollToGroup.setOnClickListener(this);
+//        efabClearFilterEnrollToGroup = view.findViewById(R.id.efabClearFilterEnrollToGroup);
+//        efabClearFilterEnrollToGroup.setOnClickListener(this);
 //        flStudentExaminationSchedule = view.findViewById(R.id.flStudentExaminationSchedule);
         llSubjectName = view.findViewById(R.id.llSubjectName);
+
+        edtFromDateEnrollToGroup = view.findViewById(R.id.edtFromDateEnrollToGroup);
+        edtFromDateEnrollToGroup.setOnClickListener(this);
+        edtToDateEnrollToGroup = view.findViewById(R.id.edtToDateEnrollToGroup);
+        edtToDateEnrollToGroup.setOnClickListener(this);
+        imgClearFromToDateFilter = view.findViewById(R.id.imgClearFromToDateFilter);
+        imgClearFromToDateFilter.setOnClickListener(this);
+        imgClearSubjectFilter = view.findViewById(R.id.imgClearSubjectFilter);
+        imgClearSubjectFilter.setOnClickListener(this);
+        llFromDateToDateFilterOption = view.findViewById(R.id.llFromDateToDateFilterOption);
 
         spYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -148,7 +158,10 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                         if (subjectNameArrayList != null &&
                                 subjectNameArrayList.size() > 1 && spSubjectName.getSelectedItemPosition() > 0) {
                             SUBJECT_ID = subjectNameAndIdHashMap.get(subjectNameArrayList.get(spSubjectName.getSelectedItemPosition()));
-                            getEnrollToGroupExpandedListApiCall(true, true, selectedGroupId, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+                            String fromDate = edtFromDateEnrollToGroup.getText().toString().trim() == null ? "" : edtFromDateEnrollToGroup.getText().toString().trim();
+                            String toDate = edtToDateEnrollToGroup.getText().toString().trim() == null ? "" : edtToDateEnrollToGroup.getText().toString().trim();
+
+                            getEnrollToGroupExpandedListApiCall(true, true, selectedGroupId, selectedYearId, fromDate, toDate, SUBJECT_ID);
                         } else {
                             SUBJECT_ID = "0";
                             checkIsELearningGrpIsCompulsoryOrNot(selectedYearId, selectedGroupId);
@@ -189,7 +202,9 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                             spGroupName.getSelectedItemPosition() > 0) {
                         String selectedYearId = yearNameAndIdHashMap.get(yearArrayList.get(spYear.getSelectedItemPosition())) + "";
                         String selectedGroupId = groupNameAndIdHashMap.get(eLearningGroupList.get(spGroupName.getSelectedItemPosition())) + "";
-                        getEnrollToGroupExpandedListApiCall(true, true, selectedGroupId, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+                        String fromDate = edtFromDateEnrollToGroup.getText().toString().trim() == null ? "" : edtFromDateEnrollToGroup.getText().toString().trim();
+                        String toDate = edtToDateEnrollToGroup.getText().toString().trim() == null ? "" : edtToDateEnrollToGroup.getText().toString().trim();
+                        getEnrollToGroupExpandedListApiCall(true, true, selectedGroupId, selectedYearId, fromDate, toDate, SUBJECT_ID);
                     }
                 } else {
                     SUBJECT_ID = "0";
@@ -216,28 +231,83 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
         return validate;
     }
 
+    private boolean isValidWithoutToast() {
+        boolean validate = true;
+        if (spYear.getSelectedItemPosition() == 0) {
+//            Toast.makeText(eLearningActivity, "Please select year", Toast.LENGTH_SHORT).show();
+            validate = false;
+        } else if (spGroupName.getSelectedItemPosition() == 0) {
+//            Toast.makeText(eLearningActivity, "Please select group", Toast.LENGTH_SHORT).show();
+            validate = false;
+        }
+        return validate;
+    }
+
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.efabApplyFilterEnrollToGroup) {
-            if (isValid()) {
-                showApplyFilterDialog();
-            }
-        } else if (view.getId() == R.id.efabClearFilterEnrollToGroup) {
-            if (isValid()) {
-                if (subjectNameArrayList != null && subjectNameArrayList.size() > 2) {
-                    SUBJECT_ID = "0";
-                    spSubjectName.setSelection(0);
-                }
-                FROM_DATE = "";
-                TO_DATE = "";
-                efabClearFilterEnrollToGroup.setVisibility(View.GONE);
-                efabApplyFilterEnrollToGroup.setVisibility(View.VISIBLE);
+//        if (view.getId() == R.id.efabApplyFilterEnrollToGroup) {
+//            if (isValid()) {
+//                showApplyFilterDialog();
+//            }
+//        } else if (view.getId() == R.id.efabClearFilterEnrollToGroup) {
+//            if (isValid()) {
+//                if (subjectNameArrayList != null && subjectNameArrayList.size() > 2) {
+//                    SUBJECT_ID = "0";
+//                    spSubjectName.setSelection(0);
+//                }
+//                FROM_DATE = "";
+//                TO_DATE = "";
+//                efabClearFilterEnrollToGroup.setVisibility(View.GONE);
+//                efabApplyFilterEnrollToGroup.setVisibility(View.VISIBLE);
+//                String grpId = groupNameAndIdHashMap.get(eLearningGroupList.get(spGroupName.getSelectedItemPosition()));
+//                String selectedYearId = yearNameAndIdHashMap.get(yearArrayList.get(spYear.getSelectedItemPosition()));
+//                getEnrollToGroupExpandedListApiCall(true, true, grpId, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+//            }
+//        }
+//        else
+        if (view.getId() == R.id.edtFromDateEnrollToGroup) {
+            showFromDateDialog(edtFromDateEnrollToGroup);
+        } else if (view.getId() == R.id.edtToDateEnrollToGroup) {
+            showToDateDialog(edtToDateEnrollToGroup);
+        } else if (view.getId() == R.id.imgClearFromToDateFilter) {
+//            FROM_DATE = "";
+//            TO_DATE = "";
+            if (isValidWithoutToast()) {
+                clearFromToDateFilter();
                 String grpId = groupNameAndIdHashMap.get(eLearningGroupList.get(spGroupName.getSelectedItemPosition()));
                 String selectedYearId = yearNameAndIdHashMap.get(yearArrayList.get(spYear.getSelectedItemPosition()));
-                getEnrollToGroupExpandedListApiCall(true, true, grpId, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+                getEnrollToGroupExpandedListApiCall(true, true, grpId, selectedYearId, "", "", SUBJECT_ID);
+            } else {
+                clearFromToDateFilter();
+            }
+        } else if (view.getId() == R.id.imgClearSubjectFilter) {
+            if (isValidWithoutToast()) {
+                clearSubjectFilter();
+                String grpId = groupNameAndIdHashMap.get(eLearningGroupList.get(spGroupName.getSelectedItemPosition()));
+                String selectedYearId = yearNameAndIdHashMap.get(yearArrayList.get(spYear.getSelectedItemPosition()));
+                String fromDate = edtFromDateEnrollToGroup.getText().toString().trim() == null ? "" : edtFromDateEnrollToGroup.getText().toString().trim();
+                String toDate = edtToDateEnrollToGroup.getText().toString().trim() == null ? "" : edtToDateEnrollToGroup.getText().toString().trim();
+                getEnrollToGroupExpandedListApiCall(true, true, grpId, selectedYearId, fromDate, toDate, SUBJECT_ID);
+            } else {
+                clearSubjectFilter();
             }
         }
     }
+
+    private void clearSubjectFilter() {
+        if (subjectNameArrayList != null && subjectNameArrayList.size() > 2) {
+            SUBJECT_ID = "0";
+            spSubjectName.setSelection(0);
+        }
+    }
+
+    private void clearFromToDateFilter() {
+        edtFromDateEnrollToGroup.setText("");
+        edtFromDateEnrollToGroup.setHint("From Date(dd/MM/yyyy)");
+        edtToDateEnrollToGroup.setText("");
+        edtToDateEnrollToGroup.setHint("To Date(dd/MM/yyyy)");
+    }
+
 
     private void getYearListApiCall() {
         if (connectionDetector.isConnectingToInternet()) {
@@ -350,23 +420,25 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                 public void onResponse(Call<ArrayList<CheckIsELearningManagementGroupIsCompulsoryOrNot>> call, Response<ArrayList<CheckIsELearningManagementGroupIsCompulsoryOrNot>> response) {
                     try {
 //                        DialogUtil.hideProgressDialog();
+                        String fromDate = edtFromDateEnrollToGroup.getText().toString().trim() == null ? "" : edtFromDateEnrollToGroup.getText().toString().trim();
+                        String toDate = edtToDateEnrollToGroup.getText().toString().trim() == null ? "" : edtToDateEnrollToGroup.getText().toString().trim();
                         if (response.isSuccessful() && response.body() != null &&
                                 response.body().size() > 0) {
                             if (response.body().get(0).getGrpType() == 1) {
                                 llSubjectName.setVisibility(View.GONE);
                                 SUBJECT_ID = "0";
-                                getEnrollToGroupExpandedListApiCall(false, true, grpId, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+                                getEnrollToGroupExpandedListApiCall(false, true, grpId, selectedYearId, fromDate, toDate, SUBJECT_ID);
                             } else if (response.body().get(0).getGrpType() == 2) {
                                 getGroupWiseSubjectListApiCall(false, false, selectedYearId, grpId);
                             } else {
                                 SUBJECT_ID = "0";
                                 llSubjectName.setVisibility(View.GONE);
-                                getEnrollToGroupExpandedListApiCall(false, true, grpId, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+                                getEnrollToGroupExpandedListApiCall(false, true, grpId, selectedYearId, fromDate, toDate, SUBJECT_ID);
                             }
                         } else {
                             SUBJECT_ID = "0";
                             DialogUtil.hideProgressDialog();
-                            getEnrollToGroupExpandedListApiCall(false, true, grpId, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+                            getEnrollToGroupExpandedListApiCall(false, true, grpId, selectedYearId, fromDate, toDate, SUBJECT_ID);
                         }
                     } catch (Exception ex) {
                         DialogUtil.hideProgressDialog();
@@ -399,6 +471,8 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                                 DialogUtil.hideProgressDialog();
                             }
                             SUBJECT_ID = "0";
+                            String fromDate = edtFromDateEnrollToGroup.getText().toString().trim() == null ? "" : edtFromDateEnrollToGroup.getText().toString().trim();
+                            String toDate = edtToDateEnrollToGroup.getText().toString().trim() == null ? "" : edtToDateEnrollToGroup.getText().toString().trim();
                             if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
                                 subjectNameArrayList = new ArrayList<>();
                                 subjectNameArrayList.add(SELECT_SUBJECT);
@@ -413,11 +487,11 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                                 }
                                 spinnerAdapterSubject = new SpinnerSimpleAdapter(eLearningActivity, subjectNameArrayList);
                                 spSubjectName.setAdapter(spinnerAdapterSubject);
-                                getEnrollToGroupExpandedListApiCall(false, true, grp_id, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+                                getEnrollToGroupExpandedListApiCall(false, true, grp_id, selectedYearId, fromDate, toDate, SUBJECT_ID);
 
                                 llSubjectName.setVisibility(View.VISIBLE);
                             } else {
-                                getEnrollToGroupExpandedListApiCall(false, true, grp_id, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+                                getEnrollToGroupExpandedListApiCall(false, true, grp_id, selectedYearId, fromDate, toDate, SUBJECT_ID);
                                 llSubjectName.setVisibility(View.GONE);
                             }
                         }
@@ -452,6 +526,7 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                                 if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
 //                                    flStudentExaminationSchedule.setVisibility(View.VISIBLE);
                                     elvGroupWiseSubjectDetails.setVisibility(View.VISIBLE);
+                                    llFromDateToDateFilterOption.setVisibility(View.VISIBLE);
                                     LearningManagementGroupDetailsPojo learningManagementGroupDetailsPojo;
 
                                     ArrayList<String> headerNameArrayList = new ArrayList<>();
@@ -472,15 +547,16 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                                         }
                                     }
                                     elvGroupWiseSubjectDetails.setAdapter(new GroupWiseSubjectDetailsAdapter(eLearningActivity, headerNameArrayList, childListDetailsHashMap));
-                                    if (efabApplyFilterEnrollToGroup.getVisibility() != View.VISIBLE &&
-                                            efabClearFilterEnrollToGroup.getVisibility() != View.VISIBLE) {
-                                        efabApplyFilterEnrollToGroup.setVisibility(View.VISIBLE);
-//                                    rvEnrollToGroupList.setAdapter(new GroupWiseSubjectDetailsAdapter(eLearningActivity, response.body()))
-                                    }
+//                                    if (efabApplyFilterEnrollToGroup.getVisibility() != View.VISIBLE &&
+//                                            efabClearFilterEnrollToGroup.getVisibility() != View.VISIBLE) {
+//                                        efabApplyFilterEnrollToGroup.setVisibility(View.VISIBLE);
+////                                    rvEnrollToGroupList.setAdapter(new GroupWiseSubjectDetailsAdapter(eLearningActivity, response.body()))
+//                                    }
                                     ;
                                 } else {
 //                                    flStudentExaminationSchedule.setVisibility(View.GONE);
                                     elvGroupWiseSubjectDetails.setVisibility(View.GONE);
+                                    llFromDateToDateFilterOption.setVisibility(View.GONE);
 //                                    efabApplyFilterEnrollToGroup.setVisibility(View.VISIBLE);
 //                                    efabClearFilterEnrollToGroup.setVisibility(View.GONE);
                                     Toast.makeText(eLearningActivity, "No Data Found!", Toast.LENGTH_SHORT).show();
@@ -495,6 +571,7 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                             DialogUtil.hideProgressDialog();
 //                            flStudentExaminationSchedule.setVisibility(View.GONE);
                             elvGroupWiseSubjectDetails.setVisibility(View.GONE);
+                            llFromDateToDateFilterOption.setVisibility(View.GONE);
                             Toast.makeText(eLearningActivity, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -503,91 +580,91 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    private void showApplyFilterDialog() {
-        TextInputEditText tilFromDate, tilToDate;
-//        Spinner spSubjectFilter;
-        TextViewRegularFont btnCancel;
-        AppCompatButton btnApplyFilter;
-//        LinearLayout llSpSubjectList;
+//    private void showApplyFilterDialog() {
+//        TextInputEditText tilFromDate, tilToDate;
+////        Spinner spSubjectFilter;
+//        TextViewRegularFont btnCancel;
+//        AppCompatButton btnApplyFilter;
+////        LinearLayout llSpSubjectList;
+//
+//        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(eLearningActivity);
+//        dialogBuilder.setCancelable(false);
+//
+//        LayoutInflater layoutInflater = LayoutInflater.from(eLearningActivity);
+//        View dialogView = layoutInflater.inflate(R.layout.layout_for_enroll_togroup_filter_opetion, null);
+//
+//        tilFromDate = dialogView.findViewById(R.id.tilFromDate);
+//        tilToDate = dialogView.findViewById(R.id.tilToDate);
+////        spSubjectFilter = dialogView.findViewById(R.id.spSubjectFilter);
+//        btnCancel = dialogView.findViewById(R.id.btnCancel);
+//        btnApplyFilter = dialogView.findViewById(R.id.btnApplyFilter);
+////        llSpSubjectList = dialogView.findViewById(R.id.llSpSubjectList);
+//
+//        tilFromDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showFromDateDialog(tilFromDate);
+//            }
+//        });
+//
+//        tilToDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showToDateDialog(tilToDate);
+//            }
+//        });
+//
+//        btnCancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                applyFilterDialog.dismiss();
+//            }
+//        });
+//
+//
+//        btnApplyFilter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (validateFromDateAndToDate(tilFromDate, tilToDate)) {
+//                    if (!CommonUtil.checkIsEmptyOrNullCommon(tilFromDate.getText().toString())) {
+//                        applyFilterDialog.dismiss();
+//                        efabApplyFilterEnrollToGroup.setVisibility(View.GONE);
+//                        efabClearFilterEnrollToGroup.setVisibility(View.VISIBLE);
+//                        String selectedYearId = yearNameAndIdHashMap.get(yearArrayList.get(spYear.getSelectedItemPosition())) + "";
+//                        String groupId = groupNameAndIdHashMap.get(eLearningGroupList.get(spGroupName.getSelectedItemPosition())) + "";
+//
+//                        if (subjectNameArrayList != null &&
+//                                subjectNameArrayList.size() > 1 && spSubjectName.getSelectedItemPosition() > 0) {
+//                            SUBJECT_ID = subjectNameAndIdHashMap.get(subjectNameArrayList.get(spSubjectName.getSelectedItemPosition()));
+//                        }
+//
+//                        getEnrollToGroupExpandedListApiCall(true, true, groupId, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
+//                    }
+//                }
+//            }
+//        });
+//
+//        dialogBuilder.setView(dialogView);
+//        applyFilterDialog = dialogBuilder.create();
+//        if (!applyFilterDialog.isShowing()) {
+//            applyFilterDialog.show();
+//        }
+//    }
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(eLearningActivity);
-        dialogBuilder.setCancelable(false);
-
-        LayoutInflater layoutInflater = LayoutInflater.from(eLearningActivity);
-        View dialogView = layoutInflater.inflate(R.layout.layout_for_enroll_togroup_filter_opetion, null);
-
-        tilFromDate = dialogView.findViewById(R.id.tilFromDate);
-        tilToDate = dialogView.findViewById(R.id.tilToDate);
-//        spSubjectFilter = dialogView.findViewById(R.id.spSubjectFilter);
-        btnCancel = dialogView.findViewById(R.id.btnCancel);
-        btnApplyFilter = dialogView.findViewById(R.id.btnApplyFilter);
-//        llSpSubjectList = dialogView.findViewById(R.id.llSpSubjectList);
-
-        tilFromDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showFromDateDialog(tilFromDate);
-            }
-        });
-
-        tilToDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showToDateDialog(tilToDate);
-            }
-        });
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                applyFilterDialog.dismiss();
-            }
-        });
-
-
-        btnApplyFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isValidFilterDialog(tilFromDate, tilToDate)) {
-                    if (!CommonUtil.checkIsEmptyOrNullCommon(tilFromDate.getText().toString())) {
-                        applyFilterDialog.dismiss();
-                        efabApplyFilterEnrollToGroup.setVisibility(View.GONE);
-                        efabClearFilterEnrollToGroup.setVisibility(View.VISIBLE);
-                        String selectedYearId = yearNameAndIdHashMap.get(yearArrayList.get(spYear.getSelectedItemPosition())) + "";
-                        String groupId = groupNameAndIdHashMap.get(eLearningGroupList.get(spGroupName.getSelectedItemPosition())) + "";
-
-                        if (subjectNameArrayList != null &&
-                                subjectNameArrayList.size() > 1 && spSubjectName.getSelectedItemPosition() > 0) {
-                            SUBJECT_ID = subjectNameAndIdHashMap.get(subjectNameArrayList.get(spSubjectName.getSelectedItemPosition()));
-                        }
-
-                        getEnrollToGroupExpandedListApiCall(true, true, groupId, selectedYearId, FROM_DATE, TO_DATE, SUBJECT_ID);
-                    }
-                }
-            }
-        });
-
-        dialogBuilder.setView(dialogView);
-        applyFilterDialog = dialogBuilder.create();
-        if (!applyFilterDialog.isShowing()) {
-            applyFilterDialog.show();
-        }
-    }
-
-    private boolean isValidFilterDialog(TextInputEditText edtFromDate,
-                                        TextInputEditText edtToDate) {
+    private boolean validateFromDateAndToDate(String edtFromDate,
+                                              String edtToDate) {
         boolean isValid = true;
 //        boolean isDateEntered = !CommonUtil.checkIsEmptyOrNullCommon(edtFromDate.getText().toString()) ||
 //                !CommonUtil.checkIsEmptyOrNullCommon(edtToDate.getText().toString());
 
-        if (CommonUtil.checkIsEmptyOrNullCommon(edtFromDate.getText().toString())) {
+        if (CommonUtil.checkIsEmptyOrNullCommon(edtFromDate)) {
             Toast.makeText(eLearningActivity, "Please select from date.", Toast.LENGTH_SHORT).show();
             isValid = false;
-        } else if (CommonUtil.checkIsEmptyOrNullCommon(edtToDate.getText().toString())) {
+        } else if (CommonUtil.checkIsEmptyOrNullCommon(edtToDate)) {
             Toast.makeText(eLearningActivity, "Please select to date.", Toast.LENGTH_SHORT).show();
             isValid = false;
-        } else if (!CommonUtil.checkIsFromDateGraterThanToDate(edtFromDate.getText().toString(),
-                edtToDate.getText().toString(), "dd/MM/yyyy")) {
+        } else if (!CommonUtil.checkIsFromDateGraterThanToDate(edtFromDate,
+                edtToDate, "dd/MM/yyyy")) {
             Toast.makeText(eLearningActivity, "From date can not be greater than to date.", Toast.LENGTH_SHORT).show();
             isValid = false;
         } else {
@@ -597,7 +674,7 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
         return isValid;
     }
 
-    private void showFromDateDialog(TextInputEditText tilFromDate) {
+    private void showFromDateDialog(AppCompatEditText edtFromDate) {
         DatePickerDialog datePickerDialogFromDate = new DatePickerDialog(eLearningActivity,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -617,14 +694,16 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                             e.printStackTrace();
                         }
 
-                        tilFromDate.setText(simpleDateFormat.format(fromDate));
-                        FROM_DATE = tilFromDate.getText().toString().trim();
+                        String selectedFromDate = simpleDateFormat.format(fromDate);
+                        String selectedToDate = edtToDateEnrollToGroup.getText().toString().trim();
+                        edtFromDate.setText(selectedFromDate);
+                        getOnlyFilteredDateList(selectedFromDate, selectedToDate);
                     }
                 }, myCalendarFromDate.get(Calendar.YEAR), myCalendarFromDate.get(Calendar.MONTH), myCalendarFromDate.get(Calendar.DAY_OF_MONTH));
         datePickerDialogFromDate.show();
     }
 
-    private void showToDateDialog(TextInputEditText tilToDate) {
+    private void showToDateDialog(AppCompatEditText edtToDate) {
         DatePickerDialog datePickerDialogToDate = new DatePickerDialog(eLearningActivity,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -643,11 +722,32 @@ public class EnrollToGroupFragment extends Fragment implements View.OnClickListe
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        tilToDate.setText(simpleDateFormat.format(toDate));
-                        TO_DATE = tilToDate.getText().toString().trim();
+
+                        String selectedFromDate = edtFromDateEnrollToGroup.getText().toString();
+                        String selectedToDate = simpleDateFormat.format(toDate);
+                        edtToDate.setText(selectedToDate);
+                        getOnlyFilteredDateList(selectedFromDate, selectedToDate);
                     }
                 }, myCalendarToDate.get(Calendar.YEAR), myCalendarToDate.get(Calendar.MONTH), myCalendarToDate.get(Calendar.DAY_OF_MONTH));
         datePickerDialogToDate.show();
     }
+
+
+    private void getOnlyFilteredDateList(String selectedFromDate, String selectedToDate) {
+        if (validateFromDateAndToDate(selectedFromDate, selectedToDate)) {
+            if (subjectNameArrayList != null &&
+                    subjectNameArrayList.size() > 1 && spSubjectName.getSelectedItemPosition() > 0) {
+                SUBJECT_ID = subjectNameAndIdHashMap.get(subjectNameArrayList.get(spSubjectName.getSelectedItemPosition()));
+            } else {
+                SUBJECT_ID = "0";
+            }
+            if (isValidWithoutToast()) {
+                String selectedYearId = yearNameAndIdHashMap.get(yearArrayList.get(spYear.getSelectedItemPosition())) + "";
+                String groupId = groupNameAndIdHashMap.get(eLearningGroupList.get(spGroupName.getSelectedItemPosition())) + "";
+                getEnrollToGroupExpandedListApiCall(true, true, groupId, selectedYearId, selectedFromDate, selectedToDate, SUBJECT_ID);
+            }
+        }
+    }
+
 
 }

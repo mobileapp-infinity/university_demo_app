@@ -39,7 +39,7 @@
                     android:id="@+id/tvGroupWiseSubjectName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gujrati"
+                    android:text="-"
                     android:textColor="@color/color_white"
                     android:textSize="12sp" />
 

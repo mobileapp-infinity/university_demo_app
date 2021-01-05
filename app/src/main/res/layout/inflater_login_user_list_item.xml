@@ -57,7 +57,8 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
                 android:text="-"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

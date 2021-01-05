@@ -83,7 +83,9 @@ public class GroupWiseSubjectDetailsAdapter extends BaseExpandableListAdapter {
         TextViewRegularFont tvGroupNameGroupWiseSubjectList = view.findViewById(R.id.tvGroupNameGroupWiseSubjectList);
         AppCompatImageView ivViewMoreGroupWiseSubjectList = view.findViewById(R.id.ivViewMoreGroupWiseSubjectList);
         LinearLayout llExpandedGroupWiseSubjectList = view.findViewById(R.id.llExpandedGroupWiseSubjectList);
+        TextViewRegularFont tvPostCount = view.findViewById(R.id.tvPostCount);
 
+        tvPostCount.setText("Post : " + childListDetailsHashMap.get(headerName).size());
 
         tvGroupNameGroupWiseSubjectList.setText(headerName);
 
