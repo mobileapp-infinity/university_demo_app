@@ -1,120 +1,114 @@
 package com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class FacultyAnnouncementPojo {
 
-    @SerializedName("srno")
-    @Expose
-    private Integer srno;
-    @SerializedName("notif_head")
-    @Expose
-    private String notifHead;
-    @SerializedName("notif_msg")
-    @Expose
-    private String notifMsg;
-    @SerializedName("notif_date")
-    @Expose
-    private String notifDate;
-    @SerializedName("notif_file_path")
-    @Expose
-    private String notifFilePath;
-    @SerializedName("notif_file")
-    @Expose
-    private String notifFile;
-    @SerializedName("app_file_path")
-    @Expose
-    private String appFilePath;
-    @SerializedName("created_by")
-    @Expose
-    private String createdBy;
-    @SerializedName("announced_by")
-    @Expose
-    private String announcedBy;
-    @SerializedName("notif_no")
-    @Expose
-    private Integer notifNo;
+    private List<FacultyAnnouncementPojo.Data> Table;
 
-    public Integer getSrno() {
-        return srno;
+    public List<FacultyAnnouncementPojo.Data> getTable() {
+        return Table;
     }
 
-    public void setSrno(Integer srno) {
-        this.srno = srno;
+    public void setTable(List<FacultyAnnouncementPojo.Data> Table) {
+        this.Table = Table;
     }
 
-    public String getNotifHead() {
-        return notifHead;
-    }
+    public class Data {
+        /**
+         * nt_srno : 1
+         * nt_id : 2
+         * nt_date : 20/06/2020
+         * nt_for : Staff
+         * nt_head : Learning Management For Employee
+         * nt_desc : New Testing Notification added.
+         * nt_file_path :
+         * nt_file :
+         * nt_is_notif : 1
+         */
 
-    public void setNotifHead(String notifHead) {
-        this.notifHead = notifHead;
-    }
+        private int nt_srno;
+        private int nt_id;
+        private String nt_date;
+        private String nt_for;
+        private String nt_head;
+        private String nt_desc;
+        private String nt_file_path;
+        private String nt_file;
+        private int nt_is_notif;
 
-    public String getNotifMsg() {
-        return notifMsg;
-    }
+        public int getNt_srno() {
+            return nt_srno;
+        }
 
-    public void setNotifMsg(String notifMsg) {
-        this.notifMsg = notifMsg;
-    }
+        public void setNt_srno(int nt_srno) {
+            this.nt_srno = nt_srno;
+        }
 
-    public String getNotifDate() {
-        return notifDate;
-    }
+        public int getNt_id() {
+            return nt_id;
+        }
 
-    public void setNotifDate(String notifDate) {
-        this.notifDate = notifDate;
-    }
+        public void setNt_id(int nt_id) {
+            this.nt_id = nt_id;
+        }
 
-    public String getNotifFilePath() {
-        return notifFilePath;
-    }
+        public String getNt_date() {
+            return nt_date;
+        }
 
-    public void setNotifFilePath(String notifFilePath) {
-        this.notifFilePath = notifFilePath;
-    }
+        public void setNt_date(String nt_date) {
+            this.nt_date = nt_date;
+        }
 
-    public String getNotifFile() {
-        return notifFile;
-    }
+        public String getNt_for() {
+            return nt_for;
+        }
 
-    public void setNotifFile(String notifFile) {
-        this.notifFile = notifFile;
-    }
+        public void setNt_for(String nt_for) {
+            this.nt_for = nt_for;
+        }
 
-    public String getAppFilePath() {
-        return appFilePath;
-    }
+        public String getNt_head() {
+            return nt_head;
+        }
 
-    public void setAppFilePath(String appFilePath) {
-        this.appFilePath = appFilePath;
-    }
+        public void setNt_head(String nt_head) {
+            this.nt_head = nt_head;
+        }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
+        public String getNt_desc() {
+            return nt_desc;
+        }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
+        public void setNt_desc(String nt_desc) {
+            this.nt_desc = nt_desc;
+        }
 
-    public String getAnnouncedBy() {
-        return announcedBy;
-    }
+        public String getNt_file_path() {
+            return nt_file_path;
+        }
 
-    public void setAnnouncedBy(String announcedBy) {
-        this.announcedBy = announcedBy;
-    }
+        public void setNt_file_path(String nt_file_path) {
+            this.nt_file_path = nt_file_path;
+        }
 
-    public Integer getNotifNo() {
-        return notifNo;
-    }
+        public String getNt_file() {
+            return nt_file;
+        }
 
-    public void setNotifNo(Integer notifNo) {
-        this.notifNo = notifNo;
-    }
+        public void setNt_file(String nt_file) {
+            this.nt_file = nt_file;
+        }
 
+        public int getNt_is_notif() {
+            return nt_is_notif;
+        }
+
+        public void setNt_is_notif(int nt_is_notif) {
+            this.nt_is_notif = nt_is_notif;
+        }
+    }
 
 }

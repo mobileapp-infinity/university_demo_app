@@ -13,8 +13,11 @@ import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.faculty.faculty_announcement.FacultyAnnouncementActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.FacultyAnnouncementPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
+import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.IntentConstants;
 
 import java.util.ArrayList;
 
@@ -22,11 +25,11 @@ public class FacultyAnnouncementAdapter extends RecyclerView.Adapter<FacultyAnno
 
     Context context;
     LayoutInflater layoutInflater;
-    ArrayList<FacultyAnnouncementPojo> facultyAnnouncementPojoArrayList;
+    ArrayList<StudentNewsOrNotificationsPojo.Data> studentNewsOrNotificationList;
 
-    public FacultyAnnouncementAdapter(Context context, ArrayList<FacultyAnnouncementPojo> facultyAnnouncementPojoArrayList) {
+    public FacultyAnnouncementAdapter(Context context, ArrayList<StudentNewsOrNotificationsPojo.Data> studentNewsOrNotificationList) {
         this.context = context;
-        this.facultyAnnouncementPojoArrayList = facultyAnnouncementPojoArrayList;
+        this.studentNewsOrNotificationList = studentNewsOrNotificationList;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -40,17 +43,17 @@ public class FacultyAnnouncementAdapter extends RecyclerView.Adapter<FacultyAnno
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        FacultyAnnouncementPojo facultyAnnouncementPojo = facultyAnnouncementPojoArrayList.get(position);
+        StudentNewsOrNotificationsPojo.Data data = studentNewsOrNotificationList.get(position);
 
-        if (facultyAnnouncementPojo.getNotifHead() != null && !facultyAnnouncementPojo.getNotifHead().isEmpty()) {
-            holder.tvNotificationHeadFacultySide.setText(facultyAnnouncementPojo.getNotifHead());
+        if (data.getNt_head() != null && !data.getNt_head().isEmpty()) {
+            holder.tvNotificationHeadFacultySide.setText(data.getNt_head());
         }
 
-        if (facultyAnnouncementPojo.getNotifDate() != null && !facultyAnnouncementPojo.getNotifDate().isEmpty()) {
+        if (data.getNt_date() != null && !data.getNt_date().isEmpty()) {
             String date = "";
             try {
-                if (facultyAnnouncementPojo.getNotifDate().contains("/")) {
-                    String dateArray[] = facultyAnnouncementPojo.getNotifDate().split("/");
+                if (data.getNt_date().contains("/")) {
+                    String dateArray[] = data.getNt_date().split("/");
                     date = dateArray[0] + " " + CommonUtil.getMonthSortNameFromNumber(Integer.parseInt(dateArray[1])) + "," + "\n" + dateArray[2];
                 }
                 holder.tvNotificationDateFacultySide.setText(date);
@@ -59,15 +62,15 @@ public class FacultyAnnouncementAdapter extends RecyclerView.Adapter<FacultyAnno
             }
         }
 
-        if (facultyAnnouncementPojo.getNotifMsg() != null && !facultyAnnouncementPojo.getNotifMsg().isEmpty()) {
-            holder.tvnotificationDescriptionFacultySide.setText(facultyAnnouncementPojo.getNotifMsg());
+        if (data.getNt_desc() != null && !data.getNt_desc().isEmpty()) {
+            holder.tvnotificationDescriptionFacultySide.setText(data.getNt_desc());
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, FacultyAnnouncementActivity.class);
-                context.startActivity(intent);
+                Intent intent = new Intent(context, ViewAllNewsOrNotificationActivity.class);
+                ((StudentDashboardActivity)context).startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION_FACULTY_SIDE);
             }
         });
 
@@ -76,7 +79,7 @@ public class FacultyAnnouncementAdapter extends RecyclerView.Adapter<FacultyAnno
 
     @Override
     public int getItemCount() {
-        return facultyAnnouncementPojoArrayList.size();
+        return studentNewsOrNotificationList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

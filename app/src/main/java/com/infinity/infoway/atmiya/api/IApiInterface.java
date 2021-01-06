@@ -448,14 +448,6 @@ public interface IApiInterface {
     Call<ArrayList<FacultyProfilePojo>> getFacultyProfileDetails(
             @Query("emp_id") String emp_id);
 
-    @GET("get_notification_new")
-    Call<ArrayList<FacultyAnnouncementPojo>> getFacultyAnnouncement(
-            @Query("institute_id") String institute_id,
-            @Query("notification_for") String notification_for,
-            @Query("notif_college_id") String notif_college_id,
-            @Query("notif_dept_id") String notif_dept_id,
-            @Query("notif_course_id") String notif_course_id,
-            @Query("notif_sem_id") String notif_sem_id);
 
     @GET("Get_Employee_Timetable_Display_with_Merge_Lecture")
     Call<ArrayList<FacultyTimeTablePojo>> getFacultyTimeTable(

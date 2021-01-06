@@ -30,6 +30,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfileActivit
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.activity.FacultyTimeTableActivity;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.adapter.NewsOrNotificationListAdapter;
@@ -279,38 +280,37 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
             Intent intent = new Intent(FacultyDashboardActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+        } else if (resultCode == RESULT_OK && requestCode == IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION_FACULTY_SIDE) {
+            getFacultyAnnouncementApiCall();
         }
     }
 
     private void getFacultyAnnouncementApiCall() {
         if (connectionDetector.isConnectingToInternet()) {
             llAnnouncementFacultyDashboard.setVisibility(View.GONE);
-            String notif_college_id = "0";
-            if (!CommonUtil.checkIsEmptyOrNullCommon(mySharedPreferences.getEmpPermanentCollege())) {
-                notif_college_id = mySharedPreferences.getEmpPermanentCollege();
-            }
-            ApiImplementer.getFacultyAnnouncementApiImplementer(mySharedPreferences.getEmpInstituteId(), "1", notif_college_id,
-                    mySharedPreferences.getEmpDepartmentId(),
-                    "0", "0", new Callback<ArrayList<FacultyAnnouncementPojo>>() {
+            ApiImplementer.getStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "",
+                    mySharedPreferences.getEmpUserStatus(), mySharedPreferences.getEmpId(), "0", "0",
+                    "0", "0", mySharedPreferences.getEmpInstituteId(),
+                    mySharedPreferences.getEmpYearId(), "8", new Callback<StudentNewsOrNotificationsPojo>() {
                         @Override
-                        public void onResponse(Call<ArrayList<FacultyAnnouncementPojo>> call, Response<ArrayList<FacultyAnnouncementPojo>> response) {
-                            if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
+                        public void onResponse(Call<StudentNewsOrNotificationsPojo> call, Response<StudentNewsOrNotificationsPojo> response) {
+                            if (response.isSuccessful() && response.body() != null &&
+                                    response.body().getTable().size() > 0) {
                                 llAnnouncementFacultyDashboard.setVisibility(View.VISIBLE);
                                 rvAnnouncementFacultySide.setLayoutManager(new LinearLayoutManager(FacultyDashboardActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                                rvAnnouncementFacultySide.setAdapter(new FacultyAnnouncementAdapter(FacultyDashboardActivity.this, response.body()));
-                            } else {
-                                llAnnouncementFacultyDashboard.setVisibility(View.GONE);
+                                rvAnnouncementFacultySide.setAdapter(new FacultyAnnouncementAdapter(FacultyDashboardActivity.this, (ArrayList<StudentNewsOrNotificationsPojo.Data>) response.body().getTable()));
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<ArrayList<FacultyAnnouncementPojo>> call, Throwable t) {
+                        public void onFailure(Call<StudentNewsOrNotificationsPojo> call, Throwable t) {
                             llAnnouncementFacultyDashboard.setVisibility(View.GONE);
                         }
                     });
         } else {
             Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 }
