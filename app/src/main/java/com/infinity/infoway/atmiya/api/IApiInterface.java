@@ -1,7 +1,9 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.FacultyAnnouncementPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
 import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
@@ -468,5 +470,19 @@ public interface IApiInterface {
     @GET("employee_profile_api")
     Call<ArrayList<FacultyProfilePojo>> getFacultyProfileDetails(
             @Query("emp_id") String emp_id);
+
+    @GET("get_notification_new")
+    Call<ArrayList<FacultyAnnouncementPojo>> getFacultyAnnouncement(
+            @Query("institute_id") String institute_id,
+            @Query("notification_for") String notification_for,
+            @Query("notif_college_id") String notif_college_id,
+            @Query("notif_dept_id") String notif_dept_id,
+            @Query("notif_course_id") String notif_course_id,
+            @Query("notif_sem_id") String notif_sem_id);
+
+    @GET("get_employee_timetable_display")
+    Call<ArrayList<FacultyTimeTablePojo>> getFacultyTimeTable(
+            @Query("emp_id") String emp_id,
+            @Query("year_id") String year_id);
 
 }

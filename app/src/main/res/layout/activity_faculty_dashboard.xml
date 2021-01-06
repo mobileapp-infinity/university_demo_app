@@ -42,6 +42,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
+                android:maxLines="1"
                 android:text=""
                 android:textColor="@color/colorPrimary" />
 
@@ -51,6 +52,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="top"
+                android:maxLines="1"
                 android:text=""
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
@@ -114,9 +116,9 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/llSyllabusStudentSide"
+                        android:id="@+id/llRemAttendanceFacultySide"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
                         android:gravity="center"
@@ -125,22 +127,23 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            app:srcCompat="@drawable/ic_syllabus" />
+                            app:srcCompat="@drawable/ic_faculty_rem_attendance" />
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="4dp"
-                            android:text="@string/syllabus"
+                            android:gravity="center"
+                            android:text="Rem.\nAttendance"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/llLeassonPlanStudentSide"
+                        android:id="@+id/llAttendanceFacultySide"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
                         android:gravity="center"
@@ -153,18 +156,19 @@
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="4dp"
-                            android:text="@string/lesson_plan"
+                            android:gravity="center"
+                            android:text="Attendance"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/llHomeWorkStudentSide"
+                        android:id="@+id/llPendingAttendanceFacultySide"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
                         android:gravity="center"
@@ -177,9 +181,10 @@
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="4dp"
-                            android:text="@string/home_work"
+                            android:gravity="center"
+                            android:text="Pending\nAttendance"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
@@ -194,9 +199,9 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/llFeeDetailsStudentSide"
+                        android:id="@+id/llLeaveFacultySide"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
                         android:gravity="center"
@@ -206,22 +211,23 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:adjustViewBounds="true"
-                            app:srcCompat="@drawable/ic_fee_details" />
+                            app:srcCompat="@drawable/ic_leave_application" />
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="4dp"
-                            android:text="@string/fee_details"
+                            android:gravity="center"
+                            android:text="Leave"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/llActivityStudentSide"
+                        android:id="@+id/llTimetableFacultySide"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
                         android:gravity="center"
@@ -230,22 +236,23 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            app:srcCompat="@drawable/ic_activity" />
+                            app:srcCompat="@drawable/ic_time_table" />
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="4dp"
-                            android:text="@string/activity"
+                            android:gravity="center"
+                            android:text="Time Table"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/llMessageHistoryStudentSide"
+                        android:id="@+id/llLecturePlanFacultySide"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
                         android:gravity="center"
@@ -258,9 +265,177 @@
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="4dp"
-                            android:text="@string/message_history"
+                            android:gravity="center"
+                            android:text="Lecture Plan"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/llNewsFacultySide"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            app:srcCompat="@drawable/ic_faculty_news" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="News"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:srcCompat="@drawable/ic_activity" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="Faculty Adviser\nRemarks"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:srcCompat="@drawable/ic_message_history" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="Student Forum\nActivity"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            app:srcCompat="@drawable/ic_faculty_lab_plan" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="Lab Plan"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:srcCompat="@drawable/ic_activity" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="Faculty Adviser\nRemarks"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:srcCompat="@drawable/ic_message_history" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="Student Forum\nActivity"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
@@ -276,7 +451,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -294,7 +469,7 @@
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnViewAllAnnouncement"
+                        android:id="@+id/btnViewAllAnnouncementFacultySide"
                         android:layout_width="wrap_content"
                         android:layout_height="34dp"
                         android:background="@drawable/btn_capsual_shape_accent"

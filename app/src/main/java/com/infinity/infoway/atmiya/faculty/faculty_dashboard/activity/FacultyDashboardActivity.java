@@ -2,26 +2,42 @@ package com.infinity.infoway.atmiya.faculty.faculty_dashboard.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiClientForStudentAndEmployeeFcmApi;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.api.Urls;
+import com.infinity.infoway.atmiya.custom_class.TextViewBoldFont;
+import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
+import com.infinity.infoway.atmiya.faculty.faculty_announcement.FacultyAnnouncementActivity;
+import com.infinity.infoway.atmiya.faculty.faculty_dashboard.adapter.FacultyAnnouncementAdapter;
+import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.FacultyAnnouncementPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfileActivity;
+import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_timetable.activity.FacultyTimeTableActivity;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
+import com.infinity.infoway.atmiya.student.student_dashboard.adapter.NewsOrNotificationListAdapter;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
+import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
@@ -43,6 +59,26 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
     private CircleImageView cImgProfileFacultySide;
     private RecyclerViewPager recyclerViewPagerFacultySideBanner;
 
+    AppCompatImageView imgNotificationBellFacultySide;
+
+    TextViewBoldFont tvFacultyName;
+    TextViewRegularFont tvFacultyDesignation;
+
+    LinearLayout llRemAttendanceFacultySide;
+    LinearLayout llAttendanceFacultySide;
+    LinearLayout llPendingAttendanceFacultySide;
+    LinearLayout llLeaveFacultySide;
+    LinearLayout llTimetableFacultySide;
+    LinearLayout llLecturePlanFacultySide;
+    LinearLayout llNewsFacultySide;
+
+    AppCompatButton btnViewAllAnnouncementFacultySide;
+    RecyclerView rvAnnouncementFacultySide;
+
+    ScrollView svFacultyDashboard;
+    LinearLayout llFacultyDashboradProgressbar;
+    LinearLayout llAnnouncementFacultyDashboard;
+
     private Boolean exit = false;
 
     @Override
@@ -51,7 +87,7 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_faculty_dashboard);
         initView();
         sendFacultyFCMTokenToServer();
-        getSliderImagesApiCall();
+        getFacultyProfileDetailsApiCall();
     }
 
 
@@ -61,6 +97,36 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
         cImgProfileFacultySide = findViewById(R.id.cImgProfileFacultySide);
         cImgProfileFacultySide.setOnClickListener(this);
         recyclerViewPagerFacultySideBanner = findViewById(R.id.recyclerViewPagerFacultySideBanner);
+
+        tvFacultyName = findViewById(R.id.tvFacultyName);
+        tvFacultyDesignation = findViewById(R.id.tvFacultyDesignation);
+
+        svFacultyDashboard = findViewById(R.id.svFacultyDashboard);
+        llFacultyDashboradProgressbar = findViewById(R.id.llFacultyDashboradProgressbar);
+        llAnnouncementFacultyDashboard = findViewById(R.id.llAnnouncementFacultyDashboard);
+
+        imgNotificationBellFacultySide = findViewById(R.id.imgNotificationBellFacultySide);
+        imgNotificationBellFacultySide.setOnClickListener(this);
+
+        llRemAttendanceFacultySide = findViewById(R.id.llRemAttendanceFacultySide);
+        llRemAttendanceFacultySide.setOnClickListener(this);
+        llAttendanceFacultySide = findViewById(R.id.llAttendanceFacultySide);
+        llAttendanceFacultySide.setOnClickListener(this);
+        llPendingAttendanceFacultySide = findViewById(R.id.llPendingAttendanceFacultySide);
+        llPendingAttendanceFacultySide.setOnClickListener(this);
+        llLeaveFacultySide = findViewById(R.id.llLeaveFacultySide);
+        llLeaveFacultySide.setOnClickListener(this);
+        llTimetableFacultySide = findViewById(R.id.llTimetableFacultySide);
+        llTimetableFacultySide.setOnClickListener(this);
+        llLecturePlanFacultySide = findViewById(R.id.llLecturePlanFacultySide);
+        llLecturePlanFacultySide.setOnClickListener(this);
+        llNewsFacultySide = findViewById(R.id.llNewsFacultySide);
+        llNewsFacultySide.setOnClickListener(this);
+
+        btnViewAllAnnouncementFacultySide = findViewById(R.id.btnViewAllAnnouncementFacultySide);
+        btnViewAllAnnouncementFacultySide.setOnClickListener(this);
+        rvAnnouncementFacultySide = findViewById(R.id.rvAnnouncementFacultySide);
+
     }
 
     @Override
@@ -69,6 +135,27 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
             Intent profileActivityStudentSide = new Intent(this, FacultyProfileActivity.class);
             startActivityForResult(profileActivityStudentSide, IntentConstants.REQUEST_CODE_FOR_FACULTY_LOGOUT);
             overridePendingTransition(R.anim.slide_in_left, 0);
+        } else if (v.getId() == R.id.llRemAttendanceFacultySide) {
+
+        } else if (v.getId() == R.id.llAttendanceFacultySide) {
+
+        } else if (v.getId() == R.id.llPendingAttendanceFacultySide) {
+
+        } else if (v.getId() == R.id.llLeaveFacultySide) {
+
+        } else if (v.getId() == R.id.llTimetableFacultySide) {
+            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyTimeTableActivity.class);
+            startActivity(intent);
+        } else if (v.getId() == R.id.llLecturePlanFacultySide) {
+
+        } else if (v.getId() == R.id.llNewsFacultySide) {
+
+        } else if (v.getId() == R.id.btnViewAllAnnouncementFacultySide) {
+            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyAnnouncementActivity.class);
+            startActivity(intent);
+        } else if (v.getId() == R.id.imgNotificationBellFacultySide) {
+            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyAnnouncementActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -112,6 +199,60 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
         }
     }
 
+    private void getFacultyProfileDetailsApiCall() {
+        if (connectionDetector.isConnectingToInternet()) {
+            llFacultyDashboradProgressbar.setVisibility(View.VISIBLE);
+            svFacultyDashboard.setVisibility(View.GONE);
+            ApiImplementer.getFacultyProfileDetailsApiImplementer(mySharedPreferences.getEmpId(), new Callback<ArrayList<FacultyProfilePojo>>() {
+                @Override
+                public void onResponse(Call<ArrayList<FacultyProfilePojo>> call, Response<ArrayList<FacultyProfilePojo>> response) {
+                    try {
+                        if (response.isSuccessful() && response.body() != null) {
+                            llFacultyDashboradProgressbar.setVisibility(View.GONE);
+                            FacultyProfilePojo facultyProfilePojo = response.body().get(0);
+
+                            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyProfilePojo.getName())) {
+                                tvFacultyName.setText(facultyProfilePojo.getName() + "");
+                            }
+
+                            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyProfilePojo.getEdName())) {
+                                tvFacultyDesignation.setText(facultyProfilePojo.getEdName() + "");
+                            }
+
+                            if (!CommonUtil.checkIsEmptyOrNullCommon(mySharedPreferences.getEmpStudPhotoUrl())) {
+                                Glide.with(FacultyDashboardActivity.this)
+                                        .asBitmap()
+                                        .load(mySharedPreferences.getEmpStudPhotoUrl().trim())
+                                        .override(70, 70)
+                                        .placeholder(R.drawable.person_img)
+                                        .error(R.drawable.person_img)
+                                        .into(cImgProfileFacultySide);
+                            }
+                            svFacultyDashboard.setVisibility(View.VISIBLE);
+                            getSliderImagesApiCall();
+                            getFacultyAnnouncementApiCall();
+                        } else {
+                            Toast.makeText(FacultyDashboardActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<FacultyProfilePojo>> call, Throwable t) {
+                    llFacultyDashboradProgressbar.setVisibility(View.GONE);
+                    svFacultyDashboard.setVisibility(View.GONE);
+                    Toast.makeText(FacultyDashboardActivity.this, "Request Failed,Please try again later", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        } else {
+            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void sendFacultyFCMTokenToServer() {
         if (!CommonUtil.checkIsEmptyOrNullCommon(mySharedPreferences.getFCMToken())) {
             if (connectionDetector.isConnectingToInternet()) {
@@ -140,4 +281,35 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
             finish();
         }
     }
+
+    private void getFacultyAnnouncementApiCall() {
+        if (connectionDetector.isConnectingToInternet()) {
+            llAnnouncementFacultyDashboard.setVisibility(View.GONE);
+            String notificationId = mySharedPreferences.getEmpPermanentCollege();
+            if (!CommonUtil.checkIsEmptyOrNullCommon(notificationId)) {
+                notificationId = "0";
+            }
+            ApiImplementer.getFacultyAnnouncementApiImplementer(mySharedPreferences.getEmpInstituteId(), "2", notificationId, mySharedPreferences.getEmpDepartmentId(),
+                    "0", "0", new Callback<ArrayList<FacultyAnnouncementPojo>>() {
+                        @Override
+                        public void onResponse(Call<ArrayList<FacultyAnnouncementPojo>> call, Response<ArrayList<FacultyAnnouncementPojo>> response) {
+                            if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
+                                llAnnouncementFacultyDashboard.setVisibility(View.VISIBLE);
+                                rvAnnouncementFacultySide.setLayoutManager(new LinearLayoutManager(FacultyDashboardActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                                rvAnnouncementFacultySide.setAdapter(new FacultyAnnouncementAdapter(FacultyDashboardActivity.this, response.body()));
+                            } else {
+                                llAnnouncementFacultyDashboard.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ArrayList<FacultyAnnouncementPojo>> call, Throwable t) {
+                            llAnnouncementFacultyDashboard.setVisibility(View.GONE);
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

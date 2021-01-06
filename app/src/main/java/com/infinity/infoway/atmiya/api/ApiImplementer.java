@@ -1,7 +1,9 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.FacultyAnnouncementPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
 import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
@@ -570,6 +572,20 @@ public class ApiImplementer {
     public static void getFacultyProfileDetailsApiImplementer(String emp_id, Callback<ArrayList<FacultyProfilePojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<FacultyProfilePojo>> call = apiService.getFacultyProfileDetails(emp_id);
+        call.enqueue(cb);
+    }
+
+    public static void getFacultyAnnouncementApiImplementer(String institute_id, String notification_for, String notif_college_id, String notif_dept_id,
+                                                            String notif_course_id, String notif_sem_id, Callback<ArrayList<FacultyAnnouncementPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<FacultyAnnouncementPojo>> call = apiService.getFacultyAnnouncement(institute_id, notification_for, notif_college_id, notif_dept_id,
+                notif_course_id, notif_sem_id);
+        call.enqueue(cb);
+    }
+
+    public static void getFacultyTimeTableApiImplementer(String emp_id, String year_id, Callback<ArrayList<FacultyTimeTablePojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<FacultyTimeTablePojo>> call = apiService.getFacultyTimeTable(emp_id, year_id);
         call.enqueue(cb);
     }
 

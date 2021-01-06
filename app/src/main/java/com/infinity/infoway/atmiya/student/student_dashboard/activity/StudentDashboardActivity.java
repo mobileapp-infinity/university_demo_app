@@ -318,6 +318,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
                             getStudentNewsOrNotificationListApiCall();
                         } else {
                             Toast.makeText(StudentDashboardActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();

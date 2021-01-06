@@ -38,6 +38,7 @@ public class IntentConstants {
 
     //For Employee
     public static final int REQUEST_CODE_FOR_FACULTY_LOGOUT = 1007;
+    public static final String FACULTY_TIME_TABLE_DAY_WISE_LIST = "FacultyDayWiseTimeTable";
 
 
 }

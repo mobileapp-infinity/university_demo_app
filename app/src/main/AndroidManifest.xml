@@ -43,6 +43,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".faculty.faculty_leave.FacultyLeaveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".faculty.faculty_timetable.activity.FacultyTimeTableActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".faculty.faculty_announcement.FacultyAnnouncementActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".faculty.faculty_profile.FacultyProfileActivity"
             android:screenOrientation="portrait" />
         <activity
