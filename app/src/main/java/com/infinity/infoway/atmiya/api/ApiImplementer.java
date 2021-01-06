@@ -16,6 +16,7 @@ import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetEmployeePas
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetStudentPasswordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.UpdateStudentForgotPasswordOtpPojo;
 import com.infinity.infoway.atmiya.student.home_work.pojo.StudentHomeWorkPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.UpdateNotificationStatusPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
@@ -586,6 +587,13 @@ public class ApiImplementer {
     public static void getFacultyTimeTableApiImplementer(String emp_id, String year_id, Callback<ArrayList<FacultyTimeTablePojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<FacultyTimeTablePojo>> call = apiService.getFacultyTimeTable(emp_id, year_id);
+        call.enqueue(cb);
+    }
+
+    public static void updateStudentOrEmployeeNotificationStatus(String notif_for, String nt_id, String modify_by,
+                                                                 String modify_ip, Callback<UpdateNotificationStatusPojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<UpdateNotificationStatusPojo> call = apiService.updateStudentOrEmployeeNotificationStatus(notif_for, nt_id, modify_by, modify_ip);
         call.enqueue(cb);
     }
 

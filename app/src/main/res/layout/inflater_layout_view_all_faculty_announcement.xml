@@ -13,41 +13,25 @@
         android:padding="8dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="end"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-<!--            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Date : "-->
-<!--                android:textColor="@color/colorPrimary"-->
-<!--                android:textSize="10sp" />-->
+            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date : "
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
 
             <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                android:id="@+id/tvNotificationDate"
+                android:id="@+id/tvFacultyNotificationDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textColor="@color/colorPrimary"
                 android:textSize="10sp" />
-
-            </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/cbMarkAsReadStudentNotification"
-                style="@style/CustomCheckboxStyle"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_gravity="end" />
 
         </LinearLayout>
 
@@ -58,12 +42,12 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                    android:id="@+id/tvNotificationTitle"
+                    android:id="@+id/tvFacultyNotificationTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -72,7 +56,7 @@
                     android:textSize="13sp" />
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                    android:id="@+id/tvNotificationDesc"
+                    android:id="@+id/tvFacultyNotificationDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -85,10 +69,12 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDownloadAttachFileStudent"
+                android:id="@+id/imgDownloadFacultyAnnouncementDoc"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_attach_file"/>
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_download"
+                android:tint="@color/colorPrimary"/>
 
         </LinearLayout>
 
@@ -97,7 +83,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="6dp"
         android:background="@color/colorAccent" />
 
 

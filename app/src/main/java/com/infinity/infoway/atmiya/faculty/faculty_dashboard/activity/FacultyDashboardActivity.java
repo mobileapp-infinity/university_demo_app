@@ -285,11 +285,12 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
     private void getFacultyAnnouncementApiCall() {
         if (connectionDetector.isConnectingToInternet()) {
             llAnnouncementFacultyDashboard.setVisibility(View.GONE);
-            String notificationId = mySharedPreferences.getEmpPermanentCollege();
-            if (!CommonUtil.checkIsEmptyOrNullCommon(notificationId)) {
-                notificationId = "0";
+            String notif_college_id = "0";
+            if (!CommonUtil.checkIsEmptyOrNullCommon(mySharedPreferences.getEmpPermanentCollege())) {
+                notif_college_id = mySharedPreferences.getEmpPermanentCollege();
             }
-            ApiImplementer.getFacultyAnnouncementApiImplementer(mySharedPreferences.getEmpInstituteId(), "2", notificationId, mySharedPreferences.getEmpDepartmentId(),
+            ApiImplementer.getFacultyAnnouncementApiImplementer(mySharedPreferences.getEmpInstituteId(), "1", notif_college_id,
+                    mySharedPreferences.getEmpDepartmentId(),
                     "0", "0", new Callback<ArrayList<FacultyAnnouncementPojo>>() {
                         @Override
                         public void onResponse(Call<ArrayList<FacultyAnnouncementPojo>> call, Response<ArrayList<FacultyAnnouncementPojo>> response) {

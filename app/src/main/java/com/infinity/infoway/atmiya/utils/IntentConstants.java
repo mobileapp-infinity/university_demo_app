@@ -34,6 +34,7 @@ public class IntentConstants {
     public static final String IS_STUDENT_RESET_PASSWORD = "IsStudentResetPassword";
     public static final String RESET_PASS_USER_ID = "ResetPassUserId";
     public static final String RESET_PASS_INSTITUTE_ID = "ResetPassInstituteId";
+    public static final int REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION = 1008;
 
 
     //For Employee

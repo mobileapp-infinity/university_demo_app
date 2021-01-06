@@ -68,7 +68,7 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
                 holder.llBreakTimeFaculty.setVisibility(View.GONE);
                 holder.imgFacultyBreak.setVisibility(View.GONE);
 
-                if (inoutArray1.getDetailsArray() == null || inoutArray1.getDetailsArray().size() == 0) {
+                if (inoutArray1.getInputArray() == null || inoutArray1.getInputArray().size() == 0) {
                     holder.tvFacultyLectureNoIndex.setVisibility(View.VISIBLE);
                     holder.llContentFaculty.setVisibility(View.VISIBLE);
 
@@ -144,7 +144,7 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
                               FacultyTimeTableListAdapter.MyViewHolder holder) {
         //merging logic
         try {
-            for (int i = 0; i < inoutArray1.getDetailsArray().size(); i++) {
+            for (int i = 0; i < inoutArray1.getInputArray().size(); i++) {
 
                 LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -156,51 +156,53 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
                 TextViewRegularFont tvFacultyRoomNoMergingLayout = mergingView.findViewById(R.id.tvFacultyRoomNoMergingLayout);
                 View lineStudentTimetableMergingLayout = mergingView.findViewById(R.id.lineStudentTimetableMergingLayout);
 
-                if (i == (inoutArray1.getDetailsArray().size() - 1)) {
+                if (i == (inoutArray1.getInputArray().size() - 1)) {
                     lineStudentTimetableMergingLayout.setVisibility(View.GONE);
                 }
 
-//                FacultyTimeTablePojo.Test test = inoutArray1.getDetailsArray().get(i);
-//
-//                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getSmName())) {
-//
-//                    String semAndDiv = test.getSmName();
-//
-//                    if (test.getSmName().contains("-")) {
-//                        semAndDiv = test.getSmName().split("-")[1];
-//                    }
-//
-//                    if (!CommonUtil.checkIsEmptyOrNullCommon(test.getDvmName())) {
-//                        semAndDiv += " (" + test.getDvmName() + ") ";
-//                    }
-//
-//
-//                    tvSemFacultyMergingLayout.setText(semAndDiv);
-//                } else {
-//                    tvSemFacultyMergingLayout.setText("-");
-//                }
-//
-//                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getSubShortName())) {
-//                    tvFacultySubjectNameMergingLayout.setText(test.getSubShortName());
-//                } else {
-//                    tvFacultySubjectNameMergingLayout.setText("-");
-//                }
-//
-//                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getLectStTime())) {
-//                    String lecStartAndEndTime = test.getLectStTime().trim();
-//
-//                    if (!CommonUtil.checkIsEmptyOrNullCommon(test.getLectEndTime())) {
-//                        lecStartAndEndTime += " to " + test.getLectEndTime();
-//                    }
-//                    tvFacultyLectureStartAndEnTimeMergingLayout.setText(lecStartAndEndTime);
-//
-//                }
-//
-//                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getRmName())) {
-//                    tvFacultyRoomNoMergingLayout.setText(test.getRmName() + "");
-//                } else {
-//                    tvFacultyRoomNoMergingLayout.setText("-");
-//                }
+                FacultyTimeTablePojo.InputArray test = inoutArray1.getInputArray().get(i);
+
+                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getSmName())) {
+
+                    String semAndDiv = test.getSmName();
+
+                    if (test.getSmName().contains("-")) {
+                        semAndDiv = test.getSmName().split("-")[1];
+                    }
+
+                    if (!CommonUtil.checkIsEmptyOrNullCommon(test.getDvmName())) {
+                        semAndDiv += " (" + test.getDvmName() + ") ";
+                    }
+
+
+                    tvSemFacultyMergingLayout.setText(semAndDiv);
+                } else {
+                    tvSemFacultyMergingLayout.setText("-");
+                }
+
+                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getSubShortName())) {
+                    tvFacultySubjectNameMergingLayout.setText(test.getSubShortName());
+                } else {
+                    tvFacultySubjectNameMergingLayout.setText("-");
+                }
+
+                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getLectStTime())) {
+                    String lecStartAndEndTime = test.getLectStTime().trim();
+
+                    if (!CommonUtil.checkIsEmptyOrNullCommon(test.getLectEndTime())) {
+                        lecStartAndEndTime += " to " + test.getLectEndTime();
+                    }
+                    tvFacultyLectureStartAndEnTimeMergingLayout.setText(lecStartAndEndTime);
+
+                }
+
+                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getRmName())) {
+                    tvFacultyRoomNoMergingLayout.setText(test.getRmName() + "");
+                } else {
+                    tvFacultyRoomNoMergingLayout.setText("-");
+                }
+
+                holder.llFacultyMergingDynamicLayout.addView(mergingView);
 
             }
         } catch (Exception ex) {

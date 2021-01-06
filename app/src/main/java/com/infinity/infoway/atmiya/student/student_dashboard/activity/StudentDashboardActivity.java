@@ -241,10 +241,10 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             }
         } else if (v.getId() == R.id.btnViewAllStudentSide) {
             Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
         } else if (v.getId() == R.id.imgNotificationBell) {
             Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
         }
     }
 
@@ -340,9 +340,9 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
     }
 
     private void getStudentNewsOrNotificationListApiCall() {
-        //2 for faculty login //0 for student login
         llNewsOrNotificationListStudentDashboard.setVisibility(View.GONE);
-        ApiImplementer.getStudentNewsOrNotificationImplementer("2", "0", mySharedPreferences.getStudentId(),
+        ApiImplementer.getStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "", "0",
+                mySharedPreferences.getStudentId(),
                 mySharedPreferences.getAcId(), mySharedPreferences.getDmId(),
                 mySharedPreferences.getCourseId(), mySharedPreferences.getSmId(),
                 mySharedPreferences.getInstituteId(), mySharedPreferences.getSwdYearId(), "8", new Callback<StudentNewsOrNotificationsPojo>() {
@@ -371,6 +371,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
             Intent intent = new Intent(StudentDashboardActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+        } else if (resultCode == RESULT_OK && requestCode == IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION) {
+            getStudentNewsOrNotificationListApiCall();
         }
     }
 

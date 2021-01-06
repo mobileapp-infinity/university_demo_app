@@ -16,6 +16,7 @@ import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetEmployeePas
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.ResetStudentPasswordPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.UpdateStudentForgotPasswordOtpPojo;
 import com.infinity.infoway.atmiya.student.home_work.pojo.StudentHomeWorkPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.UpdateNotificationStatusPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.login.pojo.LogOutPojo;
@@ -86,36 +87,12 @@ public interface IApiInterface {
 
     //TODO below API are for student side modules
 
-    @GET("Logout_and_Clear_FCM_id_of_User")
-    Call<ArrayList<LogOutPojo>> logoutUser(@Query("login_user_type") int login_user_type,
-                                           @Query("user_id") String user_id);
-
-    @GET("check_version_api")
-    Call<CheckVersionApiPojo> checkVersionInfo(@Query("version") int version);
-
     @GET("student_login_check_api")
     Call<StudentLoginPojo> checkStudentLogin(@QueryMap Map<String, String> params);
-
-    @GET("Get_Image_URL")
-    Call<GetSliderImageUrlsPojo> getSliderImages(@Query("url") String url, @Query("institute_id") String institute_id);
 
 
     @GET("get_student_profile_detail_atmiya")
     Call<StudentProfilePojo> getStudentProfile(@QueryMap Map<String, String> params);
-
-    @GET("Get_User_Wise_Announcement_Notification_API_with_Count")
-    @Streaming
-    Call<StudentNewsOrNotificationsPojo> getStudentNewsOrNotifications(
-            @Query("notif_for") String notif_for,
-            @Query("user_status") String user_status,
-            @Query("user_id") String user_id,
-            @Query("college_id") String college_id,
-            @Query("dept_id") String dept_id,
-            @Query("course_id") String course_id,
-            @Query("sem_id") String sem_id,
-            @Query("institute_id") String institute_id,
-            @Query("year_id") String year_id,
-            @Query("notif_count") String notification_count);
 
     @GET("get_student_attendance_api")
     Call<ArrayList<StudentLectureWiseAttendancePojo>> getStudentLectureWiseAttendance(@QueryMap Map<String, String> params);
@@ -480,9 +457,44 @@ public interface IApiInterface {
             @Query("notif_course_id") String notif_course_id,
             @Query("notif_sem_id") String notif_sem_id);
 
-    @GET("get_employee_timetable_display")
+    @GET("Get_Employee_Timetable_Display_with_Merge_Lecture")
     Call<ArrayList<FacultyTimeTablePojo>> getFacultyTimeTable(
             @Query("emp_id") String emp_id,
             @Query("year_id") String year_id);
+
+
+    //Common For Both Student And Employee(Faculty)
+
+    @GET("Get_User_Wise_Announcement_Notification_API_with_Count")
+    @Streaming
+    Call<StudentNewsOrNotificationsPojo> getStudentNewsOrNotifications(
+            @Query("notif_for") String notif_for,
+            @Query("user_status") String user_status,
+            @Query("user_id") String user_id,
+            @Query("college_id") String college_id,
+            @Query("dept_id") String dept_id,
+            @Query("course_id") String course_id,
+            @Query("sem_id") String sem_id,
+            @Query("institute_id") String institute_id,
+            @Query("year_id") String year_id,
+            @Query("notif_count") String notification_count);
+
+    @GET("Get_Image_URL")
+    Call<GetSliderImageUrlsPojo> getSliderImages(@Query("url") String url, @Query("institute_id") String institute_id);
+
+    @GET("Logout_and_Clear_FCM_id_of_User")
+    Call<ArrayList<LogOutPojo>> logoutUser(@Query("login_user_type") int login_user_type,
+                                           @Query("user_id") String user_id);
+
+    @GET("check_version_api")
+    Call<CheckVersionApiPojo> checkVersionInfo(@Query("version") int version);
+
+    @GET("Update_Student_Employee_Wise_Notification_Status_API")
+    Call<UpdateNotificationStatusPojo> updateStudentOrEmployeeNotificationStatus(
+            @Query("notif_for") String notif_for,
+            @Query("nt_id") String nt_id,
+            @Query("modify_by") String modify_by,
+            @Query("modify_ip") String modify_ip);
+
 
 }

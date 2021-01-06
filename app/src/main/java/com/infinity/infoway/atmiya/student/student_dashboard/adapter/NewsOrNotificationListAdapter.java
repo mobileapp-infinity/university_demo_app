@@ -15,6 +15,7 @@ import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNot
 import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.IntentConstants;
 
 public class NewsOrNotificationListAdapter extends RecyclerView.Adapter<NewsOrNotificationListAdapter.MyViewHolder> {
 
@@ -64,10 +65,9 @@ public class NewsOrNotificationListAdapter extends RecyclerView.Adapter<NewsOrNo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewAllNewsOrNotificationActivity.class);
-                context.startActivity(intent);
+                ((StudentDashboardActivity)context).startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
             }
         });
-
     }
 
     @Override

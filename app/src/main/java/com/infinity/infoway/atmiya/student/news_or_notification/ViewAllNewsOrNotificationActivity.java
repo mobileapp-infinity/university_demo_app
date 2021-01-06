@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,7 +12,9 @@ import android.widget.Toast;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
+import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
+import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
@@ -20,13 +23,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewAllNewsOrNotificationActivity extends AppCompatActivity implements View.OnClickListener {
+public class ViewAllNewsOrNotificationActivity extends AppCompatActivity implements View.OnClickListener,
+        ViewAllNewsOrNotificationAdapter.IRemoveStudentNewsOrNotification {
 
     MySharedPreferences mySharedPreferences;
     ConnectionDetector connectionDetector;
     LinearLayout llNewsOrNotificationProgressbar, llNoDataFoundNewsOrNotification, llStudentNewsOrNotificationList;
-    RecyclerView rvNewsOrNotification;
+    public RecyclerView rvNewsOrNotification;
     AppCompatImageView ivCloseNewsOrNotification;
+    ViewAllNewsOrNotificationAdapter viewAllNewsOrNotificationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,9 @@ public class ViewAllNewsOrNotificationActivity extends AppCompatActivity impleme
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(ViewAllNewsOrNotificationActivity.this, StudentDashboardActivity.class);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     private void getAllNewsOrNotificationApiCall() {
@@ -64,7 +71,7 @@ public class ViewAllNewsOrNotificationActivity extends AppCompatActivity impleme
             llNewsOrNotificationProgressbar.setVisibility(View.VISIBLE);
             llNoDataFoundNewsOrNotification.setVisibility(View.GONE);
             llStudentNewsOrNotificationList.setVisibility(View.GONE);
-            ApiImplementer.getStudentNewsOrNotificationImplementer("2", "0", mySharedPreferences.getStudentId(),
+            ApiImplementer.getStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "", "0", mySharedPreferences.getStudentId(),
                     mySharedPreferences.getAcId(), mySharedPreferences.getDmId(),
                     mySharedPreferences.getCourseId(), mySharedPreferences.getSmId(),
                     mySharedPreferences.getInstituteId(), mySharedPreferences.getSwdYearId(), "0", new Callback<StudentNewsOrNotificationsPojo>() {
@@ -74,7 +81,8 @@ public class ViewAllNewsOrNotificationActivity extends AppCompatActivity impleme
                             try {
                                 if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
                                     llStudentNewsOrNotificationList.setVisibility(View.VISIBLE);
-                                    rvNewsOrNotification.setAdapter(new ViewAllNewsOrNotificationAdapter(ViewAllNewsOrNotificationActivity.this, (ArrayList<StudentNewsOrNotificationsPojo.Data>) response.body().getTable()));
+                                    viewAllNewsOrNotificationAdapter = new ViewAllNewsOrNotificationAdapter(ViewAllNewsOrNotificationActivity.this, (ArrayList<StudentNewsOrNotificationsPojo.Data>) response.body().getTable());
+                                    rvNewsOrNotification.setAdapter(viewAllNewsOrNotificationAdapter);
                                 } else {
                                     llStudentNewsOrNotificationList.setVisibility(View.GONE);
                                     llNoDataFoundNewsOrNotification.setVisibility(View.VISIBLE);
@@ -98,4 +106,8 @@ public class ViewAllNewsOrNotificationActivity extends AppCompatActivity impleme
     }
 
 
+    @Override
+    public void onNotificationRemove(int removeIndex) {
+        viewAllNewsOrNotificationAdapter.notifyItemRemoved(removeIndex);
+    }
 }

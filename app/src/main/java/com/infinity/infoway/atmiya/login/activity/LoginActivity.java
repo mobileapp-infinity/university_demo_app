@@ -322,13 +322,13 @@ public class LoginActivity extends AppCompatActivity implements
                     try {
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getStatus().toString().trim().equalsIgnoreCase("1")) {
-                                if (response.body().getIsDirector().toString().trim().equalsIgnoreCase("0")) {
-                                    EmployeeLoginPojo employeeLoginPojo = response.body();
-                                    setEmployeeLoginData(empUsername, empPassword, employeeLoginPojo);
-                                    redirectToFacultyDashboard();
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Director Login Not Allowed", Toast.LENGTH_SHORT).show();
-                                }
+//                                if (response.body().getIsDirector().toString().trim().equalsIgnoreCase("0")) {
+                                EmployeeLoginPojo employeeLoginPojo = response.body();
+                                setEmployeeLoginData(empUsername, empPassword, employeeLoginPojo);
+                                redirectToFacultyDashboard();
+//                                } else {
+//                                    Toast.makeText(LoginActivity.this, "Director Login Not Allowed", Toast.LENGTH_SHORT).show();
+//                                }
                             } else {
                                 Toast.makeText(LoginActivity.this, "Invalid Username/Password", Toast.LENGTH_LONG).show();
                             }
