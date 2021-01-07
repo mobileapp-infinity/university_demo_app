@@ -122,6 +122,17 @@ public class FacultyProfilePojo {
     @SerializedName("emp_internet_password")
     @Expose
     private String empInternetPassword;
+    @SerializedName("unread_notif_count")
+    @Expose
+    private String unread_notif_count;
+
+    public String getUnread_notif_count() {
+        return unread_notif_count;
+    }
+
+    public void setUnread_notif_count(String unread_notif_count) {
+        this.unread_notif_count = unread_notif_count;
+    }
 
     public String getEmpNumber() {
         return empNumber;

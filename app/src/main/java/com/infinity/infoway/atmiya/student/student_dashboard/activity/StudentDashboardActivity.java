@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -103,7 +104,10 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
 
     ConnectionDetector connectionDetector;
     private Boolean exit = false;
-    private AppCompatImageView imgNotificationBell;
+//    private AppCompatImageView imgNotificationBell;
+
+    FrameLayout flNotification;
+    TextViewRegularFont tvNotificationCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,8 +167,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         tvPercentagePreviousMonthStudentSide = findViewById(R.id.tvPercentagePreviousMonthStudentSide);
         cpAvgStudentSide = findViewById(R.id.cpAvgStudentSide);
         tvPercentageAvgStudentSide = findViewById(R.id.tvPercentageAvgStudentSide);
-        imgNotificationBell = findViewById(R.id.imgNotificationBell);
-        imgNotificationBell.setOnClickListener(this);
+//        imgNotificationBell = findViewById(R.id.imgNotificationBell);
+//        imgNotificationBell.setOnClickListener(this);
 
         cImgProfileStudentSide.setOnClickListener(this);
 
@@ -180,6 +184,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         llFeeDetailsStudentSide.setOnClickListener(this);
         llActivityStudentSide.setOnClickListener(this);
         llMessageHistoryStudentSide.setOnClickListener(this);
+        flNotification = findViewById(R.id.flNotification);
+        flNotification.setOnClickListener(this);
 
         llAttendanceStudentSide.setOnClickListener(this);
 
@@ -188,6 +194,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         svStudentDashboard = findViewById(R.id.svStudentDashboard);
         llStudentDashboradProgressbar = findViewById(R.id.llStudentDashboradProgressbar);
         llNewsOrNotificationListStudentDashboard = findViewById(R.id.llNewsOrNotificationListStudentDashboard);
+        tvNotificationCount = findViewById(R.id.tvNotificationCount);
     }
 
     @Override
@@ -242,7 +249,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
         } else if (v.getId() == R.id.btnViewAllStudentSide) {
             Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationStudentActivity.class);
             startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
-        } else if (v.getId() == R.id.imgNotificationBell) {
+        } else if (v.getId() == R.id.flNotification) {
             Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationStudentActivity.class);
             startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
         }
@@ -286,6 +293,11 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
                         llStudentDashboradProgressbar.setVisibility(View.GONE);
                         if (response.isSuccessful() && response.body() != null) {
                             StudentProfilePojo studentProfilePojo = response.body();
+
+                            if (!CommonUtil.checkIsEmptyOrNullCommon(studentProfilePojo.getUnread_notif_count())) {
+                                tvNotificationCount.setText(studentProfilePojo.getUnread_notif_count() + "");
+                            }
+
                             if (studentProfilePojo.getStudName() != null && !studentProfilePojo.getStudName().isEmpty()) {
                                 tvStudentName.setText("Hello, " + studentProfilePojo.getStudName());
                             }

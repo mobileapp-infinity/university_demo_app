@@ -44,7 +44,7 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
         this.context = context;
         this.facultyAnnouncementPojoArrayList = facultyAnnouncementPojoArrayList;
         layoutInflater = LayoutInflater.from(context);
-        iRemoveStudentNewsOrNotification =  (FacultyAnnouncementActivity)context;
+        iRemoveStudentNewsOrNotification = (FacultyAnnouncementActivity) context;
         mySharedPreferences = new MySharedPreferences(context);
         connectionDetector = new ConnectionDetector(context);
     }
@@ -124,7 +124,7 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
             public void onClick(View v) {
                 String fileUrl = data.getNt_file_path();
                 String fileExtension = fileUrl.substring(fileUrl.lastIndexOf("."));
-                new DownloadPdfFromUrl(context, data.getNt_file_path(), fileExtension, "Student News Or Notification");
+                new DownloadPdfFromUrl(context, data.getNt_file_path(), fileExtension, "Faculty Announcement");
             }
         });
     }

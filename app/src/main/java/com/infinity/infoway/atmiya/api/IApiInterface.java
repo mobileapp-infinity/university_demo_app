@@ -2,6 +2,7 @@ package com.infinity.infoway.atmiya.api;
 
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
@@ -90,7 +91,6 @@ public interface IApiInterface {
 
     @GET("student_login_check_api")
     Call<StudentLoginPojo> checkStudentLogin(@QueryMap Map<String, String> params);
-
 
     @GET("get_student_profile_detail_atmiya")
     Call<StudentProfilePojo> getStudentProfile(@QueryMap Map<String, String> params);
@@ -495,5 +495,8 @@ public interface IApiInterface {
 
     @GET("Remaining_attendance_API")
     Call<ArrayList<FacultyRemAttendancePojo>> getFacultyRemAttendance(@Query("emp_id") String emp_id);
+
+    @GET("Get_Emp_Wise_Lecture_Planning_Api")
+    Call<ArrayList<FacultyLecturePlanPojo>> getEmployeeWiseLecturePlanning(@Query("emp_id") String emp_id);
 
 }

@@ -7,7 +7,7 @@
     tools:context=".student.student_dashboard.activity.StudentDashboardActivity">
 
     <LinearLayout
-        android:id="@+id/llNotifiation"
+        android:id="@+id/llNotification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dashboard_actionbar_shape"
@@ -57,12 +57,16 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgNotificationBell"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/ic_notification" />
+        <include
+            layout="@layout/notification_badge"/>
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/imgNotificationBell"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            app:srcCompat="@drawable/ic_notification" />-->
 
     </LinearLayout>
 
@@ -75,7 +79,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llNotifiation">
+        app:layout_constraintTop_toBottomOf="@+id/llNotification">
 
 
         <LinearLayout
@@ -510,7 +514,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llNotifiation">
+        app:layout_constraintTop_toBottomOf="@+id/llNotification">
 
         <ProgressBar
             android:layout_width="wrap_content"

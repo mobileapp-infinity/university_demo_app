@@ -2,6 +2,7 @@ package com.infinity.infoway.atmiya.api;
 
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
@@ -599,6 +600,12 @@ public class ApiImplementer {
     public static void getFacultyRemAttendanceApiImplementer(String emp_id, Callback<ArrayList<FacultyRemAttendancePojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<FacultyRemAttendancePojo>> call = apiService.getFacultyRemAttendance(emp_id);
+        call.enqueue(cb);
+    }
+
+    public static void getEmployeeWiseLecturePlanningApiImplementer(String emp_id, Callback<ArrayList<FacultyLecturePlanPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<FacultyLecturePlanPojo>> call = apiService.getEmployeeWiseLecturePlanning(emp_id);
         call.enqueue(cb);
     }
 

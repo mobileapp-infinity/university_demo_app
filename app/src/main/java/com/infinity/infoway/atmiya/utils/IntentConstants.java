@@ -6,7 +6,6 @@ public class IntentConstants {
     public static final String OPTIONAL_UPDATE = "OptionalUpdate";
 
 
-
     //For Student
 
     public static final int REQUEST_CODE_STUDENT_LOGOUT = 1001;
@@ -15,6 +14,9 @@ public class IntentConstants {
     public static final int REQUEST_CODE_FOR_FORGOT_PASSWORD = 1004;
     public static final int REQUEST_CODE_FOR_VERIFY_OTP = 1005;
     public static final int REQUEST_CODE_FOR_RESET_PASSWORD = 1006;
+    public static final int REQUEST_CODE_FOR_FACULTY_LOGOUT = 1007;
+    public static final int REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION = 1008;
+    public static final int REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION_FACULTY_SIDE = 1009;
 
     public static final String USERNAME_AFTER_FORGOT_PASS = "UsernameAfterForgot";
     public static final String PASSWORD_AFTER_FORGOT_PASS = "PasswordAfterForgot";
@@ -34,12 +36,11 @@ public class IntentConstants {
     public static final String IS_STUDENT_RESET_PASSWORD = "IsStudentResetPassword";
     public static final String RESET_PASS_USER_ID = "ResetPassUserId";
     public static final String RESET_PASS_INSTITUTE_ID = "ResetPassInstituteId";
-    public static final int REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION = 1008;
-    public static final int REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION_FACULTY_SIDE = 1009;
+
 
     //For Employee
-    public static final int REQUEST_CODE_FOR_FACULTY_LOGOUT = 1007;
-    public static final String FACULTY_TIME_TABLE_DAY_WISE_LIST = "FacultyDayWiseTimeTable";
 
+    public static final String FACULTY_TIME_TABLE_DAY_WISE_LIST = "FacultyDayWiseTimeTable";
+    public static final String FACULTY_LECTURE_DETAILS_LIST = "FacultyLectureDetailsList";
 
 }

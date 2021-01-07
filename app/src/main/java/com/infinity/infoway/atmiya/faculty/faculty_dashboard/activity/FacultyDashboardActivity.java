@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -26,9 +27,9 @@ import com.infinity.infoway.atmiya.faculty.faculty_announcement.FacultyAnnouncem
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.adapter.FacultyAnnouncementAdapter;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeaveActivity;
+import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfileActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
-import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendanceActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.activity.FacultyTimeTableActivity;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
 import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
@@ -56,12 +57,12 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
     private CircleImageView cImgProfileFacultySide;
     private RecyclerViewPager recyclerViewPagerFacultySideBanner;
 
-    AppCompatImageView imgNotificationBellFacultySide;
+//    AppCompatImageView imgNotificationBellFacultySide;
 
     TextViewBoldFont tvFacultyName;
     TextViewRegularFont tvFacultyDesignation;
 
-    LinearLayout llRemAttendanceFacultySide;
+    //    LinearLayout llRemAttendanceFacultySide;
     LinearLayout llAttendanceFacultySide;
     LinearLayout llPendingAttendanceFacultySide;
     LinearLayout llLeaveFacultySide;
@@ -73,10 +74,12 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
     RecyclerView rvAnnouncementFacultySide;
 
     ScrollView svFacultyDashboard;
-    LinearLayout llFacultyDashboradProgressbar;
+    LinearLayout llFacultyDashboardProgressbar;
     LinearLayout llAnnouncementFacultyDashboard;
 
     private Boolean exit = false;
+    FrameLayout flNotification;
+    TextViewRegularFont tvNotificationCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,14 +102,14 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
         tvFacultyDesignation = findViewById(R.id.tvFacultyDesignation);
 
         svFacultyDashboard = findViewById(R.id.svFacultyDashboard);
-        llFacultyDashboradProgressbar = findViewById(R.id.llFacultyDashboradProgressbar);
+        llFacultyDashboardProgressbar = findViewById(R.id.llFacultyDashboradProgressbar);
         llAnnouncementFacultyDashboard = findViewById(R.id.llAnnouncementFacultyDashboard);
 
-        imgNotificationBellFacultySide = findViewById(R.id.imgNotificationBellFacultySide);
-        imgNotificationBellFacultySide.setOnClickListener(this);
+//        imgNotificationBellFacultySide = findViewById(R.id.imgNotificationBellFacultySide);
+//        imgNotificationBellFacultySide.setOnClickListener(this);
 
-        llRemAttendanceFacultySide = findViewById(R.id.llRemAttendanceFacultySide);
-        llRemAttendanceFacultySide.setOnClickListener(this);
+//        llRemAttendanceFacultySide = findViewById(R.id.llRemAttendanceFacultySide);
+//        llRemAttendanceFacultySide.setOnClickListener(this);
         llAttendanceFacultySide = findViewById(R.id.llAttendanceFacultySide);
         llAttendanceFacultySide.setOnClickListener(this);
         llPendingAttendanceFacultySide = findViewById(R.id.llPendingAttendanceFacultySide);
@@ -124,6 +127,10 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
         btnViewAllAnnouncementFacultySide.setOnClickListener(this);
         rvAnnouncementFacultySide = findViewById(R.id.rvAnnouncementFacultySide);
 
+        flNotification = findViewById(R.id.flNotification);
+        flNotification.setOnClickListener(this);
+        tvNotificationCount = findViewById(R.id.tvNotificationCount);
+
     }
 
     @Override
@@ -132,10 +139,12 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
             Intent profileActivityStudentSide = new Intent(this, FacultyProfileActivity.class);
             startActivityForResult(profileActivityStudentSide, IntentConstants.REQUEST_CODE_FOR_FACULTY_LOGOUT);
             overridePendingTransition(R.anim.slide_in_left, 0);
-        } else if (v.getId() == R.id.llRemAttendanceFacultySide) {
-            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyRemAttendanceActivity.class);
-            startActivity(intent);
-        } else if (v.getId() == R.id.llAttendanceFacultySide) {
+        }
+//        else if (v.getId() == R.id.llRemAttendanceFacultySide) {
+//            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyRemAttendanceActivity.class);
+//            startActivity(intent);
+//        }
+        else if (v.getId() == R.id.llAttendanceFacultySide) {
 
         } else if (v.getId() == R.id.llPendingAttendanceFacultySide) {
 
@@ -146,13 +155,14 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
             Intent intent = new Intent(FacultyDashboardActivity.this, FacultyTimeTableActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.llLecturePlanFacultySide) {
-
+            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyLecturePlanActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llNewsFacultySide) {
 
         } else if (v.getId() == R.id.btnViewAllAnnouncementFacultySide) {
             Intent intent = new Intent(FacultyDashboardActivity.this, FacultyAnnouncementActivity.class);
             startActivity(intent);
-        } else if (v.getId() == R.id.imgNotificationBellFacultySide) {
+        } else if (v.getId() == R.id.flNotification) {
             Intent intent = new Intent(FacultyDashboardActivity.this, FacultyAnnouncementActivity.class);
             startActivity(intent);
         }
@@ -200,15 +210,19 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
 
     private void getFacultyProfileDetailsApiCall() {
         if (connectionDetector.isConnectingToInternet()) {
-            llFacultyDashboradProgressbar.setVisibility(View.VISIBLE);
+            llFacultyDashboardProgressbar.setVisibility(View.VISIBLE);
             svFacultyDashboard.setVisibility(View.GONE);
             ApiImplementer.getFacultyProfileDetailsApiImplementer(mySharedPreferences.getEmpId(), new Callback<ArrayList<FacultyProfilePojo>>() {
                 @Override
                 public void onResponse(Call<ArrayList<FacultyProfilePojo>> call, Response<ArrayList<FacultyProfilePojo>> response) {
                     try {
                         if (response.isSuccessful() && response.body() != null) {
-                            llFacultyDashboradProgressbar.setVisibility(View.GONE);
+                            llFacultyDashboardProgressbar.setVisibility(View.GONE);
                             FacultyProfilePojo facultyProfilePojo = response.body().get(0);
+
+                            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyProfilePojo.getUnread_notif_count())) {
+                                tvNotificationCount.setText(facultyProfilePojo.getUnread_notif_count() + "");
+                            }
 
                             if (!CommonUtil.checkIsEmptyOrNullCommon(facultyProfilePojo.getName())) {
                                 tvFacultyName.setText(facultyProfilePojo.getName() + "");
@@ -241,7 +255,7 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
 
                 @Override
                 public void onFailure(Call<ArrayList<FacultyProfilePojo>> call, Throwable t) {
-                    llFacultyDashboradProgressbar.setVisibility(View.GONE);
+                    llFacultyDashboardProgressbar.setVisibility(View.GONE);
                     svFacultyDashboard.setVisibility(View.GONE);
                     Toast.makeText(FacultyDashboardActivity.this, "Request Failed,Please try again later", Toast.LENGTH_SHORT).show();
                     finish();
