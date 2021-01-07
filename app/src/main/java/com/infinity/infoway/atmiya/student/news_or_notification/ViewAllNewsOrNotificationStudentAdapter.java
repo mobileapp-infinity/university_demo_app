@@ -2,7 +2,6 @@ package com.infinity.infoway.atmiya.student.news_or_notification;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
-import com.infinity.infoway.atmiya.api.IApiInterface;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
-import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
@@ -32,16 +29,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewAllNewsOrNotificationAdapter extends RecyclerView.Adapter<ViewAllNewsOrNotificationAdapter.MyViewHolder> {
+public class ViewAllNewsOrNotificationStudentAdapter extends RecyclerView.Adapter<ViewAllNewsOrNotificationStudentAdapter.MyViewHolder> {
 
     Context context;
     LayoutInflater layoutInflater;
-    ArrayList<StudentNewsOrNotificationsPojo.Data> dataArrayList;
+    ArrayList<FacultyOrStudentNewsOrNotificationsPojo.Data> dataArrayList;
     MySharedPreferences mySharedPreferences;
     ConnectionDetector connectionDetector;
     IRemoveStudentNewsOrNotification iRemoveStudentNewsOrNotification;
 
-    public ViewAllNewsOrNotificationAdapter(Context context, ArrayList<StudentNewsOrNotificationsPojo.Data> dataArrayList) {
+    public ViewAllNewsOrNotificationStudentAdapter(Context context, ArrayList<FacultyOrStudentNewsOrNotificationsPojo.Data> dataArrayList) {
         this.context = context;
         this.dataArrayList = dataArrayList;
         layoutInflater = LayoutInflater.from(context);
@@ -59,7 +56,7 @@ public class ViewAllNewsOrNotificationAdapter extends RecyclerView.Adapter<ViewA
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        StudentNewsOrNotificationsPojo.Data data = dataArrayList.get(position);
+        FacultyOrStudentNewsOrNotificationsPojo.Data data = dataArrayList.get(position);
         holder.cbMarkAsReadStudentNotification.setChecked(false);
         if (data.getNt_head() != null && !data.getNt_head().isEmpty()) {
             holder.tvNotificationTitle.setText(data.getNt_head());
@@ -130,7 +127,7 @@ public class ViewAllNewsOrNotificationAdapter extends RecyclerView.Adapter<ViewA
     }
 
 
-    private void updateNewsOrNotificationStatus(StudentNewsOrNotificationsPojo.Data data, AppCompatCheckBox cbMarkAsReadStudentNotification, int position) {
+    private void updateNewsOrNotificationStatus(FacultyOrStudentNewsOrNotificationsPojo.Data data, AppCompatCheckBox cbMarkAsReadStudentNotification, int position) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(context, "");
             ApiImplementer.updateStudentOrEmployeeNotificationStatus(mySharedPreferences.getLoginUserType() + "",

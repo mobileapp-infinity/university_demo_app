@@ -2,7 +2,6 @@ package com.infinity.infoway.atmiya.faculty.faculty_announcement;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +17,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
-import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.FacultyAnnouncementPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.news_or_notification.UpdateNotificationStatusPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
-import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationAdapter;
-import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationStudentAdapter;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.DownloadPdfFromUrl;
-import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
@@ -41,16 +36,16 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
 
     Context context;
     LayoutInflater layoutInflater;
-    ArrayList<FacultyAnnouncementPojo.Data> facultyAnnouncementPojoArrayList;
-    ViewAllNewsOrNotificationAdapter.IRemoveStudentNewsOrNotification iRemoveStudentNewsOrNotification;
+    ArrayList<FacultyOrStudentNewsOrNotificationsPojo.Data> facultyAnnouncementPojoArrayList;
+    FacultyViewAllAnnouncementAdapter.IRemoveStudentNewsOrNotification iRemoveStudentNewsOrNotification;
     MySharedPreferences mySharedPreferences;
     ConnectionDetector connectionDetector;
 
-    public FacultyViewAllAnnouncementAdapter(Context context, ArrayList<FacultyAnnouncementPojo.Data> facultyAnnouncementPojoArrayList) {
+    public FacultyViewAllAnnouncementAdapter(Context context, ArrayList<FacultyOrStudentNewsOrNotificationsPojo.Data> facultyAnnouncementPojoArrayList) {
         this.context = context;
         this.facultyAnnouncementPojoArrayList = facultyAnnouncementPojoArrayList;
         layoutInflater = LayoutInflater.from(context);
-        iRemoveStudentNewsOrNotification = (ViewAllNewsOrNotificationAdapter.IRemoveStudentNewsOrNotification) context;
+        iRemoveStudentNewsOrNotification =  (FacultyAnnouncementActivity)context;
         mySharedPreferences = new MySharedPreferences(context);
         connectionDetector = new ConnectionDetector(context);
     }
@@ -64,7 +59,7 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        FacultyAnnouncementPojo.Data data = facultyAnnouncementPojoArrayList.get(position);
+        FacultyOrStudentNewsOrNotificationsPojo.Data data = facultyAnnouncementPojoArrayList.get(position);
 
         holder.cbMarkAsReadStudentNotification.setChecked(false);
         if (data.getNt_head() != null && !data.getNt_head().isEmpty()) {
@@ -136,7 +131,7 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
     }
 
 
-    private void updateNewsOrNotificationStatus(FacultyAnnouncementPojo.Data data, AppCompatCheckBox cbMarkAsReadStudentNotification, int position) {
+    private void updateNewsOrNotificationStatus(FacultyOrStudentNewsOrNotificationsPojo.Data data, AppCompatCheckBox cbMarkAsReadStudentNotification, int position) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(context, "");
             ApiImplementer.updateStudentOrEmployeeNotificationStatus(mySharedPreferences.getLoginUserType() + "",

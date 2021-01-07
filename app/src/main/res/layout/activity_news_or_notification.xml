@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg_color"
     android:orientation="vertical"
-    tools:context=".student.news_or_notification.ViewAllNewsOrNotificationActivity">
+    tools:context=".student.news_or_notification.ViewAllNewsOrNotificationStudentActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

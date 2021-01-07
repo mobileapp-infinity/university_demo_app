@@ -20,7 +20,7 @@ import com.infinity.infoway.atmiya.student.holiday.HolidayActivity;
 import com.infinity.infoway.atmiya.student.home_work.activity.StudentHomeWorkActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
-import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationStudentActivity;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
 import com.infinity.infoway.atmiya.student.student_syllabus.StudentSyllabusActivity;
 import com.infinity.infoway.atmiya.student.student_timetable.activity.StudentTimeTableActivity;
@@ -52,7 +52,7 @@ public class NotificationUtils {
             JSONObject data = json.getJSONObject("data");
             String notificationTitle = data.getString("title");
             String notificationMessage = data.getString("message");
-            sendSimpleNotification(notificationTitle, notificationMessage, new Intent(AppController.getAppContext(), ViewAllNewsOrNotificationActivity.class));
+            sendSimpleNotification(notificationTitle, notificationMessage, new Intent(AppController.getAppContext(), ViewAllNewsOrNotificationStudentActivity.class));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -89,7 +89,7 @@ public class NotificationUtils {
                 } else if (clickAction.equalsIgnoreCase(DynamicActivityName.LESSON_PLAN_ACTIVITY_FOR_STUDENT)) {
                     intent = new Intent(AppController.getAppContext(), StudentLessonPlanActivity.class);
                 } else if (clickAction.equalsIgnoreCase(DynamicActivityName.NEWS_ACTIVITY_FOR_STUDENT)) {
-                    intent = new Intent(AppController.getAppContext(), ViewAllNewsOrNotificationActivity.class);
+                    intent = new Intent(AppController.getAppContext(), ViewAllNewsOrNotificationStudentActivity.class);
                 } else if (clickAction.equalsIgnoreCase(DynamicActivityName.ACTIVITY_FOR_STUDENT)) {
                     intent = new Intent(AppController.getAppContext(), StudentActivity.class);
                 } else if (clickAction.equalsIgnoreCase(DynamicActivityName.HOMEWORK_ACTIVITY_FOR_STUDENT)) {
@@ -111,10 +111,10 @@ public class NotificationUtils {
                 } else if (clickAction.equalsIgnoreCase(DynamicActivityName.HOLIDAY_LIST_ACTIVITY_FOR_STUDENT)) {
                     intent = new Intent(AppController.getAppContext(), HolidayActivity.class);
                 } else {
-                    intent = new Intent(AppController.getAppContext(), ViewAllNewsOrNotificationActivity.class);
+                    intent = new Intent(AppController.getAppContext(), ViewAllNewsOrNotificationStudentActivity.class);
                 }
             } else {
-                intent = new Intent(AppController.getAppContext(), ViewAllNewsOrNotificationActivity.class);
+                intent = new Intent(AppController.getAppContext(), ViewAllNewsOrNotificationStudentActivity.class);
             }
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

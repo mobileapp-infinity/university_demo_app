@@ -14,7 +14,6 @@ import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
-import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
@@ -23,15 +22,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewAllNewsOrNotificationActivity extends AppCompatActivity implements View.OnClickListener,
-        ViewAllNewsOrNotificationAdapter.IRemoveStudentNewsOrNotification {
+public class ViewAllNewsOrNotificationStudentActivity extends AppCompatActivity implements View.OnClickListener,
+        ViewAllNewsOrNotificationStudentAdapter.IRemoveStudentNewsOrNotification {
 
     MySharedPreferences mySharedPreferences;
     ConnectionDetector connectionDetector;
     LinearLayout llNewsOrNotificationProgressbar, llNoDataFoundNewsOrNotification, llStudentNewsOrNotificationList;
     public RecyclerView rvNewsOrNotification;
     AppCompatImageView ivCloseNewsOrNotification;
-    ViewAllNewsOrNotificationAdapter viewAllNewsOrNotificationAdapter;
+    ViewAllNewsOrNotificationStudentAdapter viewAllNewsOrNotificationStudentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +41,8 @@ public class ViewAllNewsOrNotificationActivity extends AppCompatActivity impleme
     }
 
     private void initView() {
-        mySharedPreferences = new MySharedPreferences(ViewAllNewsOrNotificationActivity.this);
-        connectionDetector = new ConnectionDetector(ViewAllNewsOrNotificationActivity.this);
+        mySharedPreferences = new MySharedPreferences(ViewAllNewsOrNotificationStudentActivity.this);
+        connectionDetector = new ConnectionDetector(ViewAllNewsOrNotificationStudentActivity.this);
         ivCloseNewsOrNotification = findViewById(R.id.ivCloseNewsOrNotification);
         ivCloseNewsOrNotification.setOnClickListener(this);
         llNewsOrNotificationProgressbar = findViewById(R.id.llNewsOrNotificationProgressbar);
@@ -61,7 +60,7 @@ public class ViewAllNewsOrNotificationActivity extends AppCompatActivity impleme
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ViewAllNewsOrNotificationActivity.this, StudentDashboardActivity.class);
+        Intent intent = new Intent(ViewAllNewsOrNotificationStudentActivity.this, StudentDashboardActivity.class);
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -71,18 +70,19 @@ public class ViewAllNewsOrNotificationActivity extends AppCompatActivity impleme
             llNewsOrNotificationProgressbar.setVisibility(View.VISIBLE);
             llNoDataFoundNewsOrNotification.setVisibility(View.GONE);
             llStudentNewsOrNotificationList.setVisibility(View.GONE);
-            ApiImplementer.getStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "", "0", mySharedPreferences.getStudentId(),
+            ApiImplementer.getFacultyOrStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "", "0",
+                    mySharedPreferences.getStudentId(),
                     mySharedPreferences.getAcId(), mySharedPreferences.getDmId(),
                     mySharedPreferences.getCourseId(), mySharedPreferences.getSmId(),
-                    mySharedPreferences.getInstituteId(), mySharedPreferences.getSwdYearId(), "0", new Callback<StudentNewsOrNotificationsPojo>() {
+                    mySharedPreferences.getInstituteId(), mySharedPreferences.getSwdYearId(), "0", new Callback<FacultyOrStudentNewsOrNotificationsPojo>() {
                         @Override
-                        public void onResponse(Call<StudentNewsOrNotificationsPojo> call, Response<StudentNewsOrNotificationsPojo> response) {
+                        public void onResponse(Call<FacultyOrStudentNewsOrNotificationsPojo> call, Response<FacultyOrStudentNewsOrNotificationsPojo> response) {
                             llNewsOrNotificationProgressbar.setVisibility(View.GONE);
                             try {
                                 if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
                                     llStudentNewsOrNotificationList.setVisibility(View.VISIBLE);
-                                    viewAllNewsOrNotificationAdapter = new ViewAllNewsOrNotificationAdapter(ViewAllNewsOrNotificationActivity.this, (ArrayList<StudentNewsOrNotificationsPojo.Data>) response.body().getTable());
-                                    rvNewsOrNotification.setAdapter(viewAllNewsOrNotificationAdapter);
+                                    viewAllNewsOrNotificationStudentAdapter = new ViewAllNewsOrNotificationStudentAdapter(ViewAllNewsOrNotificationStudentActivity.this, (ArrayList<FacultyOrStudentNewsOrNotificationsPojo.Data>) response.body().getTable());
+                                    rvNewsOrNotification.setAdapter(viewAllNewsOrNotificationStudentAdapter);
                                 } else {
                                     llStudentNewsOrNotificationList.setVisibility(View.GONE);
                                     llNoDataFoundNewsOrNotification.setVisibility(View.VISIBLE);
@@ -93,11 +93,11 @@ public class ViewAllNewsOrNotificationActivity extends AppCompatActivity impleme
                         }
 
                         @Override
-                        public void onFailure(Call<StudentNewsOrNotificationsPojo> call, Throwable t) {
+                        public void onFailure(Call<FacultyOrStudentNewsOrNotificationsPojo> call, Throwable t) {
                             llNewsOrNotificationProgressbar.setVisibility(View.GONE);
                             llStudentNewsOrNotificationList.setVisibility(View.GONE);
                             llNoDataFoundNewsOrNotification.setVisibility(View.VISIBLE);
-                            Toast.makeText(ViewAllNewsOrNotificationActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewAllNewsOrNotificationStudentActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
@@ -108,6 +108,6 @@ public class ViewAllNewsOrNotificationActivity extends AppCompatActivity impleme
 
     @Override
     public void onNotificationRemove(int removeIndex) {
-        viewAllNewsOrNotificationAdapter.notifyItemRemoved(removeIndex);
+        viewAllNewsOrNotificationStudentAdapter.notifyDataSetChanged();
     }
 }

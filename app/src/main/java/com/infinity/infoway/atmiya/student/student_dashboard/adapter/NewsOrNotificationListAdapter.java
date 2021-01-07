@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
-import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationStudentActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.IntentConstants;
@@ -21,9 +21,9 @@ public class NewsOrNotificationListAdapter extends RecyclerView.Adapter<NewsOrNo
 
     Context context;
     LayoutInflater layoutInflater;
-    StudentNewsOrNotificationsPojo studentNewsOrNotificationList;
+    FacultyOrStudentNewsOrNotificationsPojo studentNewsOrNotificationList;
 
-    public NewsOrNotificationListAdapter(Context context, StudentNewsOrNotificationsPojo studentNewsOrNotificationList) {
+    public NewsOrNotificationListAdapter(Context context, FacultyOrStudentNewsOrNotificationsPojo studentNewsOrNotificationList) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.studentNewsOrNotificationList = studentNewsOrNotificationList;
@@ -38,7 +38,7 @@ public class NewsOrNotificationListAdapter extends RecyclerView.Adapter<NewsOrNo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        StudentNewsOrNotificationsPojo.Data data = studentNewsOrNotificationList.getTable().get(position);
+        FacultyOrStudentNewsOrNotificationsPojo.Data data = studentNewsOrNotificationList.getTable().get(position);
 
         if (data.getNt_head() != null && !data.getNt_head().isEmpty()) {
             holder.tvNewsOrNotificationTitle.setText(data.getNt_head());
@@ -64,7 +64,7 @@ public class NewsOrNotificationListAdapter extends RecyclerView.Adapter<NewsOrNo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ViewAllNewsOrNotificationActivity.class);
+                Intent intent = new Intent(context, ViewAllNewsOrNotificationStudentActivity.class);
                 ((StudentDashboardActivity)context).startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
             }
         });

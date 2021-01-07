@@ -36,8 +36,8 @@ import com.infinity.infoway.atmiya.student.home_work.activity.StudentHomeWorkAct
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryActivity;
-import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationStudentActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
@@ -240,10 +240,10 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
                 Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
             }
         } else if (v.getId() == R.id.btnViewAllStudentSide) {
-            Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationActivity.class);
+            Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationStudentActivity.class);
             startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
         } else if (v.getId() == R.id.imgNotificationBell) {
-            Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationActivity.class);
+            Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationStudentActivity.class);
             startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
         }
     }
@@ -341,13 +341,13 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
 
     private void getStudentNewsOrNotificationListApiCall() {
         llNewsOrNotificationListStudentDashboard.setVisibility(View.GONE);
-        ApiImplementer.getStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "", "0",
+        ApiImplementer.getFacultyOrStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "", "0",
                 mySharedPreferences.getStudentId(),
                 mySharedPreferences.getAcId(), mySharedPreferences.getDmId(),
                 mySharedPreferences.getCourseId(), mySharedPreferences.getSmId(),
-                mySharedPreferences.getInstituteId(), mySharedPreferences.getSwdYearId(), "8", new Callback<StudentNewsOrNotificationsPojo>() {
+                mySharedPreferences.getInstituteId(), mySharedPreferences.getSwdYearId(), "8", new Callback<FacultyOrStudentNewsOrNotificationsPojo>() {
                     @Override
-                    public void onResponse(Call<StudentNewsOrNotificationsPojo> call, Response<StudentNewsOrNotificationsPojo> response) {
+                    public void onResponse(Call<FacultyOrStudentNewsOrNotificationsPojo> call, Response<FacultyOrStudentNewsOrNotificationsPojo> response) {
                         if (response.isSuccessful() && response.body() != null &&
                                 response.body().getTable().size() > 0) {
                             llNewsOrNotificationListStudentDashboard.setVisibility(View.VISIBLE);
@@ -357,7 +357,7 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
                     }
 
                     @Override
-                    public void onFailure(Call<StudentNewsOrNotificationsPojo> call, Throwable t) {
+                    public void onFailure(Call<FacultyOrStudentNewsOrNotificationsPojo> call, Throwable t) {
                         llNewsOrNotificationListStudentDashboard.setVisibility(View.GONE);
                     }
                 });

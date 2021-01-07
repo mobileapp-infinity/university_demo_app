@@ -33,7 +33,7 @@ import com.infinity.infoway.atmiya.student.holiday.HolidayActivity;
 import com.infinity.infoway.atmiya.student.home_work.activity.StudentHomeWorkActivity;
 import com.infinity.infoway.atmiya.student.leave_application.activity.LeaveApplicationActivity;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanActivity;
-import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationStudentActivity;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivity;
 import com.infinity.infoway.atmiya.student.student_syllabus.StudentSyllabusActivity;
 import com.infinity.infoway.atmiya.student.student_timetable.activity.StudentTimeTableActivity;
@@ -85,7 +85,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else if (clickAction.equalsIgnoreCase(DynamicActivityName.NEWS_ACTIVITY_FOR_STUDENT)) {
-                intent = new Intent(SplashActivity.this, ViewAllNewsOrNotificationActivity.class);
+                intent = new Intent(SplashActivity.this, ViewAllNewsOrNotificationStudentActivity.class);
                 startActivity(intent);
                 finish();
             } else if (clickAction.equalsIgnoreCase(DynamicActivityName.ACTIVITY_FOR_STUDENT)) {

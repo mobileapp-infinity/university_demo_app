@@ -24,21 +24,15 @@ import com.infinity.infoway.atmiya.custom_class.TextViewBoldFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.faculty.faculty_announcement.FacultyAnnouncementActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.adapter.FacultyAnnouncementAdapter;
-import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.FacultyAnnouncementPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfileActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.activity.FacultyTimeTableActivity;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
-import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
-import com.infinity.infoway.atmiya.student.profile.StudentProfileActivity;
-import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
-import com.infinity.infoway.atmiya.student.student_dashboard.adapter.NewsOrNotificationListAdapter;
+import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
-import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
-import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
@@ -288,22 +282,22 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
     private void getFacultyAnnouncementApiCall() {
         if (connectionDetector.isConnectingToInternet()) {
             llAnnouncementFacultyDashboard.setVisibility(View.GONE);
-            ApiImplementer.getStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "",
+            ApiImplementer.getFacultyOrStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "",
                     mySharedPreferences.getEmpUserStatus(), mySharedPreferences.getEmpId(), "0", "0",
                     "0", "0", mySharedPreferences.getEmpInstituteId(),
-                    mySharedPreferences.getEmpYearId(), "8", new Callback<StudentNewsOrNotificationsPojo>() {
+                    mySharedPreferences.getEmpYearId(), "8", new Callback<FacultyOrStudentNewsOrNotificationsPojo>() {
                         @Override
-                        public void onResponse(Call<StudentNewsOrNotificationsPojo> call, Response<StudentNewsOrNotificationsPojo> response) {
+                        public void onResponse(Call<FacultyOrStudentNewsOrNotificationsPojo> call, Response<FacultyOrStudentNewsOrNotificationsPojo> response) {
                             if (response.isSuccessful() && response.body() != null &&
                                     response.body().getTable().size() > 0) {
                                 llAnnouncementFacultyDashboard.setVisibility(View.VISIBLE);
                                 rvAnnouncementFacultySide.setLayoutManager(new LinearLayoutManager(FacultyDashboardActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                                rvAnnouncementFacultySide.setAdapter(new FacultyAnnouncementAdapter(FacultyDashboardActivity.this, (ArrayList<StudentNewsOrNotificationsPojo.Data>) response.body().getTable()));
+                                rvAnnouncementFacultySide.setAdapter(new FacultyAnnouncementAdapter(FacultyDashboardActivity.this, (ArrayList<FacultyOrStudentNewsOrNotificationsPojo.Data>) response.body().getTable()));
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<StudentNewsOrNotificationsPojo> call, Throwable t) {
+                        public void onFailure(Call<FacultyOrStudentNewsOrNotificationsPojo> call, Throwable t) {
                             llAnnouncementFacultyDashboard.setVisibility(View.GONE);
                         }
                     });

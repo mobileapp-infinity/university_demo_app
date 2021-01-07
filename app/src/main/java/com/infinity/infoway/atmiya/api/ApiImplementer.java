@@ -1,6 +1,5 @@
 package com.infinity.infoway.atmiya.api;
 
-import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.FacultyAnnouncementPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
@@ -64,7 +63,7 @@ import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUplo
 import com.infinity.infoway.atmiya.student.leave_application.pojo.UploadStudentLeaveDocumentPojo;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanListPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
@@ -112,11 +111,11 @@ public class ApiImplementer {
         call.enqueue(cb);
     }
 
-    public static void getStudentNewsOrNotificationImplementer(String notif_for, String user_status, String user_id, String college_id,
-                                                               String dept_id, String course_id, String sem_id, String institute_id,
-                                                               String year_id, String notification_count, Callback<StudentNewsOrNotificationsPojo> cb) {
+    public static void getFacultyOrStudentNewsOrNotificationImplementer(String notif_for, String user_status, String user_id, String college_id,
+                                                                        String dept_id, String course_id, String sem_id, String institute_id,
+                                                                        String year_id, String notification_count, Callback<FacultyOrStudentNewsOrNotificationsPojo> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
-        Call<StudentNewsOrNotificationsPojo> call = apiService.getStudentNewsOrNotifications(notif_for, user_status, user_id, college_id, dept_id,
+        Call<FacultyOrStudentNewsOrNotificationsPojo> call = apiService.getStudentNewsOrNotifications(notif_for, user_status, user_id, college_id, dept_id,
                 course_id, sem_id, institute_id, year_id, notification_count);
         call.enqueue(cb);
     }

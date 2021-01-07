@@ -1,21 +1,20 @@
-package com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo;
-
+package com.infinity.infoway.atmiya.student.news_or_notification;
 
 import java.util.List;
 
-public class FacultyAnnouncementPojo {
+public class FacultyOrStudentNewsOrNotificationsPojo {
 
-    private List<FacultyAnnouncementPojo.Data> Table;
+    private List<Data> Table;
 
-    public List<FacultyAnnouncementPojo.Data> getTable() {
+    public List<Data> getTable() {
         return Table;
     }
 
-    public void setTable(List<FacultyAnnouncementPojo.Data> Table) {
+    public void setTable(List<Data> Table) {
         this.Table = Table;
     }
 
-    public class Data {
+    public static class Data {
         /**
          * nt_srno : 1
          * nt_id : 2

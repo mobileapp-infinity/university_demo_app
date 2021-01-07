@@ -3,6 +3,7 @@ package com.infinity.infoway.atmiya.faculty.faculty_announcement;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +14,7 @@ import android.widget.Toast;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.activity.FacultyDashboardActivity;
-import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationAdapter;
-import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
@@ -25,14 +24,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FacultyAnnouncementActivity extends AppCompatActivity implements View.OnClickListener, FacultyViewAllAnnouncementAdapter.IRemoveStudentNewsOrNotification {
+public class FacultyAnnouncementActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
+        View.OnClickListener, FacultyViewAllAnnouncementAdapter.IRemoveStudentNewsOrNotification {
 
     MySharedPreferences mySharedPreferences;
     ConnectionDetector connectionDetector;
     LinearLayout llAnnouncementProgressbar, llNoDataFoundFacultyAnnouncement, llFacultyAnnouncementList;
-    public RecyclerView rvAnnouncement;
+    RecyclerView rvAnnouncement;
     AppCompatImageView ivCloseAnnouncement;
     FacultyViewAllAnnouncementAdapter viewAllNewsOrNotificationAdapter;
+    SwipeRefreshLayout swipeContainer;
 
 
     @Override
@@ -40,23 +41,26 @@ public class FacultyAnnouncementActivity extends AppCompatActivity implements Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_announcement);
         initView();
-        getAllNewsOrNotificationApiCall();
+        getAllNewsOrNotificationApiCall(false);
     }
 
     private void initView() {
         mySharedPreferences = new MySharedPreferences(FacultyAnnouncementActivity.this);
         connectionDetector = new ConnectionDetector(FacultyAnnouncementActivity.this);
-        ivCloseNewsOrNotification = findViewById(R.id.ivCloseNewsOrNotification);
-        ivCloseNewsOrNotification.setOnClickListener(this);
-        llNewsOrNotificationProgressbar = findViewById(R.id.llNewsOrNotificationProgressbar);
-        llNoDataFoundNewsOrNotification = findViewById(R.id.llNoDataFoundNewsOrNotification);
-        llStudentNewsOrNotificationList = findViewById(R.id.llStudentNewsOrNotificationList);
-        rvNewsOrNotification = findViewById(R.id.rvNewsOrNotification);
+        ivCloseAnnouncement = findViewById(R.id.ivCloseAnnouncement);
+        ivCloseAnnouncement.setOnClickListener(this);
+        llAnnouncementProgressbar = findViewById(R.id.llAnnouncementProgressbar);
+        llNoDataFoundFacultyAnnouncement = findViewById(R.id.llNoDataFoundFacultyAnnouncement);
+        llFacultyAnnouncementList = findViewById(R.id.llFacultyAnnouncementList);
+        rvAnnouncement = findViewById(R.id.rvAnnouncement);
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setEnabled(true);
+        swipeContainer.setOnRefreshListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.ivCloseNewsOrNotification) {
+        if (v.getId() == R.id.ivCloseAnnouncement) {
             onBackPressed();
         }
     }
@@ -68,26 +72,34 @@ public class FacultyAnnouncementActivity extends AppCompatActivity implements Vi
         finish();
     }
 
-    private void getAllNewsOrNotificationApiCall() {
+    private void getAllNewsOrNotificationApiCall(boolean isPullToRefresh) {
         if (connectionDetector.isConnectingToInternet()) {
-            llNewsOrNotificationProgressbar.setVisibility(View.VISIBLE);
-            llNoDataFoundNewsOrNotification.setVisibility(View.GONE);
-            llStudentNewsOrNotificationList.setVisibility(View.GONE);
-            ApiImplementer.getStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "", "0", mySharedPreferences.getStudentId(),
-                    mySharedPreferences.getAcId(), mySharedPreferences.getDmId(),
-                    mySharedPreferences.getCourseId(), mySharedPreferences.getSmId(),
-                    mySharedPreferences.getInstituteId(), mySharedPreferences.getSwdYearId(), "0", new Callback<StudentNewsOrNotificationsPojo>() {
+            if (isPullToRefresh) {
+//                swipeContainer.setEnabled(true);
+                swipeContainer.setRefreshing(true);
+            }
+            llAnnouncementProgressbar.setVisibility(View.VISIBLE);
+            llNoDataFoundFacultyAnnouncement.setVisibility(View.GONE);
+            llFacultyAnnouncementList.setVisibility(View.GONE);
+            ApiImplementer.getFacultyOrStudentNewsOrNotificationImplementer(mySharedPreferences.getLoginUserType() + "",
+                    mySharedPreferences.getEmpUserStatus(), mySharedPreferences.getEmpId(), "0", "0",
+                    "0", "0", mySharedPreferences.getEmpInstituteId(),
+                    mySharedPreferences.getEmpYearId(), "0", new Callback<FacultyOrStudentNewsOrNotificationsPojo>() {
                         @Override
-                        public void onResponse(Call<StudentNewsOrNotificationsPojo> call, Response<StudentNewsOrNotificationsPojo> response) {
-                            llNewsOrNotificationProgressbar.setVisibility(View.GONE);
+                        public void onResponse(Call<FacultyOrStudentNewsOrNotificationsPojo> call, Response<FacultyOrStudentNewsOrNotificationsPojo> response) {
+                            llAnnouncementProgressbar.setVisibility(View.GONE);
+                            if (isPullToRefresh) {
+                                swipeContainer.setRefreshing(false);
+//                                swipeContainer.setEnabled(false);
+                            }
                             try {
                                 if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
-                                    llStudentNewsOrNotificationList.setVisibility(View.VISIBLE);
-                                    viewAllNewsOrNotificationAdapter = new ViewAllNewsOrNotificationAdapter(FacultyAnnouncementActivity.this, (ArrayList<StudentNewsOrNotificationsPojo.Data>) response.body().getTable());
-                                    rvNewsOrNotification.setAdapter(viewAllNewsOrNotificationAdapter);
+                                    llFacultyAnnouncementList.setVisibility(View.VISIBLE);
+                                    viewAllNewsOrNotificationAdapter = new FacultyViewAllAnnouncementAdapter(FacultyAnnouncementActivity.this, (ArrayList<FacultyOrStudentNewsOrNotificationsPojo.Data>) response.body().getTable());
+                                    rvAnnouncement.setAdapter(viewAllNewsOrNotificationAdapter);
                                 } else {
-                                    llStudentNewsOrNotificationList.setVisibility(View.GONE);
-                                    llNoDataFoundNewsOrNotification.setVisibility(View.VISIBLE);
+                                    llFacultyAnnouncementList.setVisibility(View.GONE);
+                                    llNoDataFoundFacultyAnnouncement.setVisibility(View.VISIBLE);
                                 }
                             } catch (Exception ex) {
                                 ex.printStackTrace();
@@ -95,10 +107,14 @@ public class FacultyAnnouncementActivity extends AppCompatActivity implements Vi
                         }
 
                         @Override
-                        public void onFailure(Call<StudentNewsOrNotificationsPojo> call, Throwable t) {
-                            llNewsOrNotificationProgressbar.setVisibility(View.GONE);
-                            llStudentNewsOrNotificationList.setVisibility(View.GONE);
-                            llNoDataFoundNewsOrNotification.setVisibility(View.VISIBLE);
+                        public void onFailure(Call<FacultyOrStudentNewsOrNotificationsPojo> call, Throwable t) {
+                            if (isPullToRefresh) {
+                                swipeContainer.setRefreshing(false);
+//                                swipeContainer.setEnabled(false);
+                            }
+                            llAnnouncementProgressbar.setVisibility(View.GONE);
+                            llFacultyAnnouncementList.setVisibility(View.GONE);
+                            llNoDataFoundFacultyAnnouncement.setVisibility(View.VISIBLE);
                             Toast.makeText(FacultyAnnouncementActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -110,7 +126,12 @@ public class FacultyAnnouncementActivity extends AppCompatActivity implements Vi
 
     @Override
     public void onNotificationRemove(int removeIndex) {
-        viewAllNewsOrNotificationAdapter.notifyItemRemoved(removeIndex);
+        viewAllNewsOrNotificationAdapter.notifyDataSetChanged();
     }
 
+
+    @Override
+    public void onRefresh() {
+        getAllNewsOrNotificationApiCall(true);
+    }
 }

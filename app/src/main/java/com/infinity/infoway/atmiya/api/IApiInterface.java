@@ -1,6 +1,5 @@
 package com.infinity.infoway.atmiya.api;
 
-import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.FacultyAnnouncementPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
@@ -64,7 +63,7 @@ import com.infinity.infoway.atmiya.student.leave_application.pojo.TypeOfFileUplo
 import com.infinity.infoway.atmiya.student.leave_application.pojo.UploadStudentLeaveDocumentPojo;
 import com.infinity.infoway.atmiya.student.lesson_plan.StudentLessonPlanListPojo;
 import com.infinity.infoway.atmiya.student.message_history.MessageHistoryListPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.profile.StudentProfilePojo;
 import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
@@ -459,7 +458,7 @@ public interface IApiInterface {
 
     @GET("Get_User_Wise_Announcement_Notification_API_with_Count")
     @Streaming
-    Call<StudentNewsOrNotificationsPojo> getStudentNewsOrNotifications(
+    Call<FacultyOrStudentNewsOrNotificationsPojo> getStudentNewsOrNotifications(
             @Query("notif_for") String notif_for,
             @Query("user_status") String user_status,
             @Query("user_id") String user_id,

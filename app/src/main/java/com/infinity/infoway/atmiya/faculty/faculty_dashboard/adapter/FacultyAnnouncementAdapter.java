@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.faculty.faculty_announcement.FacultyAnnouncementActivity;
-import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.FacultyAnnouncementPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.StudentNewsOrNotificationsPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationActivity;
+import com.infinity.infoway.atmiya.faculty.faculty_dashboard.activity.FacultyDashboardActivity;
+import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
+import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationStudentActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.IntentConstants;
@@ -25,9 +25,9 @@ public class FacultyAnnouncementAdapter extends RecyclerView.Adapter<FacultyAnno
 
     Context context;
     LayoutInflater layoutInflater;
-    ArrayList<StudentNewsOrNotificationsPojo.Data> studentNewsOrNotificationList;
+    ArrayList<FacultyOrStudentNewsOrNotificationsPojo.Data> studentNewsOrNotificationList;
 
-    public FacultyAnnouncementAdapter(Context context, ArrayList<StudentNewsOrNotificationsPojo.Data> studentNewsOrNotificationList) {
+    public FacultyAnnouncementAdapter(Context context, ArrayList<FacultyOrStudentNewsOrNotificationsPojo.Data> studentNewsOrNotificationList) {
         this.context = context;
         this.studentNewsOrNotificationList = studentNewsOrNotificationList;
         layoutInflater = LayoutInflater.from(context);
@@ -43,7 +43,7 @@ public class FacultyAnnouncementAdapter extends RecyclerView.Adapter<FacultyAnno
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        StudentNewsOrNotificationsPojo.Data data = studentNewsOrNotificationList.get(position);
+        FacultyOrStudentNewsOrNotificationsPojo.Data data = studentNewsOrNotificationList.get(position);
 
         if (data.getNt_head() != null && !data.getNt_head().isEmpty()) {
             holder.tvNotificationHeadFacultySide.setText(data.getNt_head());
@@ -69,8 +69,8 @@ public class FacultyAnnouncementAdapter extends RecyclerView.Adapter<FacultyAnno
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ViewAllNewsOrNotificationActivity.class);
-                ((StudentDashboardActivity)context).startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION_FACULTY_SIDE);
+                Intent intent = new Intent(context, FacultyAnnouncementActivity.class);
+                ((FacultyDashboardActivity)context).startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION_FACULTY_SIDE);
             }
         });
 
