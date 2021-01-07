@@ -1,6 +1,7 @@
 package com.infinity.infoway.atmiya.api;
 
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
 import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
@@ -581,10 +582,16 @@ public class ApiImplementer {
         call.enqueue(cb);
     }
 
-    public static void updateStudentOrEmployeeNotificationStatus(String notif_for, String nt_id, String modify_by,
-                                                                 String modify_ip, Callback<UpdateNotificationStatusPojo> cb) {
+    public static void updateStudentOrEmployeeNotificationStatusApiImplementer(String notif_for, String nt_id, String modify_by,
+                                                                               String modify_ip, Callback<UpdateNotificationStatusPojo> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<UpdateNotificationStatusPojo> call = apiService.updateStudentOrEmployeeNotificationStatus(notif_for, nt_id, modify_by, modify_ip);
+        call.enqueue(cb);
+    }
+
+    public static void getFacultyLeaveApiImplementer(String contactId, int yearId, Callback<ArrayList<FacultyLeavePojo>> cb) {
+        final IApiInterface apiService = ApiClientForEmployeeLeave.getClient().create(IApiInterface.class);
+        Call<ArrayList<FacultyLeavePojo>> call = apiService.getFacultyLeave(Urls.KEY_FOR_EMPLOYEE_LEAVE, contactId, yearId);
         call.enqueue(cb);
     }
 

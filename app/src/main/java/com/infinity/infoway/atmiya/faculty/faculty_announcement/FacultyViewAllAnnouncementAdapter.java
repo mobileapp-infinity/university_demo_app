@@ -19,7 +19,6 @@ import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
 import com.infinity.infoway.atmiya.student.news_or_notification.UpdateNotificationStatusPojo;
-import com.infinity.infoway.atmiya.student.news_or_notification.ViewAllNewsOrNotificationStudentAdapter;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
@@ -134,7 +133,7 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
     private void updateNewsOrNotificationStatus(FacultyOrStudentNewsOrNotificationsPojo.Data data, AppCompatCheckBox cbMarkAsReadStudentNotification, int position) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(context, "");
-            ApiImplementer.updateStudentOrEmployeeNotificationStatus(mySharedPreferences.getLoginUserType() + "",
+            ApiImplementer.updateStudentOrEmployeeNotificationStatusApiImplementer(mySharedPreferences.getLoginUserType() + "",
                     data.getNt_id() + "", mySharedPreferences.getStudentId(), "1", new Callback<UpdateNotificationStatusPojo>() {
                         @Override
                         public void onResponse(Call<UpdateNotificationStatusPojo> call, Response<UpdateNotificationStatusPojo> response) {
