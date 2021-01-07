@@ -28,6 +28,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFC
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeaveActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfileActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendanceActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.activity.FacultyTimeTableActivity;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
 import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
@@ -132,7 +133,8 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
             startActivityForResult(profileActivityStudentSide, IntentConstants.REQUEST_CODE_FOR_FACULTY_LOGOUT);
             overridePendingTransition(R.anim.slide_in_left, 0);
         } else if (v.getId() == R.id.llRemAttendanceFacultySide) {
-
+            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyRemAttendanceActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llAttendanceFacultySide) {
 
         } else if (v.getId() == R.id.llPendingAttendanceFacultySide) {

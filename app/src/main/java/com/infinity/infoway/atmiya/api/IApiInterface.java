@@ -3,6 +3,7 @@ package com.infinity.infoway.atmiya.api;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
 import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
@@ -491,5 +492,8 @@ public interface IApiInterface {
     @POST("Get_Leave_Balance")
     @Streaming
     Call<ArrayList<FacultyLeavePojo>> getFacultyLeave(@Query("KEY") String KEY, @Query("Contact_ID") String Contact_ID, @Query("Year") int year);
+
+    @GET("Remaining_attendance_API")
+    Call<ArrayList<FacultyRemAttendancePojo>> getFacultyRemAttendance(@Query("emp_id") String emp_id);
 
 }
