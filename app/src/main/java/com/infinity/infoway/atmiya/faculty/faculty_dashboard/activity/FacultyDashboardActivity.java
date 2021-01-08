@@ -24,6 +24,7 @@ import com.infinity.infoway.atmiya.api.Urls;
 import com.infinity.infoway.atmiya.custom_class.TextViewBoldFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.faculty.faculty_announcement.FacultyAnnouncementActivity;
+import com.infinity.infoway.atmiya.faculty.faculty_attendance.FacultyAttendanceActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.adapter.FacultyAnnouncementAdapter;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeaveActivity;
@@ -146,7 +147,8 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
 //            startActivity(intent);
 //        }
         else if (v.getId() == R.id.llAttendanceFacultySide) {
-
+            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyAttendanceActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llPendingAttendanceFacultySide) {
 
         } else if (v.getId() == R.id.llLeaveFacultySide) {

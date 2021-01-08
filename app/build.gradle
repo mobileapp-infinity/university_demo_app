@@ -71,6 +71,7 @@ dependencies {
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:1.1.0'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.0.0'
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
+//    implementation 'com.github.psinetron:slycalendarview:0.0.9'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
