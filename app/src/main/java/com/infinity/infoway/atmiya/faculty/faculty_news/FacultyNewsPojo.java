@@ -63,6 +63,18 @@ public class FacultyNewsPojo implements Serializable {
         @Expose
         private String ph2;
 
+        public String getCn_file() {
+            return cn_file;
+        }
+
+        public void setCn_file(String cn_file) {
+            this.cn_file = cn_file;
+        }
+
+        @SerializedName("cn_file")
+        @Expose
+        private String cn_file;
+
         public Integer getCnId() {
             return cnId;
         }

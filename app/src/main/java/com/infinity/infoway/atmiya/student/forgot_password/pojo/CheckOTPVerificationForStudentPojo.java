@@ -63,10 +63,10 @@ public class CheckOTPVerificationForStudentPojo {
         private String name;
         @SerializedName("stud_admission_no")
         @Expose
-        private Integer studAdmissionNo;
+        private String studAdmissionNo;
         @SerializedName("Stud_Enrollment_no")
         @Expose
-        private Integer studEnrollmentNo;
+        private String studEnrollmentNo;
         @SerializedName("stud_photo")
         @Expose
         private String studPhoto;
@@ -207,19 +207,19 @@ public class CheckOTPVerificationForStudentPojo {
             this.name = name;
         }
 
-        public Integer getStudAdmissionNo() {
+        public String getStudAdmissionNo() {
             return studAdmissionNo;
         }
 
-        public void setStudAdmissionNo(Integer studAdmissionNo) {
+        public void setStudAdmissionNo(String studAdmissionNo) {
             this.studAdmissionNo = studAdmissionNo;
         }
 
-        public Integer getStudEnrollmentNo() {
+        public String getStudEnrollmentNo() {
             return studEnrollmentNo;
         }
 
-        public void setStudEnrollmentNo(Integer studEnrollmentNo) {
+        public void setStudEnrollmentNo(String studEnrollmentNo) {
             this.studEnrollmentNo = studEnrollmentNo;
         }
 

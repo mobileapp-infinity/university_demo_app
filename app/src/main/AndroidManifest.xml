@@ -43,6 +43,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".faculty.faculty_attendance.FacultyAttendanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".faculty.faculty_news.FacultyNewsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".faculty.faculty_news.FacultyNewsActivity"
             android:screenOrientation="portrait" />
         <activity
