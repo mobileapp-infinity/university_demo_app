@@ -75,3 +75,4 @@ public class FacultyNewsFragment extends Fragment {
         }
     }
 }
+
