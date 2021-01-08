@@ -43,6 +43,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".faculty.faculty_news.FacultyNewsActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".faculty.faculty_lecture_plan.FacultyLecturePlanDetailActivity"
             android:screenOrientation="portrait" />
         <activity

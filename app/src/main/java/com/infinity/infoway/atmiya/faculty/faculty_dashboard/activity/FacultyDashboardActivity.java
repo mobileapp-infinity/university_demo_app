@@ -28,6 +28,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_dashboard.adapter.FacultyAnno
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeaveActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanActivity;
+import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfileActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.activity.FacultyTimeTableActivity;
@@ -158,7 +159,8 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
             Intent intent = new Intent(FacultyDashboardActivity.this, FacultyLecturePlanActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.llNewsFacultySide) {
-
+            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyNewsActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.btnViewAllAnnouncementFacultySide) {
             Intent intent = new Intent(FacultyDashboardActivity.this, FacultyAnnouncementActivity.class);
             startActivity(intent);
