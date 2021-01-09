@@ -47,9 +47,15 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getAttDate())) {
             SimpleDateFormat sourceFormat = new SimpleDateFormat("dd-MMM-yyyy");
-            sourceFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             try {
-                Date parsed = sourceFormat.parse(facultyAttendancePojo.getAttDate());
+                Date parsed;
+
+                if (facultyAttendancePojo.getAttDate().contains("T")){
+                    parsed = sourceFormat.parse(facultyAttendancePojo.getAttDate().split("T")[0]);
+                }else {
+                    parsed = sourceFormat.parse(facultyAttendancePojo.getAttDate());
+                }
+
                 String result = sourceFormat.format(parsed);
                 holder.tvAttendanceFromDate.setText(" till " + result);
             } catch (ParseException e) {
@@ -113,21 +119,24 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
 
         if (facultyAttendancePojo.getInoutArray() != null && facultyAttendancePojo.getInoutArray().size() > 0) {
 
-            LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            View facultyAttendanceLayout = inflaterForMergingLayout.inflate(R.layout.layout_for_in_out_list_item, null);
 
-            LinearLayout tvInOutHeader = facultyAttendanceLayout.findViewById(R.id.tvInOutHeader);
-
+//            View facultyAttendanceLayout = inflaterForMergingLayout.inflate(R.layout.layout_for_in_out_list_item, null);
+//
+//            LinearLayout tvInOutHeader = facultyAttendanceLayout.findViewById(R.id.tvInOutHeader);
             for (int i = 0; i < facultyAttendancePojo.getInoutArray().size(); i++) {
-
+                LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View facultyAttendanceLayoutChild = inflaterForMergingLayout.inflate(R.layout.in_out_row, null);
 
-
                 TextViewRegularFont tvInTime = facultyAttendanceLayoutChild.findViewById(R.id.tvInTime);
                 TextViewRegularFont tvOutTime = facultyAttendanceLayoutChild.findViewById(R.id.tvOutTime);
+
+//                if (i == facultyAttendancePojo.getInoutArray().size() - 1) {
+//                    rowLine.setVisibility(View.GONE);
+//                }
+
 
                 if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getInoutArray().get(i).getInTime())) {
                     tvInTime.setText(facultyAttendancePojo.getInoutArray().get(i).getInTime() + "");
@@ -137,12 +146,14 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
                     tvOutTime.setText(facultyAttendancePojo.getInoutArray().get(i).getOutTime() + "");
                 }
 
-                tvInOutHeader.addView(facultyAttendanceLayoutChild);
+//                tvInOutHeader.addView(facultyAttendanceLayoutChild);
 
-
+                holder.llDynamicLayout.addView(facultyAttendanceLayoutChild);
             }
-            holder.llDynamicLayout.addView(facultyAttendanceLayout);
+//            holder.llDynamicLayout.addView(facultyAttendanceLayout);
 
+        } else {
+            holder.llDynamicLayout.setVisibility(View.GONE);
         }
 
         holder.llExpandedHeader.setOnClickListener(new View.OnClickListener() {
