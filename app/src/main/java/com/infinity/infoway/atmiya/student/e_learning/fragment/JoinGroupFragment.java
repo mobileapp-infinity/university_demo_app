@@ -42,7 +42,6 @@ public class JoinGroupFragment extends Fragment {
     private ELearningActivity eLearningActivity;
 
     LinearLayout llJoinGroupList, llJoinGroupProgressbar, llNoDataFoundJoinGroup;
-
     ExpandableListView elvJoinGroup;
 
     @Override

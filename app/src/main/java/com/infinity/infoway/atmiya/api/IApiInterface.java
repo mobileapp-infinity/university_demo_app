@@ -1,5 +1,6 @@
 package com.infinity.infoway.atmiya.api;
 
+import com.infinity.infoway.atmiya.faculty.faculty_attendance.FacultyAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
@@ -502,5 +503,13 @@ public interface IApiInterface {
 
     @GET("Get_Campus_News_Detail_API")
     Call<ArrayList<FacultyNewsPojo>> getFacultyNewsDetails(@Query("institute_id") String institute_id);
+
+    @GET("Get_Punch_Data")
+    Call<ArrayList<FacultyAttendancePojo>> getFacultyAttendance(
+            @Query("KEY") String KEY,
+            @Query("Contact_ID") String Contact_ID,
+            @Query("Company_ID") String Company_ID,
+            @Query("FromDate") String FromDate,
+            @Query("ToDate") String ToDate);
 
 }
