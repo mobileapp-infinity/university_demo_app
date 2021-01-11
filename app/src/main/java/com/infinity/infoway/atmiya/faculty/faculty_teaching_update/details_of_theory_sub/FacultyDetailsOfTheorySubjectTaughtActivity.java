@@ -19,6 +19,7 @@ import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub.*;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -45,7 +46,7 @@ public class FacultyDetailsOfTheorySubjectTaughtActivity extends AppCompatActivi
 
     FacultyDetailsOfTheorySubjectTaughtAdapter facultyDetailsOfTheorySubjectTaughtAdapter;
 
-    LinearLayout llFacultyProgressbar;
+    LinearLayout llFacultyProgressbarDetailsOfTheorySubject;
     ProgressBar pbFacultyDetailsOfTheorySubTaught;
 
     @Override
@@ -74,7 +75,6 @@ public class FacultyDetailsOfTheorySubjectTaughtActivity extends AppCompatActivi
                     isScrolling = false;
                     currentPageNo = currentPageNo + 1;
                     getFacultyDetailsOfTheorySubjectTaughtListApiCall(false);
-
                 }
             }
         });
@@ -92,7 +92,7 @@ public class FacultyDetailsOfTheorySubjectTaughtActivity extends AppCompatActivi
         llFacultyDetailsOfTheorySubjectTaughtList = findViewById(R.id.llFacultyDetailsOfTheorySubjectTaughtList);
         llFacultyDetailsOfTheorySubjectTaughtProgressbar = findViewById(R.id.llFacultyDetailsOfTheorySubjectTaughtProgressbar);
         llNoDataFoundFacultyDetailsOfTheorySubjectTaught = findViewById(R.id.llNoDataFoundFacultyDetailsOfTheorySubjectTaught);
-        llFacultyProgressbar = findViewById(R.id.llFacultyProgressbar);
+        llFacultyProgressbarDetailsOfTheorySubject = findViewById(R.id.llFacultyProgressbarDetailsOfTheorySubject);
         pbFacultyDetailsOfTheorySubTaught = findViewById(R.id.pbFacultyDetailsOfTheorySubTaught);
     }
 
@@ -117,71 +117,70 @@ public class FacultyDetailsOfTheorySubjectTaughtActivity extends AppCompatActivi
                 llFacultyDetailsOfTheorySubjectTaughtProgressbar.setVisibility(View.VISIBLE);
             } else {
 
-                llFacultyProgressbar.setVisibility(View.VISIBLE);
+                llFacultyProgressbarDetailsOfTheorySubject.setVisibility(View.VISIBLE);
             }
 
             ApiImplementer.getFacultyEmployeeAllocatedSubjectDetailsByIdApiImplementer(mySharedPreferences.getEmpId(), CommonUtil.ROW_PER_PAGE,
                     currentPageNo, new Callback<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>>() {
-                @Override
-                public void onResponse(Call<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> call, Response<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> response) {
-                    if (connectionDetector.isConnectingToInternet()) {
+                        @Override
+                        public void onResponse(Call<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> call, Response<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> response) {
+                            if (connectionDetector.isConnectingToInternet()) {
 
-                        if (isProgressbarShowing) {
-                            llFacultyDetailsOfTheorySubjectTaughtProgressbar.setVisibility(View.GONE);
-                        } else {
-
-                            llFacultyProgressbar.setVisibility(View.GONE);
-                        }
-                        try {
-                            if (response.isSuccessful() && response.body() != null) {
-
-                                llFacultyDetailsOfTheorySubjectTaughtList.setVisibility(View.VISIBLE);
-                                llNoDataFoundFacultyDetailsOfTheorySubjectTaught.setVisibility(View.GONE);
-
-
-                                facultyDetailsOfTheorySubjectTaughtPojoArrayList.addAll(response.body()); //response body
-                                if (!response.body().isEmpty() && response.body().size() > 0) {
-                                    if (currentPageNo == 1) {
-                                        facultyDetailsOfTheorySubjectTaughtAdapter = new FacultyDetailsOfTheorySubjectTaughtAdapter(FacultyDetailsOfTheorySubjectTaughtActivity.this, facultyDetailsOfTheorySubjectTaughtPojoArrayList);
-                                        rvFacultyDetailsOfTheorySubjectTaught.setAdapter(facultyDetailsOfTheorySubjectTaughtAdapter);
-
-                                    } else {
-                                        facultyDetailsOfTheorySubjectTaughtAdapter.notifyDataSetChanged();
-                                    }
+                                if (isProgressbarShowing) {
+                                    llFacultyDetailsOfTheorySubjectTaughtProgressbar.setVisibility(View.GONE);
                                 } else {
-                                    if (currentPageNo == 1) {
-                                        llFacultyDetailsOfTheorySubjectTaughtList.setVisibility(View.GONE);
-                                        llFacultyDetailsOfTheorySubjectTaughtProgressbar.setVisibility(View.GONE);
-                                        llNoDataFoundFacultyDetailsOfTheorySubjectTaught.setVisibility(View.VISIBLE);
-
-                                    } else {
-                                        hasMoreData = false;
-                                    }
+                                    llFacultyProgressbarDetailsOfTheorySubject.setVisibility(View.GONE);
                                 }
+                                try {
+                                    if (response.isSuccessful() && response.body() != null) {
+
+                                        llFacultyDetailsOfTheorySubjectTaughtList.setVisibility(View.VISIBLE);
+                                        llNoDataFoundFacultyDetailsOfTheorySubjectTaught.setVisibility(View.GONE);
+
+
+                                        facultyDetailsOfTheorySubjectTaughtPojoArrayList.addAll(response.body()); //response body
+                                        if (!response.body().isEmpty() && response.body().size() > 0) {
+                                            if (currentPageNo == 1) {
+                                                facultyDetailsOfTheorySubjectTaughtAdapter = new FacultyDetailsOfTheorySubjectTaughtAdapter(FacultyDetailsOfTheorySubjectTaughtActivity.this, facultyDetailsOfTheorySubjectTaughtPojoArrayList);
+                                                rvFacultyDetailsOfTheorySubjectTaught.setAdapter(facultyDetailsOfTheorySubjectTaughtAdapter);
+
+                                            } else {
+                                                facultyDetailsOfTheorySubjectTaughtAdapter.notifyDataSetChanged();
+                                            }
+                                        } else {
+                                            if (currentPageNo == 1) {
+                                                llFacultyDetailsOfTheorySubjectTaughtList.setVisibility(View.GONE);
+                                                llFacultyDetailsOfTheorySubjectTaughtProgressbar.setVisibility(View.GONE);
+                                                llNoDataFoundFacultyDetailsOfTheorySubjectTaught.setVisibility(View.VISIBLE);
+
+                                            } else {
+                                                hasMoreData = false;
+                                            }
+                                        }
+                                    } else {
+                                        Toast.makeText(FacultyDetailsOfTheorySubjectTaughtActivity.this, "Response Code:- " + response.code(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (Exception ex) {
+                                    Toast.makeText(FacultyDetailsOfTheorySubjectTaughtActivity.this, "Exception:- " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+
                             } else {
-                                Toast.makeText(FacultyDetailsOfTheorySubjectTaughtActivity.this, "Response Code:- " + response.code(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(FacultyDetailsOfTheorySubjectTaughtActivity.this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
                             }
 
-                        } catch (Exception ex) {
-                            Toast.makeText(FacultyDetailsOfTheorySubjectTaughtActivity.this, "Exception:- " + ex.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
+                        @Override
+                        public void onFailure(Call<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> call, Throwable t) {
+                            llFacultyDetailsOfTheorySubjectTaughtList.setVisibility(View.GONE);
+                            llFacultyDetailsOfTheorySubjectTaughtProgressbar.setVisibility(View.GONE);
+                            llNoDataFoundFacultyDetailsOfTheorySubjectTaught.setVisibility(View.VISIBLE);
+                            Toast.makeText(FacultyDetailsOfTheorySubjectTaughtActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    } else {
-                        Toast.makeText(FacultyDetailsOfTheorySubjectTaughtActivity.this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> call, Throwable t) {
-                    llFacultyDetailsOfTheorySubjectTaughtList.setVisibility(View.GONE);
-                    llFacultyDetailsOfTheorySubjectTaughtProgressbar.setVisibility(View.GONE);
-                    llNoDataFoundFacultyDetailsOfTheorySubjectTaught.setVisibility(View.VISIBLE);
-                    Toast.makeText(FacultyDetailsOfTheorySubjectTaughtActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-
-                }
-            });
+                        }
+                    });
 
 
         } else {

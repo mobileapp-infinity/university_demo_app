@@ -13,10 +13,7 @@
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        android:padding="12dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="12dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCloseFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged"
@@ -55,6 +52,33 @@
             android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+        <LinearLayout
+            android:id="@+id/llFacultyProgressbarTotalTheoryPeriodEngaged"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/pbFacultyDetailsOfTheorySubTaught"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorPrimary" />
+
+            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="Loading..."
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

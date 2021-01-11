@@ -36,7 +36,7 @@ public class FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity exte
     LinearLayoutManager layoutManager;
     AppCompatImageView ivCloseFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged;
     LinearLayout llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList, llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar, llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged;
-    LinearLayout llFacultyProgressbarTotalTheorySubject;
+    LinearLayout llFacultyProgressbarTotalTheoryPeriodEngaged;
 
     RecyclerView rvFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged;
     FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter facultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter;
@@ -94,7 +94,7 @@ public class FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity exte
         llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList = findViewById(R.id.llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList);
         llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar = findViewById(R.id.llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar);
         llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged = findViewById(R.id.llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged);
-        llFacultyProgressbarTotalTheorySubject = findViewById(R.id.llFacultyProgressbarTotalTheorySubject);
+        llFacultyProgressbarTotalTheoryPeriodEngaged = findViewById(R.id.llFacultyProgressbarTotalTheoryPeriodEngaged);
 
     }
 
@@ -118,7 +118,7 @@ public class FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity exte
             if (isProgressbarShowing) {
                 llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar.setVisibility(View.VISIBLE);
             } else {
-                llFacultyProgressbarTotalTheorySubject.setVisibility(View.VISIBLE);
+                llFacultyProgressbarTotalTheoryPeriodEngaged.setVisibility(View.VISIBLE);
             }
 
             ApiImplementer.getFacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedImplementer(mySharedPreferences.getEmpId(), mySharedPreferences.getEmpYearId(),
@@ -129,7 +129,7 @@ public class FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity exte
                                 if (isProgressbarShowing) {
                                     llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar.setVisibility(View.GONE);
                                 } else {
-                                    llFacultyProgressbarTotalTheorySubject.setVisibility(View.GONE);
+                                    llFacultyProgressbarTotalTheoryPeriodEngaged.setVisibility(View.GONE);
                                 }
                                 try {
                                     if (response.isSuccessful() && response.body() != null) {

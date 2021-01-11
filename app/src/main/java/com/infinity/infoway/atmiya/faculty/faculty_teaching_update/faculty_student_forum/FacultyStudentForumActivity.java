@@ -36,7 +36,7 @@ public class FacultyStudentForumActivity extends AppCompatActivity implements Vi
     LinearLayout llFacultyStudentForumActivityList, llFacultyStudentForumActivityProgressbar, llNoDataFoundFacultyStudentForumActivity;
     RecyclerView rvFacultyStudentForumActivity;
     LinearLayoutManager layoutManager;
-    LinearLayout llFacultyProgressbar;
+    LinearLayout llFacultyProgressbarStudentForumActivity;
     private int currentPageNo = 1;
     FacultyStudentForumAdapter facultyStudentForumAdapter;
     private boolean isScrolling = false;
@@ -90,7 +90,7 @@ public class FacultyStudentForumActivity extends AppCompatActivity implements Vi
         llFacultyStudentForumActivityList = findViewById(R.id.llFacultyStudentForumActivityList);
         llFacultyStudentForumActivityProgressbar = findViewById(R.id.llFacultyStudentForumActivityProgressbar);
         llNoDataFoundFacultyStudentForumActivity = findViewById(R.id.llNoDataFoundFacultyStudentForumActivity);
-        llFacultyProgressbar = findViewById(R.id.llFacultyProgressbar);
+        llFacultyProgressbarStudentForumActivity = findViewById(R.id.llFacultyProgressbarStudentForumActivity);
 
     }
 
@@ -114,7 +114,7 @@ public class FacultyStudentForumActivity extends AppCompatActivity implements Vi
                 llFacultyStudentForumActivityProgressbar.setVisibility(View.VISIBLE);
             } else {
 
-                llFacultyProgressbar.setVisibility(View.VISIBLE);
+                llFacultyProgressbarStudentForumActivity.setVisibility(View.VISIBLE);
             }
 
             ApiImplementer.getFacultyStudentForumActivityFacultyWiseApiImplementer(mySharedPreferences.getEmpId(), mySharedPreferences.getEmpYearId(),
@@ -127,7 +127,7 @@ public class FacultyStudentForumActivity extends AppCompatActivity implements Vi
                                     llFacultyStudentForumActivityProgressbar.setVisibility(View.GONE);
                                 } else {
 
-                                    llFacultyProgressbar.setVisibility(View.GONE);
+                                    llFacultyProgressbarStudentForumActivity.setVisibility(View.GONE);
                                 }
                                 try {
                                     if (response.isSuccessful() && response.body() != null) {

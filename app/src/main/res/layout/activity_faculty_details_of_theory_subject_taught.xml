@@ -13,10 +13,7 @@
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        android:padding="12dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="12dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCloseFacultyDetailsOfTheorySubjectTaught"
@@ -56,7 +53,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <LinearLayout
-            android:id="@+id/llFacultyProgressbarTotalTheorySubject"
+            android:id="@+id/llFacultyProgressbarDetailsOfTheorySubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -67,7 +64,6 @@
                 android:id="@+id/pbFacultyDetailsOfTheorySubTaught"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
                 android:layout_gravity="center"
                 android:indeterminateTint="@color/colorPrimary" />
 
