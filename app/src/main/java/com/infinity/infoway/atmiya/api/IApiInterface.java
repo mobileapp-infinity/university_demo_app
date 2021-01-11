@@ -7,6 +7,9 @@ import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePl
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendancePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_student_forum.FacultyStudentForumPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
 import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
@@ -511,5 +514,39 @@ public interface IApiInterface {
             @Query("Company_ID") String Company_ID,
             @Query("FromDate") String FromDate,
             @Query("ToDate") String ToDate);
+
+    @GET("Get_employee_allocated_subject_details_by_id_API")
+    @Streaming
+    Call<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> getEmployeeAllocatedSubjectDetailsByIdApi(@Query("emp_id") String emp_id,
+                                                                                                       @Query("RowsPerPage") int RowsPerPage,
+                                                                                                       @Query("PageNumber") int PageNumber);
+
+
+    @GET("Get_SubjectWise_DivisionWise_Total_Theory_Period_Engaged_API")
+    @Streaming
+    Call<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> GetSubjectWiseDivisionWiseTotalTheoryPeriodEngagedAPI(@Query("emp_id") String emp_id,
+                                                                                                                                     @Query("year_id") String year_id, @Query("RowsPerPage") String RowsPerPage, @Query("PageNumber") String PageNumber);
+
+
+    @GET("Get_Student_Forum_Activity_Faculty_Wise_API")
+    @Streaming
+    Call<ArrayList<FacultyStudentForumPojo>> GetStudentForumActivityFacultyWiseAPI(@Query("emp_id") String emp_id,
+                                                                                   @Query("year_id") String year_id, @Query("institute_id") String institute_id, @Query("RowsPerPage") String RowsPerPage, @Query("PageNumber") String PageNumber);
+
+
+    /**
+     * Added by harsh on 8-1-2021
+     **/
+//    @GET("FETCH_FACULTY_WISE_ASSGNIED_BATCH_FACULTY_ADVISER_YEAR_WISE_API")
+//    @Streaming
+//    Call<ArrayList<FacultyAdviserRemarksPojo>> getFacultyAdviserRemarksApi(@Query("emp_id") String emp_id,
+//                                                                           @Query("year_id") String year_id,@Query("institute_id") String institute_id, @Query("RowsPerPage") String RowsPerPage, @Query("PageNumber") String PageNumber);
+//
+//
+//
+//    @GET("Get_Approved_Lecture_Planning_Faculty_Wise_API")
+//    @Streaming
+//    Call<ArrayList<FacultyLabOrLecturePojo>> getFacultyApprovedLecturePlanningFacultyWiseApi(@Query("emp_id") String emp_id,
+//                                                                                             @Query("year_id") String year_id,@Query("institute_id") String institute_id, @Query("RowsPerPage") String RowsPerPage, @Query("PageNumber") String PageNumber);
 
 }

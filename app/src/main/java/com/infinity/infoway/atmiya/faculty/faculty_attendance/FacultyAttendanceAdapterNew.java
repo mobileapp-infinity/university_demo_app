@@ -46,21 +46,22 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
         FacultyAttendancePojo facultyAttendancePojo = facultyAttendancePojoArrayList.get(position);
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getAttDate())) {
-            SimpleDateFormat sourceFormat = new SimpleDateFormat("dd-MMM-yyyy");
-            try {
-                Date parsed;
-
-                if (facultyAttendancePojo.getAttDate().contains("T")){
-                    parsed = sourceFormat.parse(facultyAttendancePojo.getAttDate().split("T")[0]);
-                }else {
-                    parsed = sourceFormat.parse(facultyAttendancePojo.getAttDate());
-                }
-
-                String result = sourceFormat.format(parsed);
-                holder.tvAttendanceFromDate.setText(" till " + result);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            holder.tvAttendanceFromDate.setText(" till " + facultyAttendancePojo.getAttDate());
+//            SimpleDateFormat sourceFormat = new SimpleDateFormat("dd-MMM-yyyy");
+//            try {
+//                Date parsed;
+//
+//                if (facultyAttendancePojo.getAttDate().contains("T")){
+//                    parsed = sourceFormat.parse(facultyAttendancePojo.getAttDate().split("T")[0]);
+//                }else {
+//                    parsed = sourceFormat.parse(facultyAttendancePojo.getAttDate());
+//                }
+//
+//                String result = sourceFormat.format(parsed);
+//
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getDay())) {
@@ -118,7 +119,6 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
         }
 
         if (facultyAttendancePojo.getInoutArray() != null && facultyAttendancePojo.getInoutArray().size() > 0) {
-
 
 
 //            View facultyAttendanceLayout = inflaterForMergingLayout.inflate(R.layout.layout_for_in_out_list_item, null);

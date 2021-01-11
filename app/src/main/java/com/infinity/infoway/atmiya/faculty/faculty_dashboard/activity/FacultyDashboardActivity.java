@@ -32,6 +32,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePl
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfileActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.FacultyTeachingUpdateActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.activity.FacultyTimeTableActivity;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
 import com.infinity.infoway.atmiya.student.news_or_notification.FacultyOrStudentNewsOrNotificationsPojo;
@@ -71,6 +72,9 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
     LinearLayout llTimetableFacultySide;
     LinearLayout llLecturePlanFacultySide;
     LinearLayout llNewsFacultySide;
+    LinearLayout llFacultyProfile;
+    LinearLayout llFacultyAnnouncement;
+    LinearLayout llFacultyTeachingUpdate;
 
     AppCompatButton btnViewAllAnnouncementFacultySide;
     RecyclerView rvAnnouncementFacultySide;
@@ -133,20 +137,33 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
         flNotification.setOnClickListener(this);
         tvNotificationCount = findViewById(R.id.tvNotificationCount);
 
+        llFacultyProfile = findViewById(R.id.llFacultyProfile);
+        llFacultyProfile.setOnClickListener(this);
+        llFacultyAnnouncement = findViewById(R.id.llFacultyAnnouncement);
+        llFacultyAnnouncement.setOnClickListener(this);
+        llFacultyTeachingUpdate = findViewById(R.id.llFacultyTeachingUpdate);
+        llFacultyTeachingUpdate.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.cImgProfileFacultySide) {
+
+        if (v.getId() == R.id.llFacultyProfile) {
             Intent profileActivityStudentSide = new Intent(this, FacultyProfileActivity.class);
             startActivityForResult(profileActivityStudentSide, IntentConstants.REQUEST_CODE_FOR_FACULTY_LOGOUT);
             overridePendingTransition(R.anim.slide_in_left, 0);
-        }
-//        else if (v.getId() == R.id.llRemAttendanceFacultySide) {
-//            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyRemAttendanceActivity.class);
-//            startActivity(intent);
-//        }
-        else if (v.getId() == R.id.llAttendanceFacultySide) {
+        } else if (v.getId() == R.id.llFacultyAnnouncement) {
+            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyAnnouncementActivity.class);
+            startActivity(intent);
+        } else if (v.getId() == R.id.llFacultyTeachingUpdate) {
+            Intent intent = new Intent(FacultyDashboardActivity.this, FacultyTeachingUpdateActivity.class);
+            startActivity(intent);
+        } else if (v.getId() == R.id.cImgProfileFacultySide) {
+            Intent profileActivityStudentSide = new Intent(this, FacultyProfileActivity.class);
+            startActivityForResult(profileActivityStudentSide, IntentConstants.REQUEST_CODE_FOR_FACULTY_LOGOUT);
+            overridePendingTransition(R.anim.slide_in_left, 0);
+        } else if (v.getId() == R.id.llAttendanceFacultySide) {
             Intent intent = new Intent(FacultyDashboardActivity.this, FacultyAttendanceActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.llPendingAttendanceFacultySide) {

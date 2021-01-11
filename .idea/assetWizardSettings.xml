@@ -311,9 +311,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_faculty_profile" />
-                            <entry key="sourceFile" value="C:\Users\iipl\Downloads\faculty_rem_attendance.svg" />
+                            <entry key="outputName" value="ic_faculty_teching_update_subject_wise_total_theory_period" />
+                            <entry key="sourceFile" value="C:\Users\iipl\Downloads\Employee icon (1)\Employee icon\faculty_teching_update_subject_wise_total_theory_period.svg" />
                           </map>
                         </option>
                       </PersistentState>

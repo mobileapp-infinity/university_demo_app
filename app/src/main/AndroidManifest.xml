@@ -42,6 +42,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".faculty.faculty_teaching_update.FacultyTeachingUpdateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".faculty.faculty_teaching_update.faculty_student_forum.FacultyStudentForumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".faculty.faculty_attendance.FacultyAttendanceActivity"
             android:screenOrientation="portrait" />

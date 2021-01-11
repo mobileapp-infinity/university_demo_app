@@ -59,15 +59,14 @@
 
         </LinearLayout>
 
-        <include
-            layout="@layout/notification_badge"/>
+        <include layout="@layout/notification_badge" />
 
-<!--        <androidx.appcompat.widget.AppCompatImageView-->
-<!--            android:id="@+id/imgNotificationBellFacultySide"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            app:srcCompat="@drawable/ic_notification" />-->
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/imgNotificationBellFacultySide"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_gravity="center_vertical"-->
+        <!--            app:srcCompat="@drawable/ic_notification" />-->
 
     </LinearLayout>
 
@@ -115,34 +114,34 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
+                    android:layout_marginTop="18dp"
                     android:orientation="horizontal">
 
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/llRemAttendanceFacultySide"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:background="?android:attr/selectableItemBackground"-->
-<!--                        android:gravity="center"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:visibility="gone">-->
+                    <LinearLayout
+                        android:id="@+id/llFacultyProfile"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-<!--                        <androidx.appcompat.widget.AppCompatImageView-->
-<!--                            android:layout_width="48dp"-->
-<!--                            android:layout_height="48dp"-->
-<!--                            app:srcCompat="@drawable/ic_faculty_rem_attendance" />-->
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            app:srcCompat="@drawable/ic_faculty_profile" />
 
-<!--                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_marginTop="4dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="Rem.\nAttendance"-->
-<!--                            android:textColor="@color/colorPrimary"-->
-<!--                            android:textSize="12sp" />-->
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="Profile"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
 
-<!--                    </LinearLayout>-->
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/llAttendanceFacultySide"
@@ -156,7 +155,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            app:srcCompat="@drawable/ic_lesson_plan" />
+                            app:srcCompat="@drawable/ic_faculty_attendence" />
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
@@ -164,31 +163,6 @@
                             android:layout_marginTop="4dp"
                             android:gravity="center"
                             android:text="Attendance"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llPendingAttendanceFacultySide"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            app:srcCompat="@drawable/ic_home_work" />
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center"
-                            android:text="Pending\nAttendance"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
@@ -206,7 +180,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            app:srcCompat="@drawable/ic_time_table" />
+                            app:srcCompat="@drawable/ic_faculty_time_table" />
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
@@ -254,6 +228,31 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llPendingAttendanceFacultySide"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:srcCompat="@drawable/ic_faculty_pending_attendence" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="Pending\nAttendance"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/llLecturePlanFacultySide"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -265,7 +264,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            app:srcCompat="@drawable/ic_message_history" />
+                            app:srcCompat="@drawable/ic_faculty_lecture_plan" />
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
@@ -277,6 +276,14 @@
                             android:textSize="12sp" />
 
                     </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:id="@+id/llNewsFacultySide"
@@ -304,150 +311,59 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/llFacultyAnnouncement"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            app:srcCompat="@drawable/ic_faculty_announcement" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="Announcement"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llFacultyTeachingUpdate"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            app:srcCompat="@drawable/ic_teaching_update" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:text="Teaching\nUpdate"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="18dp"-->
-<!--                    android:orientation="horizontal">-->
-
-<!--                  -->
-
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:background="?android:attr/selectableItemBackground"-->
-<!--                        android:gravity="center"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:visibility="visible">-->
-
-<!--                        <androidx.appcompat.widget.AppCompatImageView-->
-<!--                            android:layout_width="48dp"-->
-<!--                            android:layout_height="48dp"-->
-<!--                            app:srcCompat="@drawable/ic_activity" />-->
-
-<!--                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_marginTop="4dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="Faculty Adviser\nRemarks"-->
-<!--                            android:textColor="@color/colorPrimary"-->
-<!--                            android:textSize="12sp" />-->
-
-<!--                    </LinearLayout>-->
-
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:background="?android:attr/selectableItemBackground"-->
-<!--                        android:gravity="center"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:visibility="visible">-->
-
-<!--                        <androidx.appcompat.widget.AppCompatImageView-->
-<!--                            android:layout_width="48dp"-->
-<!--                            android:layout_height="48dp"-->
-<!--                            app:srcCompat="@drawable/ic_message_history" />-->
-
-<!--                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_marginTop="4dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="Student Forum\nActivity"-->
-<!--                            android:textColor="@color/colorPrimary"-->
-<!--                            android:textSize="12sp" />-->
-
-<!--                    </LinearLayout>-->
-
-<!--                </LinearLayout>-->
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="18dp"-->
-<!--                    android:orientation="horizontal">-->
-
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:background="?android:attr/selectableItemBackground"-->
-<!--                        android:gravity="center"-->
-<!--                        android:orientation="vertical">-->
-
-<!--                        <androidx.appcompat.widget.AppCompatImageView-->
-<!--                            android:layout_width="48dp"-->
-<!--                            android:layout_height="48dp"-->
-<!--                            android:adjustViewBounds="true"-->
-<!--                            app:srcCompat="@drawable/ic_faculty_lab_plan" />-->
-
-<!--                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_marginTop="4dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="Lab Plan"-->
-<!--                            android:textColor="@color/colorPrimary"-->
-<!--                            android:textSize="12sp" />-->
-
-<!--                    </LinearLayout>-->
-
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:background="?android:attr/selectableItemBackground"-->
-<!--                        android:gravity="center"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:visibility="invisible">-->
-
-<!--                        <androidx.appcompat.widget.AppCompatImageView-->
-<!--                            android:layout_width="48dp"-->
-<!--                            android:layout_height="48dp"-->
-<!--                            app:srcCompat="@drawable/ic_activity" />-->
-
-<!--                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_marginTop="4dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="Faculty Adviser\nRemarks"-->
-<!--                            android:textColor="@color/colorPrimary"-->
-<!--                            android:textSize="12sp" />-->
-
-<!--                    </LinearLayout>-->
-
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:background="?android:attr/selectableItemBackground"-->
-<!--                        android:gravity="center"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:visibility="invisible">-->
-
-<!--                        <androidx.appcompat.widget.AppCompatImageView-->
-<!--                            android:layout_width="48dp"-->
-<!--                            android:layout_height="48dp"-->
-<!--                            app:srcCompat="@drawable/ic_message_history" />-->
-
-<!--                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_marginTop="4dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="Student Forum\nActivity"-->
-<!--                            android:textColor="@color/colorPrimary"-->
-<!--                            android:textSize="12sp" />-->
-
-<!--                    </LinearLayout>-->
-
-<!--                </LinearLayout>-->
 
             </LinearLayout>
 
