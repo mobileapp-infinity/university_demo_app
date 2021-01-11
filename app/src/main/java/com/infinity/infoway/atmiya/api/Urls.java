@@ -9,6 +9,7 @@ public class Urls {
     public static String DOMAIN_NAME = "https://cms.atmiya.edu.in";
 
     public static String BASE_URL_FOR_EXAM_MODULE = "https://exam.atmiyauni.ac.in/API_Student_result.asmx/";
+    public static String BASE_URL_FOR_FACULTY_PENDING_ATTENDANCE = "https://cms.atmiya.edu.in/API_Student_Panel_JSON_Icampus.asmx/";
     public static String BASE_URL_FOR_EMP_ATTENDANCE = "http://119.160.199.67:81/FeesTest/PunchData/";
     public static String KEY_FOR_FACULTY_ATTENDANCE = "v8llRrQaDng=";
 

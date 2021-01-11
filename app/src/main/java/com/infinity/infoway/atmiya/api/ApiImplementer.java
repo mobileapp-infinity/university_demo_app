@@ -5,6 +5,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFC
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_pending_attendance.FacultyPendingAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtPojo;
@@ -629,41 +630,28 @@ public class ApiImplementer {
 
     public static void getFacultyEmployeeAllocatedSubjectDetailsByIdApiImplementer(String emp_id, int RowsPerPage, int PageNumber, Callback<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
-        Call<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> call = apiService.getEmployeeAllocatedSubjectDetailsByIdApi(emp_id,RowsPerPage,PageNumber);
+        Call<ArrayList<FacultyDetailsOfTheorySubjectTaughtPojo>> call = apiService.getEmployeeAllocatedSubjectDetailsByIdApi(emp_id, RowsPerPage, PageNumber);
         call.enqueue(cb);
     }
 
-    public static void getFacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedImplementer( String emp_id,String year_id,String RowsPerPage, String PageNumber, Callback<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> cb) {
+    public static void getFacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedImplementer(String emp_id, String year_id, String RowsPerPage, String PageNumber, Callback<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
-        Call<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> call = apiService.GetSubjectWiseDivisionWiseTotalTheoryPeriodEngagedAPI(emp_id,year_id,RowsPerPage,PageNumber);
+        Call<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> call = apiService.GetSubjectWiseDivisionWiseTotalTheoryPeriodEngagedAPI(emp_id, year_id, RowsPerPage, PageNumber);
         call.enqueue(cb);
     }
 
-    public static void getFacultyStudentForumActivityFacultyWiseApiImplementer(String emp_id,String year_id,String institute_id,String RowsPerPage,String PageNumber, Callback<ArrayList<FacultyStudentForumPojo>> cb){
+    public static void getFacultyStudentForumActivityFacultyWiseApiImplementer(String emp_id, String year_id, String institute_id, String RowsPerPage, String PageNumber, Callback<ArrayList<FacultyStudentForumPojo>> cb) {
 
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
-        Call<ArrayList<FacultyStudentForumPojo>> call = apiService.GetStudentForumActivityFacultyWiseAPI(emp_id,year_id,institute_id,RowsPerPage,PageNumber);
-
+        Call<ArrayList<FacultyStudentForumPojo>> call = apiService.GetStudentForumActivityFacultyWiseAPI(emp_id, year_id, institute_id, RowsPerPage, PageNumber);
         call.enqueue(cb);
-
-
     }
 
-//    public static void getFacultyFacultyAdviserRemarksApiImplementer(String emp_id,String year_id,String institute_id,String RowsPerPage,String PageNumber, Callback<ArrayList<FacultyAdviserRemarksPojo>> cb){
-//
-//        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
-//        Call<ArrayList<FacultyAdviserRemarksPojo>> call = apiService.getFacultyAdviserRemarksApi(emp_id,year_id,institute_id,RowsPerPage,PageNumber);
-//
-//        call.enqueue(cb);
-//    }
-//
-//
-//    public static void getFacultyApprovedLecturePlanningFacultyWiseApiImplementer(String emp_id,String year_id,String institute_id,String RowsPerPage,String PageNumber, Callback<ArrayList<FacultyLabOrLecturePojo>> cb){
-//
-//        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
-//        Call<ArrayList<FacultyLabOrLecturePojo>> call = apiService.getFacultyApprovedLecturePlanningFacultyWiseApi(emp_id,year_id,institute_id,RowsPerPage,PageNumber);
-//
-//        call.enqueue(cb);
-//    }
+    public static void getFacultyPendingAttendanceApiImplementer(String emp_id, String year_id, Callback<FacultyPendingAttendancePojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<FacultyPendingAttendancePojo> call = apiService.getFacultyPendingAttendance(emp_id, year_id);
+        call.enqueue(cb);
+    }
+
 
 }

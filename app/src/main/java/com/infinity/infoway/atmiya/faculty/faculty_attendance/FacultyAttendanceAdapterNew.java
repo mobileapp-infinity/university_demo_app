@@ -171,7 +171,7 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
         holder.llExpandedHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean show = toggleLayout(!facultyAttendancePojoArrayList.get(position).isExpanded(), holder.ivViewMoreBtnFacultyAttendance, holder.llExpandableLayoutFacultyAttendance);
+                boolean show = toggleLayoutForDefaultOpenCard(!facultyAttendancePojoArrayList.get(position).isExpanded(), holder.ivViewMoreBtnFacultyAttendance, holder.llExpandableLayoutFacultyAttendance);
                 facultyAttendancePojoArrayList.get(position).setExpanded(show);
             }
         });
@@ -222,7 +222,7 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
         }
     }
 
-    private boolean toggleLayout(boolean isExpanded, View v, LinearLayout layoutExpand) {
+    private boolean toggleLayoutForDefaultOpenCard(boolean isExpanded, View v, LinearLayout layoutExpand) {
         CustomAnimationForDefaultExpandableCard.toggleArrow(v, isExpanded);
         if (isExpanded) {
             CustomAnimationForDefaultExpandableCard.expand(layoutExpand);
@@ -230,7 +230,6 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
             CustomAnimationForDefaultExpandableCard.collapse(layoutExpand);
         }
         return isExpanded;
-
     }
 
 }

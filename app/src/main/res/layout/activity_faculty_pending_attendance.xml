@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg_color"
     android:orientation="vertical"
-    tools:context=".faculty.faculty_leave.FacultyLeaveActivity">
+    tools:context=".faculty.faculty_pending_attendance.FacultyPendingAttendanceActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:padding="12dp">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivCloseFacultyLeave"
+            android:id="@+id/ivCloseFacultyPendingAttendance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -27,14 +27,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
-            android:text="Leave"
+            android:text="Pending Attendance"
             android:textAllCaps="true"
             android:textColor="@color/white" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llFacultyLeavetList"
+        android:id="@+id/llFacultyPendingAttendanceList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="8dp"
@@ -44,7 +44,7 @@
         android:visibility="gone">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvFacultyLeave"
+            android:id="@+id/rvFacultyPendingAttendance"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layoutAnimation="@anim/layout_animation"
@@ -55,7 +55,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llFacultyLeaveProgressbar"
+        android:id="@+id/llFacultyPendingAttendanceProgressbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -72,7 +72,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llNoDataFoundFacultyLeave"
+        android:id="@+id/llNoDataFoundPendingAttendance"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

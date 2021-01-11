@@ -5,6 +5,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFC
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_pending_attendance.FacultyPendingAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtPojo;
@@ -534,19 +535,9 @@ public interface IApiInterface {
                                                                                    @Query("year_id") String year_id, @Query("institute_id") String institute_id, @Query("RowsPerPage") String RowsPerPage, @Query("PageNumber") String PageNumber);
 
 
-    /**
-     * Added by harsh on 8-1-2021
-     **/
-//    @GET("FETCH_FACULTY_WISE_ASSGNIED_BATCH_FACULTY_ADVISER_YEAR_WISE_API")
-//    @Streaming
-//    Call<ArrayList<FacultyAdviserRemarksPojo>> getFacultyAdviserRemarksApi(@Query("emp_id") String emp_id,
-//                                                                           @Query("year_id") String year_id,@Query("institute_id") String institute_id, @Query("RowsPerPage") String RowsPerPage, @Query("PageNumber") String PageNumber);
-//
-//
-//
-//    @GET("Get_Approved_Lecture_Planning_Faculty_Wise_API")
-//    @Streaming
-//    Call<ArrayList<FacultyLabOrLecturePojo>> getFacultyApprovedLecturePlanningFacultyWiseApi(@Query("emp_id") String emp_id,
-//                                                                                             @Query("year_id") String year_id,@Query("institute_id") String institute_id, @Query("RowsPerPage") String RowsPerPage, @Query("PageNumber") String PageNumber);
+    @GET("Get_Pending_Attendance_Detail_Employee_Wise_API")
+    @Streaming
+    Call<FacultyPendingAttendancePojo> getFacultyPendingAttendance(@Query("emp_id") String emp_id,
+                                                                              @Query("year_id") String year_id);
 
 }
