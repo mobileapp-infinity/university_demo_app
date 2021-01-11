@@ -75,6 +75,13 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
                 facultyPendingAttendancePojo.setExpanded(show);
             }
         });
+
+        holder.llFillAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -88,6 +95,7 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
         LinearLayout llExpandableLayoutFacultyPendingAttendance;
         LinearLayout llExpandedHeaderFacultyPendingAttendance;
 
+        LinearLayout llFillAttendance;
         TextViewRegularFont tvSemesterFacultyPendingAttendance;
         TextViewRegularFont tvDepartmentNamePendingAttendance;
         TextViewRegularFont tvSubjectFacultyPendingAttendance;
@@ -102,6 +110,7 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
             llExpandableLayoutFacultyPendingAttendance = itemView.findViewById(R.id.llExpandableLayoutFacultyPendingAttendance);
             llExpandedHeaderFacultyPendingAttendance = itemView.findViewById(R.id.llExpandedHeaderFacultyPendingAttendance);
 
+            llFillAttendance = itemView.findViewById(R.id.llFillAttendance);
             tvSemesterFacultyPendingAttendance = itemView.findViewById(R.id.tvSemesterFacultyPendingAttendance);
             tvDepartmentNamePendingAttendance = itemView.findViewById(R.id.tvDepartmentNamePendingAttendance);
             tvSubjectFacultyPendingAttendance = itemView.findViewById(R.id.tvSubjectFacultyPendingAttendance);

@@ -2,7 +2,7 @@
 <resources>
 
     <color name="colorPrimary">#252258</color>
-<!--    <color name="colorPrimaryDark">#FFFFFF</color>-->
+    <!--    <color name="colorPrimaryDark">#FFFFFF</color>-->
     <color name="colorPrimaryDark">#80000000</color>
     <color name="colorAccent">#CEA955</color>
 
@@ -17,6 +17,7 @@
     <color name="color_primary_with_80_opacity">#CC252258</color>
     <color name="color_primary_with_90_opacity">#E6252258</color>
     <color name="color_primary_with_60_opacity">#4D252258</color>
+    <color name="color_primary_with_30_opacity">#33252258</color>
 
     <color name="color_accent_with_90_opacity">#E6CEA955</color>
     <color name="color_accent_with_75_opacity">#66CEA955</color>
