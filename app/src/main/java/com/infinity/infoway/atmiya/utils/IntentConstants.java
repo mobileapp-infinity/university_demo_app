@@ -44,5 +44,7 @@ public class IntentConstants {
     public static final String FACULTY_NEWS_GROUP_WISE = "FacultyNewsGroupWise";
     public static final String FACULTY_NEWS_DETAILS = "FacultyNewsDetails";
     public static final String FACULTY_LECTURE_DETAILS_LIST = "FacultyLectureDetailsList";
+    public static final String FACULTY_LAB_OR_LECTURE_DETAILS_TEACHING_UPDATE = "FacultyLabOrLectureDetailsTeachingUpdateList";
+    public static final String FACULTY_LAB_OR_LECTURE_DETAILS_TEACHING_UPDATE_POSITION = "FacultyLabOrLectureDetailsTeachingUpdateListPosition";
 
 }

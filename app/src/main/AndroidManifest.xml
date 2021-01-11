@@ -43,6 +43,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdateDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdateActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".student.forgot_password.activity.SelectUserTypeActivity"
             android:screenOrientation="portrait" />
         <activity

@@ -152,10 +152,10 @@ public class LoginActivity extends AppCompatActivity implements
                 checkStudentLoginCheckApiCall(edtLoginUserName.getText().toString().trim(), edtLoginUserPassword.getText().toString().trim());
             }
         } else if (v.getId() == R.id.llForgotPassword) {
-            Intent intent = new Intent(LoginActivity.this, SelectUserTypeActivity.class);
-            startActivity(intent);
-//            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-//            startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD);
+//            Intent intent = new Intent(LoginActivity.this, SelectUserTypeActivity.class);
+//            startActivity(intent);
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD);
         }
     }
 

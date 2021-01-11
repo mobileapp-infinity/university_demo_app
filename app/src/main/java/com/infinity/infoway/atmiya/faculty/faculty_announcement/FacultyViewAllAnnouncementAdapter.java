@@ -134,7 +134,7 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(context, "");
             ApiImplementer.updateStudentOrEmployeeNotificationStatusApiImplementer(mySharedPreferences.getLoginUserType() + "",
-                    data.getNt_id() + "", mySharedPreferences.getStudentId(), "1", new Callback<UpdateNotificationStatusPojo>() {
+                    data.getNt_id() + "", mySharedPreferences.getEmpId(), "1", new Callback<UpdateNotificationStatusPojo>() {
                         @Override
                         public void onResponse(Call<UpdateNotificationStatusPojo> call, Response<UpdateNotificationStatusPojo> response) {
                             DialogUtil.hideProgressDialog();

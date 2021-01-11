@@ -9,6 +9,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_pending_attendance.FacultyPen
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdatePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_student_forum.FacultyStudentForumPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
@@ -538,6 +539,14 @@ public interface IApiInterface {
     @GET("Get_Pending_Attendance_Detail_Employee_Wise_API")
     @Streaming
     Call<FacultyPendingAttendancePojo> getFacultyPendingAttendance(@Query("emp_id") String emp_id,
-                                                                              @Query("year_id") String year_id);
+                                                                   @Query("year_id") String year_id);
+
+    @GET("Get_Approved_Lecture_Planning_Faculty_Wise_API")
+    @Streaming
+    Call<ArrayList<FacultyLabOrLecturePlanTeachingUpdatePojo>> getFacultyLabOrLecturePlanTeachingUpdate(@Query("emp_id") String emp_id,
+                                                                                                        @Query("institute_id") String institute_id,
+                                                                                                        @Query("year_id") String year_id,
+                                                                                                        @Query("RowsPerPage") String RowsPerPage,
+                                                                                                        @Query("PageNumber") String PageNumber);
 
 }
