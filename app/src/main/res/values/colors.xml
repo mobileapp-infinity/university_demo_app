@@ -18,6 +18,7 @@
     <color name="color_primary_with_90_opacity">#E6252258</color>
     <color name="color_primary_with_60_opacity">#4D252258</color>
     <color name="color_primary_with_30_opacity">#33252258</color>
+    <color name="color_primary_with_70_opacity">#B3252258</color>
 
     <color name="color_accent_with_90_opacity">#E6CEA955</color>
     <color name="color_accent_with_75_opacity">#66CEA955</color>

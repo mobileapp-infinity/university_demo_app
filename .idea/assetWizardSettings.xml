@@ -301,7 +301,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Android_Sdk/icons/material/materialiconsoutlined/person_outline/outline_person_outline_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Android_Sdk/icons/material/materialicons/business/baseline_business_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -311,9 +311,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_faculty_teching_update_subject_wise_total_theory_period" />
+                            <entry key="outputName" value="ic_select_employee" />
                             <entry key="sourceFile" value="C:\Users\iipl\Downloads\Employee icon (1)\Employee icon\faculty_teching_update_subject_wise_total_theory_period.svg" />
                           </map>
                         </option>

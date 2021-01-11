@@ -43,10 +43,12 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        FacultyAttendancePojo facultyAttendancePojo = facultyAttendancePojoArrayList.get(position);
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getAttDate())) {
-            holder.tvAttendanceFromDate.setText(" till " + facultyAttendancePojo.getAttDate());
+        try {
+            FacultyAttendancePojo facultyAttendancePojo = facultyAttendancePojoArrayList.get(position);
+
+            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getAttDate())) {
+                holder.tvAttendanceFromDate.setText(" till " + facultyAttendancePojo.getAttDate());
 //            SimpleDateFormat sourceFormat = new SimpleDateFormat("dd-MMM-yyyy");
 //            try {
 //                Date parsed;
@@ -62,121 +64,122 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
 //            } catch (ParseException e) {
 //                e.printStackTrace();
 //            }
-        }
-
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getDay())) {
-            holder.tvDays.setText(facultyAttendancePojo.getDay());
-        }
-
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getTotalHour())) {
-            if (facultyAttendancePojo.getTotalHour().contains(":")) {
-                holder.tvWorkingHours.setText(facultyAttendancePojo.getTotalHour().split(":")[0] + "H" + " " +
-                        facultyAttendancePojo.getTotalHour().split(":")[1] + "M");
-            } else {
-                holder.tvWorkingHours.setText(facultyAttendancePojo.getTotalHour());
-            }
-        }
-
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getStatus())) {
-            String status = "-";
-
-            if (facultyAttendancePojo.getStatus().equalsIgnoreCase("P")) {
-                status = "Present";
-            } else if (facultyAttendancePojo.getStatus().equalsIgnoreCase("AB")) {
-                status = "Absent";
-            } else {
-                status = facultyAttendancePojo.getStatus() + "";
             }
 
-            holder.tvStatus.setText(status);
-        }
-
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getLateByHour())) {
-            if (facultyAttendancePojo.getTotalHour().contains(":")) {
-                holder.tvLateBy.setText(facultyAttendancePojo.getLateByHour().split(":")[0] + "H" + " " +
-                        facultyAttendancePojo.getLateByHour().split(":")[1] + "M");
-            } else {
-                holder.tvLateBy.setText(facultyAttendancePojo.getLateByHour());
+            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getDay())) {
+                holder.tvDays.setText(facultyAttendancePojo.getDay());
             }
-        }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getEarlyByHour())) {
-            if (facultyAttendancePojo.getTotalHour().contains(":")) {
-                holder.tvEarlyBy.setText(facultyAttendancePojo.getEarlyByHour().split(":")[0] + "H" + " " +
-                        facultyAttendancePojo.getEarlyByHour().split(":")[1] + "M");
-            } else {
-                holder.tvEarlyBy.setText(facultyAttendancePojo.getEarlyByHour());
+            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getTotalHour())) {
+                if (facultyAttendancePojo.getTotalHour().contains(":")) {
+                    holder.tvWorkingHours.setText(facultyAttendancePojo.getTotalHour().split(":")[0] + "H" + " " +
+                            facultyAttendancePojo.getTotalHour().split(":")[1] + "M");
+                } else {
+                    holder.tvWorkingHours.setText(facultyAttendancePojo.getTotalHour());
+                }
             }
-        }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getEarlyByHour())) {
-            if (facultyAttendancePojo.getTotalHour().contains(":")) {
-                holder.tvExtraHours.setText(facultyAttendancePojo.getEarlyByHour().split(":")[0] + "H" + " " +
-                        facultyAttendancePojo.getEarlyByHour().split(":")[1] + "M");
-            } else {
-                holder.tvExtraHours.setText(facultyAttendancePojo.getEarlyByHour());
+            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getStatus())) {
+                String status = "-";
+
+                if (facultyAttendancePojo.getStatus().equalsIgnoreCase("P")) {
+                    status = "Present";
+                } else if (facultyAttendancePojo.getStatus().equalsIgnoreCase("AB")) {
+                    status = "Absent";
+                } else {
+                    status = facultyAttendancePojo.getStatus() + "";
+                }
+
+                holder.tvStatus.setText(status);
             }
-        }
 
-        if (facultyAttendancePojo.getInoutArray() != null && facultyAttendancePojo.getInoutArray().size() > 0) {
-            holder.llDynamicLayout.removeAllViewsInLayout();
+            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getLateByHour())) {
+                if (facultyAttendancePojo.getTotalHour().contains(":")) {
+                    holder.tvLateBy.setText(facultyAttendancePojo.getLateByHour().split(":")[0] + "H" + " " +
+                            facultyAttendancePojo.getLateByHour().split(":")[1] + "M");
+                } else {
+                    holder.tvLateBy.setText(facultyAttendancePojo.getLateByHour());
+                }
+            }
+
+            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getEarlyByHour())) {
+                if (facultyAttendancePojo.getTotalHour().contains(":")) {
+                    holder.tvEarlyBy.setText(facultyAttendancePojo.getEarlyByHour().split(":")[0] + "H" + " " +
+                            facultyAttendancePojo.getEarlyByHour().split(":")[1] + "M");
+                } else {
+                    holder.tvEarlyBy.setText(facultyAttendancePojo.getEarlyByHour());
+                }
+            }
+
+            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getEarlyByHour())) {
+                if (facultyAttendancePojo.getTotalHour().contains(":")) {
+                    holder.tvExtraHours.setText(facultyAttendancePojo.getEarlyByHour().split(":")[0] + "H" + " " +
+                            facultyAttendancePojo.getEarlyByHour().split(":")[1] + "M");
+                } else {
+                    holder.tvExtraHours.setText(facultyAttendancePojo.getEarlyByHour());
+                }
+            }
+
+            if (facultyAttendancePojo.getInoutArray() != null && facultyAttendancePojo.getInoutArray().size() > 0) {
+                holder.llDynamicLayout.removeAllViewsInLayout();
 
 //            View facultyAttendanceLayout = inflaterForMergingLayout.inflate(R.layout.layout_for_in_out_list_item, null);
 //
 //            LinearLayout tvInOutHeader = facultyAttendanceLayout.findViewById(R.id.tvInOutHeader);
-            LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            View facultyAttendanceLayoutChild = inflaterForMergingLayout.inflate(R.layout.in_out_row, null);
+                View facultyAttendanceLayoutChild = inflaterForMergingLayout.inflate(R.layout.in_out_row, null);
 
-            boolean isInOrOut = false;
+                boolean isInOrOut = false;
 
-            for (int i = 0; i < facultyAttendancePojo.getInoutArray().size(); i++) {
+                for (int i = 0; i < facultyAttendancePojo.getInoutArray().size(); i++) {
 
-                TextViewRegularFont tvInTime = facultyAttendanceLayoutChild.findViewById(R.id.tvInTime);
-                TextViewRegularFont tvOutTime = facultyAttendanceLayoutChild.findViewById(R.id.tvOutTime);
+                    TextViewRegularFont tvInTime = facultyAttendanceLayoutChild.findViewById(R.id.tvInTime);
+                    TextViewRegularFont tvOutTime = facultyAttendanceLayoutChild.findViewById(R.id.tvOutTime);
 
 //                if (i == facultyAttendancePojo.getInoutArray().size() - 1) {
 //                    rowLine.setVisibility(View.GONE);
 //                }
 
 
-                if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getInoutArray().get(i).getInTime())) {
-                    tvInTime.setText(facultyAttendancePojo.getInoutArray().get(i).getInTime() + "");
-                    isInOrOut = true;
-                }
+                    if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getInoutArray().get(i).getInTime())) {
+                        tvInTime.setText(facultyAttendancePojo.getInoutArray().get(i).getInTime() + "");
+                        isInOrOut = true;
+                    }
 
-                if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getInoutArray().get(i).getOutTime())) {
-                    tvOutTime.setText(facultyAttendancePojo.getInoutArray().get(i).getOutTime() + "");
-                    isInOrOut = true;
-                }
+                    if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getInoutArray().get(i).getOutTime())) {
+                        tvOutTime.setText(facultyAttendancePojo.getInoutArray().get(i).getOutTime() + "");
+                        isInOrOut = true;
+                    }
 
 //                tvInOutHeader.addView(facultyAttendanceLayoutChild);
 
-                if (isInOrOut) {
-                    holder.llDynamicLayout.addView(facultyAttendanceLayoutChild);
+                    if (isInOrOut) {
+                        holder.llDynamicLayout.addView(facultyAttendanceLayoutChild);
+                    }
                 }
-            }
-            if (isInOrOut) {
-                holder.llInOutLayout.setVisibility(View.VISIBLE);
-            } else {
-                holder.llInOutLayout.setVisibility(View.GONE);
-            }
+                if (isInOrOut) {
+                    holder.llInOutLayout.setVisibility(View.VISIBLE);
+                } else {
+                    holder.llInOutLayout.setVisibility(View.GONE);
+                }
 //            holder.llDynamicLayout.addView(facultyAttendanceLayout);
 
-        } else {
-            holder.llDynamicLayout.setVisibility(View.GONE);
-        }
-
-        holder.llExpandedHeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean show = toggleLayoutForDefaultOpenCard(!facultyAttendancePojoArrayList.get(position).isExpanded(), holder.ivViewMoreBtnFacultyAttendance, holder.llExpandableLayoutFacultyAttendance);
-                facultyAttendancePojoArrayList.get(position).setExpanded(show);
+            } else {
+                holder.llDynamicLayout.setVisibility(View.GONE);
             }
-        });
 
-
+            holder.llExpandedHeader.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean show = toggleLayoutForDefaultOpenCard(!facultyAttendancePojoArrayList.get(position).isExpanded(), holder.ivViewMoreBtnFacultyAttendance, holder.llExpandableLayoutFacultyAttendance);
+                    facultyAttendancePojoArrayList.get(position).setExpanded(show);
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

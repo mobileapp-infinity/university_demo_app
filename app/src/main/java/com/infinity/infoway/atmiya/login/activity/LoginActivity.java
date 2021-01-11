@@ -27,6 +27,7 @@ import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.login.pojo.RegisterStudentDetailsModel;
 import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.activity.ForgotPasswordActivity;
+import com.infinity.infoway.atmiya.student.forgot_password.activity.SelectUserTypeActivity;
 import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
@@ -151,8 +152,10 @@ public class LoginActivity extends AppCompatActivity implements
                 checkStudentLoginCheckApiCall(edtLoginUserName.getText().toString().trim(), edtLoginUserPassword.getText().toString().trim());
             }
         } else if (v.getId() == R.id.llForgotPassword) {
-            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-            startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD);
+            Intent intent = new Intent(LoginActivity.this, SelectUserTypeActivity.class);
+            startActivity(intent);
+//            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+//            startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD);
         }
     }
 

@@ -43,6 +43,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".student.forgot_password.activity.SelectUserTypeActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".faculty.faculty_pending_attendance.FacultyPendingAttendanceActivity"
             android:screenOrientation="portrait" />
         <activity
