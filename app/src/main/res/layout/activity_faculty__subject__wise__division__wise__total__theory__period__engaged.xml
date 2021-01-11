@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg_color"
     android:orientation="vertical"
-    tools:context=".faculty.faculty_leave.FacultyLeaveActivity">
+    tools:context=".faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
+            android:singleLine="true"
             android:text="Subject Wise Division Wise Total Theory Period Engaged"
             android:textAllCaps="true"
             android:textColor="@color/white" />

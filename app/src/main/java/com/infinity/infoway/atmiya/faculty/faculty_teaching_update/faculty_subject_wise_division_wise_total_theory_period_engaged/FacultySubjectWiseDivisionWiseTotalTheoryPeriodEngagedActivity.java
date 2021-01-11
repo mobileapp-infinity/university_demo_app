@@ -36,7 +36,7 @@ public class FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity exte
     LinearLayoutManager layoutManager;
     AppCompatImageView ivCloseFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged;
     LinearLayout llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList, llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar, llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged;
-    LinearLayout llFacultyProgressbar;
+    LinearLayout llFacultyProgressbarTotalTheorySubject;
 
     RecyclerView rvFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged;
     FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter facultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter;
@@ -74,7 +74,6 @@ public class FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity exte
                     isScrolling = false;
                     currentPageNo = currentPageNo + 1;
                     GetSubjectWiseDivisionWiseTotalTheoryPeriodEngagedAPI(false);
-
                 }
             }
         });
@@ -95,7 +94,7 @@ public class FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity exte
         llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList = findViewById(R.id.llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList);
         llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar = findViewById(R.id.llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar);
         llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged = findViewById(R.id.llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged);
-        llFacultyProgressbar = findViewById(R.id.llFacultyProgressbar);
+        llFacultyProgressbarTotalTheorySubject = findViewById(R.id.llFacultyProgressbarTotalTheorySubject);
 
     }
 
@@ -119,72 +118,69 @@ public class FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity exte
             if (isProgressbarShowing) {
                 llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar.setVisibility(View.VISIBLE);
             } else {
-
-                llFacultyProgressbar.setVisibility(View.VISIBLE);
+                llFacultyProgressbarTotalTheorySubject.setVisibility(View.VISIBLE);
             }
 
             ApiImplementer.getFacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedImplementer(mySharedPreferences.getEmpId(), mySharedPreferences.getEmpYearId(),
                     String.valueOf(CommonUtil.ROW_PER_PAGE), String.valueOf(currentPageNo), new Callback<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>>() {
-                @Override
-                public void onResponse(Call<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> call, Response<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> response) {
-                    if (connectionDetector.isConnectingToInternet()) {
-
-                        if (isProgressbarShowing) {
-                            llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar.setVisibility(View.GONE);
-                        } else {
-
-                            llFacultyProgressbar.setVisibility(View.GONE);
-                        }
-                        try {
-                            if (response.isSuccessful() && response.body() != null) {
-
-                                llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList.setVisibility(View.VISIBLE);
-                                llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged.setVisibility(View.GONE);
-
-
-                                facultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojoArrayList.addAll(response.body()); //response body
-                                if (!response.body().isEmpty() && response.body().size() > 0) {
-                                    if (currentPageNo == 1) {
-                                        facultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter = new FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, facultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojoArrayList);
-                                        rvFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged.setAdapter(facultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter);
-
-                                    } else {
-                                        facultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter.notifyDataSetChanged();
-                                    }
+                        @Override
+                        public void onResponse(Call<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> call, Response<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> response) {
+                            if (connectionDetector.isConnectingToInternet()) {
+                                if (isProgressbarShowing) {
+                                    llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar.setVisibility(View.GONE);
                                 } else {
-                                    if (currentPageNo == 1) {
-                                        llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList.setVisibility(View.GONE);
-                                        llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar.setVisibility(View.GONE);
-                                        llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged.setVisibility(View.VISIBLE);
-
-                                    } else {
-                                        hasMoreData = false;
-                                    }
+                                    llFacultyProgressbarTotalTheorySubject.setVisibility(View.GONE);
                                 }
+                                try {
+                                    if (response.isSuccessful() && response.body() != null) {
+
+                                        llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList.setVisibility(View.VISIBLE);
+                                        llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged.setVisibility(View.GONE);
+
+
+                                        facultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojoArrayList.addAll(response.body()); //response body
+                                        if (!response.body().isEmpty() && response.body().size() > 0) {
+                                            if (currentPageNo == 1) {
+                                                facultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter = new FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, facultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojoArrayList);
+                                                rvFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged.setAdapter(facultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter);
+
+                                            } else {
+                                                facultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedAdapter.notifyDataSetChanged();
+                                            }
+                                        } else {
+                                            if (currentPageNo == 1) {
+                                                llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList.setVisibility(View.GONE);
+                                                llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar.setVisibility(View.GONE);
+                                                llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged.setVisibility(View.VISIBLE);
+
+                                            } else {
+                                                hasMoreData = false;
+                                            }
+                                        }
+                                    } else {
+                                        Toast.makeText(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, "Response Code:- " + response.code(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (Exception ex) {
+                                    Toast.makeText(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, "Exception:- " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+
                             } else {
-                                Toast.makeText(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, "Response Code:- " + response.code(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
                             }
 
-                        } catch (Exception ex) {
-                            Toast.makeText(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, "Exception:- " + ex.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
+                        @Override
+                        public void onFailure(Call<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> call, Throwable t) {
+                            llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList.setVisibility(View.GONE);
+                            llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar.setVisibility(View.GONE);
+                            llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged.setVisibility(View.VISIBLE);
+                            Toast.makeText(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    } else {
-                        Toast.makeText(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<ArrayList<FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo>> call, Throwable t) {
-                    llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedList.setVisibility(View.GONE);
-                    llFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedProgressbar.setVisibility(View.GONE);
-                    llNoDataFoundFacultySubjectWiseDivisionWiseTotalTheoryPeriodEngaged.setVisibility(View.VISIBLE);
-                    Toast.makeText(FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-
-                }
-            });
+                        }
+                    });
 
 
         } else {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg_color"
     android:orientation="vertical"
-    tools:context=".faculty.faculty_details_of_theory_subjects_taught.FacultyDetailsOfTheorySubjectTaughtActivity">
+    tools:context=".faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,20 +56,20 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:id="@+id/llFacultyProgressbarTotalTheorySubject"
             android:layout_width="match_parent"
-            android:id="@+id/llFacultyProgressbar"
-            android:visibility="gone"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ProgressBar
+                android:id="@+id/pbFacultyDetailsOfTheorySubTaught"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center"
 
-                android:indeterminateTint="@color/colorPrimary"
-                android:id="@+id/pbFacultyDetailsOfTheorySubTaught"/>
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorPrimary" />
 
             <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                 android:layout_width="wrap_content"
@@ -78,12 +78,11 @@
                 android:layout_marginLeft="10dp"
                 android:text="Loading..."
                 android:textAllCaps="true"
-                android:textSize="12sp"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
 
 
         </LinearLayout>
-
 
 
     </LinearLayout>
