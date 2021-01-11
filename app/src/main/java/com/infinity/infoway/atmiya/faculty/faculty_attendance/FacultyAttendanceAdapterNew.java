@@ -119,16 +119,19 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
         }
 
         if (facultyAttendancePojo.getInoutArray() != null && facultyAttendancePojo.getInoutArray().size() > 0) {
-
+            holder.llDynamicLayout.removeAllViewsInLayout();
 
 //            View facultyAttendanceLayout = inflaterForMergingLayout.inflate(R.layout.layout_for_in_out_list_item, null);
 //
 //            LinearLayout tvInOutHeader = facultyAttendanceLayout.findViewById(R.id.tvInOutHeader);
-            for (int i = 0; i < facultyAttendancePojo.getInoutArray().size(); i++) {
-                LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-                View facultyAttendanceLayoutChild = inflaterForMergingLayout.inflate(R.layout.in_out_row, null);
+            View facultyAttendanceLayoutChild = inflaterForMergingLayout.inflate(R.layout.in_out_row, null);
+
+            boolean isInOrOut = false;
+
+            for (int i = 0; i < facultyAttendancePojo.getInoutArray().size(); i++) {
 
                 TextViewRegularFont tvInTime = facultyAttendanceLayoutChild.findViewById(R.id.tvInTime);
                 TextViewRegularFont tvOutTime = facultyAttendanceLayoutChild.findViewById(R.id.tvOutTime);
@@ -140,15 +143,24 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
 
                 if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getInoutArray().get(i).getInTime())) {
                     tvInTime.setText(facultyAttendancePojo.getInoutArray().get(i).getInTime() + "");
+                    isInOrOut = true;
                 }
 
                 if (!CommonUtil.checkIsEmptyOrNullCommon(facultyAttendancePojo.getInoutArray().get(i).getOutTime())) {
                     tvOutTime.setText(facultyAttendancePojo.getInoutArray().get(i).getOutTime() + "");
+                    isInOrOut = true;
                 }
 
 //                tvInOutHeader.addView(facultyAttendanceLayoutChild);
 
-                holder.llDynamicLayout.addView(facultyAttendanceLayoutChild);
+                if (isInOrOut) {
+                    holder.llDynamicLayout.addView(facultyAttendanceLayoutChild);
+                }
+            }
+            if (isInOrOut) {
+                holder.llInOutLayout.setVisibility(View.VISIBLE);
+            } else {
+                holder.llInOutLayout.setVisibility(View.GONE);
             }
 //            holder.llDynamicLayout.addView(facultyAttendanceLayout);
 
@@ -186,6 +198,7 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
         TextViewMediumFont tvEarlyBy;
         TextViewMediumFont tvExtraHours;
 
+        LinearLayout llInOutLayout;
         LinearLayout llDynamicLayout;
 
 
@@ -205,6 +218,7 @@ public class FacultyAttendanceAdapterNew extends RecyclerView.Adapter<FacultyAtt
             tvExtraHours = itemView.findViewById(R.id.tvExtraHours);
 
             llDynamicLayout = itemView.findViewById(R.id.llDynamicLayout);
+            llInOutLayout = itemView.findViewById(R.id.llInOutLayout);
         }
     }
 

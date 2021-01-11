@@ -145,33 +145,34 @@ public class FacultyAttendanceActivity extends AppCompatActivity implements View
             llFacultyAttendanceList.setVisibility(View.GONE);
             llFacultyAttendanceProgressbar.setVisibility(View.VISIBLE);
             llNoDataFoundFacultyAttendance.setVisibility(View.GONE);
-            ApiImplementer.getFacultyAttendanceApiImplementer(mySharedPreferences.getEmpNumber(), mySharedPreferences.getEmpAcCode(), fromDate, toDate, new Callback<ArrayList<FacultyAttendancePojo>>() {
-                @Override
-                public void onResponse(Call<ArrayList<FacultyAttendancePojo>> call, Response<ArrayList<FacultyAttendancePojo>> response) {
-                    try {
-                        llFacultyAttendanceProgressbar.setVisibility(View.GONE);
+            ApiImplementer.getFacultyAttendanceApiImplementer(mySharedPreferences.getEmpNumber(), mySharedPreferences.getEmpAcCode(),
+                    fromDate, toDate, new Callback<ArrayList<FacultyAttendancePojo>>() {
+                        @Override
+                        public void onResponse(Call<ArrayList<FacultyAttendancePojo>> call, Response<ArrayList<FacultyAttendancePojo>> response) {
+                            try {
+                                llFacultyAttendanceProgressbar.setVisibility(View.GONE);
 
-                        if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
-                            llFacultyAttendanceList.setVisibility(View.VISIBLE);
-                            ArrayList<FacultyAttendancePojo> facultyAttendancePojoArrayList = response.body();
-                            rvFacultyAttendanceListNew.setAdapter(new FacultyAttendanceAdapterNew(FacultyAttendanceActivity.this, facultyAttendancePojoArrayList));
-                        } else {
-                            llFacultyAttendanceList.setVisibility(View.GONE);
-                            llNoDataFoundFacultyAttendance.setVisibility(View.VISIBLE);
+                                if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
+                                    llFacultyAttendanceList.setVisibility(View.VISIBLE);
+                                    ArrayList<FacultyAttendancePojo> facultyAttendancePojoArrayList = response.body();
+                                    rvFacultyAttendanceListNew.setAdapter(new FacultyAttendanceAdapterNew(FacultyAttendanceActivity.this, facultyAttendancePojoArrayList));
+                                } else {
+                                    llFacultyAttendanceList.setVisibility(View.GONE);
+                                    llNoDataFoundFacultyAttendance.setVisibility(View.VISIBLE);
+                                }
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
                         }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<ArrayList<FacultyAttendancePojo>> call, Throwable t) {
-                    llFacultyAttendanceList.setVisibility(View.GONE);
-                    llFacultyAttendanceProgressbar.setVisibility(View.GONE);
-                    llNoDataFoundFacultyAttendance.setVisibility(View.VISIBLE);
-                    Toast.makeText(FacultyAttendanceActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                        @Override
+                        public void onFailure(Call<ArrayList<FacultyAttendancePojo>> call, Throwable t) {
+                            llFacultyAttendanceList.setVisibility(View.GONE);
+                            llFacultyAttendanceProgressbar.setVisibility(View.GONE);
+                            llNoDataFoundFacultyAttendance.setVisibility(View.VISIBLE);
+                            Toast.makeText(FacultyAttendanceActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         } else {
             Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
         }
