@@ -466,6 +466,8 @@ public class LoginActivity extends AppCompatActivity implements
         if (registerStudentDetailsModelArrayList.size() > 0) {
             llLoggedInStudentList.setVisibility(View.VISIBLE);
             rvLoginUserList.setAdapter(new LoginUserListAdapter(LoginActivity.this, registerStudentDetailsModelArrayList));
+        } else {
+            llLoggedInStudentList.setVisibility(View.GONE);
         }
     }
 
