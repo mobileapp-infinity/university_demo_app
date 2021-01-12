@@ -1,4 +1,4 @@
-package com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub;
+package com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_details_of_theory_sub;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +18,6 @@ import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
-import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub.*;
 
 import java.util.ArrayList;
 

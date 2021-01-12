@@ -63,16 +63,18 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:checked="true"
+                        android:fontFamily="@font/ubuntu_r"
                         android:text="Fill Attendance By Student"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="12sp"
-                        android:checked="true"/>
+                        android:textSize="12sp" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/rbtnFillByRolNo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/ubuntu_r"
                         android:text="Fill Attendance By Roll No"
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp" />

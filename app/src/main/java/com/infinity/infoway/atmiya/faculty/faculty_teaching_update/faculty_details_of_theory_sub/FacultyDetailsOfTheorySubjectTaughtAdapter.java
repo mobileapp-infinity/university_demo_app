@@ -1,4 +1,4 @@
-package com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub;
+package com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_details_of_theory_sub;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.CustomAnimationForDefaultExpandableCard;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
-import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeaveAdapter;
-import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 
 import java.util.ArrayList;

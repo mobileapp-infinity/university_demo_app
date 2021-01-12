@@ -8,7 +8,8 @@ import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_pending_attendance.FacultyPendingAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendancePojo;
-import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_adviser_remarks.FacultyAdviserRemarksListPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdatePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_student_forum.FacultyStudentForumPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo;
@@ -548,5 +549,13 @@ public interface IApiInterface {
                                                                                                         @Query("year_id") String year_id,
                                                                                                         @Query("RowsPerPage") String RowsPerPage,
                                                                                                         @Query("PageNumber") String PageNumber);
+
+    @GET("FETCH_FACULTY_WISE_ASSGNIED_BATCH_FACULTY_ADVISER_YEAR_WISE_API")
+    @Streaming
+    Call<ArrayList<FacultyAdviserRemarksListPojo>> facultyAdviserRemarks(@Query("emp_id") String emp_id,
+                                                                         @Query("year_id") String year_id,
+                                                                         @Query("institute_id") String institute_id,
+                                                                         @Query("RowsPerPage") String RowsPerPage,
+                                                                         @Query("PageNumber") String PageNumber);
 
 }

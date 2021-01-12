@@ -9,7 +9,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.infinity.infoway.atmiya.R;
-import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtActivity;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_adviser_remarks.FacultyAdviserRemarksActivity;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdateActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_student_forum.FacultyStudentForumActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity;
@@ -63,7 +64,8 @@ public class FacultyTeachingUpdateActivity extends AppCompatActivity implements 
             Intent intent = new Intent(FacultyTeachingUpdateActivity.this, FacultyStudentForumActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.llFacultyTeachingUpdateFacultyAdviserRemarks) {
-
+            Intent intent = new Intent(FacultyTeachingUpdateActivity.this, FacultyAdviserRemarksActivity.class);
+            startActivity(intent);
         } else if (v.getId() == R.id.llFacultyTeachingUpdateDetailsOfTheorySubject) {
             Intent intent = new Intent(FacultyTeachingUpdateActivity.this, FacultyDetailsOfTheorySubjectTaughtActivity.class);
             startActivity(intent);

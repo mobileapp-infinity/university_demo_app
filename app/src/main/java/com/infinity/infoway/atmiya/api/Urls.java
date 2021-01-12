@@ -5,6 +5,7 @@ import retrofit2.Retrofit;
 public class Urls {
 
     public static String BASE_URL = "https://cms.atmiya.edu.in/API_Student_panel_json.asmx/";//For Live
+    public static String BASE_URL_FOR_TESTING_NEW = "http://icampus.biz/API_Student_Panel_JSON.asmx/";//For Testing
     //    public static String BASE_URL_FOR_TESTING = "https://icampus.biz/API_Student_panel_json_icampus.asmx/";//For Testing
     public static String DOMAIN_NAME = "https://cms.atmiya.edu.in";
 

@@ -43,6 +43,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".faculty.faculty_teaching_update.faculty_adviser_remarks.FacultyAdviserRemarksActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".faculty.faculty_fill_attendance.FacultyFillAttendanceActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -67,7 +70,7 @@
             android:name=".faculty.faculty_teaching_update.faculty_student_forum.FacultyStudentForumActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtActivity"
+            android:name=".faculty.faculty_teaching_update.faculty_details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".faculty.faculty_attendance.FacultyAttendanceActivity"

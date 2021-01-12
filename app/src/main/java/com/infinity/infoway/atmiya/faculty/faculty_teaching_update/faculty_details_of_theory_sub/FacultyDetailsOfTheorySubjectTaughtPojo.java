@@ -1,4 +1,4 @@
-package com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub;
+package com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_details_of_theory_sub;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

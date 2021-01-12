@@ -1,7 +1,5 @@
 package com.infinity.infoway.atmiya.api;
 
-import android.content.Context;
-
 import com.infinity.infoway.atmiya.faculty.faculty_attendance.FacultyAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
@@ -10,7 +8,8 @@ import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_pending_attendance.FacultyPendingAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_profile.FacultyProfilePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_rem_attendance.FacultyRemAttendancePojo;
-import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_adviser_remarks.FacultyAdviserRemarksListPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdatePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_student_forum.FacultyStudentForumPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo;
@@ -661,6 +660,13 @@ public class ApiImplementer {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<FacultyLabOrLecturePlanTeachingUpdatePojo>> call = apiService.getFacultyLabOrLecturePlanTeachingUpdate(emp_id,
                 institute_id, year_id, RowsPerPage, PageNumber);
+        call.enqueue(cb);
+    }
+
+    public static void facultyAdviserRemarksApiImplementer(String emp_id, String year_id, String institute_id,
+                                                           String RowsPerPage, String PageNumber, Callback<ArrayList<FacultyAdviserRemarksListPojo>> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<FacultyAdviserRemarksListPojo>> call = apiService.facultyAdviserRemarks(emp_id, year_id, institute_id, RowsPerPage, PageNumber);
         call.enqueue(cb);
     }
 
