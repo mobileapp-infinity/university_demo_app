@@ -36,11 +36,6 @@ public class FacultyPendingAttendanceActivity extends AppCompatActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_pending_attendance);
         initView();
-//        llFacultyPendingAttendanceList.setVisibility(View.VISIBLE);
-//        llFacultyPendingAttendanceProgressbar.setVisibility(View.GONE);
-//        llNoDataFoundPendingAttendance.setVisibility(View.GONE);
-//        rvFacultyPendingAttendance.setAdapter(new FacultyPendingAttendanceListAdapter(FacultyPendingAttendanceActivity.this, null));
-
         getFacultyPendingAttendanceApiCall();
     }
 
@@ -75,28 +70,28 @@ public class FacultyPendingAttendanceActivity extends AppCompatActivity implemen
             llNoDataFoundPendingAttendance.setVisibility(View.GONE);
             ApiImplementer.getFacultyPendingAttendanceApiImplementer(mySharedPreferences.getEmpId(),
                     mySharedPreferences.getEmpYearId(), new Callback<FacultyPendingAttendancePojo>() {
-                @Override
-                public void onResponse(Call<FacultyPendingAttendancePojo> call, Response<FacultyPendingAttendancePojo> response) {
-                    llFacultyPendingAttendanceProgressbar.setVisibility(View.GONE);
-                    if (response.isSuccessful() && response.body() != null &&
-                            response.body().getDetailsArrayList().size() > 0) {
-                        llFacultyPendingAttendanceList.setVisibility(View.VISIBLE);
-                        llNoDataFoundPendingAttendance.setVisibility(View.GONE);
-                        rvFacultyPendingAttendance.setAdapter(new FacultyPendingAttendanceListAdapter(FacultyPendingAttendanceActivity.this, response.body().getDetailsArrayList()));
-                    } else {
-                        llFacultyPendingAttendanceList.setVisibility(View.GONE);
-                        llNoDataFoundPendingAttendance.setVisibility(View.VISIBLE);
-                    }
-                }
+                        @Override
+                        public void onResponse(Call<FacultyPendingAttendancePojo> call, Response<FacultyPendingAttendancePojo> response) {
+                            llFacultyPendingAttendanceProgressbar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null &&
+                                    response.body().getDetailsArrayList().size() > 0) {
+                                llFacultyPendingAttendanceList.setVisibility(View.VISIBLE);
+                                llNoDataFoundPendingAttendance.setVisibility(View.GONE);
+                                rvFacultyPendingAttendance.setAdapter(new FacultyPendingAttendanceListAdapter(FacultyPendingAttendanceActivity.this, response.body().getDetailsArrayList()));
+                            } else {
+                                llFacultyPendingAttendanceList.setVisibility(View.GONE);
+                                llNoDataFoundPendingAttendance.setVisibility(View.VISIBLE);
+                            }
+                        }
 
-                @Override
-                public void onFailure(Call<FacultyPendingAttendancePojo> call, Throwable t) {
-                    llFacultyPendingAttendanceList.setVisibility(View.GONE);
-                    llFacultyPendingAttendanceProgressbar.setVisibility(View.GONE);
-                    llNoDataFoundPendingAttendance.setVisibility(View.VISIBLE);
-                    Toast.makeText(FacultyPendingAttendanceActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                        @Override
+                        public void onFailure(Call<FacultyPendingAttendancePojo> call, Throwable t) {
+                            llFacultyPendingAttendanceList.setVisibility(View.GONE);
+                            llFacultyPendingAttendanceProgressbar.setVisibility(View.GONE);
+                            llNoDataFoundPendingAttendance.setVisibility(View.VISIBLE);
+                            Toast.makeText(FacultyPendingAttendanceActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         } else {
             Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
         }
