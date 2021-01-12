@@ -36,6 +36,11 @@ public class FacultyPendingAttendanceActivity extends AppCompatActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_pending_attendance);
         initView();
+//        llFacultyPendingAttendanceList.setVisibility(View.VISIBLE);
+//        llFacultyPendingAttendanceProgressbar.setVisibility(View.GONE);
+//        llNoDataFoundPendingAttendance.setVisibility(View.GONE);
+//        rvFacultyPendingAttendance.setAdapter(new FacultyPendingAttendanceListAdapter(FacultyPendingAttendanceActivity.this, null));
+
         getFacultyPendingAttendanceApiCall();
     }
 
@@ -68,7 +73,8 @@ public class FacultyPendingAttendanceActivity extends AppCompatActivity implemen
             llFacultyPendingAttendanceList.setVisibility(View.GONE);
             llFacultyPendingAttendanceProgressbar.setVisibility(View.VISIBLE);
             llNoDataFoundPendingAttendance.setVisibility(View.GONE);
-            ApiImplementer.getFacultyPendingAttendanceApiImplementer(mySharedPreferences.getEmpId(), mySharedPreferences.getEmpYearId(), new Callback<FacultyPendingAttendancePojo>() {
+            ApiImplementer.getFacultyPendingAttendanceApiImplementer(mySharedPreferences.getEmpId(),
+                    mySharedPreferences.getEmpYearId(), new Callback<FacultyPendingAttendancePojo>() {
                 @Override
                 public void onResponse(Call<FacultyPendingAttendancePojo> call, Response<FacultyPendingAttendancePojo> response) {
                     llFacultyPendingAttendanceProgressbar.setVisibility(View.GONE);

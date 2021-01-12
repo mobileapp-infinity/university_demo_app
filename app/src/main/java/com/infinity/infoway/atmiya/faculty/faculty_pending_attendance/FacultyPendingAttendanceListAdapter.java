@@ -38,26 +38,41 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         FacultyPendingAttendancePojo.Details facultyPendingAttendancePojo = facultyPendingAttendancePojoArrayList.get(position);
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getSemesterName())) {
             holder.tvSemesterFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getSemesterName() + "");
         }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getDepartment())) {
-            holder.tvDepartmentNamePendingAttendance.setText(facultyPendingAttendancePojo.getDepartment() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getDlDate())) {
+
+            String data = facultyPendingAttendancePojo.getDlDate();
+
+            if (data != null && !data.isEmpty()) {
+                String date = "";
+                try {
+                    if (data.contains("/")) {
+                        String dateArray[] = data.split("/");
+                        date = dateArray[0] + " " + CommonUtil.getMonthSortNameFromNumber(Integer.parseInt(dateArray[1])) + "," + " " + dateArray[2];
+                    }
+                    holder.tvFacultyPendingAttendanceDate.setText(date);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getCourseName())) {
+            holder.tvCourseNameFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getCourseName() + "");
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getSubName())) {
-            holder.tvSubjectFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getSubName() + "");
+            holder.tvSubjectNameFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getSubName() + "");
         }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getDlDate())) {
-            holder.tvDateFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getDlDate() + "");
-        }
-
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getResourseName())) {
-            holder.tvResourceNameFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getResourseName() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getBatchName())) {
+            holder.tvBatchFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getBatchName() + "");
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getBatchName())) {
@@ -65,18 +80,10 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getDivisionName())) {
-            holder.tvDivisionPendingAttendance.setText(facultyPendingAttendancePojo.getDivisionName() + "");
+            holder.tvDivisionFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getDivisionName() + "");
         }
 
-        holder.llExpandedHeaderFacultyPendingAttendance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean show = toggleLayoutForDefaultOpenCard(!facultyPendingAttendancePojo.isExpanded(), holder.ivViewMoreFacultyPendingAttendance, holder.llExpandableLayoutFacultyPendingAttendance);
-                facultyPendingAttendancePojo.setExpanded(show);
-            }
-        });
-
-        holder.llFillAttendance.setOnClickListener(new View.OnClickListener() {
+        holder.llFillAttendanceFacultyPendingAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -86,38 +93,56 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
 
     @Override
     public int getItemCount() {
-        return facultyPendingAttendancePojoArrayList.size();
+        return 3;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        AppCompatImageView ivViewMoreFacultyPendingAttendance;
-        LinearLayout llExpandableLayoutFacultyPendingAttendance;
-        LinearLayout llExpandedHeaderFacultyPendingAttendance;
+//        AppCompatImageView ivViewMoreFacultyPendingAttendance;
+//        LinearLayout llExpandableLayoutFacultyPendingAttendance;
+//        LinearLayout llExpandedHeaderFacultyPendingAttendance;
 
-        LinearLayout llFillAttendance;
         TextViewRegularFont tvSemesterFacultyPendingAttendance;
-        TextViewRegularFont tvDepartmentNamePendingAttendance;
-        TextViewRegularFont tvSubjectFacultyPendingAttendance;
-        TextViewRegularFont tvDateFacultyPendingAttendance;
-        TextViewRegularFont tvResourceNameFacultyPendingAttendance;
+        TextViewRegularFont tvFacultyPendingAttendanceDate;
+        TextViewRegularFont tvCourseNameFacultyPendingAttendance;
+        TextViewRegularFont tvSubjectNameFacultyPendingAttendance;
         TextViewRegularFont tvBatchFacultyPendingAttendance;
-        TextViewRegularFont tvDivisionPendingAttendance;
+        TextViewRegularFont tvDivisionFacultyPendingAttendance;
+        LinearLayout llFillAttendanceFacultyPendingAttendance;
+
+
+//        TextViewRegularFont tvDepartmentNamePendingAttendance;
+//        TextViewRegularFont tvSubjectFacultyPendingAttendance;
+//        TextViewRegularFont tvDateFacultyPendingAttendance;
+//        TextViewRegularFont tvResourceNameFacultyPendingAttendance;
+//        TextViewRegularFont tvBatchFacultyPendingAttendance;
+//        TextViewRegularFont tvDivisionPendingAttendance;
+
+        View dynamicLine;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivViewMoreFacultyPendingAttendance = itemView.findViewById(R.id.ivViewMoreFacultyPendingAttendance);
-            llExpandableLayoutFacultyPendingAttendance = itemView.findViewById(R.id.llExpandableLayoutFacultyPendingAttendance);
-            llExpandedHeaderFacultyPendingAttendance = itemView.findViewById(R.id.llExpandedHeaderFacultyPendingAttendance);
+            dynamicLine = itemView.findViewById(R.id.dynamicLine);
+//            ivViewMoreFacultyPendingAttendance = itemView.findViewById(R.id.ivViewMoreFacultyPendingAttendance);
+//            llExpandableLayoutFacultyPendingAttendance = itemView.findViewById(R.id.llExpandableLayoutFacultyPendingAttendance);
+//            llExpandedHeaderFacultyPendingAttendance = itemView.findViewById(R.id.llExpandedHeaderFacultyPendingAttendance);
+//
+//            llFillAttendance = itemView.findViewById(R.id.llFillAttendance);
+//            tvSemesterFacultyPendingAttendance = itemView.findViewById(R.id.tvSemesterFacultyPendingAttendance);
+//            tvDepartmentNamePendingAttendance = itemView.findViewById(R.id.tvDepartmentNamePendingAttendance);
+//            tvSubjectFacultyPendingAttendance = itemView.findViewById(R.id.tvSubjectFacultyPendingAttendance);
+//            tvDateFacultyPendingAttendance = itemView.findViewById(R.id.tvDateFacultyPendingAttendance);
+//            tvResourceNameFacultyPendingAttendance = itemView.findViewById(R.id.tvResourceNameFacultyPendingAttendance);
+//            tvBatchFacultyPendingAttendance = itemView.findViewById(R.id.tvBatchFacultyPendingAttendance);
+//            tvDivisionPendingAttendance = itemView.findViewById(R.id.tvDivisionPendingAttendance);
 
-            llFillAttendance = itemView.findViewById(R.id.llFillAttendance);
             tvSemesterFacultyPendingAttendance = itemView.findViewById(R.id.tvSemesterFacultyPendingAttendance);
-            tvDepartmentNamePendingAttendance = itemView.findViewById(R.id.tvDepartmentNamePendingAttendance);
-            tvSubjectFacultyPendingAttendance = itemView.findViewById(R.id.tvSubjectFacultyPendingAttendance);
-            tvDateFacultyPendingAttendance = itemView.findViewById(R.id.tvDateFacultyPendingAttendance);
-            tvResourceNameFacultyPendingAttendance = itemView.findViewById(R.id.tvResourceNameFacultyPendingAttendance);
+            tvFacultyPendingAttendanceDate = itemView.findViewById(R.id.tvFacultyPendingAttendanceDate);
+            tvCourseNameFacultyPendingAttendance = itemView.findViewById(R.id.tvCourseNameFacultyPendingAttendance);
+            tvSubjectNameFacultyPendingAttendance = itemView.findViewById(R.id.tvSubjectNameFacultyPendingAttendance);
             tvBatchFacultyPendingAttendance = itemView.findViewById(R.id.tvBatchFacultyPendingAttendance);
-            tvDivisionPendingAttendance = itemView.findViewById(R.id.tvDivisionPendingAttendance);
+            tvDivisionFacultyPendingAttendance = itemView.findViewById(R.id.tvDivisionFacultyPendingAttendance);
+            llFillAttendanceFacultyPendingAttendance = itemView.findViewById(R.id.llFillAttendanceFacultyPendingAttendance);
         }
     }
 
