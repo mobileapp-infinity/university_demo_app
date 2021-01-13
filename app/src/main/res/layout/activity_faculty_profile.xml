@@ -571,7 +571,7 @@
                                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Job Name"
+                                    android:text="Designation"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 

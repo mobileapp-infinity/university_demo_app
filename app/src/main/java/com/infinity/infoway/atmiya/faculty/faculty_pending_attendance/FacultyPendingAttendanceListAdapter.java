@@ -1,6 +1,7 @@
 package com.infinity.infoway.atmiya.faculty.faculty_pending_attendance;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.CustomAnimationForDefaultExpandableCard;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.activity.FacultyFillAttendanceActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 
 import java.util.ArrayList;
@@ -75,9 +77,9 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
             holder.tvBatchFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getBatchName() + "");
         }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getBatchName())) {
-            holder.tvBatchFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getBatchName() + "");
-        }
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getBatchName())) {
+//            holder.tvBatchFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getBatchName() + "");
+//        }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getDivisionName())) {
             holder.tvDivisionFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getDivisionName() + "");
@@ -86,12 +88,15 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
         holder.llFillAttendanceFacultyPendingAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, FacultyFillAttendanceActivity.class);
+                context.startActivity(intent);
             }
         });
 
         if (position == facultyPendingAttendancePojoArrayList.size() - 1) {
-            holder.dynamicLine.setVisibility(View.GONE);
+            holder.ivDynamicLineEnd.setVisibility(View.VISIBLE);
+        } else {
+            holder.ivDynamicLineEnd.setVisibility(View.GONE);
         }
     }
 
@@ -122,11 +127,13 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
 //        TextViewRegularFont tvBatchFacultyPendingAttendance;
 //        TextViewRegularFont tvDivisionPendingAttendance;
 
-        View dynamicLine;
+        //        View dynamicLine;
+        AppCompatImageView ivDynamicLineEnd;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            dynamicLine = itemView.findViewById(R.id.dynamicLine);
+//            dynamicLine = itemView.findViewById(R.id.dynamicLine);
+            ivDynamicLineEnd = itemView.findViewById(R.id.ivDynamicLineEnd);
 //            ivViewMoreFacultyPendingAttendance = itemView.findViewById(R.id.ivViewMoreFacultyPendingAttendance);
 //            llExpandableLayoutFacultyPendingAttendance = itemView.findViewById(R.id.llExpandableLayoutFacultyPendingAttendance);
 //            llExpandedHeaderFacultyPendingAttendance = itemView.findViewById(R.id.llExpandedHeaderFacultyPendingAttendance);

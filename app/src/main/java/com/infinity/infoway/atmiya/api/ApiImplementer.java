@@ -2,6 +2,9 @@ package com.infinity.infoway.atmiya.api;
 
 import com.infinity.infoway.atmiya.faculty.faculty_attendance.FacultyAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.FacultyPendingAttendanceUnitPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingAidDetailsPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingMethodPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
@@ -667,6 +670,24 @@ public class ApiImplementer {
                                                            String RowsPerPage, String PageNumber, Callback<ArrayList<FacultyAdviserRemarksListPojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
         Call<ArrayList<FacultyAdviserRemarksListPojo>> call = apiService.facultyAdviserRemarks(emp_id, year_id, institute_id, RowsPerPage, PageNumber);
+        call.enqueue(cb);
+    }
+
+    public static void getTeachingMethodApiImplementer(String institute_id, Callback<GetTeachingMethodPojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<GetTeachingMethodPojo> call = apiService.getTeachingMethod(institute_id);
+        call.enqueue(cb);
+    }
+
+    public static void getTeachingAidDetailsApiImplementer(String institute_id, Callback<GetTeachingAidDetailsPojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<GetTeachingAidDetailsPojo> call = apiService.getTeachingAidDetails(institute_id);
+        call.enqueue(cb);
+    }
+
+    public static void getFacultyPendingAttendanceUnitApiImplementer(String emp_id, String div_id, String sub_id, String year_id, Callback<FacultyPendingAttendanceUnitPojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<FacultyPendingAttendanceUnitPojo> call = apiService.getFacultyPendingAttendanceUnit(emp_id, div_id, sub_id, year_id);
         call.enqueue(cb);
     }
 

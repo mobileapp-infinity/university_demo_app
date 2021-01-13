@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg_color"
     android:orientation="vertical"
-    tools:context=".faculty.faculty_fill_attendance.FacultyFillAttendanceActivity">
+    tools:context=".faculty.faculty_fill_attendance.activity.FacultyFillAttendanceActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
@@ -65,7 +65,7 @@
                         android:layout_weight="1"
                         android:checked="true"
                         android:fontFamily="@font/ubuntu_r"
-                        android:text="Fill Attendance By Student"
+                        android:text="By Student"
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp" />
 
@@ -75,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/ubuntu_r"
-                        android:text="Fill Attendance By Roll No"
+                        android:text="By Roll Numbers"
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp" />
 
@@ -83,6 +83,187 @@
 
             </LinearLayout>
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/llFillAttendanceByRollNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:gravity="center_vertical|end"
+                            android:orientation="horizontal">
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                android:id="@+id/tvAttendanceForByRollNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Attendance For Absent"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp" />
+
+                            <com.kyleduo.switchbutton.SwitchButton
+                                android:id="@+id/sBtnAttendanceForByRollNo"
+                                style="@style/SwitchButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:ignore="RtlHardcoded" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/llSelectTeachingMethod"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="vertical">
+
+                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:text="Select Teaching Method"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp" />
+
+                            <GridView
+                                android:id="@+id/gvTeachingMethodList"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:numColumns="3"
+                                android:scrollbars="none"
+                                android:verticalSpacing="4dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llSelectNoOfPost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/spSelectNoOfPostOn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:dropDownVerticalOffset="40dp"
+                                android:minHeight="35dp"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llFaciltyAidDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/spSelectTeachingAid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:dropDownVerticalOffset="40dp"
+                                android:minHeight="35dp"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llFacultyPendingAttendaUnit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/spSelectUnit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:dropDownVerticalOffset="40dp"
+                                android:minHeight="35dp"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/common_bg_color"
+                                app:boxBackgroundColor="@color/common_bg_color"
+                                app:hintTextColor="@color/colorAccent">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/tilNote"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/ubuntu_r"
+                                    android:hint="Enter Topic"
+                                    android:text=" "
+                                    android:textColor="@color/colorPrimary"
+                                    android:textColorHint="@color/colorAccent"
+                                    android:textSize="12sp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
 
         </LinearLayout>
 

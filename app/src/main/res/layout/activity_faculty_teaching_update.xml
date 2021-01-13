@@ -262,7 +262,7 @@
                         android:maxLines="2"
                         android:minLines="2"
                         android:padding="8dp"
-                        android:text="Total Theory\nPeriod"
+                        android:text="Total Lecture\nEngaged"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="10sp" />

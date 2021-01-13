@@ -2,6 +2,9 @@ package com.infinity.infoway.atmiya.api;
 
 import com.infinity.infoway.atmiya.faculty.faculty_attendance.FacultyAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.FacultyPendingAttendanceUnitPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingAidDetailsPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingMethodPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
@@ -557,5 +560,20 @@ public interface IApiInterface {
                                                                          @Query("institute_id") String institute_id,
                                                                          @Query("RowsPerPage") String RowsPerPage,
                                                                          @Query("PageNumber") String PageNumber);
+
+    @GET("Get_Teaching_Method_Details_API")
+    @Streaming
+    Call<GetTeachingMethodPojo> getTeachingMethod(@Query("institute_id") String institute_id);
+
+    @GET("Get_Teaching_Aid_Detail_API")
+    @Streaming
+    Call<GetTeachingAidDetailsPojo> getTeachingAidDetails(@Query("institute_id") String institute_id);
+
+    @GET("Get_Subject_Wise_Unit_Detail")
+    @Streaming
+    Call<FacultyPendingAttendanceUnitPojo> getFacultyPendingAttendanceUnit(@Query("emp_id") String emp_id,
+                                                                           @Query("div_id") String div_id,
+                                                                           @Query("sub_id") String sub_id,
+                                                                           @Query("year_id") String year_id);
 
 }
