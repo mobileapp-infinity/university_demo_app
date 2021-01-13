@@ -89,11 +89,15 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
 
             }
         });
+
+        if (position == facultyPendingAttendancePojoArrayList.size() - 1) {
+            holder.dynamicLine.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return facultyPendingAttendancePojoArrayList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
