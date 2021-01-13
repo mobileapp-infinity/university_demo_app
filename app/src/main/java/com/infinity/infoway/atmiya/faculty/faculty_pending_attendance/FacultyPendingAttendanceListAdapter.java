@@ -16,6 +16,7 @@ import com.infinity.infoway.atmiya.custom_class.CustomAnimationForDefaultExpanda
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.activity.FacultyFillAttendanceActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.IntentConstants;
 
 import java.util.ArrayList;
 
@@ -89,6 +90,7 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FacultyFillAttendanceActivity.class);
+                intent.putExtra(IntentConstants.FACULTY_FILL_ATTENDANCE, facultyPendingAttendancePojo);
                 context.startActivity(intent);
             }
         });

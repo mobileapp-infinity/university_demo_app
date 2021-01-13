@@ -5,6 +5,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFC
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.FacultyPendingAttendanceUnitPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingAidDetailsPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingMethodPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.StudentDetailsFillAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
@@ -575,5 +576,15 @@ public interface IApiInterface {
                                                                            @Query("div_id") String div_id,
                                                                            @Query("sub_id") String sub_id,
                                                                            @Query("year_id") String year_id);
+
+    @GET("Get_Student_Detail_For_Attendance")
+    @Streaming
+    Call<StudentDetailsFillAttendancePojo> getPendingAttendanceStudentList(@Query("batch_id") String batch_id,
+                                                                           @Query("div_id") String div_id,
+                                                                           @Query("sem_id") String sem_id,
+                                                                           @Query("lect_no") String lect_no,
+                                                                           @Query("att_date") String att_date,
+                                                                           @Query("year_id") String year_id,
+                                                                           @Query("sub_id") String sub_id);
 
 }

@@ -5,6 +5,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFC
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.FacultyPendingAttendanceUnitPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingAidDetailsPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingMethodPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.StudentDetailsFillAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
@@ -688,6 +689,13 @@ public class ApiImplementer {
     public static void getFacultyPendingAttendanceUnitApiImplementer(String emp_id, String div_id, String sub_id, String year_id, Callback<FacultyPendingAttendanceUnitPojo> cb) {
         final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
         Call<FacultyPendingAttendanceUnitPojo> call = apiService.getFacultyPendingAttendanceUnit(emp_id, div_id, sub_id, year_id);
+        call.enqueue(cb);
+    }
+
+    public static void getPendingAttendanceStudentListApiImplementer(String batch_id, String div_id, String sem_id, String lect_no,
+                                                       String att_date, String year_id, String sub_id, Callback<StudentDetailsFillAttendancePojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<StudentDetailsFillAttendancePojo> call = apiService.getPendingAttendanceStudentList(batch_id, div_id, sem_id, lect_no, att_date, year_id, sub_id);
         call.enqueue(cb);
     }
 

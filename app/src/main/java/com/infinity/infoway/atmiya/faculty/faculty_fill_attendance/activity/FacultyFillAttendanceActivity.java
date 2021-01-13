@@ -2,6 +2,7 @@ package com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,20 +10,26 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.SpinnerSimpleAdapter;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.adapter.SelectTeachingMethodGridViewAdapter;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.adapter.StudentListFillAttendanceAdapter;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.FacultyPendingAttendanceUnitPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingAidDetailsPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingMethodPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.StudentDetailsFillAttendancePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_pending_attendance.FacultyPendingAttendancePojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
+import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 import com.kyleduo.switchbutton.SwitchButton;
 
@@ -38,7 +45,6 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
     private static final String SELECT_NO_OF_POST_ON = "Select No Of Post";
     private static final String SELECT_TEACHING_AID = "Select Teaching Aid";
     private static final String SELECT_TEACHING_UNIT = "Select Unit";
-
 
     MySharedPreferences mySharedPreferences;
     ConnectionDetector connectionDetector;
@@ -68,23 +74,91 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
     Spinner spSelectUnit;
     ArrayList<String> teachingUnitArrayList;
     HashMap<String, String> teachingUnitNameAndIdHashMap;
+    FacultyPendingAttendancePojo.Details facultyPendingAttendancePojo;
 
+    RadioGroup rbtnGrpByStudentAndRollNo;
+    LinearLayout llFillAttendanceByRollNumber;
+    LinearLayout llFillAttendanceByStudent;
+
+    //By Roll Number
+    TextInputEditText tilStudentCommaSeparatedRollNumber;
+
+    //By Student
+    RecyclerView rvFillAttendanceStudentList;
+    LinearLayout llFillAttendanceByStudentInner;
+
+    //Common
+    TextInputEditText tilTopic;
+    TextViewRegularFont btnSaveFilledAttendance;
+
+    TextViewRegularFont tvCourseName;
+    TextViewRegularFont tvLectureName;
+    LinearLayout llHangingCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_fill_attendance);
         initView();
-        getFacultyPendingAttendanceTeachingMethodApiCall(true, false);
+
+        if (getIntent().hasExtra(IntentConstants.FACULTY_FILL_ATTENDANCE)) {
+            facultyPendingAttendancePojo = (FacultyPendingAttendancePojo.Details) getIntent().getSerializableExtra(IntentConstants.FACULTY_FILL_ATTENDANCE);
+
+
+            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getCourseName()) ||
+                    !CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getLectName())) {
+                llHangingCard.setVisibility(View.VISIBLE);
+                tvCourseName.setText(facultyPendingAttendancePojo.getCourseName() + "");
+                tvLectureName.setText(facultyPendingAttendancePojo.getSubName() + "");
+            } else {
+                llHangingCard.setVisibility(View.GONE);
+            }
+
+            if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getDivId()) &&
+                    !CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getSubId())) {
+                getFacultyPendingAttendanceTeachingMethodApiCall(true, false);
+            } else {
+                Toast.makeText(this, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();
+        }
+
+        rbtnGrpByStudentAndRollNo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rbtnFillAttendanceByStydent) {
+                    llFillAttendanceByStudent.setVisibility(View.VISIBLE);
+                    llFillAttendanceByRollNumber.setVisibility(View.GONE);
+                } else if (checkedId == R.id.rbtnFillAttendanceByRolNo) {
+                    llFillAttendanceByRollNumber.setVisibility(View.VISIBLE);
+                    llFillAttendanceByStudent.setVisibility(View.GONE);
+                }
+            }
+        });
+
     }
 
     private void initView() {
         mySharedPreferences = new MySharedPreferences(FacultyFillAttendanceActivity.this);
         connectionDetector = new ConnectionDetector(FacultyFillAttendanceActivity.this);
+        tilStudentCommaSeparatedRollNumber = findViewById(R.id.tilStudentCommaSeparatedRollNumber);
+        tilTopic = findViewById(R.id.tilTopic);
+        llFillAttendanceByStudent = findViewById(R.id.llFillAttendanceByStudent);
+        llFillAttendanceByRollNumber = findViewById(R.id.llFillAttendanceByRollNumber);
+        rbtnGrpByStudentAndRollNo = findViewById(R.id.rbtnGrpByStudentAndRollNo);
         ivCloseFacultyFillAttendance = findViewById(R.id.ivCloseFacultyFillAttendance);
         ivCloseFacultyFillAttendance.setOnClickListener(this);
         sBtnAttendanceForByRollNo = findViewById(R.id.sBtnAttendanceForByRollNo);
         tvAttendanceForByRollNumber = findViewById(R.id.tvAttendanceForByRollNumber);
+        rvFillAttendanceStudentList = findViewById(R.id.rvFillAttendanceStudentList);
+        llFillAttendanceByStudentInner = findViewById(R.id.llFillAttendanceByStudentInner);
+        btnSaveFilledAttendance = findViewById(R.id.btnSaveFilledAttendance);
+        btnSaveFilledAttendance.setOnClickListener(this);
+
+        tvCourseName = findViewById(R.id.tvCourseName);
+        tvLectureName = findViewById(R.id.tvLectureName);
+        llHangingCard = findViewById(R.id.llHangingCard);
 
         llSelectTeachingMethod = findViewById(R.id.llSelectTeachingMethod);
         gvTeachingMethodList = findViewById(R.id.gvTeachingMethodList);
@@ -96,6 +170,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         }
 
         spinnerAdapterYearSelectNoOfPost = new SpinnerSimpleAdapter(FacultyFillAttendanceActivity.this, noOfPostArrayList);
+        spSelectNoOfPostOn = findViewById(R.id.spSelectNoOfPostOn);
         spSelectNoOfPostOn.setAdapter(spinnerAdapterYearSelectNoOfPost);
 
         spSelectNoOfPostOn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -161,6 +236,8 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
     public void onClick(View v) {
         if (v.getId() == R.id.ivCloseFacultyFillAttendance) {
             onBackPressed();
+        } else if (v.getId() == R.id.btnSaveFilledAttendance) {
+
         }
     }
 
@@ -188,7 +265,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                                     getTeachingMethodArrayList);
                             gvTeachingMethodList.setAdapter(selectTeachingMethodGridViewAdapter);
                             isMethodSelected = true;
-                            getFacultyAidDetailsApiCall(false, true);
+                            getFacultyAidDetailsApiCall(false, false);
                         } else {
                             isMethodSelected = false;
                             DialogUtil.hideProgressDialog();
@@ -241,7 +318,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                         }
                         spinnerAdapterFacultyAidDetails = new SpinnerSimpleAdapter(FacultyFillAttendanceActivity.this, teachingAidArrayList);
                         spSelectTeachingAid.setAdapter(spinnerAdapterFacultyAidDetails);
-
+                        getFacultyPendingAttendanceUnitApiCall(false, false);
                     } else {
                         DialogUtil.hideProgressDialog();
                         llFaciltyAidDetails.setVisibility(View.GONE);
@@ -260,53 +337,90 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         }
     }
 
-    private void getFacultyPendingAttendanceUnitApiCall(boolean isPdShow, boolean isPdHide, String divId, String subId) {
+    private void getFacultyPendingAttendanceUnitApiCall(boolean isPdShow, boolean isPdHide) {
         if (connectionDetector.isConnectingToInternet()) {
             if (isPdShow) {
                 DialogUtil.showProgressDialogNotCancelable(FacultyFillAttendanceActivity.this, "");
             }
             llFacultyPendingAttendaUnit.setVisibility(View.GONE);
-            ApiImplementer.getFacultyPendingAttendanceUnitApiImplementer(mySharedPreferences.getEmpId(), divId, subId, mySharedPreferences.getEmpYearId(), new Callback<FacultyPendingAttendanceUnitPojo>() {
-                @Override
-                public void onResponse(Call<FacultyPendingAttendanceUnitPojo> call, Response<FacultyPendingAttendanceUnitPojo> response) {
-                    if (isPdHide) {
-                        DialogUtil.hideProgressDialog();
-                    }
-                    if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
-                        teachingUnitArrayList = new ArrayList<>();
-                        teachingUnitArrayList.add(SELECT_TEACHING_UNIT);
-                        teachingUnitNameAndIdHashMap = new HashMap<>();
-                        ArrayList<FacultyPendingAttendanceUnitPojo.Table> tableArrayList = (ArrayList<FacultyPendingAttendanceUnitPojo.Table>) response.body().getTable();
+            ApiImplementer.getFacultyPendingAttendanceUnitApiImplementer(mySharedPreferences.getEmpId(), facultyPendingAttendancePojo.getDivId() + "",
+                    facultyPendingAttendancePojo.getSubId() + "", mySharedPreferences.getEmpYearId(), new Callback<FacultyPendingAttendanceUnitPojo>() {
+                        @Override
+                        public void onResponse(Call<FacultyPendingAttendanceUnitPojo> call, Response<FacultyPendingAttendanceUnitPojo> response) {
+                            if (isPdHide) {
+                                DialogUtil.hideProgressDialog();
+                            }
+                            if (response.isSuccessful() && response.body() != null && response.body().getTable() != null &&
+                                    response.body().getTable().size() > 0) {
+                                teachingUnitArrayList = new ArrayList<>();
+                                teachingUnitArrayList.add(SELECT_TEACHING_UNIT);
+                                teachingUnitNameAndIdHashMap = new HashMap<>();
+                                ArrayList<FacultyPendingAttendanceUnitPojo.Table> tableArrayList = (ArrayList<FacultyPendingAttendanceUnitPojo.Table>) response.body().getTable();
 
-                        for (int i = 0; i < tableArrayList.size(); i++) {
-                            FacultyPendingAttendanceUnitPojo.Table table = tableArrayList.get(i);
-                            if (!CommonUtil.checkIsEmptyOrNullCommon(table.getUnitId()) &&
-                                    !CommonUtil.checkIsEmptyOrNullCommon(table.getUnitName())) {
-                                teachingUnitArrayList.add(table.getUnitName().trim());
-                                teachingUnitNameAndIdHashMap.put(table.getUnitName().trim(),
-                                        table.getUnitId() + "");
+                                for (int i = 0; i < tableArrayList.size(); i++) {
+                                    FacultyPendingAttendanceUnitPojo.Table table = tableArrayList.get(i);
+                                    if (!CommonUtil.checkIsEmptyOrNullCommon(table.getUnitId()) &&
+                                            !CommonUtil.checkIsEmptyOrNullCommon(table.getUnitName())) {
+                                        teachingUnitArrayList.add(table.getUnitName().trim());
+                                        teachingUnitNameAndIdHashMap.put(table.getUnitName().trim(),
+                                                table.getUnitId() + "");
+                                    }
+                                }
+
+                                spinnerAdapterFacultyUnit = new SpinnerSimpleAdapter(FacultyFillAttendanceActivity.this, teachingUnitArrayList);
+                                spSelectUnit.setAdapter(spinnerAdapterFacultyUnit);
+                                llFacultyPendingAttendaUnit.setVisibility(View.VISIBLE);
+                                getPendingAttendanceStudentListApiCall(false, true);
+                            } else {
+                                llFacultyPendingAttendaUnit.setVisibility(View.GONE);
+                                getPendingAttendanceStudentListApiCall(false, true);
                             }
                         }
 
-
-                        spinnerAdapterFacultyUnit = new SpinnerSimpleAdapter(FacultyFillAttendanceActivity.this, teachingUnitArrayList);
-                        spSelectUnit.setAdapter(spinnerAdapterFacultyUnit);
-                        llFacultyPendingAttendaUnit.setVisibility(View.VISIBLE);
-                    } else {
-                        llFacultyPendingAttendaUnit.setVisibility(View.GONE);
-                        DialogUtil.hideProgressDialog();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<FacultyPendingAttendanceUnitPojo> call, Throwable t) {
-                    DialogUtil.hideProgressDialog();
-                    llFacultyPendingAttendaUnit.setVisibility(View.GONE);
-                    Toast.makeText(FacultyFillAttendanceActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                        @Override
+                        public void onFailure(Call<FacultyPendingAttendanceUnitPojo> call, Throwable t) {
+                            DialogUtil.hideProgressDialog();
+                            llFacultyPendingAttendaUnit.setVisibility(View.GONE);
+                            Toast.makeText(FacultyFillAttendanceActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         } else {
             Toast.makeText(this, "No internet connection ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void getPendingAttendanceStudentListApiCall(boolean isPdShow, boolean isPdHide) {
+        if (connectionDetector.isConnectingToInternet()) {
+            if (isPdShow) {
+                DialogUtil.showProgressDialogNotCancelable(FacultyFillAttendanceActivity.this, "");
+            }
+            llFillAttendanceByStudentInner.setVisibility(View.GONE);
+            ApiImplementer.getPendingAttendanceStudentListApiImplementer(facultyPendingAttendancePojo.getBatchId() + "", facultyPendingAttendancePojo.getDivId() + "",
+                    facultyPendingAttendancePojo.getSmId() + "", facultyPendingAttendancePojo.getLecNo() + "", facultyPendingAttendancePojo.getDlDate() + "",
+                    mySharedPreferences.getEmpYearId(), facultyPendingAttendancePojo.getSubId() + "", new Callback<StudentDetailsFillAttendancePojo>() {
+                        @Override
+                        public void onResponse(Call<StudentDetailsFillAttendancePojo> call, Response<StudentDetailsFillAttendancePojo> response) {
+                            if (isPdHide) {
+                                DialogUtil.hideProgressDialog();
+                            }
+                            if (response.isSuccessful() && response.body() != null && response.body().getTableBean() != null &&
+                                    response.body().getTableBean().size() > 0) {
+                                llFillAttendanceByStudentInner.setVisibility(View.VISIBLE);
+                                rvFillAttendanceStudentList.setAdapter(new StudentListFillAttendanceAdapter(FacultyFillAttendanceActivity.this, (ArrayList<StudentDetailsFillAttendancePojo.TableBean>) response.body().getTableBean()));
+                            } else {
+                                llFillAttendanceByStudentInner.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<StudentDetailsFillAttendancePojo> call, Throwable t) {
+                            DialogUtil.hideProgressDialog();
+                            llFillAttendanceByStudentInner.setVisibility(View.GONE);
+                            Toast.makeText(FacultyFillAttendanceActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
         }
     }
 

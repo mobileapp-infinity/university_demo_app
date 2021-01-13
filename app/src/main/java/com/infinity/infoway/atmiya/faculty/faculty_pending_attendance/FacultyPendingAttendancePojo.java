@@ -3,9 +3,10 @@ package com.infinity.infoway.atmiya.faculty.faculty_pending_attendance;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FacultyPendingAttendancePojo {
+public class FacultyPendingAttendancePojo implements Serializable {
 
 
     @SerializedName("Table")
@@ -20,7 +21,7 @@ public class FacultyPendingAttendancePojo {
         this.detailsArrayList = detailsArrayList;
     }
 
-    public class Details {
+    public class Details implements Serializable{
 
         boolean isExpanded = true;
 
