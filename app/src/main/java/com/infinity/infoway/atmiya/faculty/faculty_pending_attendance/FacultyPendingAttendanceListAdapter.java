@@ -91,7 +91,7 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
             public void onClick(View v) {
                 Intent intent = new Intent(context, FacultyFillAttendanceActivity.class);
                 intent.putExtra(IntentConstants.FACULTY_FILL_ATTENDANCE, facultyPendingAttendancePojo);
-                context.startActivity(intent);
+                ((FacultyPendingAttendanceActivity) context).startActivityForResult(intent, IntentConstants.REQUEST_CODE_FACULTY_PENDING_ATTENDANCE_UPDATE_LIST);
             }
         });
 

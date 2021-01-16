@@ -2,10 +2,17 @@ package com.infinity.infoway.atmiya.api;
 
 import com.infinity.infoway.atmiya.faculty.faculty_attendance.FacultyAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.FacultyFillAttendanceConfigurationPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.FacultyPendingAttendanceUnitPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetLessonPlaningTopicDetailsSubjectFacultyAndTopicWisePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnlyPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingAidDetailsPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingMethodPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.InsertAllAbsentStudentByAlternateMethodPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.InsertAllPresentStudentByAlternateMethodPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.InsertClassWiseAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.StudentDetailsFillAttendancePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.UpdateDailyLectureWiseAttendanceStatusPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
@@ -19,6 +26,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_stude
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
 import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.DownloadHallTicketExaminationSchedulePojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
@@ -693,11 +701,216 @@ public class ApiImplementer {
     }
 
     public static void getPendingAttendanceStudentListApiImplementer(String batch_id, String div_id, String sem_id, String lect_no,
-                                                       String att_date, String year_id, String sub_id, Callback<StudentDetailsFillAttendancePojo> cb) {
+                                                                     String att_date, String year_id, String sub_id, Callback<StudentDetailsFillAttendancePojo> cb) {
         final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
         Call<StudentDetailsFillAttendancePojo> call = apiService.getPendingAttendanceStudentList(batch_id, div_id, sem_id, lect_no, att_date, year_id, sub_id);
         call.enqueue(cb);
     }
 
+    public static void downloadHallTicketExaminationScheduleApiImplementer(String institute_id, String college_id, String sem_id, String year_id, String stud_id,
+                                                                           String repeater_status, String exam_db, Callback<DownloadHallTicketExaminationSchedulePojo> cb) {
+        final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
+        Call<DownloadHallTicketExaminationSchedulePojo> call = apiService.downloadAUExaminationScheduleHallTicket(institute_id, college_id, sem_id, year_id, stud_id, repeater_status, exam_db);
+        call.enqueue(cb);
+    }
+
+    public static void insertAllStudentAsPresentApiCallApiImplementer(String college_id, String institute_id,
+                                                                      Callback<FacultyFillAttendanceConfigurationPojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<FacultyFillAttendanceConfigurationPojo> call = apiService.getFacultyFillAttendanceConfiguration(college_id, institute_id);
+        call.enqueue(cb);
+    }
+
+    public static void insertAllStudentAsPresentApiCallApiImplementer(String college_id, String sem_id, String div_id, String course_id,
+                                                                      String batch_id,
+                                                                      String year_id,
+                                                                      String lecture_no,
+                                                                      String att_date,
+                                                                      String att_intime,
+                                                                      String att_topic,
+                                                                      String att_method,
+                                                                      String att_aid,
+                                                                      String att_flinnt,
+                                                                      String roll_no,
+                                                                      String att_prac_the_status,
+                                                                      String version_id,
+                                                                      String emp_id,
+                                                                      String unit_id,
+                                                                      String sub_id,
+                                                                      String att_homework,
+                                                                      String created_by,
+                                                                      String created_ip,
+                                                                      Callback<InsertAllPresentStudentByAlternateMethodPojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<InsertAllPresentStudentByAlternateMethodPojo> call = apiService.insertAllStudentAsPresentApiCall(college_id,
+                sem_id,
+                div_id,
+                course_id,
+                batch_id,
+                year_id,
+                lecture_no,
+                att_date,
+                att_intime,
+                att_topic,
+                att_method,
+                att_aid,
+                att_flinnt,
+                roll_no,
+                att_prac_the_status,
+                version_id,
+                emp_id,
+                unit_id,
+                sub_id,
+                att_homework,
+                created_by,
+                created_ip);
+        call.enqueue(cb);
+    }
+
+
+    public static void updateDailyLectureWiseAttendanceApiImplementer(String course_id,
+                                                                      String sem_id,
+                                                                      String div_id,
+                                                                      String batch_id,
+                                                                      String att_date,
+                                                                      String lec_type,
+                                                                      String emp_id,
+                                                                      String lecture_no,
+                                                                      String sub_id,
+                                                                      String res_id,
+                                                                      String version_id,
+                                                                      String modify_by,
+                                                                      String modify_ip,
+                                                                      Callback<UpdateDailyLectureWiseAttendanceStatusPojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<UpdateDailyLectureWiseAttendanceStatusPojo> call = apiService.updateDailyLectureWiseAttendance(
+                course_id,
+                sem_id,
+                div_id,
+                batch_id,
+                att_date,
+                lec_type,
+                emp_id,
+                lecture_no,
+                sub_id,
+                res_id,
+                version_id,
+                modify_by,
+                modify_ip);
+        call.enqueue(cb);
+    }
+
+    public static void insertAllStudentAbsentApiCallApiCallApiImplementer(String college_id, String sem_id, String div_id, String course_id,
+                                                                          String batch_id,
+                                                                          String year_id,
+                                                                          String lecture_no,
+                                                                          String att_date,
+                                                                          String att_intime,
+                                                                          String att_topic,
+                                                                          String att_method,
+                                                                          String att_aid,
+                                                                          String att_flinnt,
+                                                                          String roll_no,
+                                                                          String att_prac_the_status,
+                                                                          String version_id,
+                                                                          String emp_id,
+                                                                          String unit_id,
+                                                                          String sub_id,
+                                                                          String att_homework,
+                                                                          String created_by,
+                                                                          String created_ip,
+                                                                          Callback<InsertAllAbsentStudentByAlternateMethodPojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<InsertAllAbsentStudentByAlternateMethodPojo> call = apiService.insertAllStudentAbsent(college_id,
+                sem_id,
+                div_id,
+                course_id,
+                batch_id,
+                year_id,
+                lecture_no,
+                att_date,
+                att_intime,
+                att_topic,
+                att_method,
+                att_aid,
+                att_flinnt,
+                roll_no,
+                att_prac_the_status,
+                version_id,
+                emp_id,
+                unit_id,
+                sub_id,
+                att_homework,
+                created_by,
+                created_ip);
+        call.enqueue(cb);
+    }
+
+    public static void getMethodFromApiApiImplementer(String emp_id, String div_id,
+                                                      String sub_id, String year_id, String topic_id,
+                                                      Callback<GetLessonPlaningTopicDetailsSubjectFacultyAndTopicWisePojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<GetLessonPlaningTopicDetailsSubjectFacultyAndTopicWisePojo> call = apiService.getMethodFromApi(emp_id, div_id, sub_id, year_id, topic_id);
+        call.enqueue(cb);
+    }
+
+    public static void getLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnlyApiImplementer(String emp_id, String div_id,
+                                                                                              String sub_id, String year_id, Callback<GetLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnlyPojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<GetLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnlyPojo> call = apiService.getLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnly(emp_id, div_id,
+                sub_id, year_id);
+        call.enqueue(cb);
+    }
+
+    public static void insertClassWiseAttendanceApiImplementer(String college_id,
+                                                               String present_stud_id,
+                                                               String absent_stud_id,
+                                                               String sem_id,
+                                                               String div_id,
+                                                               String batch_id,
+                                                               String lecture_no,
+                                                               String att_date,
+                                                               String att_intime,
+                                                               String att_status,
+                                                               String year_id,
+                                                               String att_topic,
+                                                               String att_teaching_method,
+                                                               String att_aid,
+                                                               String no_of_flinnt,
+                                                               String prac_the_status,
+                                                               String att_version_id,
+                                                               String att_type,
+                                                               String att_emp_id,
+                                                               String att_unit_id,
+                                                               String att_homework,
+                                                               String att_created_by,
+                                                               String att_created_ip, Callback<InsertClassWiseAttendancePojo> cb) {
+        final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
+        Call<InsertClassWiseAttendancePojo> call = apiService.insertClassWiseAttendance(
+                college_id,
+                present_stud_id,
+                absent_stud_id,
+                sem_id,
+                div_id,
+                batch_id,
+                lecture_no,
+                att_date,
+                att_intime,
+                att_status,
+                year_id,
+                att_topic,
+                att_teaching_method,
+                att_aid,
+                no_of_flinnt,
+                prac_the_status,
+                att_version_id,
+                att_type,
+                att_emp_id,
+                att_unit_id,
+                att_homework,
+                att_created_by,
+                att_created_ip);
+        call.enqueue(cb);
+    }
 
 }

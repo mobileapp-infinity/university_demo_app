@@ -42,6 +42,21 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
     }
 
     @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
+    public void setHasStableIds(boolean hasStableIds) {
+        super.setHasStableIds(hasStableIds);
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         try {
             FacultyTimeTablePojo.InoutArray1 inoutArray1 = facultyLectureDetailsArrayList.get(position);
@@ -50,8 +65,8 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
                 holder.tvStart.setVisibility(View.VISIBLE);
                 holder.tvEnd.setVisibility(View.GONE);
             } else if (position == facultyLectureDetailsArrayList.size() - 1) {
-                holder.tvEnd.setVisibility(View.VISIBLE);
                 holder.tvStart.setVisibility(View.GONE);
+                holder.tvEnd.setVisibility(View.VISIBLE);
             }
 
             if (inoutArray1.getLectName().contains("RECESS")) {
@@ -132,7 +147,7 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
 
                     holder.tvFacultyLectureNoIndex.setText(lectureNoForIndex);
 
-                    mergingLogic(inoutArray1, position, holder);
+                    mergingLogic(inoutArray1, holder);
                 }
             }
         } catch (Exception ex) {
@@ -140,8 +155,9 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
         }
     }
 
-    private void mergingLogic(FacultyTimeTablePojo.InoutArray1 inoutArray1, int position,
+    private void mergingLogic(FacultyTimeTablePojo.InoutArray1 inoutArray1,
                               FacultyTimeTableListAdapter.MyViewHolder holder) {
+        holder.llFacultyMergingDynamicLayout.removeAllViewsInLayout();
         //merging logic
         try {
             for (int i = 0; i < inoutArray1.getInputArray().size(); i++) {

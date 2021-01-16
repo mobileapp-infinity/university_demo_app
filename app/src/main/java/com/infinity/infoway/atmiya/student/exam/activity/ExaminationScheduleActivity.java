@@ -22,6 +22,7 @@ import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadExaminationSchedulePojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.DownloadHallTicketExaminationSchedulePojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
@@ -54,7 +55,9 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
     ArrayList<String> examId;
     MaterialCardView cvSelectExam;
     ExtendedFloatingActionButton efabDownloadExaminationSchedule;
+    ExtendedFloatingActionButton efabDownloadHallTicketExaminationSchedule;
     ProgressDialog progressDialog;
+    int check = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +69,13 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
         spExaminationScheduleName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String examIdArray[] = examId.get(position).split("_");
-                yearId = examIdArray[0];
-                semId = examIdArray[1];
-                repeaterStatus = examIdArray[2];
-                getExaminationScheduleWiseProgramTimetableApiCall(semId, yearId, repeaterStatus);
+                if (++check > 1) {
+                    String examIdArray[] = examId.get(position).split("_");
+                    yearId = examIdArray[0];
+                    semId = examIdArray[1];
+                    repeaterStatus = examIdArray[2];
+                    getExaminationScheduleWiseProgramTimetableApiCall(semId, yearId, repeaterStatus);
+                }
             }
 
             @Override
@@ -88,6 +93,8 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
         cvSelectExam = findViewById(R.id.cvSelectExam);
         efabDownloadExaminationSchedule = findViewById(R.id.efabDownloadExaminationSchedule);
         efabDownloadExaminationSchedule.setOnClickListener(this);
+        efabDownloadHallTicketExaminationSchedule = findViewById(R.id.efabDownloadHallTicketExaminationSchedule);
+        efabDownloadHallTicketExaminationSchedule.setOnClickListener(this);
 //        rvExaminationScheduleStudent = findViewById(R.id.rvExaminationScheduleStudent);
         llStudentExaminationSchedule = findViewById(R.id.llStudentExaminationSchedule);
         llExaminationScheduleProgressbar = findViewById(R.id.llExaminationScheduleProgressbar);
@@ -172,6 +179,7 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
                                 ex.printStackTrace();
                             }
                         }
+
                         @Override
                         public void onFailure(Call<ExaminationScheduleProgramWiseTimetablePojo> call, Throwable t) {
                             llStudentExaminationSchedule.setVisibility(View.GONE);
@@ -341,10 +349,15 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
                     @Override
                     public void onResponse(Call<DownloadExaminationSchedulePojo> call, Response<DownloadExaminationSchedulePojo> response) {
                         try {
-                            if (response.isSuccessful() && response.body() != null && response.body().getBase64string() != null &&
-                                    !response.body().getBase64string().isEmpty()) {
-                                new GeneratePDFFileFromBase64String(ExaminationScheduleActivity.this, "Exam Schedule", CommonUtil.generateUniqueFileName(response.body().getFilename()),
-                                        response.body().getBase64string(), progressDialog);
+                            if (response.isSuccessful() && response.body() != null) {
+                                if (response.body().getBase64string() != null &&
+                                        !response.body().getBase64string().isEmpty()) {
+                                    new GeneratePDFFileFromBase64String(ExaminationScheduleActivity.this, "Exam Schedule", CommonUtil.generateUniqueFileName(response.body().getFilename()),
+                                            response.body().getBase64string(), progressDialog);
+                                } else {
+                                    progressDialog.hide();
+                                    Toast.makeText(ExaminationScheduleActivity.this, "Exam Schedule Not Found!", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
                                 progressDialog.hide();
                                 Toast.makeText(ExaminationScheduleActivity.this, "Some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
@@ -362,12 +375,47 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
                 });
     }
 
+    private void downloadHallTicketExaminationSchedule(String semId, String yearId, String repeaterStatus) {
+        progressDialog.show();
+        ApiImplementer.downloadHallTicketExaminationScheduleApiImplementer(mySharedPreferences.getInstituteId(), mySharedPreferences.getAcId(), semId,
+                yearId, mySharedPreferences.getStudentId(), repeaterStatus, mySharedPreferences.getImExamDbName(), new Callback<DownloadHallTicketExaminationSchedulePojo>() {
+                    @Override
+                    public void onResponse(Call<DownloadHallTicketExaminationSchedulePojo> call, Response<DownloadHallTicketExaminationSchedulePojo> response) {
+                        try {
+                            if (response.isSuccessful() && response.body() != null) {
+                                if (response.body().getBase64string() != null &&
+                                        !response.body().getBase64string().isEmpty()) {
+                                    new GeneratePDFFileFromBase64String(ExaminationScheduleActivity.this, "Exam Schedule", CommonUtil.generateUniqueFileName(response.body().getFilename()),
+                                            response.body().getBase64string(), progressDialog);
+                                } else {
+                                    progressDialog.hide();
+                                    Toast.makeText(ExaminationScheduleActivity.this, "Hall Ticket Not Publish.", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                progressDialog.hide();
+                                Toast.makeText(ExaminationScheduleActivity.this, "Some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception ex) {
+                            progressDialog.hide();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DownloadHallTicketExaminationSchedulePojo> call, Throwable t) {
+                        progressDialog.hide();
+                        Toast.makeText(ExaminationScheduleActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.ivCloseExaminationSchedule) {
             onBackPressed();
         } else if (v.getId() == R.id.efabDownloadExaminationSchedule) {
             downloadExaminationSchedule(semId, yearId, repeaterStatus);
+        } else if (v.getId() == R.id.efabDownloadHallTicketExaminationSchedule) {
+            downloadHallTicketExaminationSchedule(semId, yearId, repeaterStatus);
         }
     }
 

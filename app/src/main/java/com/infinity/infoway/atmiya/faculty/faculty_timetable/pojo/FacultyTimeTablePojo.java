@@ -1,5 +1,7 @@
 package com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo;
 
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -43,7 +45,7 @@ public class FacultyTimeTablePojo implements Serializable {
         this.inoutArray1 = inoutArray1;
     }
 
-    public class InoutArray1 {
+    public class InoutArray1 implements Serializable {
 
         @SerializedName("lect_name")
         @Expose
@@ -147,7 +149,7 @@ public class FacultyTimeTablePojo implements Serializable {
 
     }
 
-    public class InputArray {
+    public class InputArray implements Serializable{
 
         @SerializedName("lect_name")
         @Expose

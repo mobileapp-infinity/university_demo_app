@@ -21,6 +21,16 @@ public class StudentDetailsFillAttendancePojo {
 
     public class TableBean {
 
+        private boolean isChecked = false;
+
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean checked) {
+            isChecked = checked;
+        }
+
         @SerializedName("sr_no")
         @Expose
         private Integer srNo;

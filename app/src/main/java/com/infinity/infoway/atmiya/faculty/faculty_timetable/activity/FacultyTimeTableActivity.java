@@ -78,6 +78,8 @@ public class FacultyTimeTableActivity extends AppCompatActivity implements View.
     }
 
 
+
+
     private void getFacultyTimeTableApiCall() {
         if (connectionDetector.isConnectingToInternet()) {
             llFacultyTimeTableTab.setVisibility(View.GONE);

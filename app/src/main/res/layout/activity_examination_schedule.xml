@@ -245,18 +245,33 @@
         </HorizontalScrollView>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/efabDownloadExaminationSchedule"
+            android:id="@+id/efabDownloadHallTicketExaminationSchedule"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="18dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="@color/colorPrimary"
             android:drawableRight="@drawable/ic_download"
             android:fontFamily="@font/ubuntu_r"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="Download"
+            android:text="Hall Ticket"
+            android:textColor="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/efabDownloadExaminationSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableRight="@drawable/ic_download"
+            android:fontFamily="@font/ubuntu_r"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="Exam Schedule"
             android:textColor="@color/white" />
 
     </FrameLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -22,11 +23,13 @@ public class StudentListFillAttendanceAdapter extends RecyclerView.Adapter<Stude
     Context context;
     LayoutInflater layoutInflater;
     ArrayList<StudentDetailsFillAttendancePojo.TableBean> tableBeanArrayList;
+    IOnStudentAbsentPresentStatusChanged iOnStudentAbsentPresentStatusChanged;
 
     public StudentListFillAttendanceAdapter(Context context, ArrayList<StudentDetailsFillAttendancePojo.TableBean> tableBeanArrayList) {
         this.context = context;
         this.tableBeanArrayList = tableBeanArrayList;
         layoutInflater = LayoutInflater.from(context);
+        iOnStudentAbsentPresentStatusChanged = (IOnStudentAbsentPresentStatusChanged) context;
     }
 
     @NonNull
@@ -39,13 +42,19 @@ public class StudentListFillAttendanceAdapter extends RecyclerView.Adapter<Stude
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        if (position % 2 == 0){
-            holder.llDynamicRow.setBackgroundColor(context.getResources().getColor(R.color.white));
-        }else {
-            holder.llDynamicRow.setBackgroundColor(context.getResources().getColor(R.color.exam_module_row_color));
+        StudentDetailsFillAttendancePojo.TableBean tableBean = tableBeanArrayList.get(position);
+        if (tableBean.isChecked()) {
+            holder.sbtnPresentAbsetntFillAttendance.setChecked(true);
+        } else {
+            holder.sbtnPresentAbsetntFillAttendance.setChecked(false);
         }
 
-        StudentDetailsFillAttendancePojo.TableBean tableBean = tableBeanArrayList.get(position);
+        if (position % 2 == 0) {
+
+            holder.llDynamicRow.setBackgroundColor(context.getResources().getColor(R.color.white));
+        } else {
+            holder.llDynamicRow.setBackgroundColor(context.getResources().getColor(R.color.exam_module_row_color));
+        }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getSwdRollNo())) {
             holder.tvStudentRollNoFillAttendance.setText(tableBean.getSwdRollNo() + "");
@@ -58,6 +67,14 @@ public class StudentListFillAttendanceAdapter extends RecyclerView.Adapter<Stude
         if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getStudEnrollmentNo())) {
             holder.tvStudentEnNoFillAttendance.setText(tableBean.getStudEnrollmentNo() + "");
         }
+
+        holder.sbtnPresentAbsetntFillAttendance.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                tableBean.setChecked(isChecked);
+                iOnStudentAbsentPresentStatusChanged.onAbsentPresentStatusChange(tableBeanArrayList);
+            }
+        });
 
     }
 
@@ -84,6 +101,9 @@ public class StudentListFillAttendanceAdapter extends RecyclerView.Adapter<Stude
         }
     }
 
+    public interface IOnStudentAbsentPresentStatusChanged {
+        void onAbsentPresentStatusChange(ArrayList<StudentDetailsFillAttendancePojo.TableBean> tableBeanArrayList);
+    }
 
 
 }

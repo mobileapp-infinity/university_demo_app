@@ -17,6 +17,7 @@ public class IntentConstants {
     public static final int REQUEST_CODE_FOR_FACULTY_LOGOUT = 1007;
     public static final int REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION = 1008;
     public static final int REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION_FACULTY_SIDE = 1009;
+    public static final int REQUEST_CODE_FACULTY_PENDING_ATTENDANCE_UPDATE_LIST = 1010;
 
     public static final String USERNAME_AFTER_FORGOT_PASS = "UsernameAfterForgot";
     public static final String PASSWORD_AFTER_FORGOT_PASS = "PasswordAfterForgot";

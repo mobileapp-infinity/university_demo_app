@@ -49,10 +49,10 @@
 
             <LinearLayout
                 android:id="@+id/llHangingCard"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -248,10 +248,10 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="0.7"
-                                        tools:ignore="RtlHardcoded"
                                         app:kswTextOff="A"
                                         app:kswTextOn="P"
-                                        app:kswTintColor="@color/colorPrimary"/>
+                                        app:kswTintColor="@color/colorPrimary"
+                                        tools:ignore="RtlHardcoded" />
 
                                 </LinearLayout>
 
@@ -333,129 +333,195 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="visible">
 
                             <LinearLayout
-                                android:id="@+id/llSelectTeachingMethod"
+                                android:id="@+id/llCommonForConfig1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
+                                android:visibility="visible"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:id="@+id/llSelectTeachingMethod"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
                                     android:layout_marginBottom="8dp"
-                                    android:text="Select Teaching Method"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="12sp" />
+                                    android:orientation="vertical">
 
-                                <GridView
-                                    android:id="@+id/gvTeachingMethodList"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:numColumns="3"
-                                    android:scrollbars="none"
-                                    android:verticalSpacing="4dp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/llSelectNoOfPost"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:orientation="vertical">
-
-                                <Spinner
-                                    android:id="@+id/spSelectNoOfPostOn"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:dropDownVerticalOffset="40dp"
-                                    android:minHeight="35dp"
-                                    android:textSize="12sp" />
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="@color/colorPrimary" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/llFaciltyAidDetails"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:orientation="vertical">
-
-                                <Spinner
-                                    android:id="@+id/spSelectTeachingAid"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:dropDownVerticalOffset="40dp"
-                                    android:minHeight="35dp"
-                                    android:textSize="12sp" />
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="@color/colorPrimary" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/llFacultyPendingAttendaUnit"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:orientation="vertical">
-
-                                <Spinner
-                                    android:id="@+id/spSelectUnit"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:dropDownVerticalOffset="40dp"
-                                    android:minHeight="35dp"
-                                    android:textSize="12sp" />
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="@color/colorPrimary" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:orientation="vertical">
-
-                                <com.google.android.material.textfield.TextInputLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@color/common_bg_color"
-                                    app:boxBackgroundColor="@color/common_bg_color"
-                                    app:hintTextColor="@color/colorAccent">
-
-                                    <com.google.android.material.textfield.TextInputEditText
-                                        android:id="@+id/tilTopic"
-                                        android:layout_width="match_parent"
+                                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:fontFamily="@font/ubuntu_r"
-                                        android:hint="Enter Topic"
-                                        android:text=" "
+                                        android:layout_marginBottom="8dp"
+                                        android:text="Select Teaching Method"
                                         android:textColor="@color/colorPrimary"
-                                        android:textColorHint="@color/colorAccent"
                                         android:textSize="12sp" />
 
-                                </com.google.android.material.textfield.TextInputLayout>
+                                    <GridView
+                                        android:id="@+id/gvTeachingMethodList"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:numColumns="3"
+                                        android:scrollbars="none"
+                                        android:verticalSpacing="4dp"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/llSelectNoOfPost"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="vertical">
+
+                                    <Spinner
+                                        android:id="@+id/spSelectNoOfPostOn"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:dropDownVerticalOffset="40dp"
+                                        android:minHeight="35dp"
+                                        android:textSize="12sp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:background="@color/colorPrimary" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/llFaciltyAidDetails"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="vertical">
+
+                                    <Spinner
+                                        android:id="@+id/spSelectTeachingAid"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:dropDownVerticalOffset="40dp"
+                                        android:minHeight="35dp"
+                                        android:textSize="12sp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:background="@color/colorPrimary" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/llFacultyPendingAttendaUnit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="vertical">
+
+                                    <Spinner
+                                        android:id="@+id/spSelectUnit"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:dropDownVerticalOffset="40dp"
+                                        android:minHeight="35dp"
+                                        android:textSize="12sp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:background="@color/colorPrimary" />
+
+                                </LinearLayout>
+
+<!--                                <LinearLayout-->
+<!--                                    android:id="@+id/llEnterTopicSp"-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="8dp"-->
+<!--                                    android:layout_marginBottom="8dp"-->
+<!--                                    android:orientation="vertical"-->
+<!--                                    android:visibility="gone">-->
+
+<!--                                    <Spinner-->
+<!--                                        android:id="@+id/spEnterTopic"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:dropDownVerticalOffset="40dp"-->
+<!--                                        android:minHeight="35dp"-->
+<!--                                        android:textSize="12sp" />-->
+
+<!--                                    <View-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="1dp"-->
+<!--                                        android:background="@color/colorPrimary" />-->
+
+<!--                                </LinearLayout>-->
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/common_bg_color"
+                                        app:boxBackgroundColor="@color/common_bg_color"
+                                        app:hintTextColor="@color/colorAccent">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/tilTopic"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/ubuntu_r"
+                                            android:hint="Enter Topic"
+                                            android:text=" "
+                                            android:textColor="@color/colorPrimary"
+                                            android:textColorHint="@color/colorAccent"
+                                            android:textSize="12sp" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llCommonForConfig2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/llTopicUnitForConfig2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="vertical">
+
+                                    <Spinner
+                                        android:id="@+id/spSelectUnitForConfig2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:dropDownVerticalOffset="40dp"
+                                        android:minHeight="35dp"
+                                        android:textSize="12sp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:background="@color/colorPrimary" />
+
+                                </LinearLayout>
 
                             </LinearLayout>
 

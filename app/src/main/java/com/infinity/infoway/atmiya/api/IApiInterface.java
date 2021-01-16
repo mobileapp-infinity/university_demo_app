@@ -2,10 +2,17 @@ package com.infinity.infoway.atmiya.api;
 
 import com.infinity.infoway.atmiya.faculty.faculty_attendance.FacultyAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.pojo.UpdateFaultyFCMTokenPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.FacultyFillAttendanceConfigurationPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.FacultyPendingAttendanceUnitPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetLessonPlaningTopicDetailsSubjectFacultyAndTopicWisePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnlyPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingAidDetailsPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.GetTeachingMethodPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.InsertAllAbsentStudentByAlternateMethodPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.InsertAllPresentStudentByAlternateMethodPojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.InsertClassWiseAttendancePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.StudentDetailsFillAttendancePojo;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.UpdateDailyLectureWiseAttendanceStatusPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeavePojo;
 import com.infinity.infoway.atmiya.faculty.faculty_lecture_plan.FacultyLecturePlanPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsPojo;
@@ -19,6 +26,7 @@ import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_stude
 import com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectAndDivisionWiseTotalTheoryPeriodEngagedPojo;
 import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTablePojo;
 import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
+import com.infinity.infoway.atmiya.student.exam.pojo.DownloadHallTicketExaminationSchedulePojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
@@ -586,5 +594,135 @@ public interface IApiInterface {
                                                                            @Query("att_date") String att_date,
                                                                            @Query("year_id") String year_id,
                                                                            @Query("sub_id") String sub_id);
+
+    @GET("Download_AU_Examination_Hall_Ticket")
+    @Streaming
+    Call<DownloadHallTicketExaminationSchedulePojo> downloadAUExaminationScheduleHallTicket(@Query("institute_id") String institute_id,
+                                                                                            @Query("college_id") String college_id,
+                                                                                            @Query("sem_id") String sem_id,
+                                                                                            @Query("year_id") String year_id,
+                                                                                            @Query("stud_id") String stud_id,
+                                                                                            @Query("repeater_status") String repeater_status,
+                                                                                            @Query("exam_db") String exam_db);
+
+    @GET("Get_Attendance_Method_Configuration_For_Fill_Attendance")
+    @Streaming
+    Call<FacultyFillAttendanceConfigurationPojo> getFacultyFillAttendanceConfiguration(@Query("college_id") String college_id,
+                                                                                       @Query("institute_id") String institute_id);
+
+    @GET("Insert_Present_Student_Attendance_By_Alternate_Method")
+    @Streaming
+    Call<InsertAllPresentStudentByAlternateMethodPojo> insertAllStudentAsPresentApiCall(
+            @Query("college_id") String college_id,
+            @Query("sem_id") String sem_id,
+            @Query("div_id") String div_id,
+            @Query("course_id") String course_id,
+            @Query("batch_id") String batch_id,
+            @Query("year_id") String year_id,
+            @Query("lecture_no") String lecture_no,
+            @Query("att_date") String att_date,
+            @Query("att_intime") String att_intime,
+            @Query("att_topic") String att_topic,
+            @Query("att_method") String att_method,
+            @Query("att_aid") String att_aid,
+            @Query("att_flinnt") String att_flinnt,
+            @Query("roll_no") String roll_no,
+            @Query("att_prac_the_status") String att_prac_the_status,
+            @Query("version_id") String version_id,
+            @Query("emp_id") String emp_id,
+            @Query("unit_id") String unit_id,
+            @Query("sub_id") String sub_id,
+            @Query("att_homework") String att_homework,
+            @Query("created_by") String created_by,
+            @Query("created_ip") String created_ip);
+
+
+    @GET("UPDATE_DAILY_LECTURE_PLANING_WISE_ATT_STATUS_API")
+    @Streaming
+    Call<UpdateDailyLectureWiseAttendanceStatusPojo> updateDailyLectureWiseAttendance(
+            @Query("course_id") String course_id,
+            @Query("sem_id") String sem_id,
+            @Query("div_id") String div_id,
+            @Query("batch_id") String batch_id,
+            @Query("att_date") String att_date,
+            @Query("lec_type") String lec_type,
+            @Query("emp_id") String emp_id,
+            @Query("lecture_no") String lecture_no,
+            @Query("sub_id") String sub_id,
+            @Query("res_id") String res_id,
+            @Query("version_id") String version_id,
+            @Query("modify_by") String modify_by,
+            @Query("modify_ip") String modify_ip);
+
+    @GET("Insert_Absent_Student_Attendance_By_Alternate_Method")
+    @Streaming
+    Call<InsertAllAbsentStudentByAlternateMethodPojo> insertAllStudentAbsent(
+            @Query("college_id") String college_id,
+            @Query("sem_id") String sem_id,
+            @Query("div_id") String div_id,
+            @Query("course_id") String course_id,
+            @Query("batch_id") String batch_id,
+            @Query("year_id") String year_id,
+            @Query("lecture_no") String lecture_no,
+            @Query("att_date") String att_date,
+            @Query("att_intime") String att_intime,
+            @Query("att_topic") String att_topic,
+            @Query("att_method") String att_method,
+            @Query("att_aid") String att_aid,
+            @Query("att_flinnt") String att_flinnt,
+            @Query("roll_no") String roll_no,
+            @Query("att_prac_the_status") String att_prac_the_status,
+            @Query("version_id") String version_id,
+            @Query("emp_id") String emp_id,
+            @Query("unit_id") String unit_id,
+            @Query("sub_id") String sub_id,
+            @Query("att_homework") String att_homework,
+            @Query("created_by") String created_by,
+            @Query("created_ip") String created_ip);
+
+
+    @GET("Get_Lesson_Planning_Topic_Detail_Subject_and_Faculty_Wise_Topic_Wise_API")
+    @Streaming
+    Call<GetLessonPlaningTopicDetailsSubjectFacultyAndTopicWisePojo> getMethodFromApi(
+            @Query("emp_id") String emp_id,
+            @Query("div_id") String div_id,
+            @Query("sub_id") String sub_id,
+            @Query("year_id") String year_id,
+            @Query("topic_id") String topic_id);
+
+    @GET("Get_Lesson_Planning_Topic_Detail_Subject_and_Faculty_Wise_API")
+    @Streaming
+    Call<GetLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnlyPojo> getLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnly(
+            @Query("emp_id") String emp_id,
+            @Query("div_id") String div_id,
+            @Query("sub_id") String sub_id,
+            @Query("year_id") String year_id);
+
+    @GET("Insert_isrp_class_wise_attendance_API")
+    @Streaming
+    Call<InsertClassWiseAttendancePojo> insertClassWiseAttendance(
+            @Query("college_id") String college_id,
+            @Query("present_stud_id") String present_stud_id,
+            @Query("absent_stud_id") String absent_stud_id,
+            @Query("sem_id") String sem_id,
+            @Query("div_id") String div_id,
+            @Query("batch_id") String batch_id,
+            @Query("lecture_no") String lecture_no,
+            @Query("att_date") String att_date,
+            @Query("att_intime") String att_intime,
+            @Query("att_status") String att_status,
+            @Query("year_id") String year_id,
+            @Query("att_topic") String att_topic,
+            @Query("att_teaching_method") String att_teaching_method,
+            @Query("att_aid") String att_aid,
+            @Query("no_of_flinnt") String no_of_flinnt,
+            @Query("prac_the_status") String prac_the_status,
+            @Query("att_version_id") String att_version_id,
+            @Query("att_type") String att_type,
+            @Query("att_emp_id") String att_emp_id,
+            @Query("att_unit_id") String att_unit_id,
+            @Query("att_homework") String att_homework,
+            @Query("att_created_by") String att_created_by,
+            @Query("att_created_ip") String att_created_ip);
 
 }

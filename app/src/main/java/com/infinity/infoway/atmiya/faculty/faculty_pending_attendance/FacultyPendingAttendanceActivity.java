@@ -1,9 +1,11 @@
 package com.infinity.infoway.atmiya.faculty.faculty_pending_attendance;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,6 +16,7 @@ import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeaveActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_leave.FacultyLeaveAdapter;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
+import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
 import java.util.ArrayList;
@@ -97,5 +100,11 @@ public class FacultyPendingAttendanceActivity extends AppCompatActivity implemen
         }
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == IntentConstants.REQUEST_CODE_FACULTY_PENDING_ATTENDANCE_UPDATE_LIST) {
+            getFacultyPendingAttendanceApiCall();
+        }
+    }
 }
