@@ -43,14 +43,8 @@ public class StudentListFillAttendanceAdapter extends RecyclerView.Adapter<Stude
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         StudentDetailsFillAttendancePojo.TableBean tableBean = tableBeanArrayList.get(position);
-        if (tableBean.isChecked()) {
-            holder.sbtnPresentAbsetntFillAttendance.setChecked(true);
-        } else {
-            holder.sbtnPresentAbsetntFillAttendance.setChecked(false);
-        }
 
         if (position % 2 == 0) {
-
             holder.llDynamicRow.setBackgroundColor(context.getResources().getColor(R.color.white));
         } else {
             holder.llDynamicRow.setBackgroundColor(context.getResources().getColor(R.color.exam_module_row_color));
@@ -68,6 +62,14 @@ public class StudentListFillAttendanceAdapter extends RecyclerView.Adapter<Stude
             holder.tvStudentEnNoFillAttendance.setText(tableBean.getStudEnrollmentNo() + "");
         }
 
+        holder.sbtnPresentAbsetntFillAttendance.setOnCheckedChangeListener(null);
+
+        if (tableBean.isChecked()) {
+            holder.sbtnPresentAbsetntFillAttendance.setChecked(true);
+        } else {
+            holder.sbtnPresentAbsetntFillAttendance.setChecked(false);
+        }
+
         holder.sbtnPresentAbsetntFillAttendance.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -81,6 +83,23 @@ public class StudentListFillAttendanceAdapter extends RecyclerView.Adapter<Stude
     @Override
     public int getItemCount() {
         return tableBeanArrayList.size();
+    }
+
+
+    public void selectAll() {
+        for (int i = 0; i < tableBeanArrayList.size(); i++) {
+            tableBeanArrayList.get(i).setChecked(true);
+        }
+        iOnStudentAbsentPresentStatusChanged.onAbsentPresentStatusChange(tableBeanArrayList);
+        notifyDataSetChanged();
+    }
+
+    public void unSelectAll() {
+        for (int i = 0; i < tableBeanArrayList.size(); i++) {
+            tableBeanArrayList.get(i).setChecked(false);
+        }
+        iOnStudentAbsentPresentStatusChanged.onAbsentPresentStatusChange(tableBeanArrayList);
+        notifyDataSetChanged();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

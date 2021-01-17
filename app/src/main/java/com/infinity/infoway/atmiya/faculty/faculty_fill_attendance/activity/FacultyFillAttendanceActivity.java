@@ -67,7 +67,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
 
     LinearLayout llSelectTeachingMethod;
     GridView gvTeachingMethodList;
-    String selectedMethodNo = "";
+    String selectedMethodIds = "";
     private boolean isMethodSelected = false;
     ArrayList<GetTeachingMethodPojo.Table> getTeachingMethodArrayListNew;
 
@@ -113,7 +113,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
 
     LinearLayout llCommonForConfig1;
     LinearLayout llCommonForConfig2;
-    Spinner spSelectUnitForConfig2;
+    Spinner spSelectTopicForConfig2;
     ArrayList<String> topicListForConfig2;
     HashMap<String, String> topicNameAndIdListForConfig2;
     SpinnerSimpleAdapter spinnerAdapterFacultyTopicForConfig2;
@@ -122,6 +122,8 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
 
     String strDate = "";
 
+    StudentListFillAttendanceAdapter studentListFillAttendanceAdapter = null;
+    SwitchButton sbtnPresentOrAbsentAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,11 +196,11 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         llFillAttendanceByStudentInner = findViewById(R.id.llFillAttendanceByStudentInner);
         btnSaveFilledAttendance = findViewById(R.id.btnSaveFilledAttendance);
         btnSaveFilledAttendance.setOnClickListener(this);
-
+        sbtnPresentOrAbsentAll = findViewById(R.id.sbtnPresentOrAbsentAll);
         tvCourseName = findViewById(R.id.tvCourseName);
         tvLectureName = findViewById(R.id.tvLectureName);
         llHangingCard = findViewById(R.id.llHangingCard);
-        llTopicUnitForConfig2 = findViewById(R.id.llTopicUnitForConfig2);
+        llTopicUnitForConfig2 = findViewById(R.id.llTopicForConfig2);
 
         llSelectTeachingMethod = findViewById(R.id.llSelectTeachingMethod);
         gvTeachingMethodList = findViewById(R.id.gvTeachingMethodList);
@@ -223,15 +225,27 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         llCommonForConfig2 = findViewById(R.id.llCommonForConfig2);
 //        llEnterTopicSp = findViewById(R.id.llEnterTopicSp);
 
-        spSelectUnitForConfig2 = findViewById(R.id.spSelectUnitForConfig2);
+        spSelectTopicForConfig2 = findViewById(R.id.spSelectTopicForConfig2);
 
-        spSelectUnitForConfig2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        sbtnPresentOrAbsentAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (studentListFillAttendanceAdapter != null) {
+                    if (b) {
+                        studentListFillAttendanceAdapter.selectAll();
+                    } else {
+                        studentListFillAttendanceAdapter.unSelectAll();
+                    }
+                }
+            }
+        });
+
+        spSelectTopicForConfig2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0) {
-
-                } else {
-
+                    String topicIdForConfig2 = topicNameAndIdListForConfig2.get(topicListForConfig2.get(i)) + "";
+                    getMethodFromApi(true, true, topicIdForConfig2);
                 }
 
             }
@@ -301,67 +315,205 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         if (v.getId() == R.id.ivCloseFacultyFillAttendance) {
             onBackPressed();
         } else if (v.getId() == R.id.btnSaveFilledAttendance) {
-            if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 1) {
-                if (isValidForConfiguration_1()) {
-                    callStudentAttendanceSaveApi();
-                }
-            } else if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 2) {
-                if (isValidForConfiguration_2()) {
-                    callStudentAttendanceSaveApi();
-                }
-            }
+            callStudentAttendanceSaveApi();
         }
     }
 
     private void callStudentAttendanceSaveApi() {
         if (rbtnGrpByStudentAndRollNo.getCheckedRadioButtonId() == R.id.rbtnFillAttendanceByStydent) {//by student selection method
             //Call insert student attendance by class api
-            if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 1) {
 
+            String attStatus = "1";
+            String attHomeWork = "";
+
+            if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 1) {
+                String attTeachingMethod;
+                String flint;
+                String attAid = "0";
+                String unitId = "0";
+                String attTopic;
+                if (facultyPendingAttendancePojo.getLecType().equalsIgnoreCase("1")) {
+                    if (CommonUtil.checkIsEmptyOrNullCommon(selectedMethodIds)) {
+                        Toast.makeText(this, "Please select Teaching Method", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (spSelectNoOfPostOn.getSelectedItemPosition() == 0) {
+                        Toast.makeText(this, "Please select No of post", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (teachingAidArrayList != null && teachingAidArrayList.size() > 0 &&
+                            spSelectTeachingAid.getSelectedItemPosition() == 0) {
+                        Toast.makeText(this, "Please select Teaching Aid", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (teachingUnitArrayList != null && teachingUnitArrayList.size() > 0 &&
+                            spSelectUnit.getSelectedItemPosition() == 0) {
+                        Toast.makeText(this, "Please select unit", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (CommonUtil.checkIsEmptyOrNullCommon(tilTopic.getText().toString())) {
+                        Toast.makeText(this, "Please enter topic name", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    attTopic = tilTopic.getText().toString();
+                    unitId = teachingUnitArrayList != null && teachingUnitArrayList.size() > 0 ? teachingUnitNameAndIdHashMap.get(teachingUnitArrayList.get(spSelectUnit.getSelectedItemPosition())) : "0";
+                    flint = noOfPostArrayList.get(spSelectNoOfPostOn.getSelectedItemPosition()).trim();
+                    attTeachingMethod = selectedMethodIds;
+                    attAid = teachingAidArrayList != null && teachingAidArrayList.size() > 0 ? teachingAidNameAndIdHashMap.get(teachingAidArrayList.get(spSelectTeachingAid.getSelectedItemPosition())) : "0";
+
+                    insertClassWiseAttendanceApiCall(true, false, attStatus, attTopic, attTeachingMethod,
+                            attAid, flint, attHomeWork, unitId, selectedPresentIDList, selectedAbsentIDList);
+
+                } else {
+                    if (teachingUnitArrayList != null && teachingUnitArrayList.size() > 0 && spSelectUnit.getSelectedItemPosition() == 0) {
+                        Toast.makeText(this, "Please select unit", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (CommonUtil.checkIsEmptyOrNullCommon(tilTopic.getText().toString())) {
+                        Toast.makeText(this, "Please enter topic name", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    attTopic = tilTopic.getText().toString();
+                    unitId = teachingUnitArrayList != null && teachingUnitArrayList.size() > 0 ? teachingUnitNameAndIdHashMap.get(teachingUnitArrayList.get(spSelectUnit.getSelectedItemPosition())) : "0";
+                    attTeachingMethod = "";
+                    attAid = "0";
+                    flint = "0";
+
+                    insertClassWiseAttendanceApiCall(true, false, attStatus, attTopic, attTeachingMethod,
+                            attAid, flint, attHomeWork, unitId, selectedPresentIDList, selectedAbsentIDList);
+
+                }
             } else if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 2) {
 
+                String attTopic = "";
+
+                if (topicListForConfig2 != null && topicListForConfig2.size() > 0 &&
+                        spSelectTopicForConfig2.getSelectedItemPosition() == 0) {
+                    Toast.makeText(this, "Please select topic", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (topicListForConfig2 == null || topicListForConfig2.size() == 0) {
+                    Toast.makeText(this, "Topic not found!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                attTopic = topicListForConfig2.get(spSelectTopicForConfig2.getSelectedItemPosition());
+
+
+                insertClassWiseAttendanceApiCall(true, false, attStatus, attTopic, topicMethodForConfig2,
+                        topicMethodAidForConfig2, "0", attHomeWork, topicUnitIdForConfig2, selectedPresentIDList, selectedAbsentIDList);
             }
         } else if (rbtnGrpByStudentAndRollNo.getCheckedRadioButtonId() == R.id.rbtnFillAttendanceByRolNo) {//by manually comma Separated roll no
             if (sBtnAttendanceForByRollNo.isChecked()) {
                 //Call Present All Student Api
-                if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 1) {
-
-                } else if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 2) {
-
-                }
+                makeStudentAbsentAndPresentByRollNumber(true);
             } else {
                 //Call Absent All Student Api
-                if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 1) {
-
-                } else if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 2) {
-
-                }
+                makeStudentAbsentAndPresentByRollNumber(false);
             }
         }
     }
 
 
-    private boolean isValidForConfiguration_1() {
-        boolean isValidForConfig_1 = true;
+    private void makeStudentAbsentAndPresentByRollNumber(boolean isAttendanceForPresent) {
+        if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 1) {
 
-        if (rbtnGrpByStudentAndRollNo.getCheckedRadioButtonId() == R.id.rbtnFillAttendanceByStydent) {//For Student Selection
+            String attTeachingMethod;
+            String flint;
+            String attAid = "0";
+            String unitId = "0";
+            String attTopic;
+            String commaSeparatedRollNumber;
 
-        } else {//For Manually insert
+            if (facultyPendingAttendancePojo.getLecType().equalsIgnoreCase("1")) {
 
+                if (CommonUtil.checkIsEmptyOrNullCommon(tilStudentCommaSeparatedRollNumber.getText().toString())) {
+                    Toast.makeText(this, "Please enter comma separated roll number", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (CommonUtil.checkIsEmptyOrNullCommon(selectedMethodIds)) {
+                    Toast.makeText(this, "Please select Teaching Method", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (spSelectNoOfPostOn.getSelectedItemPosition() == 0) {
+                    Toast.makeText(this, "Please select No of post", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (teachingAidArrayList != null && teachingAidArrayList.size() > 0 &&
+                        spSelectTeachingAid.getSelectedItemPosition() == 0) {
+                    Toast.makeText(this, "Please select Teaching Aid", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (teachingUnitArrayList != null && teachingUnitArrayList.size() > 0 &&
+                        spSelectUnit.getSelectedItemPosition() == 0) {
+                    Toast.makeText(this, "Please select unit", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (CommonUtil.checkIsEmptyOrNullCommon(tilTopic.getText().toString())) {
+                    Toast.makeText(this, "Please enter topic name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                attTopic = tilTopic.getText().toString();
+                unitId = teachingUnitArrayList != null && teachingUnitArrayList.size() > 0 ? teachingUnitNameAndIdHashMap.get(teachingUnitArrayList.get(spSelectUnit.getSelectedItemPosition())) : "0";
+                flint = noOfPostArrayList.get(spSelectNoOfPostOn.getSelectedItemPosition()).trim();
+                attTeachingMethod = selectedMethodIds;
+                attAid = teachingAidArrayList != null && teachingAidArrayList.size() > 0 ? teachingAidNameAndIdHashMap.get(teachingAidArrayList.get(spSelectTeachingAid.getSelectedItemPosition())) : "0";
+                commaSeparatedRollNumber = tilStudentCommaSeparatedRollNumber.getText().toString();
+
+
+                if (isAttendanceForPresent) {
+                    presentAllStudentApiCall(true, false, attTopic, attTeachingMethod, attAid,
+                            flint, commaSeparatedRollNumber, unitId);
+                } else {
+                    absentAllStudentApiCall(true, false, attTopic, attTeachingMethod, attAid,
+                            flint, commaSeparatedRollNumber, unitId);
+                }
+
+            } else {
+                if (CommonUtil.checkIsEmptyOrNullCommon(tilStudentCommaSeparatedRollNumber.getText().toString())) {
+                    Toast.makeText(this, "Please enter comma separated roll number", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (teachingUnitArrayList != null && teachingUnitArrayList.size() > 0 && spSelectUnit.getSelectedItemPosition() == 0) {
+                    Toast.makeText(this, "Please select unit", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (CommonUtil.checkIsEmptyOrNullCommon(tilTopic.getText().toString())) {
+                    Toast.makeText(this, "Please enter topic name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                attTopic = tilTopic.getText().toString();
+                unitId = teachingUnitArrayList != null && teachingUnitArrayList.size() > 0 ? teachingUnitNameAndIdHashMap.get(teachingUnitArrayList.get(spSelectUnit.getSelectedItemPosition())) : "0";
+                attTeachingMethod = "";
+                attAid = "0";
+                flint = "0";
+                commaSeparatedRollNumber = tilStudentCommaSeparatedRollNumber.getText().toString();
+
+                if (isAttendanceForPresent) {
+                    presentAllStudentApiCall(true, false, attTopic, attTeachingMethod, attAid,
+                            flint, commaSeparatedRollNumber, unitId);
+                } else {
+                    absentAllStudentApiCall(true, false, attTopic, attTeachingMethod, attAid,
+                            flint, commaSeparatedRollNumber, unitId);
+                }
+
+            }
+        } else if (FACULTY_FILL_ATTENDANCE_CONFIGURATION == 2) {
+
+            String attTopic = "";
+            String commaSeparatedRollNumber = "";
+
+            if (CommonUtil.checkIsEmptyOrNullCommon(tilStudentCommaSeparatedRollNumber.getText().toString())) {
+                Toast.makeText(this, "Please enter comma separated roll number", Toast.LENGTH_SHORT).show();
+                return;
+            } else if (topicListForConfig2 != null && topicListForConfig2.size() > 0 &&
+                    spSelectTopicForConfig2.getSelectedItemPosition() == 0) {
+                Toast.makeText(this, "Please select topic", Toast.LENGTH_SHORT).show();
+                return;
+            } else if (topicListForConfig2 == null || topicListForConfig2.size() == 0) {
+                Toast.makeText(this, "Topic not found!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            commaSeparatedRollNumber = tilStudentCommaSeparatedRollNumber.getText().toString();
+            attTopic = topicListForConfig2.get(spSelectTopicForConfig2.getSelectedItemPosition());
+
+            if (isAttendanceForPresent) {
+                presentAllStudentApiCall(true, false, attTopic, topicMethodForConfig2,
+                        topicMethodAidForConfig2, "0", commaSeparatedRollNumber, topicUnitIdForConfig2);
+            } else {
+                absentAllStudentApiCall(true, false, attTopic, topicMethodForConfig2,
+                        topicMethodAidForConfig2, "0", commaSeparatedRollNumber, topicUnitIdForConfig2);
+            }
         }
-
-        return isValidForConfig_1;
     }
 
-    private boolean isValidForConfiguration_2() {
-        boolean isValidForConfig_2 = true;
-        if (rbtnGrpByStudentAndRollNo.getCheckedRadioButtonId() == R.id.rbtnFillAttendanceByStydent) {//For Student Selection
-
-        } else {//For Manually insert
-
-        }
-        return isValidForConfig_2;
-    }
 
     @Override
     public void onBackPressed() {
@@ -389,7 +541,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                                 llCommonForConfig1.setVisibility(View.VISIBLE);
                                 llCommonForConfig2.setVisibility(View.GONE);
                                 getFacultyPendingAttendanceTeachingMethodApiCall(false, false);
-                                if (facultyPendingAttendancePojo.getLectType().equalsIgnoreCase("1")) {
+                                if (facultyPendingAttendancePojo.getLecType().equalsIgnoreCase("1")) {
                                     llFaciltyAidDetails.setVisibility(View.VISIBLE);
                                     llSelectTeachingMethod.setVisibility(View.VISIBLE);
                                 } else {
@@ -440,7 +592,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                         getFacultyAidDetailsApiCall(false, false);
                     } else {
                         isMethodSelected = false;
-                        DialogUtil.hideProgressDialog();
+                        getFacultyAidDetailsApiCall(false, false);
                         llSelectTeachingMethod.setVisibility(View.GONE);
                     }
                 }
@@ -493,7 +645,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                         spSelectTeachingAid.setAdapter(spinnerAdapterFacultyAidDetails);
                         getFacultyPendingAttendanceUnitApiCall(false, false);
                     } else {
-                        DialogUtil.hideProgressDialog();
+                        getFacultyPendingAttendanceUnitApiCall(false, false);
                         llFaciltyAidDetails.setVisibility(View.GONE);
                     }
                 }
@@ -579,7 +731,9 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                             if (response.isSuccessful() && response.body() != null && response.body().getTableBean() != null &&
                                     response.body().getTableBean().size() > 0) {
                                 llFillAttendanceByStudentInner.setVisibility(View.VISIBLE);
-                                rvFillAttendanceStudentList.setAdapter(new StudentListFillAttendanceAdapter(FacultyFillAttendanceActivity.this, (ArrayList<StudentDetailsFillAttendancePojo.TableBean>) response.body().getTableBean()));
+                                onAbsentPresentStatusChange((ArrayList<StudentDetailsFillAttendancePojo.TableBean>) response.body().getTableBean());
+                                studentListFillAttendanceAdapter = new StudentListFillAttendanceAdapter(FacultyFillAttendanceActivity.this, (ArrayList<StudentDetailsFillAttendancePojo.TableBean>) response.body().getTableBean());
+                                rvFillAttendanceStudentList.setAdapter(studentListFillAttendanceAdapter);
                                 getLessonPlanningDetailsByFacultyAndTopicWiseApiCall(false, true);
                             } else {
                                 getLessonPlanningDetailsByFacultyAndTopicWiseApiCall(false, true);
@@ -610,7 +764,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         ApiImplementer.insertAllStudentAsPresentApiCallApiImplementer(facultyPendingAttendancePojo.getCollegeId() + "", facultyPendingAttendancePojo.getSmId() + "",
                 facultyPendingAttendancePojo.getDivId() + "", facultyPendingAttendancePojo.getCourseId() + "", facultyPendingAttendancePojo.getBatchId() + "",
                 mySharedPreferences.getEmpYearId(), facultyPendingAttendancePojo.getLecNo() + "", strDate, "", attTopicName, attTopicMethod, attAid,
-                attFlint, commaSepratedRollNo, facultyPendingAttendancePojo.getLectType(), facultyPendingAttendancePojo.getDLVERSIONID() + "",
+                attFlint, commaSepratedRollNo, facultyPendingAttendancePojo.getLecType(), facultyPendingAttendancePojo.getDLVERSIONID() + "",
                 mySharedPreferences.getEmpId(), unitId, facultyPendingAttendancePojo.getSubId() + "", "", mySharedPreferences.getEmpId(), "1", new Callback<InsertAllPresentStudentByAlternateMethodPojo>() {
                     @Override
                     public void onResponse(Call<InsertAllPresentStudentByAlternateMethodPojo> call, Response<InsertAllPresentStudentByAlternateMethodPojo> response) {
@@ -650,7 +804,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         ApiImplementer.insertAllStudentAbsentApiCallApiCallApiImplementer(facultyPendingAttendancePojo.getCollegeId() + "", facultyPendingAttendancePojo.getSmId() + "",
                 facultyPendingAttendancePojo.getDivId() + "", facultyPendingAttendancePojo.getCourseId() + "", facultyPendingAttendancePojo.getBatchId() + "",
                 mySharedPreferences.getEmpYearId(), facultyPendingAttendancePojo.getLecNo() + "", strDate, "", attTopicName, attTopicMethod, attAid,
-                attFlint, commaSepratedRollNo, facultyPendingAttendancePojo.getLectType(), facultyPendingAttendancePojo.getDLVERSIONID() + "",
+                attFlint, commaSepratedRollNo, facultyPendingAttendancePojo.getLecType(), facultyPendingAttendancePojo.getDLVERSIONID() + "",
                 mySharedPreferences.getEmpId(), unitId, facultyPendingAttendancePojo.getSubId() + "", "", mySharedPreferences.getEmpId(), "1", new Callback<InsertAllAbsentStudentByAlternateMethodPojo>() {
                     @Override
                     public void onResponse(Call<InsertAllAbsentStudentByAlternateMethodPojo> call, Response<InsertAllAbsentStudentByAlternateMethodPojo> response) {
@@ -661,14 +815,6 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                             InsertAllAbsentStudentByAlternateMethodPojo.Table table = response.body().getTable().get(0);
 
                             if (table.getErrorCode().contentEquals("1")) {
-                                Toast.makeText(FacultyFillAttendanceActivity.this, "" + table.getErrorMsg(), Toast.LENGTH_SHORT).show();
-                                updateStudentDailyLectureWiseAttendanceStatusApiCall(false, true);
-                            } else if (table.getErrorCode().contentEquals("2")) {
-                                Toast.makeText(FacultyFillAttendanceActivity.this, "" + table.getErrorMsg(), Toast.LENGTH_SHORT).show();
-                                onBackPressed();
-                            }
-
-                            if (table.getErrorCode().equalsIgnoreCase("1")) {
                                 Toast.makeText(FacultyFillAttendanceActivity.this, "" + table.getErrorMsg(), Toast.LENGTH_SHORT).show();
                                 updateStudentDailyLectureWiseAttendanceStatusApiCall(false, true);
                             } else if (table.getErrorCode().contentEquals("2")) {
@@ -689,6 +835,11 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                 });
     }
 
+    String topicNameForConfig2 = "";
+    String topicMethodForConfig2 = "0";
+    String topicMethodAidForConfig2 = "0";
+    String topicUnitIdForConfig2 = "0";
+
     private void getMethodFromApi(boolean isPdShow, boolean isPdHide, String topicId) {
         if (isPdShow) {
             DialogUtil.showProgressDialogNotCancelable(FacultyFillAttendanceActivity.this, "");
@@ -705,18 +856,16 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getTable() != null &&
                                     response.body().getTable().size() > 0) {
-                                METHOD_TOPIC_NAME = methodgetPojo.getTable().get(0).getTopic_name() + "";
-                                METHOD_TOPIC_METHOD = methodgetPojo.getTable().get(0).getTopic_method() + "";
-                                METHOD_TOPIC_AID = methodgetPojo.getTable().get(0).getTopic_aid() + "";
-                                METHOD_UNIT_ID = methodgetPojo.getTable().get(0).getUnit_id() + "";
-                                Alterbate_method();
-
-                            } else if (topicId == null || topicId.equalsIgnoreCase("0")) {
-                                Alterbate_method();
+                                GetLessonPlaningTopicDetailsSubjectFacultyAndTopicWisePojo.Table table = response.body().getTable().get(0);
+                                topicNameForConfig2 = table.getTopicName() + "";
+                                topicMethodForConfig2 = table.getTopicMethod() + "";
+                                topicMethodAidForConfig2 = table.getTopicAid() + "";
+                                topicUnitIdForConfig2 = table.getUnitId() + "";
                             }
                         } else {
                             DialogUtil.hideProgressDialog();
                             Toast.makeText(FacultyFillAttendanceActivity.this, "Something went wrong,Please try again later", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
 
@@ -756,7 +905,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                                 }
 
                                 spinnerAdapterFacultyTopicForConfig2 = new SpinnerSimpleAdapter(FacultyFillAttendanceActivity.this, topicListForConfig2);
-                                spSelectUnitForConfig2.setAdapter(spinnerAdapterFacultyTopicForConfig2);
+                                spSelectTopicForConfig2.setAdapter(spinnerAdapterFacultyTopicForConfig2);
                                 llTopicUnitForConfig2.setVisibility(View.VISIBLE);
                             } else {
                                 llTopicUnitForConfig2.setVisibility(View.GONE);
@@ -782,24 +931,33 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         }
         ApiImplementer.updateDailyLectureWiseAttendanceApiImplementer(facultyPendingAttendancePojo.getCourseId() + "", facultyPendingAttendancePojo.getSmId() + "",
                 facultyPendingAttendancePojo.getDivId() + "", facultyPendingAttendancePojo.getBatchId() + "", facultyPendingAttendancePojo.getDlDate() + "",
-                facultyPendingAttendancePojo.getLectType() + "", mySharedPreferences.getEmpId(), facultyPendingAttendancePojo.getLecNo() + "",
+                facultyPendingAttendancePojo.getLecType() + "", mySharedPreferences.getEmpId(), facultyPendingAttendancePojo.getLecNo() + "",
                 facultyPendingAttendancePojo.getSubId() + "", facultyPendingAttendancePojo.getDLRECOURSEID() + "", facultyPendingAttendancePojo.getDLVERSIONID() + "",
                 mySharedPreferences.getEmpId(), "1", new Callback<UpdateDailyLectureWiseAttendanceStatusPojo>() {
                     @Override
                     public void onResponse(Call<UpdateDailyLectureWiseAttendanceStatusPojo> call, Response<UpdateDailyLectureWiseAttendanceStatusPojo> response) {
-                        if (isPdHide) {
+                        try {
+//    if (isPdHide) {
                             DialogUtil.hideProgressDialog();
+//                        }
+
+                            onBackPressed();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
                         }
-                        if (response.isSuccessful() && response.body() != null && response.body().getTable() != null && response.body().getTable().size() > 0) {
-                            if (response.body().getTable().get(0).getErrorCode().equalsIgnoreCase("1")) {
-                                onBackPressed();
-                            } else {
-                                Toast.makeText(FacultyFillAttendanceActivity.this, "" + response.message(), Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            DialogUtil.hideProgressDialog();
-                            Toast.makeText(FacultyFillAttendanceActivity.this, "" + response.message(), Toast.LENGTH_SHORT).show();
-                        }
+                        //
+
+//                        if (response.isSuccessful() && response.body() != null && response.body().getTable() != null && response.body().getTable().size() > 0) {
+////                            if (response.body().getTable().get(0).getErrorCode().equalsIgnoreCase("1")) {
+////                                onBackPressed();
+////                            } else {
+////                                Toast.makeText(FacultyFillAttendanceActivity.this, "" + response.message(), Toast.LENGTH_SHORT).show();
+////                            }
+//                            onBackPressed();
+//                        } else {
+//                            DialogUtil.hideProgressDialog();
+//                            Toast.makeText(FacultyFillAttendanceActivity.this, "" + response.message(), Toast.LENGTH_SHORT).show();
+//                        }
                     }
 
                     @Override
@@ -811,14 +969,17 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
 
     }
 
-    private void insertClassWiseAttendanceApiCall(boolean isPdShow, boolean isPdHide, String presentId, String absentId) {
+    private void insertClassWiseAttendanceApiCall(boolean isPdShow, boolean isPdHide, String attStatus,
+                                                  String attTopic, String attTeachingMethod, String attAid,
+                                                  String flint, String attHomeWork, String unitId,
+                                                  String presentId, String absentId) {
         if (isPdShow) {
             DialogUtil.showProgressDialogNotCancelable(FacultyFillAttendanceActivity.this, "");
         }
-        ApiImplementer.insertClassWiseAttendanceApiImplementer(facultyPendingAttendancePojo.getCollegeId(), presentId, absentId,
-                facultyPendingAttendancePojo.getSmId(), facultyPendingAttendancePojo.getDivId(), facultyPendingAttendancePojo.getBatchId(),
-                facultyPendingAttendancePojo.getLecNo(), strDate, "", attStatus, mySharedPreferences.getEmpYearId(),
-                attTopic, attTeachingMethod, attAid, flint, facultyPendingAttendancePojo.getLectType(), facultyPendingAttendancePojo.getDLVERSIONID(), "By Selection Method Application", mySharedPreferences.getEmpId(), unitId, attHomeWork, mySharedPreferences.getEmpId(), "1", new Callback<InsertClassWiseAttendancePojo>() {
+        ApiImplementer.insertClassWiseAttendanceApiImplementer(facultyPendingAttendancePojo.getCollegeId() + "", presentId, absentId,
+                facultyPendingAttendancePojo.getSmId() + "" + "", facultyPendingAttendancePojo.getDivId() + "", facultyPendingAttendancePojo.getBatchId() + "",
+                facultyPendingAttendancePojo.getLecNo() + "", strDate, "", attStatus, mySharedPreferences.getEmpYearId(),
+                attTopic, attTeachingMethod, attAid, flint, facultyPendingAttendancePojo.getLecType(), facultyPendingAttendancePojo.getDLVERSIONID() + "", "By Selection Method Application", mySharedPreferences.getEmpId(), unitId, attHomeWork, mySharedPreferences.getEmpId(), "1", new Callback<InsertClassWiseAttendancePojo>() {
                     @Override
                     public void onResponse(Call<InsertClassWiseAttendancePojo> call, Response<InsertClassWiseAttendancePojo> response) {
                         if (isPdHide) {
@@ -850,15 +1011,15 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
 
     @Override
     public void onClickTeachingMethod(ArrayList<GetTeachingMethodPojo.Table> getTeachingMethodArrayListNew) {
-        selectedMethodNo = "";
+        selectedMethodIds = "";
         this.getTeachingMethodArrayListNew = getTeachingMethodArrayListNew;
         for (int i = 0; i < getTeachingMethodArrayListNew.size(); i++) {
             if (getTeachingMethodArrayListNew.get(i).isSelected()) {
-                selectedMethodNo = selectedMethodNo + "," + getTeachingMethodArrayListNew.get(i).getTmId() + "";
+                selectedMethodIds = selectedMethodIds + "," + getTeachingMethodArrayListNew.get(i).getTmId() + "";
             }
         }
-        selectedMethodNo = selectedMethodNo.replaceFirst(",", "");
-        if (CommonUtil.checkIsEmptyOrNullCommon(selectedMethodNo)) {
+        selectedMethodIds = selectedMethodIds.replaceFirst(",", "");
+        if (CommonUtil.checkIsEmptyOrNullCommon(selectedMethodIds)) {
             isMethodSelected = false;
         } else {
             isMethodSelected = true;
@@ -866,18 +1027,23 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
     }
 
 
-    private String selectedStudetAbsentPresentBySelectionIDList = "";
+    private String selectedPresentIDList = "";
+    private String selectedAbsentIDList = "";
     private ArrayList<StudentDetailsFillAttendancePojo.TableBean> selectedStudentAbsentOrPresentArrayListNew;
 
     @Override
     public void onAbsentPresentStatusChange(ArrayList<StudentDetailsFillAttendancePojo.TableBean> tableBeanArrayList) {
-        selectedStudetAbsentPresentBySelectionIDList = "";
+        selectedPresentIDList = "";
+        selectedAbsentIDList = "";
         selectedStudentAbsentOrPresentArrayListNew = tableBeanArrayList;
         for (int i = 0; i < tableBeanArrayList.size(); i++) {
             if (tableBeanArrayList.get(i).isChecked()) {
-                selectedStudetAbsentPresentBySelectionIDList = selectedStudetAbsentPresentBySelectionIDList + "," + selectedStudentAbsentOrPresentArrayListNew.get(i).getStudId() + "";
+                selectedPresentIDList = selectedPresentIDList + "," + selectedStudentAbsentOrPresentArrayListNew.get(i).getStudId() + "";
+            } else {
+                selectedAbsentIDList = selectedAbsentIDList + "," + selectedStudentAbsentOrPresentArrayListNew.get(i).getStudId() + "";
             }
         }
-        selectedStudetAbsentPresentBySelectionIDList = selectedStudetAbsentPresentBySelectionIDList.replaceFirst(",", "");
+        selectedPresentIDList = selectedPresentIDList.replaceFirst(",", "");
+        selectedAbsentIDList = selectedAbsentIDList.replaceFirst(",", "");
     }
 }

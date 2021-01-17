@@ -244,6 +244,7 @@
                                         android:background="@color/white" />
 
                                     <com.kyleduo.switchbutton.SwitchButton
+                                        android:id="@+id/sbtnPresentOrAbsentAll"
                                         style="@style/SwitchButtonStyle"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -501,7 +502,7 @@
                                 android:orientation="vertical">
 
                                 <LinearLayout
-                                    android:id="@+id/llTopicUnitForConfig2"
+                                    android:id="@+id/llTopicForConfig2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
@@ -509,7 +510,7 @@
                                     android:orientation="vertical">
 
                                     <Spinner
-                                        android:id="@+id/spSelectUnitForConfig2"
+                                        android:id="@+id/spSelectTopicForConfig2"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:dropDownVerticalOffset="40dp"

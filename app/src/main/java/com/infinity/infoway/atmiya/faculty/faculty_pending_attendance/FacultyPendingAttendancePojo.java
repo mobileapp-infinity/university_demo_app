@@ -93,7 +93,7 @@ public class FacultyPendingAttendancePojo implements Serializable {
         private String lectureName;
         @SerializedName("lec_type")
         @Expose
-        private Integer lecType;
+        private String lecType;
         @SerializedName("DL_VERSION_ID")
         @Expose
         private Integer dLVERSIONID;
@@ -262,11 +262,11 @@ public class FacultyPendingAttendancePojo implements Serializable {
             this.lectureName = lectureName;
         }
 
-        public Integer getLecType() {
+        public String getLecType() {
             return lecType;
         }
 
-        public void setLecType(Integer lecType) {
+        public void setLecType(String lecType) {
             this.lecType = lecType;
         }
 
