@@ -52,7 +52,6 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         try {

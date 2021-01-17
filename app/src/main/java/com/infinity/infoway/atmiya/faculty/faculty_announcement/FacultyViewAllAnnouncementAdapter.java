@@ -60,7 +60,7 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         FacultyOrStudentNewsOrNotificationsPojo.Data data = facultyAnnouncementPojoArrayList.get(position);
 
-        holder.cbMarkAsReadStudentNotification.setChecked(false);
+//        holder.cbMarkAsReadStudentNotification.setChecked(false);
         if (data.getNt_head() != null && !data.getNt_head().isEmpty()) {
             holder.tvNotificationTitle.setText(data.getNt_head());
         }
@@ -83,35 +83,47 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
         }
 
         if (data.getNt_is_notif() == 1) {
-            holder.cbMarkAsReadStudentNotification.setVisibility(View.VISIBLE);
+            holder.tvNewNotificationVisibleView.setVisibility(View.VISIBLE);
+            holder.tvNewNotificationInVisibleView.setVisibility(View.INVISIBLE);
         } else {
-            holder.cbMarkAsReadStudentNotification.setVisibility(View.GONE);
+            holder.tvNewNotificationVisibleView.setVisibility(View.GONE);
+            holder.tvNewNotificationInVisibleView.setVisibility(View.GONE);
         }
 
-        holder.cbMarkAsReadStudentNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    new MaterialAlertDialogBuilder(context)
-                            .setMessage("Are you sure you want to mark as read ?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    updateNewsOrNotificationStatus(data, holder.cbMarkAsReadStudentNotification, position);
-                                    dialog.dismiss();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    holder.cbMarkAsReadStudentNotification.setChecked(false);
-                                    dialog.dismiss();
-                                }
-                            })
-                            .show();
+            public void onClick(View view) {
+                if (holder.tvNewNotificationVisibleView.getVisibility() == View.VISIBLE) {
+                    updateNewsOrNotificationStatus(data, position, holder.tvNewNotificationVisibleView,
+                            holder.tvNewNotificationInVisibleView);
                 }
             }
         });
+
+//        holder.cbMarkAsReadStudentNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    new MaterialAlertDialogBuilder(context)
+//                            .setMessage("Are you sure you want to mark as read ?")
+//                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    updateNewsOrNotificationStatus(data, holder.cbMarkAsReadStudentNotification, position);
+//                                    dialog.dismiss();
+//                                }
+//                            })
+//                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    holder.cbMarkAsReadStudentNotification.setChecked(false);
+//                                    dialog.dismiss();
+//                                }
+//                            })
+//                            .show();
+//                }
+//            }
+//        });
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(data.getNt_file_path())) {
             holder.imgDownloadAttachFileStudent.setVisibility(View.VISIBLE);
@@ -130,7 +142,9 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
     }
 
 
-    private void updateNewsOrNotificationStatus(FacultyOrStudentNewsOrNotificationsPojo.Data data, AppCompatCheckBox cbMarkAsReadStudentNotification, int position) {
+    private void updateNewsOrNotificationStatus(FacultyOrStudentNewsOrNotificationsPojo.Data data,
+                                                int position, TextViewRegularFont tvNewNotificationVisibleView,
+                                                TextViewRegularFont tvNewNotificationInVisibleView) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(context, "");
             ApiImplementer.updateStudentOrEmployeeNotificationStatusApiImplementer(mySharedPreferences.getLoginUserType() + "",
@@ -138,11 +152,16 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
                         @Override
                         public void onResponse(Call<UpdateNotificationStatusPojo> call, Response<UpdateNotificationStatusPojo> response) {
                             DialogUtil.hideProgressDialog();
-                            if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
-                                facultyAnnouncementPojoArrayList.remove(position);
-                                iRemoveStudentNewsOrNotification.onNotificationRemove(position);
+                            if (response.isSuccessful() && response.body() != null &&
+                                    response.body().getTable().size() > 0) {
+                                tvNewNotificationVisibleView.setVisibility(View.INVISIBLE);
+                                tvNewNotificationInVisibleView.setVisibility(View.INVISIBLE);
+//                                facultyAnnouncementPojoArrayList.remove(position);
+//                                iRemoveStudentNewsOrNotification.onNotificationRemove(position);
                             } else {
-                                cbMarkAsReadStudentNotification.setChecked(false);
+                                tvNewNotificationVisibleView.setVisibility(View.VISIBLE);
+                                tvNewNotificationInVisibleView.setVisibility(View.INVISIBLE);
+//                                cbMarkAsReadStudentNotification.setChecked(false);
                                 Toast.makeText(context, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -150,7 +169,9 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
                         @Override
                         public void onFailure(Call<UpdateNotificationStatusPojo> call, Throwable t) {
                             DialogUtil.hideProgressDialog();
-                            cbMarkAsReadStudentNotification.setChecked(false);
+                            tvNewNotificationVisibleView.setVisibility(View.VISIBLE);
+                            tvNewNotificationInVisibleView.setVisibility(View.INVISIBLE);
+//                            cbMarkAsReadStudentNotification.setChecked(false);
                             Toast.makeText(context, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -168,19 +189,24 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         AppCompatImageView imgDownloadAttachFileStudent;
-        AppCompatCheckBox cbMarkAsReadStudentNotification;
+//        AppCompatCheckBox cbMarkAsReadStudentNotification;
 
         TextViewRegularFont tvNotificationDate;
         TextViewRegularFont tvNotificationTitle;
         TextViewRegularFont tvNotificationDesc;
 
+        TextViewRegularFont tvNewNotificationVisibleView;
+        TextViewRegularFont tvNewNotificationInVisibleView;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            tvNewNotificationVisibleView = itemView.findViewById(R.id.tvNewNotificationVisibleView);
+            tvNewNotificationInVisibleView = itemView.findViewById(R.id.tvNewNotificationInVisibleView);
             tvNotificationDate = itemView.findViewById(R.id.tvNotificationDate);
             tvNotificationTitle = itemView.findViewById(R.id.tvNotificationTitle);
             tvNotificationDesc = itemView.findViewById(R.id.tvNotificationDesc);
             imgDownloadAttachFileStudent = itemView.findViewById(R.id.imgDownloadAttachFileStudent);
-            cbMarkAsReadStudentNotification = itemView.findViewById(R.id.cbMarkAsReadStudentNotification);
+//            cbMarkAsReadStudentNotification = itemView.findViewById(R.id.cbMarkAsReadStudentNotification);
         }
     }
 
