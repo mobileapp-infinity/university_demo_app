@@ -43,18 +43,15 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
 
     @Override
     public long getItemId(int position) {
-        return super.getItemId(position);
+        return position;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        return position;
     }
 
-    @Override
-    public void setHasStableIds(boolean hasStableIds) {
-        super.setHasStableIds(hasStableIds);
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -86,6 +83,7 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
                 if (inoutArray1.getInputArray() == null || inoutArray1.getInputArray().size() == 0) {
                     holder.tvFacultyLectureNoIndex.setVisibility(View.VISIBLE);
                     holder.llContentFaculty.setVisibility(View.VISIBLE);
+                    holder.llFacultyMergingDynamicLayout.setVisibility(View.GONE);
 
                     String lectureNoForIndex = "-";
 
@@ -147,7 +145,11 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
 
                     holder.tvFacultyLectureNoIndex.setText(lectureNoForIndex);
 
-                    mergingLogic(inoutArray1, holder);
+                    holder.rvFacultyMergingDynamicLayout.setAdapter(new FacultyTimeTableChildListAdapter(context,
+                            (ArrayList<FacultyTimeTablePojo.InputArray>) facultyLectureDetailsArrayList.get(position).getInputArray()));
+
+                    holder.llFacultyMergingDynamicLayout.setVisibility(View.VISIBLE);
+//                    mergingLogic(inoutArray1, holder);
                 }
             }
         } catch (Exception ex) {
@@ -254,10 +256,17 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
         //For Circle
         AppCompatTextView tvStart;
         AppCompatTextView tvEnd;
+        RecyclerView rvFacultyMergingDynamicLayout;
+
+//        private final ViewGroup container;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+//            container = (ViewGroup) itemView;
+
+            rvFacultyMergingDynamicLayout = itemView.findViewById(R.id.rvFacultyMergingDynamicLayout);
+
             tvFacultyLectureNoIndex = itemView.findViewById(R.id.tvFacultyLectureNoIndex);
             imgFacultyBreak = itemView.findViewById(R.id.imgFacultyBreak);
             cvDataFaculty = itemView.findViewById(R.id.cvDataFaculty);

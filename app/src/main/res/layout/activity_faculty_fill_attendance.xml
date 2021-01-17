@@ -320,6 +320,7 @@
                                         android:fontFamily="@font/ubuntu_r"
                                         android:hint="Enter Comma Separated Roll Number"
                                         android:minLines="2"
+                                        android:digits="0123456789,"
                                         android:text=" "
                                         android:textColor="@color/colorPrimary"
                                         android:textColorHint="@color/colorAccent"
