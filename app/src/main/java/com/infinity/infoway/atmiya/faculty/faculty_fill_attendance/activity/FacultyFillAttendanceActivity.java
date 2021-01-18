@@ -256,46 +256,46 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
             }
         });
 
-        spSelectNoOfPostOn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i > 0) {
-
-                } else {
-
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        spSelectTeachingAid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        spSelectNoOfPostOn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                if (i > 0) {
+//
+//                } else {
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
 
-        spSelectUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
+//        spSelectTeachingAid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+//        spSelectUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
 
         sBtnAttendanceForByRollNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -991,8 +991,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                             if (table.getErrorCode().equalsIgnoreCase("1")) {
                                 Toast.makeText(FacultyFillAttendanceActivity.this, "" + table.getErrorMsg(), Toast.LENGTH_SHORT).show();
                                 updateStudentDailyLectureWiseAttendanceStatusApiCall(false, true);
-                            }
-                            if (table.getErrorCode().equalsIgnoreCase("2")) {
+                            } else if (table.getErrorCode().equalsIgnoreCase("2")) {
                                 Toast.makeText(FacultyFillAttendanceActivity.this, "" + table.getErrorMsg(), Toast.LENGTH_SHORT).show();
                                 onBackPressed();
                             }
