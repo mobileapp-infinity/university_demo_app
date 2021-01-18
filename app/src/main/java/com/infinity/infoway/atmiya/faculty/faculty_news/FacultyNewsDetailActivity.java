@@ -100,7 +100,7 @@ public class FacultyNewsDetailActivity extends AppCompatActivity implements View
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(groupNewsDetail.getCnContent())) {
             tvNewsContent.setText(groupNewsDetail.getCnContent() + "");
-            
+
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(groupNewsDetail.getCn_file()) &&
