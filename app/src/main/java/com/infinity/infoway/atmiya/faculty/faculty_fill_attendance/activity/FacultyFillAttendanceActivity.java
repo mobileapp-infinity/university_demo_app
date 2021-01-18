@@ -934,9 +934,9 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                 facultyPendingAttendancePojo.getDivId() + "", facultyPendingAttendancePojo.getBatchId() + "", facultyPendingAttendancePojo.getDlDate() + "",
                 facultyPendingAttendancePojo.getLecType() + "", mySharedPreferences.getEmpId(), facultyPendingAttendancePojo.getLecNo() + "",
                 facultyPendingAttendancePojo.getSubId() + "", facultyPendingAttendancePojo.getDLRECOURSEID() + "", facultyPendingAttendancePojo.getDLVERSIONID() + "",
-                mySharedPreferences.getEmpId(), "1", new Callback<UpdateDailyLectureWiseAttendanceStatusPojo>() {
+                mySharedPreferences.getEmpId(), "1", new Callback<ArrayList<UpdateDailyLectureWiseAttendanceStatusPojo>>() {
                     @Override
-                    public void onResponse(Call<UpdateDailyLectureWiseAttendanceStatusPojo> call, Response<UpdateDailyLectureWiseAttendanceStatusPojo> response) {
+                    public void onResponse(Call<ArrayList<UpdateDailyLectureWiseAttendanceStatusPojo>> call, Response<ArrayList<UpdateDailyLectureWiseAttendanceStatusPojo>> response) {
                         try {
 //    if (isPdHide) {
                             DialogUtil.hideProgressDialog();
@@ -962,7 +962,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                     }
 
                     @Override
-                    public void onFailure(Call<UpdateDailyLectureWiseAttendanceStatusPojo> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<UpdateDailyLectureWiseAttendanceStatusPojo>> call, Throwable t) {
                         DialogUtil.hideProgressDialog();
                         Toast.makeText(FacultyFillAttendanceActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }

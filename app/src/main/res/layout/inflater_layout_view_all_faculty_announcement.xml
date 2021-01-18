@@ -21,63 +21,63 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                     android:id="@+id/tvNewNotificationVisibleView"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
-                    android:layout_marginRight="6dp"
-                    android:visibility="invisible"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/shape_new_notification"/>
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/shape_new_notification"
+                    android:visibility="invisible" />
 
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                     android:id="@+id/tvNotificationTitle"
                     android:layout_width="0dp"
-                    android:layout_weight="0.75"
                     android:layout_height="wrap_content"
-                    android:text="Testing Title"
+                    android:layout_weight="0.75"
                     android:gravity="center_vertical"
+                    android:text="-"
                     android:textColor="@color/colorPrimary"
                     android:textSize="13sp" />
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                     android:id="@+id/tvNotificationDate"
                     android:layout_width="0dp"
-                    android:layout_weight="0.25"
                     android:layout_height="wrap_content"
-                    android:text="-"
+                    android:layout_weight="0.25"
                     android:gravity="end|center_vertical"
+                    android:text="-"
                     android:textColor="@color/color_primary_with_75_opacity"
                     android:textSize="10sp" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                     android:id="@+id/tvNewNotificationInVisibleView"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
-                    android:layout_marginRight="6dp"
-                    android:visibility="invisible"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/shape_new_notification"/>
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/shape_new_notification"
+                    android:visibility="invisible" />
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
                     android:id="@+id/tvNotificationDesc"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_weight="1"
                     android:lineSpacingMultiplier="1.2"
                     android:text="-"
                     android:textColor="@color/color_primary_with_90_opacity"
@@ -86,9 +86,9 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgDownloadAttachFileStudent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/ic_attach_file"/>
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    app:srcCompat="@drawable/ic_attach_file" />
 
             </LinearLayout>
 

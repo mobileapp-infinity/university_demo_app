@@ -639,7 +639,7 @@ public interface IApiInterface {
 
     @GET("UPDATE_DAILY_LECTURE_PLANING_WISE_ATT_STATUS_API")
     @Streaming
-    Call<UpdateDailyLectureWiseAttendanceStatusPojo> updateDailyLectureWiseAttendance(
+    Call<ArrayList<UpdateDailyLectureWiseAttendanceStatusPojo>> updateDailyLectureWiseAttendance(
             @Query("course_id") String course_id,
             @Query("sem_id") String sem_id,
             @Query("div_id") String div_id,

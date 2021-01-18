@@ -71,11 +71,11 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getCourseName())) {
-            holder.tvCourseNameFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getCourseName() + "");
+            holder.tvCourseNameFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getCourseName().trim() + "");
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getSubName())) {
-            holder.tvSubjectNameFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getSubName() + "");
+            holder.tvSubjectNameFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getSubName().trim() + "");
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getBatchName())) {

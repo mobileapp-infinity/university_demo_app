@@ -781,9 +781,9 @@ public class ApiImplementer {
                                                                       String version_id,
                                                                       String modify_by,
                                                                       String modify_ip,
-                                                                      Callback<UpdateDailyLectureWiseAttendanceStatusPojo> cb) {
+                                                                      Callback<ArrayList<UpdateDailyLectureWiseAttendanceStatusPojo>> cb) {
         final IApiInterface apiService = ApiClientForFacultyPendingAttendance.getClient().create(IApiInterface.class);
-        Call<UpdateDailyLectureWiseAttendanceStatusPojo> call = apiService.updateDailyLectureWiseAttendance(
+        Call<ArrayList<UpdateDailyLectureWiseAttendanceStatusPojo>> call = apiService.updateDailyLectureWiseAttendance(
                 course_id,
                 sem_id,
                 div_id,

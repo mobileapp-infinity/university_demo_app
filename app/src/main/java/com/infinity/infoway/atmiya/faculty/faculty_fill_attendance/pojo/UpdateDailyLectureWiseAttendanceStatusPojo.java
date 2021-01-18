@@ -7,43 +7,28 @@ import java.util.List;
 
 public class UpdateDailyLectureWiseAttendanceStatusPojo {
 
-    @SerializedName("Table")
+    @SerializedName("Error_code")
     @Expose
-    private List<Table> table = null;
+    private String errorCode;
+    @SerializedName("Error_msg")
+    @Expose
+    private String errorMsg;
 
-    public List<Table> getTable() {
-        return table;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setTable(List<Table> table) {
-        this.table = table;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public class Table {
-
-        @SerializedName("Error_code")
-        @Expose
-        private String errorCode;
-        @SerializedName("Error_msg")
-        @Expose
-        private String errorMsg;
-
-        public String getErrorCode() {
-            return errorCode;
-        }
-
-        public void setErrorCode(String errorCode) {
-            this.errorCode = errorCode;
-        }
-
-        public String getErrorMsg() {
-            return errorMsg;
-        }
-
-        public void setErrorMsg(String errorMsg) {
-            this.errorMsg = errorMsg;
-        }
-
+    public String getErrorMsg() {
+        return errorMsg;
     }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
 
 }
