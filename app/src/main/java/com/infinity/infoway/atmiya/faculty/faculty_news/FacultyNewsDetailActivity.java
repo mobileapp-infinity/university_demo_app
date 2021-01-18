@@ -5,11 +5,14 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 
 import android.graphics.Color;
+import android.graphics.text.LineBreaker;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.infinity.infoway.atmiya.BuildConfig;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
@@ -21,6 +24,7 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 import static com.infinity.infoway.atmiya.faculty.faculty_news.FacultyNewsListAdapter.FACULTY_NEWS_FOLDER_NAME;
 
 public class FacultyNewsDetailActivity extends AppCompatActivity implements View.OnClickListener {

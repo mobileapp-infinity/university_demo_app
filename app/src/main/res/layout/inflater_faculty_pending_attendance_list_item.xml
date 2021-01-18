@@ -181,6 +181,31 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:text="Division"
+                            android:textColor="@color/profile_heading_color"
+                            android:textSize="10sp" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:id="@+id/tvDivisionFacultyPendingAttendance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="-"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="Batch"
                             android:textColor="@color/profile_heading_color"
                             android:textSize="10sp" />
@@ -206,12 +231,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Division"
+                            android:text="Lec. No."
                             android:textColor="@color/profile_heading_color"
                             android:textSize="10sp" />
 
                         <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:id="@+id/tvDivisionFacultyPendingAttendance"
+                            android:id="@+id/tvLectureNoFacultyPendingAttendance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"

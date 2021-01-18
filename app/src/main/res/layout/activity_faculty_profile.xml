@@ -150,43 +150,44 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="8dp">-->
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:orientation="vertical"
-                    android:text="Emp Id"
-                    android:textAllCaps="true"
-                    android:textColor="@color/profile_heading_color"
-                    android:textSize="10sp" />
+<!--                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:text="Designation"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:textColor="@color/profile_heading_color"-->
+<!--                    android:textSize="10sp" />-->
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                    android:id="@+id/tvEmpId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:orientation="vertical"
-                    android:text="-"
-                    android:textAllCaps="true"
-                    android:textColor="@color/profile_heading_value_color"
-                    android:textSize="12sp" />
+<!--                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont-->
+<!--                    android:id="@+id/tvEmpId"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:text="Assistant Professor"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:textColor="@color/profile_heading_value_color"-->
+<!--                    android:textSize="12sp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/profile_heading_color" />
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@color/profile_heading_color" />-->
 
             <LinearLayout
                 android:layout_width="0dp"

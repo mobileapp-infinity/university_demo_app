@@ -66,6 +66,10 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
             }
         }
 
+        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getLecNo())) {
+            holder.tvLectureNoFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getLecNo() + "");
+        }
+
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyPendingAttendancePojo.getCourseName())) {
             holder.tvCourseNameFacultyPendingAttendance.setText(facultyPendingAttendancePojo.getCourseName() + "");
         }
@@ -119,6 +123,7 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
         TextViewRegularFont tvSubjectNameFacultyPendingAttendance;
         TextViewRegularFont tvBatchFacultyPendingAttendance;
         TextViewRegularFont tvDivisionFacultyPendingAttendance;
+        TextViewRegularFont tvLectureNoFacultyPendingAttendance;
         LinearLayout llFillAttendanceFacultyPendingAttendance;
 
 
@@ -156,6 +161,7 @@ public class FacultyPendingAttendanceListAdapter extends RecyclerView.Adapter<Fa
             tvBatchFacultyPendingAttendance = itemView.findViewById(R.id.tvBatchFacultyPendingAttendance);
             tvDivisionFacultyPendingAttendance = itemView.findViewById(R.id.tvDivisionFacultyPendingAttendance);
             llFillAttendanceFacultyPendingAttendance = itemView.findViewById(R.id.llFillAttendanceFacultyPendingAttendance);
+            tvLectureNoFacultyPendingAttendance = itemView.findViewById(R.id.tvLectureNoFacultyPendingAttendance);
         }
     }
 

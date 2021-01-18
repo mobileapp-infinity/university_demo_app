@@ -43,7 +43,7 @@ public class FacultyProfileActivity extends AppCompatActivity implements View.On
 
     private TextViewRegularFont tvFacultyName;
     private TextViewRegularFont tvFacultyEmail;
-    private TextViewMediumFont tvEmpId;
+//    private TextViewMediumFont tvEmpId;
     private TextViewMediumFont tvFacultyEmployeeNo;
     private TextViewMediumFont tvFacultyEducation;
 
@@ -126,7 +126,7 @@ public class FacultyProfileActivity extends AppCompatActivity implements View.On
 
         tvFacultyName = findViewById(R.id.tvFacultyName);
         tvFacultyEmail = findViewById(R.id.tvFacultyEmail);
-        tvEmpId = findViewById(R.id.tvEmpId);
+//        tvEmpId = findViewById(R.id.tvEmpId);
         tvFacultyEmployeeNo = findViewById(R.id.tvFacultyEmployeeNo);
         tvFacultyEducation = findViewById(R.id.tvFacultyEducation);
 
@@ -273,9 +273,9 @@ public class FacultyProfileActivity extends AppCompatActivity implements View.On
             tvFacultyEmail.setText(facultyProfilePojo.getEmpEmail() + "");
         }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(mySharedPreferences.getEmpId())) {
-            tvEmpId.setText(mySharedPreferences.getEmpId() + "");
-        }
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(mySharedPreferences.getEmpId())) {
+//            tvEmpId.setText(mySharedPreferences.getEmpId() + "");
+//        }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyProfilePojo.getEmpNumber())) {
             tvFacultyEmployeeNo.setText(facultyProfilePojo.getEmpNumber() + "");
