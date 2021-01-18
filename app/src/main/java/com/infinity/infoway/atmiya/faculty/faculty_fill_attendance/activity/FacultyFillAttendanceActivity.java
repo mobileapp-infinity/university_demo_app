@@ -893,6 +893,7 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                                     response.body().getTable().size() > 0) {
                                 ArrayList<GetLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnlyPojo.Table> tableArrayList = (ArrayList<GetLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnlyPojo.Table>) response.body().getTable();
                                 topicListForConfig2 = new ArrayList<>();
+                                topicListForConfig2.add(SELECT_TOPIC);
                                 topicNameAndIdListForConfig2 = new HashMap<>();
                                 for (int i = 0; i < tableArrayList.size(); i++) {
                                     GetLessonPlanningTopicDetailsBySubjectAndFacultyWiseOnlyPojo.Table table = tableArrayList.get(i);

@@ -19,8 +19,10 @@ public class IntentConstants {
     public static final int REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION_FACULTY_SIDE = 1009;
     public static final int REQUEST_CODE_FACULTY_PENDING_ATTENDANCE_UPDATE_LIST = 1010;
 
-    public static final String USERNAME_AFTER_FORGOT_PASS = "UsernameAfterForgot";
-    public static final String PASSWORD_AFTER_FORGOT_PASS = "PasswordAfterForgot";
+//    public static final String USERNAME_AFTER_FORGOT_PASS = "UsernameAfterForgot";
+    //    public static final String PASSWORD_AFTER_FORGOT_PASS = "PasswordAfterForgot";
+    public static final String IS_OTP_VERIFIED_AND_RESENT_PASS = "IsOtpVerifiedAndResentPass";
+
 
     public static final String STUDENT_HOME_WORK_DAY_WISE_LIST = "StudentHomeWorkDayWiseList";
     public static final String STUDENT_TIME_TABLE_DAY_WISE_LIST = "StudentDayWiseTimeTable";

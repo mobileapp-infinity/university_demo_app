@@ -34,8 +34,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     AppCompatEditText edtConfirmPassword;
     TextViewRegularFont btnUpdatePassword;
 
-    String userNameAfterForgotPassword = "";
-    String passwordAfterForgotPassword = "";
+//    String userNameAfterForgotPassword = "";
     String userId = "";
     String instituteId = "";
     String isEmployee = "";
@@ -47,17 +46,17 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_reset_password);
         initView();
 
-        if (getIntent().hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
-            userNameAfterForgotPassword = getIntent().getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
-        }
+//        if (getIntent().hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
+//            userNameAfterForgotPassword = getIntent().getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
+//        }
 
         if (getIntent().hasExtra(IntentConstants.RESET_PASS_USER_ID)) {
             userId = getIntent().getStringExtra(IntentConstants.RESET_PASS_USER_ID);
         }
 
-        if (getIntent().hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
-            passwordAfterForgotPassword = getIntent().getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
-        }
+//        if (getIntent().hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
+//            passwordAfterForgotPassword = getIntent().getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
+//        }
 
         if (getIntent().hasExtra(IntentConstants.IS_EMPLOYEE_RESET_PASSWORD)) {
             isEmployee = getIntent().getStringExtra(IntentConstants.IS_EMPLOYEE_RESET_PASSWORD);
@@ -122,8 +121,8 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(ResetPasswordActivity.this, VerifyOTPActivity.class);
-        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userNameAfterForgotPassword);
-        intent.putExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS, passwordAfterForgotPassword);
+//        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userNameAfterForgotPassword);
+        intent.putExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, false);
         setResult(Activity.RESULT_OK, intent);
         finish();
     }
@@ -140,8 +139,8 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                             response.body().getTable().get(0).getErrorCode() == 1) {
                         Toast.makeText(ResetPasswordActivity.this, "Password reset successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ResetPasswordActivity.this, VerifyOTPActivity.class);
-                        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userNameAfterForgotPassword);
-                        intent.putExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS, password);
+//                        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userNameAfterForgotPassword);
+                        intent.putExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, true);
                         setResult(Activity.RESULT_OK, intent);
                         finish();
                     } else {
@@ -171,8 +170,8 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0 &&
                             response.body().getTable().get(0).getErrorCode() == 1) {
                         Intent intent = new Intent(ResetPasswordActivity.this, VerifyOTPActivity.class);
-                        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userNameAfterForgotPassword);
-                        intent.putExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS, password);
+//                        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userNameAfterForgotPassword);
+                        intent.putExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, true);
                         setResult(Activity.RESULT_OK, intent);
                         finish();
                         Toast.makeText(ResetPasswordActivity.this, "Password reset successful", Toast.LENGTH_SHORT).show();

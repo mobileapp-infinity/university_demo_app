@@ -36,6 +36,15 @@ public class FacultyOrStudentNewsOrNotificationsPojo {
         private String nt_file_path;
         private String nt_file;
         private int nt_is_notif;
+        private int read_unread_status;
+
+        public int getRead_unread_status() {
+            return read_unread_status;
+        }
+
+        public void setRead_unread_status(int read_unread_status) {
+            this.read_unread_status = read_unread_status;
+        }
 
         public int getNt_srno() {
             return nt_srno;

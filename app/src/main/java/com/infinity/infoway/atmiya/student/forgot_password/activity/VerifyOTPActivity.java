@@ -15,6 +15,8 @@ import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.login.activity.LoginActivity;
+import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
+import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
 import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
@@ -122,14 +124,17 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                     DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
                         CheckOTPVerificationForStudentPojo.TableBean checkOTPVerificationForStudentPojo = response.body().getTable().get(0);
-                        String userName = checkOTPVerificationForStudentPojo.getStudUserName().toString().trim();
+
+                        setStudentLoginData(checkOTPVerificationForStudentPojo);
+
+//                        String userName = checkOTPVerificationForStudentPojo.getStudUserName().toString().trim();
                         String userId = checkOTPVerificationForStudentPojo.getStudId() + "";
-                        String password = checkOTPVerificationForStudentPojo.getStudPassword().toString().trim();
+//                        String password = checkOTPVerificationForStudentPojo.getStudPassword().toString().trim();
                         String isEmp = "0";
                         String isStudent = "1";
                         String instituteId = institute_id;
                         Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
-                        redirectToResetPasswordActivity(userName, userId, password, isEmp, isStudent, instituteId);
+                        redirectToResetPasswordActivity(userId, isEmp, isStudent, instituteId);
                     } else {
                         Toast.makeText(VerifyOTPActivity.this, "Incorrect OTP,Please enter correct OTP.", Toast.LENGTH_SHORT).show();
                     }
@@ -156,15 +161,18 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                     DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
                         CheckOTPVerificationForEmployeePojo.TableBean checkOTPVerificationForEmployeePojo = response.body().getTable().get(0);
+
+                        setEmployeeLoginData(checkOTPVerificationForEmployeePojo);
+
                         Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
 
-                        String userName = checkOTPVerificationForEmployeePojo.getEmpUsername().trim();
+//                        String userName = checkOTPVerificationForEmployeePojo.getEmpUsername().trim();
                         String userId = checkOTPVerificationForEmployeePojo.getEmpId() + "";
-                        String password = checkOTPVerificationForEmployeePojo.getEmpPassword().toString().trim();
+//                        String password = checkOTPVerificationForEmployeePojo.getEmpPassword().toString().trim();
                         String isEmp = "1";
                         String isStudent = "0";
                         String instituteId = institute_id;
-                        redirectToResetPasswordActivity(userName, userId, password, isEmp, isStudent, instituteId);
+                        redirectToResetPasswordActivity(userId, isEmp, isStudent, instituteId);
                     } else {
                         Toast.makeText(VerifyOTPActivity.this, "Incorrect OTP,Please enter correct OTP.", Toast.LENGTH_SHORT).show();
                     }
@@ -182,12 +190,11 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-    private void redirectToResetPasswordActivity(String userName, String userId, String password,
+    private void redirectToResetPasswordActivity(String userId,
                                                  String isEmp, String isStudent, String instituteId) {
         Intent intent = new Intent(VerifyOTPActivity.this, ResetPasswordActivity.class);
-        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userName);
+//        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userName);
         intent.putExtra(IntentConstants.RESET_PASS_USER_ID, userId);
-        intent.putExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS, password);
         intent.putExtra(IntentConstants.IS_EMPLOYEE_RESET_PASSWORD, isEmp);
         intent.putExtra(IntentConstants.IS_STUDENT_RESET_PASSWORD, isStudent);
         intent.putExtra(IntentConstants.RESET_PASS_INSTITUTE_ID, instituteId);
@@ -200,20 +207,207 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
         if (resultCode == Activity.RESULT_OK &&
                 requestCode == IntentConstants.REQUEST_CODE_FOR_RESET_PASSWORD) {
             Intent intent = new Intent(VerifyOTPActivity.this, ForgotPasswordActivity.class);
-            String userName = "";
-            String password = "";
+//            String userName = "";
+            boolean isOTPVerifiedAndResetPass = false;
 
-            if (data.hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
-                userName = data.getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
-            }
+//            if (data.hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
+//                userName = data.getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
+//            }
 
-            if (data.hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
-                password = data.getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
+            if (data.hasExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS)) {
+                isOTPVerifiedAndResetPass = data.getBooleanExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, false);
             }
-            intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userName);
-            intent.putExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS, password);
+//            intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userName);
+            intent.putExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, isOTPVerifiedAndResetPass);
             setResult(Activity.RESULT_OK, intent);
             finish();
         }
     }
+
+    private void setStudentLoginData(CheckOTPVerificationForStudentPojo.TableBean checkOtpVerificationForStudentPojo) {
+
+        if (checkOtpVerificationForStudentPojo.getStudUserName() != null) {
+            mySharedPreferences.setStudentUsername(checkOtpVerificationForStudentPojo.getStudUserName() + "");
+        }
+//        mySharedPreferences.setStudentPassword(password);
+        mySharedPreferences.setLoginUserType(2);
+
+        if (checkOtpVerificationForStudentPojo.getStudId() != null) {
+            mySharedPreferences.setStudentId(checkOtpVerificationForStudentPojo.getStudId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getDmId() != null) {
+            mySharedPreferences.setDMId(checkOtpVerificationForStudentPojo.getDmId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getDmFullName() != null) {
+            mySharedPreferences.setDmFullName(checkOtpVerificationForStudentPojo.getDmFullName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getCourseId() != null) {
+            mySharedPreferences.setCourseId(checkOtpVerificationForStudentPojo.getCourseId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getCourseFullname() != null) {
+            mySharedPreferences.setCourseFullName(checkOtpVerificationForStudentPojo.getCourseFullname());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSmId() != null) {
+            mySharedPreferences.setSmId(checkOtpVerificationForStudentPojo.getSmId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSmName() != null) {
+            mySharedPreferences.setSmName(checkOtpVerificationForStudentPojo.getSmName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getAcId() != null) {
+            mySharedPreferences.setAcId(checkOtpVerificationForStudentPojo.getAcId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getAcFullName() != null) {
+            mySharedPreferences.setAcFullName(checkOtpVerificationForStudentPojo.getAcFullName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSwdYearId() != null) {
+            mySharedPreferences.setSwdYearId(checkOtpVerificationForStudentPojo.getSwdYearId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getAcCode() != null) {
+            mySharedPreferences.setAcCode(checkOtpVerificationForStudentPojo.getAcCode() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getHostelCode() != null) {
+            mySharedPreferences.setHostelCode(checkOtpVerificationForStudentPojo.getHostelCode() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getName() != null) {
+            mySharedPreferences.setStudentName(checkOtpVerificationForStudentPojo.getName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getStudAdmissionNo() != null) {
+            mySharedPreferences.setStudAdmissionNo(checkOtpVerificationForStudentPojo.getStudAdmissionNo());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getStudEnrollmentNo() != null) {
+            mySharedPreferences.setStudentEnrollmentNo(checkOtpVerificationForStudentPojo.getStudEnrollmentNo());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getStudPhoto() != null) {
+            mySharedPreferences.setStudentPhotoUrl(checkOtpVerificationForStudentPojo.getStudPhoto());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getStatus() != null) {
+            mySharedPreferences.setStatus(checkOtpVerificationForStudentPojo.getStatus() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSwdDivisionId() != null) {
+            mySharedPreferences.setSwdDivisionId(checkOtpVerificationForStudentPojo.getSwdDivisionId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSwdBatchId() != null) {
+            mySharedPreferences.setSwdBatchId(checkOtpVerificationForStudentPojo.getSwdBatchId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getShiftId() != null) {
+            mySharedPreferences.setShiftId(checkOtpVerificationForStudentPojo.getShiftId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getImDomainName() != null) {
+            mySharedPreferences.setImDomainName(checkOtpVerificationForStudentPojo.getImDomainName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getIntituteId() != null) {
+            mySharedPreferences.setInstituteId(checkOtpVerificationForStudentPojo.getIntituteId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getFcFile() != null) {
+            mySharedPreferences.setFcFile(checkOtpVerificationForStudentPojo.getFcFile());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getImExamDbName() != null) {
+            mySharedPreferences.setImExamDbName(checkOtpVerificationForStudentPojo.getImExamDbName());
+        }
+    }
+
+    private void setEmployeeLoginData(CheckOTPVerificationForEmployeePojo.TableBean checkOTPVerificationForEmployeePojo) {
+
+        if (checkOTPVerificationForEmployeePojo.getEmpUsername() != null) {
+            mySharedPreferences.setEmpUserName(checkOTPVerificationForEmployeePojo.getEmpUsername());
+        }
+//        mySharedPreferences.setEmpPassword(empPassword);
+
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getLoginUserType())) {
+        mySharedPreferences.setLoginUserType(1);
+//        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpId())) {
+            mySharedPreferences.setEmpId(checkOTPVerificationForEmployeePojo.getEmpId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpNumber())) {
+            mySharedPreferences.setEmpNumber(checkOTPVerificationForEmployeePojo.getEmpNumber() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getName())) {
+            mySharedPreferences.setEmpName(checkOTPVerificationForEmployeePojo.getName() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpMainSchoolId())) {
+            mySharedPreferences.setEmpMainSchoolId(checkOTPVerificationForEmployeePojo.getEmpMainSchoolId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getAcFullName())) {
+            mySharedPreferences.setAcFullName(checkOTPVerificationForEmployeePojo.getAcFullName() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getAcLogo())) {
+            mySharedPreferences.setEmpAcLogo(checkOTPVerificationForEmployeePojo.getAcLogo() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getStudPhoto())) {
+            mySharedPreferences.setStudentPhotoUrl(checkOTPVerificationForEmployeePojo.getStudPhoto() + "");
+        }
+
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getStatus())) {
+//            mySharedPreferences.setEmpStatus(checkOTPVerificationForEmployeePojo.getStatus() + "");
+//        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getAcCode())) {
+            mySharedPreferences.setEmpAcCode(checkOTPVerificationForEmployeePojo.getAcCode() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getIsDirector())) {
+            mySharedPreferences.setEmpIsDirectory(checkOTPVerificationForEmployeePojo.getIsDirector() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpId())) {
+            mySharedPreferences.setEmpId(checkOTPVerificationForEmployeePojo.getEmpId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpYearId())) {
+            mySharedPreferences.setEmpYearId(checkOTPVerificationForEmployeePojo.getEmpYearId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getInstituteId())) {
+            mySharedPreferences.setEmpInstituteId(checkOTPVerificationForEmployeePojo.getInstituteId() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getImDomainName())) {
+            mySharedPreferences.setEmpImDomainName(checkOTPVerificationForEmployeePojo.getImDomainName() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpUserStatus())) {
+            mySharedPreferences.setEmpUserStatus(checkOTPVerificationForEmployeePojo.getEmpUserStatus() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpPermenantCollege())) {
+            mySharedPreferences.setEmpPermanentCollege(checkOTPVerificationForEmployeePojo.getEmpPermenantCollege() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpDepartmentId())) {
+            mySharedPreferences.setEmpDepartmentId(checkOTPVerificationForEmployeePojo.getEmpDepartmentId() + "");
+        }
+
+    }
+
 }

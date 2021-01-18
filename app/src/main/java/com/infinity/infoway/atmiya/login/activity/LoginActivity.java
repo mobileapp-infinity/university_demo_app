@@ -476,23 +476,40 @@ public class LoginActivity extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK &&
                 requestCode == IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD) {
-            String userName = "";
-            String password = "";
 
-            if (data.hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
-                userName = data.getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
+            boolean isOTPVerifiedAndResetPass = false;
+
+            if (data.hasExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS)) {
+                isOTPVerifiedAndResetPass = data.getBooleanExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, false);
             }
 
-            if (data.hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
-                password = data.getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
+            if (!isOTPVerifiedAndResetPass) {
+                if (mySharedPreferences.checkIsStudentCurrentlyLoggedIn() &&
+                        mySharedPreferences.getLoginUserType() == CommonUtil.LOGIN_TYPE_STUDENT) {
+                    redirectToStudentDashboard();
+                } else if (mySharedPreferences.checkIsFacultyCurrentlyLoggedIn() &&
+                        mySharedPreferences.getLoginUserType() == CommonUtil.LOGIN_TYPE_FACULTY) {
+                    redirectToFacultyDashboard();
+                }
             }
 
-            if (!CommonUtil.checkIsEmptyOrNullCommon(userName) &&
-                    !CommonUtil.checkIsEmptyOrNullCommon(password)) {
-                edtLoginUserName.setText(userName + "");
-                edtLoginUserPassword.setText(password + "");
-                llLogin.performClick();
-            }
+//            String userName = "";
+//            String password = "";
+//
+//            if (data.hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
+//                userName = data.getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
+//            }
+//
+//            if (data.hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
+//                password = data.getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
+//            }
+
+//            if (!CommonUtil.checkIsEmptyOrNullCommon(userName) &&
+//                    !CommonUtil.checkIsEmptyOrNullCommon(password)) {
+//                edtLoginUserName.setText(userName + "");
+//                edtLoginUserPassword.setText(password + "");
+//                llLogin.performClick();
+//            }
         }
     }
 }

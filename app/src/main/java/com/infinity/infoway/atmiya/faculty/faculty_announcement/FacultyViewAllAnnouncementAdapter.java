@@ -60,6 +60,14 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         FacultyOrStudentNewsOrNotificationsPojo.Data data = facultyAnnouncementPojoArrayList.get(position);
 
+        if (data.getNt_is_notif() == 1 && data.getRead_unread_status() == 0) {
+            holder.tvNewNotificationVisibleView.setVisibility(View.VISIBLE);
+            holder.tvNewNotificationInVisibleView.setVisibility(View.INVISIBLE);
+        } else {
+            holder.tvNewNotificationVisibleView.setVisibility(View.INVISIBLE);
+            holder.tvNewNotificationInVisibleView.setVisibility(View.INVISIBLE);
+        }
+
 //        holder.cbMarkAsReadStudentNotification.setChecked(false);
         if (data.getNt_head() != null && !data.getNt_head().isEmpty()) {
             holder.tvNotificationTitle.setText(data.getNt_head());
@@ -82,18 +90,10 @@ public class FacultyViewAllAnnouncementAdapter extends RecyclerView.Adapter<Facu
             holder.tvNotificationDesc.setText(data.getNt_desc());
         }
 
-        if (data.getNt_is_notif() == 1) {
-            holder.tvNewNotificationVisibleView.setVisibility(View.VISIBLE);
-            holder.tvNewNotificationInVisibleView.setVisibility(View.INVISIBLE);
-        } else {
-            holder.tvNewNotificationVisibleView.setVisibility(View.GONE);
-            holder.tvNewNotificationInVisibleView.setVisibility(View.GONE);
-        }
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.tvNewNotificationVisibleView.getVisibility() == View.VISIBLE) {
+                if (data.getNt_is_notif() == 1 && data.getRead_unread_status() == 0 && holder.tvNewNotificationVisibleView.getVisibility() == View.VISIBLE) {
                     updateNewsOrNotificationStatus(data, position, holder.tvNewNotificationVisibleView,
                             holder.tvNewNotificationInVisibleView);
                 }

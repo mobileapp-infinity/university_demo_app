@@ -166,49 +166,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:orientation="vertical"
-                    android:text="User Id"
+                    android:text="Course"
                     android:textAllCaps="true"
                     android:textColor="@color/profile_heading_color"
                     android:textSize="10sp" />
 
                 <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                    android:id="@+id/tvStudentUserId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:orientation="vertical"
-                    android:text="-"
-                    android:textAllCaps="true"
-                    android:textColor="@color/profile_heading_value_color"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/profile_heading_color" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:orientation="vertical"
-                    android:text="enrollment No"
-                    android:textAllCaps="true"
-                    android:textColor="@color/profile_heading_color"
-                    android:textSize="10sp" />
-
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                    android:id="@+id/tvStudentenrollmentNo"
+                    android:id="@+id/tvStudentCourseNew"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -257,6 +221,41 @@
 
             </LinearLayout>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/profile_heading_color" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical"
+                    android:text="enrollment No"
+                    android:textAllCaps="true"
+                    android:textColor="@color/profile_heading_color"
+                    android:textSize="10sp" />
+
+                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    android:id="@+id/tvStudentenrollmentNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical"
+                    android:text="-"
+                    android:textAllCaps="true"
+                    android:textColor="@color/profile_heading_value_color"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

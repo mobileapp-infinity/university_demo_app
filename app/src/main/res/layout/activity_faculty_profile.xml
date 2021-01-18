@@ -476,6 +476,214 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/llExpandedHeaderContactDetailsFaculty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/profile_personal_details_shape"
+                        android:orientation="horizontal">
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:padding="8dp"
+                            android:text="Contact Details"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivViewMoreBtnContactDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            app:srcCompat="@drawable/ic_expand_more" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llExpandableLayoutContactDetailsFaculty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Permanent Address"
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyPermenantAddress"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Present Address"
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyPresentAddress"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Home Mobile No."
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyHomeMobileNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="City"
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyCity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="State"
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyState"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Country"
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyCountry"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
                         android:id="@+id/llExpandedHeaderOfficialDetailsFacultyProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -683,372 +891,6 @@
                                     android:textSize="12sp" />
 
                             </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="7dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:id="@+id/llExpandedHeaderAccountDetailsFaculty"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/profile_personal_details_shape"
-                        android:orientation="horizontal">
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="left"
-                            android:padding="8dp"
-                            android:text="Account Details"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white" />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/ivViewMoreBtnAccountDetails"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="10dp"
-                            app:srcCompat="@drawable/ic_expand_more" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llExpandableLayoutAccountDetailsFaculty"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        android:visibility="gone">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Bank Name"
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyBankName"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Account No."
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyAccountNo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Branch Name"
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyBranchName"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Account Type"
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyAccountType"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="7dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:id="@+id/llExpandedHeaderContactDetailsFaculty"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/profile_personal_details_shape"
-                        android:orientation="horizontal">
-
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="left"
-                            android:padding="8dp"
-                            android:text="Contact Details"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white" />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/ivViewMoreBtnContactDetails"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="10dp"
-                            app:srcCompat="@drawable/ic_expand_more" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llExpandableLayoutContactDetailsFaculty"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        android:visibility="gone">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Permanent Address"
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyPermenantAddress"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Present Address"
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyPresentAddress"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Home Mobile No."
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyHomeMobileNo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="City"
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyCity"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="State"
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyState"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:orientation="vertical">
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Country"
-                                    android:textColor="@color/profile_heading_color"
-                                    android:textSize="10sp" />
-
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
-                                    android:id="@+id/tvFacultyCountry"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="-"
-                                    android:textColor="@color/profile_heading_value_color"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
 
                         </LinearLayout>
 
@@ -1321,6 +1163,164 @@
 
                                 <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultySonOrDaughterDOF"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/llExpandedHeaderAccountDetailsFaculty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/profile_personal_details_shape"
+                        android:orientation="horizontal">
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:padding="8dp"
+                            android:text="Account Details"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivViewMoreBtnAccountDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            app:srcCompat="@drawable/ic_expand_more" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llExpandableLayoutAccountDetailsFaculty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Bank Name"
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyBankName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Account No."
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyAccountNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Branch Name"
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyBranchName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textColor="@color/profile_heading_value_color"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="vertical">
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Account Type"
+                                    android:textColor="@color/profile_heading_color"
+                                    android:textSize="10sp" />
+
+                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                    android:id="@+id/tvFacultyAccountType"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="-"

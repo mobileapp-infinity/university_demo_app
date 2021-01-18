@@ -94,6 +94,17 @@ public class CheckOTPVerificationForStudentPojo {
         @SerializedName("Stud_password")
         @Expose
         private Object studPassword;
+        @SerializedName("im_exam_db_name")
+        @Expose
+        private String imExamDbName;
+
+        public String getImExamDbName() {
+            return imExamDbName;
+        }
+
+        public void setImExamDbName(String imExamDbName) {
+            this.imExamDbName = imExamDbName;
+        }
 
         public Integer getStudId() {
             return studId;

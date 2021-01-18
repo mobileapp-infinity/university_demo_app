@@ -59,7 +59,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
     private CircleImageView student_profile_image;
     private TextViewRegularFont mTvStudentName;
     private TextViewRegularFont mTvStudentEmail;
-    private TextViewMediumFont mTvStudentUserId;
+    //    private TextViewMediumFont mTvStudentUserId;
     private TextViewMediumFont mTvStudentEnrollmentNo;
     private TextViewMediumFont mTvStudentSem;
     private TextViewMediumFont mTvStudentGender;
@@ -69,6 +69,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
     private TextViewMediumFont mTvStudentCollegeName;
     private TextViewMediumFont mTvStudentDepartment;
     private TextViewMediumFont mTvStudentCourse;
+    private TextViewMediumFont mTvStudentCourseNew;
     private TextViewMediumFont mTvStudentDivision;
     private TextViewMediumFont mTvStudentRollNo;
     private TextViewMediumFont mTvStudentAdmissionNo;
@@ -122,7 +123,8 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
         student_profile_image = findViewById(R.id.student_profile_image);
         mTvStudentName = findViewById(R.id.tvStudentName);
         mTvStudentEmail = findViewById(R.id.tvStudentEmail);
-        mTvStudentUserId = findViewById(R.id.tvStudentUserId);
+//        mTvStudentUserId = findViewById(R.id.tvStudentUserId);
+        mTvStudentCourseNew = findViewById(R.id.tvStudentCourseNew);
         mTvStudentEnrollmentNo = findViewById(R.id.tvStudentenrollmentNo);
         mTvStudentSem = findViewById(R.id.tvStudentSem);
         mTvStudentGender = findViewById(R.id.tvStudentGender);
@@ -204,7 +206,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
                                 .error(R.drawable.person_img)
                                 .into(student_profile_image);
 
-                        mTvStudentUserId.setText(mySharedPreferences.getStudentId());
+//                        mTvStudentUserId.setText(mySharedPreferences.getStudentId());
 
                         setProfileData(studentProfilePojo);
 
@@ -241,7 +243,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
             mTvStudentEnrollmentNo.setText(studentProfilePojo.getStudEnrollmentNo() + "");
         }
         if (studentProfilePojo.getSmName() != null && !studentProfilePojo.getSmName().isEmpty()) {
-            mTvStudentSem.setText(studentProfilePojo.getSmName()+ "");
+            mTvStudentSem.setText(studentProfilePojo.getSmName() + "");
         }
         if (studentProfilePojo.getGenName() != null && !studentProfilePojo.getGenName().toString().isEmpty()) {
             mTvStudentGender.setText(studentProfilePojo.getGenName() + "");
@@ -259,9 +261,9 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
             mTvStudentMobileNo.setText(studentProfilePojo.getStudMobileNo() + "");
         }
 
-        if (studentProfilePojo.getCountryName() != null && !studentProfilePojo.getCountryName().toString().isEmpty()) {
-            mTvStudentCourse.setText(studentProfilePojo.getCourseFullname() + "");
-        }
+//        if (studentProfilePojo.getCountryName() != null && !studentProfilePojo.getCountryName().toString().isEmpty()) {
+//            mTvStudentCourse.setText(studentProfilePojo.getCourseFullname() + "");
+//        }
 
 
 //For Cnotact Details
@@ -275,6 +277,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
 
         if (studentProfilePojo.getCourseFullname() != null && !studentProfilePojo.getCourseFullname().isEmpty()) {
             mTvStudentCourse.setText(studentProfilePojo.getCourseFullname() + "");
+            mTvStudentCourseNew.setText(studentProfilePojo.getCourseFullname() + "");
         }
 
         if (studentProfilePojo.getDvmName() != null && !studentProfilePojo.getDvmName().toString().isEmpty()) {
@@ -365,7 +368,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
                         } else {
                             Toast.makeText(StudentProfileActivity.this, "some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
                         }
-                    }else {
+                    } else {
                         Toast.makeText(StudentProfileActivity.this, "some thing went wrong please try again later", Toast.LENGTH_SHORT).show();
                     }
                 }
