@@ -77,7 +77,7 @@ public class OtpBaseLoginDetailsForEmployeePojo {
         private Object imYearlyDomainName;
         @SerializedName("emp_mobile_phone")
         @Expose
-        private Integer empMobilePhone;
+        private String empMobilePhone;
         @SerializedName("is_emp_login_otp_required")
         @Expose
         private Integer isEmpLoginOtpRequired;
@@ -234,11 +234,11 @@ public class OtpBaseLoginDetailsForEmployeePojo {
             this.imYearlyDomainName = imYearlyDomainName;
         }
 
-        public Integer getEmpMobilePhone() {
+        public String getEmpMobilePhone() {
             return empMobilePhone;
         }
 
-        public void setEmpMobilePhone(Integer empMobilePhone) {
+        public void setEmpMobilePhone(String empMobilePhone) {
             this.empMobilePhone = empMobilePhone;
         }
 

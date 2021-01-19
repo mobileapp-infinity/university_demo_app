@@ -227,7 +227,7 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
             textViewCellSrNo.setGravity(Gravity.CENTER);
             textViewCellSrNo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             textViewCellSrNo.setTextColor(getResources().getColor(R.color.colorPrimary));
-            textViewCellSrNo.setText(i + "");
+            textViewCellSrNo.setText((i+1) + "");
             textViewCellSrNo.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
 
             View view = new View(ExaminationScheduleActivity.this);
