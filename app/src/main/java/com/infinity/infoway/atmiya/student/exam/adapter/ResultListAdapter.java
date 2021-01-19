@@ -17,6 +17,7 @@ import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.exam.pojo.CIAExamResultPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.StudentReulstPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 
 import java.util.ArrayList;
@@ -30,16 +31,16 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.My
     Context context;
     LayoutInflater layoutInflater;
     ArrayList<StudentReulstPojo> studentReulstPojoArrayList;
-    ProgressDialog progressDialog;
+//    ProgressDialog progressDialog;
 
     public ResultListAdapter(Context context, ArrayList<StudentReulstPojo> studentReulstPojoArrayList) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.studentReulstPojoArrayList = studentReulstPojoArrayList;
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog = new ProgressDialog(context);
+//        progressDialog.setMessage("Please wait....");
+//        progressDialog.setCancelable(false);
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     @NonNull
@@ -83,22 +84,25 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.My
 
     private void downloadCIAResultApiCall(String Collegeid, String Yearid, String Semid,
                                           String Exam_id, String stud_id) {
-        progressDialog.show();
+//        progressDialog.show();
+        DialogUtil.showProgressDialogNotCancelable(context, "downloading... ");
         ApiImplementer.downloadCIAExamResultApiImplementer(Collegeid, Yearid, Semid, Exam_id, stud_id, new Callback<CIAExamResultPojo>() {
             @Override
             public void onResponse(Call<CIAExamResultPojo> call, Response<CIAExamResultPojo> response) {
+                DialogUtil.hideProgressDialog();
                 if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 1 &&
                         response.body().getBase64string() != null && !response.body().getBase64string().isEmpty()) {
-                    new GeneratePDFFileFromBase64String(context, "CIA Marks", CommonUtil.generateUniqueFileName(response.body().getFilename()), response.body().getBase64string(), progressDialog);
+                    new GeneratePDFFileFromBase64String(context, "CIA Marks", CommonUtil.generateUniqueFileName(response.body().getFilename()), response.body().getBase64string());
                 } else {
-                    progressDialog.hide();
+//                    progressDialog.hide();
                     Toast.makeText(context, "some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CIAExamResultPojo> call, Throwable t) {
-                progressDialog.hide();
+                DialogUtil.hideProgressDialog();
+//                progressDialog.hide();
                 Toast.makeText(context, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

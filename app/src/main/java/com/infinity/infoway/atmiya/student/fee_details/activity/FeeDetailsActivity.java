@@ -16,6 +16,7 @@ import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
+import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
@@ -29,7 +30,7 @@ public class FeeDetailsActivity extends AppCompatActivity implements View.OnClic
     ConnectionDetector connectionDetector;
     AppCompatImageView ivCloseFeeDetails;
     LinearLayout llStudentFeeReceipt;
-    ProgressDialog progressDialog;
+    //    ProgressDialog progressDialog;
     LinearLayout llPaySlipOfAxisFeeDetails, llDownloadPaySlipOfHdfc, llFeeCircularFeeDetails, llPayFee;
 
 
@@ -58,10 +59,10 @@ public class FeeDetailsActivity extends AppCompatActivity implements View.OnClic
         llPayFee = findViewById(R.id.llPayFee);
         llPayFee.setOnClickListener(this);
 
-        progressDialog = new ProgressDialog(FeeDetailsActivity.this);
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog = new ProgressDialog(FeeDetailsActivity.this);
+//        progressDialog.setMessage("Please wait....");
+//        progressDialog.setCancelable(false);
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     @Override
@@ -94,23 +95,26 @@ public class FeeDetailsActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void downloadPayslipOfAxis() {
-        progressDialog.show();
+        DialogUtil.showProgressDialogNotCancelable(FeeDetailsActivity.this, "downloading... ");
+//        progressDialog.show();
         ApiImplementer.downloadPaySlipOfAxisApiImplementer(mySharedPreferences.getStudentId(), new Callback<PaySlipOfAxisPojo>() {
             @Override
             public void onResponse(Call<PaySlipOfAxisPojo> call, Response<PaySlipOfAxisPojo> response) {
+                DialogUtil.hideProgressDialog();
                 if (response.isSuccessful() && response.body() != null && response.body().getBase64string() != null &&
                         !response.body().getBase64string().isEmpty()) {
                     new GeneratePDFFileFromBase64String(FeeDetailsActivity.this, "Pay Slip Of Axis", response.body().getFilename(),
-                            response.body().getBase64string(), progressDialog);
+                            response.body().getBase64string());
                 } else {
-                    progressDialog.hide();
+//                    progressDialog.hide();
                     Toast.makeText(FeeDetailsActivity.this, "No Data Found!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<PaySlipOfAxisPojo> call, Throwable t) {
-                progressDialog.hide();
+                DialogUtil.hideProgressDialog();
+//                progressDialog.hide();
                 Toast.makeText(FeeDetailsActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -23,6 +23,7 @@ import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.FeeReceiptPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
+import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 
@@ -38,17 +39,17 @@ public class FeeReceiptListAdapter extends RecyclerView.Adapter<FeeReceiptListAd
     LayoutInflater layoutInflater;
     ArrayList<FeeReceiptPojo> feeReceiptPojoArrayList;
     MySharedPreferences mySharedPreferences;
-    ProgressDialog progressDialog;
+//    ProgressDialog progressDialog;
 
     public FeeReceiptListAdapter(Context context, ArrayList<FeeReceiptPojo> feeReceiptPojoArrayList) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.feeReceiptPojoArrayList = feeReceiptPojoArrayList;
         mySharedPreferences = new MySharedPreferences(context);
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog = new ProgressDialog(context);
+//        progressDialog.setMessage("Please wait....");
+//        progressDialog.setCancelable(false);
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     @NonNull
@@ -113,28 +114,31 @@ public class FeeReceiptListAdapter extends RecyclerView.Adapter<FeeReceiptListAd
 
 
     private void downloadFeeReceiptApiCall(String feeReceiptNo) {
-        progressDialog.show();
+        DialogUtil.showProgressDialogNotCancelable(context, "downloading... ");
+//        progressDialog.show();
         ApiImplementer.downloadFeeReceiptApiImplementer(mySharedPreferences.getStudentId(), feeReceiptNo, new Callback<PrintFeeReceiptPojo>() {
             @Override
             public void onResponse(Call<PrintFeeReceiptPojo> call, Response<PrintFeeReceiptPojo> response) {
                 try {
+                    DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 1 &&
                             response.body().getBase64string() != null && !response.body().getBase64string().isEmpty()) {
                         new GeneratePDFFileFromBase64String(context, "Fee Receipt", response.body().getFilename(),
-                                response.body().getBase64string(), progressDialog);
+                                response.body().getBase64string());
                     } else {
-                        progressDialog.hide();
+//                        progressDialog.hide();
                         Toast.makeText(context, "Some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception ex) {
-                    progressDialog.hide();
+//                    progressDialog.hide();
                     ex.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(Call<PrintFeeReceiptPojo> call, Throwable t) {
-                progressDialog.hide();
+                DialogUtil.hideProgressDialog();
+//                progressDialog.hide();
                 Toast.makeText(context, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

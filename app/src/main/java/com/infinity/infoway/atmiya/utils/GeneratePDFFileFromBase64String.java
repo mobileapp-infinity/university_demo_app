@@ -21,7 +21,24 @@ public class GeneratePDFFileFromBase64String {
     private String menuNameToCreateFolder;
     private String fileNameWithExtension;
     private String base64String;
-    private ProgressDialog progressDialog = null;
+//    private ProgressDialog progressDialog = null;
+
+//    public GeneratePDFFileFromBase64String(Context context, String menuNameToCreateFolder, String fileNameWithExtension, String base64String) {
+//        this.context = context;
+//        this.menuNameToCreateFolder = menuNameToCreateFolder;
+//        this.fileNameWithExtension = fileNameWithExtension;
+//        this.base64String = base64String;
+//        generatePdfFromBase64String();
+//    }
+
+//    public GeneratePDFFileFromBase64String(Context context, String menuNameToCreateFolder, String fileNameWithExtension, String base64String, ProgressDialog progressDialog) {
+//        this.context = context;
+//        this.menuNameToCreateFolder = menuNameToCreateFolder;
+//        this.fileNameWithExtension = fileNameWithExtension;
+//        this.base64String = base64String;
+//        this.progressDialog = progressDialog;
+//        generatePdfFromBase64String();
+//    }
 
     public GeneratePDFFileFromBase64String(Context context, String menuNameToCreateFolder, String fileNameWithExtension, String base64String) {
         this.context = context;
@@ -31,21 +48,12 @@ public class GeneratePDFFileFromBase64String {
         generatePdfFromBase64String();
     }
 
-    public GeneratePDFFileFromBase64String(Context context, String menuNameToCreateFolder, String fileNameWithExtension, String base64String, ProgressDialog progressDialog) {
-        this.context = context;
-        this.menuNameToCreateFolder = menuNameToCreateFolder;
-        this.fileNameWithExtension = fileNameWithExtension;
-        this.base64String = base64String;
-        this.progressDialog = progressDialog;
-        generatePdfFromBase64String();
-    }
-
 
     private void generatePdfFromBase64String() {
         try {
             File inputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), CommonUtil.FOLDER_NAME + "/" + menuNameToCreateFolder + "/" + fileNameWithExtension);
             if (inputFile.exists()) {
-                hideProgressDialog();
+//                hideProgressDialog();
                 openPdfFile();
             } else {
                 File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + CommonUtil.FOLDER_NAME + "/" + menuNameToCreateFolder + "/");
@@ -62,12 +70,12 @@ public class GeneratePDFFileFromBase64String {
                 fileOutputStream.flush();
                 fileOutputStream.close();
 
-                hideProgressDialog();
+//                hideProgressDialog();
 
                 openPdfFile();
             }
         } catch (Exception ex) {
-            hideProgressDialog();
+//            hideProgressDialog();
             ex.printStackTrace();
         }
     }
@@ -93,7 +101,7 @@ public class GeneratePDFFileFromBase64String {
             try {
                 context.startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                hideProgressDialog();
+//                hideProgressDialog();
                 Toast.makeText(context, "No Apps can performs this action \n File download at" +
                         fileToOpen.getPath(), Toast.LENGTH_SHORT).show();
             }
@@ -106,17 +114,17 @@ public class GeneratePDFFileFromBase64String {
             try {
                 context.startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                hideProgressDialog();
+//                hideProgressDialog();
                 Toast.makeText(context, "No Apps can perform this action \n File download at" +
                         fileToOpen.getPath(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void hideProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.hide();
-        }
-    }
+//    private void hideProgressDialog() {
+//        if (progressDialog != null && progressDialog.isShowing()) {
+//            progressDialog.hide();
+//        }
+//    }
 
 }

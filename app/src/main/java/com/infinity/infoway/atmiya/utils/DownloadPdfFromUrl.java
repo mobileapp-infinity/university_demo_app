@@ -54,7 +54,7 @@ public class DownloadPdfFromUrl {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            DialogUtil.showProgressDialogNotCancelable(context, "");
+            DialogUtil.showProgressDialogNotCancelable(context, "downloading... ");
 
         }
 

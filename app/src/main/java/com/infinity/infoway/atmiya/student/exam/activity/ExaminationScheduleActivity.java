@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -27,6 +28,7 @@ import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleDetailsP
 import com.infinity.infoway.atmiya.student.exam.pojo.ExaminationScheduleProgramWiseTimetablePojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
+import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.GeneratePDFFileFromBase64String;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
@@ -56,7 +58,7 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
     MaterialCardView cvSelectExam;
     ExtendedFloatingActionButton efabDownloadExaminationSchedule;
     ExtendedFloatingActionButton efabDownloadHallTicketExaminationSchedule;
-    ProgressDialog progressDialog;
+    //    ProgressDialog progressDialog;
     int check = 0;
 
     @Override
@@ -101,10 +103,10 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
         llNoDataFoundExaminationSchedule = findViewById(R.id.llNoDataFoundExaminationSchedule);
         spExaminationScheduleName = findViewById(R.id.spExaminationScheduleName);
         llExaminationScheduleList = findViewById(R.id.llExaminationScheduleList);
-        progressDialog = new ProgressDialog(ExaminationScheduleActivity.this);
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog = new ProgressDialog(ExaminationScheduleActivity.this);
+//        progressDialog.setMessage("Please wait....");
+//        progressDialog.setCancelable(false);
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     private void getExaminationScheduleDetailsListForDropdownApiCall() {
@@ -227,7 +229,7 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
             textViewCellSrNo.setGravity(Gravity.CENTER);
             textViewCellSrNo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             textViewCellSrNo.setTextColor(getResources().getColor(R.color.colorPrimary));
-            textViewCellSrNo.setText((i+1) + "");
+            textViewCellSrNo.setText((i + 1) + "");
             textViewCellSrNo.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
 
             View view = new View(ExaminationScheduleActivity.this);
@@ -343,66 +345,72 @@ public class ExaminationScheduleActivity extends AppCompatActivity implements Vi
     }
 
     private void downloadExaminationSchedule(String semId, String yearId, String repeaterStatus) {
-        progressDialog.show();
+//        progressDialog.show();
+        DialogUtil.showProgressDialogNotCancelable(ExaminationScheduleActivity.this, "downloading... ");
         ApiImplementer.downloadExaminationScheduleApiImplementer(semId, yearId,
                 mySharedPreferences.getStudentId(), repeaterStatus, mySharedPreferences.getImExamDbName(), new Callback<DownloadExaminationSchedulePojo>() {
                     @Override
                     public void onResponse(Call<DownloadExaminationSchedulePojo> call, Response<DownloadExaminationSchedulePojo> response) {
                         try {
+                            DialogUtil.hideProgressDialog();
                             if (response.isSuccessful() && response.body() != null) {
                                 if (response.body().getBase64string() != null &&
                                         !response.body().getBase64string().isEmpty()) {
                                     new GeneratePDFFileFromBase64String(ExaminationScheduleActivity.this, "Exam Schedule", CommonUtil.generateUniqueFileName(response.body().getFilename()),
-                                            response.body().getBase64string(), progressDialog);
+                                            response.body().getBase64string());
                                 } else {
-                                    progressDialog.hide();
+//                                    progressDialog.hide();
                                     Toast.makeText(ExaminationScheduleActivity.this, "Exam Schedule Not Found!", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                progressDialog.hide();
+//                                progressDialog.hide();
                                 Toast.makeText(ExaminationScheduleActivity.this, "Some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception ex) {
-                            progressDialog.hide();
+//                            progressDialog.hide();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<DownloadExaminationSchedulePojo> call, Throwable t) {
-                        progressDialog.hide();
+//                        progressDialog.hide();
+                        DialogUtil.hideProgressDialog();
                         Toast.makeText(ExaminationScheduleActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     private void downloadHallTicketExaminationSchedule(String semId, String yearId, String repeaterStatus) {
-        progressDialog.show();
+//        progressDialog.show();
+        DialogUtil.showProgressDialogNotCancelable(ExaminationScheduleActivity.this, "downloading... ");
         ApiImplementer.downloadHallTicketExaminationScheduleApiImplementer(mySharedPreferences.getInstituteId(), mySharedPreferences.getAcId(), semId,
                 yearId, mySharedPreferences.getStudentId(), repeaterStatus, mySharedPreferences.getImExamDbName(), new Callback<DownloadHallTicketExaminationSchedulePojo>() {
                     @Override
                     public void onResponse(Call<DownloadHallTicketExaminationSchedulePojo> call, Response<DownloadHallTicketExaminationSchedulePojo> response) {
                         try {
+                            DialogUtil.hideProgressDialog();
                             if (response.isSuccessful() && response.body() != null) {
                                 if (response.body().getBase64string() != null &&
                                         !response.body().getBase64string().isEmpty()) {
                                     new GeneratePDFFileFromBase64String(ExaminationScheduleActivity.this, "Exam Schedule", CommonUtil.generateUniqueFileName(response.body().getFilename()),
-                                            response.body().getBase64string(), progressDialog);
+                                            response.body().getBase64string());
                                 } else {
-                                    progressDialog.hide();
+//                                    progressDialog.hide();
                                     Toast.makeText(ExaminationScheduleActivity.this, "Hall Ticket Not Publish.", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                progressDialog.hide();
+//                                progressDialog.hide();
                                 Toast.makeText(ExaminationScheduleActivity.this, "Some thing went wrong please try again later.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception ex) {
-                            progressDialog.hide();
+//                            progressDialog.hide();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<DownloadHallTicketExaminationSchedulePojo> call, Throwable t) {
-                        progressDialog.hide();
+                        DialogUtil.hideProgressDialog();
+//                        progressDialog.hide();
                         Toast.makeText(ExaminationScheduleActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

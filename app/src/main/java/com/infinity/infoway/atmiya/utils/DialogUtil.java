@@ -15,8 +15,10 @@ public class DialogUtil {
 
     public static Dialog showProgressDialogCancelable(Context context, String text) {
         String msg = "";
-        if (text == null || text.contentEquals("")) {
-            msg = "Please Wait...";
+        if (CommonUtil.checkIsEmptyOrNullCommon(text)) {
+            msg = "Please Wait... ";
+        }else {
+            msg = text;
         }
 
         m_Dialog = new Dialog(context);
@@ -42,8 +44,10 @@ public class DialogUtil {
     public static Dialog showProgressDialogNotCancelable(Context context, String text) {
 
         String msg = "";
-        if (text == null || text.contentEquals("")) {
-            msg = "Please Wait...";
+        if (CommonUtil.checkIsEmptyOrNullCommon(text)) {
+            msg = "Please Wait... ";
+        }else {
+            msg = text;
         }
 
         m_Dialog = new Dialog(context);
