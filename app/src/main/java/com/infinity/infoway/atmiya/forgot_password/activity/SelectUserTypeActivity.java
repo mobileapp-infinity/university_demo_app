@@ -1,4 +1,4 @@
-package com.infinity.infoway.atmiya.student.forgot_password.activity;
+package com.infinity.infoway.atmiya.forgot_password.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;

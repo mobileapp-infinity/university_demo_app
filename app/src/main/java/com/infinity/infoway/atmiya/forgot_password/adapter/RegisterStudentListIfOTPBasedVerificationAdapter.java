@@ -1,4 +1,4 @@
-package com.infinity.infoway.atmiya.student.forgot_password.adapter;
+package com.infinity.infoway.atmiya.forgot_password.adapter;
 
 import android.content.Context;
 import android.os.Handler;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
-import com.infinity.infoway.atmiya.student.forgot_password.pojo.OtpBaseLoginDetailsForStudentPojo;
+import com.infinity.infoway.atmiya.forgot_password.pojo.OtpBaseLoginDetailsForStudentPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 
 import java.util.ArrayList;

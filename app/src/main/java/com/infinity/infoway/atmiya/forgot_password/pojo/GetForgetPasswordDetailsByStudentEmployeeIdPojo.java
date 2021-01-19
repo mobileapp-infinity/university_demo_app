@@ -1,9 +1,9 @@
-package com.infinity.infoway.atmiya.student.forgot_password.pojo;
+package com.infinity.infoway.atmiya.forgot_password.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetStudentForgotPasswordDetailsPojo {
+public class GetForgetPasswordDetailsByStudentEmployeeIdPojo {
 
     @SerializedName("id")
     @Expose
@@ -35,6 +35,17 @@ public class GetStudentForgotPasswordDetailsPojo {
     @SerializedName("emp_stud_status")
     @Expose
     private Integer empStudStatus;
+    @SerializedName("institute_id")
+    @Expose
+    private Integer institute_id;
+
+    public Integer getInstitute_id() {
+        return institute_id;
+    }
+
+    public void setInstitute_id(Integer institute_id) {
+        this.institute_id = institute_id;
+    }
 
     public Integer getId() {
         return id;

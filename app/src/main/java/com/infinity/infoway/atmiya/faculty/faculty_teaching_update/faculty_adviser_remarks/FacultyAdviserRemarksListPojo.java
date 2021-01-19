@@ -2,7 +2,6 @@ package com.infinity.infoway.atmiya.faculty.faculty_teaching_update.faculty_advi
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.infinity.infoway.atmiya.student.forgot_password.activity.SelectUserTypeActivity;
 
 import java.io.Serializable;
 import java.util.List;

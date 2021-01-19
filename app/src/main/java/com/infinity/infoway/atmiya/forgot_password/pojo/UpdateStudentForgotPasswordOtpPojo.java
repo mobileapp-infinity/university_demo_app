@@ -1,23 +1,24 @@
-package com.infinity.infoway.atmiya.student.forgot_password.pojo;
+package com.infinity.infoway.atmiya.forgot_password.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ResetEmployeePasswordPojo {
+public class UpdateStudentForgotPasswordOtpPojo {
 
-    private List<ResetEmployeePasswordPojo.TableBean> Table;
+    private List<UpdateStudentForgotPasswordOtpPojo.TableBean> Table;
 
-    public List<ResetEmployeePasswordPojo.TableBean> getTable() {
+    public List<UpdateStudentForgotPasswordOtpPojo.TableBean> getTable() {
         return Table;
     }
 
-    public void setTable(List<ResetEmployeePasswordPojo.TableBean> Table) {
+    public void setTable(List<UpdateStudentForgotPasswordOtpPojo.TableBean> Table) {
         this.Table = Table;
     }
 
     public class TableBean {
+
         @SerializedName("Error_code")
         @Expose
         private Integer errorCode;
@@ -40,6 +41,8 @@ public class ResetEmployeePasswordPojo {
         public void setErrorMsg(String errorMsg) {
             this.errorMsg = errorMsg;
         }
+
+
     }
 
 }

@@ -1,4 +1,4 @@
-package com.infinity.infoway.atmiya.student.forgot_password.activity;
+package com.infinity.infoway.atmiya.forgot_password.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,11 +14,8 @@ import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
-import com.infinity.infoway.atmiya.login.activity.LoginActivity;
-import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
-import com.infinity.infoway.atmiya.login.pojo.StudentLoginPojo;
-import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
-import com.infinity.infoway.atmiya.student.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
+import com.infinity.infoway.atmiya.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
+import com.infinity.infoway.atmiya.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
