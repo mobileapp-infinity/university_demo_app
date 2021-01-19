@@ -1,6 +1,7 @@
 package com.infinity.infoway.atmiya.login.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
@@ -22,6 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.infinity.infoway.atmiya.BuildConfig;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
+import com.infinity.infoway.atmiya.common_activity.NoInternetConnectionActivity;
 import com.infinity.infoway.atmiya.login.pojo.CheckVersionApiPojo;
 import com.infinity.infoway.atmiya.student.assignment.AssignmentActivity;
 import com.infinity.infoway.atmiya.student.attendance.activity.StudentAttendanceActivity;
@@ -320,12 +322,20 @@ public class SplashActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(SplashActivity.this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Intent intent = new Intent(SplashActivity.this, NoInternetConnectionActivity.class);
+                    startActivityForResult(intent, IntentConstants.REQUEST_CODE_FACULTY_NO_INTERNET_CONNECTION);
+//                    Toast.makeText(/*SplashActivity.this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+//                    finish();*/
                 }
             });
         }
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == IntentConstants.REQUEST_CODE_FACULTY_NO_INTERNET_CONNECTION) {
+            this.recreate();
+        }
+    }
 }
