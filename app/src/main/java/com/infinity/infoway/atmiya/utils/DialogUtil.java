@@ -1,19 +1,9 @@
 package com.infinity.infoway.atmiya.utils;
 
-import android.app.Activity;
-import android.app.Application;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Typeface;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-
-import androidx.core.content.res.ResourcesCompat;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
@@ -30,7 +20,8 @@ public class DialogUtil {
         }
 
         m_Dialog = new Dialog(context);
-        m_Dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        m_Dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_shape_for_custom_dialog);//if need to change dialog radius in custom_layout_for_progress_dialog
+        // layout than also change same radius in bg_shape_for_custom_dialog
         m_Dialog.setCancelable(true);
         View customProgressDialog = LayoutInflater.from(context).inflate(R.layout.custom_layout_for_progress_dialog, null);
         TextViewRegularFont tvMsg = customProgressDialog.findViewById(R.id.tvMsg);
@@ -56,7 +47,8 @@ public class DialogUtil {
         }
 
         m_Dialog = new Dialog(context);
-        m_Dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        m_Dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_shape_for_custom_dialog);//if need to change dialog radius in custom_layout_for_progress_dialog
+        // layout than also change same radius in bg_shape_for_custom_dialog
         m_Dialog.setCancelable(false);
         View customProgressDialog = LayoutInflater.from(context).inflate(R.layout.custom_layout_for_progress_dialog, null);
         TextViewRegularFont tvMsg = customProgressDialog.findViewById(R.id.tvMsg);
