@@ -165,7 +165,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     private void getStudentForgetPasswordDetailsApiCall(boolean isPdShow, boolean isPdHide, final String email) {
 
         if (isPdShow) {
-            DialogUtil.showProgressDialog(ForgotPasswordActivity.this, "");
+            DialogUtil.showProgressDialogNotCancelable(ForgotPasswordActivity.this, "");
         }
         ApiImplementer.getStudentForgetPasswordDetailsApiImplementer(email, new Callback<ArrayList<GetStudentForgotPasswordDetailsPojo>>() {
             @Override

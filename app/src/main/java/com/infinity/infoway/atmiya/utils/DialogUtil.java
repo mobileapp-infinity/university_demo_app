@@ -1,31 +1,41 @@
 package com.infinity.infoway.atmiya.utils;
 
+import android.app.Activity;
 import android.app.Application;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
 
 import androidx.core.content.res.ResourcesCompat;
 
 import com.infinity.infoway.atmiya.R;
+import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 
 public class DialogUtil {
-    static ProgressDialog m_Dialog = null;
+
+    static Dialog m_Dialog = null;
 
 
-    public static ProgressDialog showProgressDialog(Context context, String text) {
-        m_Dialog = new ProgressDialog(context);
+    public static Dialog showProgressDialogCancelable(Context context, String text) {
+        String msg = "";
         if (text == null || text.contentEquals("")) {
-            text = "Please Wait...";
+            msg = "Please Wait...";
         }
-        SpannableString spannableString = new SpannableString(text);
-        spannableString.setSpan(ResourcesCompat.getFont(context, R.font.ubuntu_r), 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        m_Dialog.setMessage(spannableString);
 
-        m_Dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        m_Dialog = new Dialog(context);
+        m_Dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         m_Dialog.setCancelable(true);
+        View customProgressDialog = LayoutInflater.from(context).inflate(R.layout.custom_layout_for_progress_dialog, null);
+        TextViewRegularFont tvMsg = customProgressDialog.findViewById(R.id.tvMsg);
+        tvMsg.setText(msg);
+        m_Dialog.setContentView(customProgressDialog);
         m_Dialog.show();
         return m_Dialog;
     }
@@ -38,18 +48,81 @@ public class DialogUtil {
         }
     }
 
-    public static ProgressDialog showProgressDialogNotCancelable(Context context, String text) {
-        m_Dialog = new ProgressDialog(context);
+    public static Dialog showProgressDialogNotCancelable(Context context, String text) {
+
+        String msg = "";
         if (text == null || text.contentEquals("")) {
-            text = "Please Wait...";
+            msg = "Please Wait...";
         }
-        SpannableString spannableString = new SpannableString(text);
-        spannableString.setSpan(ResourcesCompat.getFont(context, R.font.ubuntu_r), 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        m_Dialog.setMessage(spannableString);
-        m_Dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        m_Dialog = new Dialog(context);
+        m_Dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         m_Dialog.setCancelable(false);
+        View customProgressDialog = LayoutInflater.from(context).inflate(R.layout.custom_layout_for_progress_dialog, null);
+        TextViewRegularFont tvMsg = customProgressDialog.findViewById(R.id.tvMsg);
+        tvMsg.setText(msg);
+        m_Dialog.setContentView(customProgressDialog);
         m_Dialog.show();
         return m_Dialog;
     }
 
 }
+
+
+//////OLD CODE
+//package com.infinity.infoway.atmiya.utils;
+//
+//        import android.app.Application;
+//        import android.app.ProgressDialog;
+//        import android.content.Context;
+//        import android.graphics.Typeface;
+//        import android.text.SpannableString;
+//        import android.text.Spanned;
+//
+//        import androidx.core.content.res.ResourcesCompat;
+//
+//        import com.infinity.infoway.atmiya.R;
+//
+//public class DialogUtil {
+//    static ProgressDialog m_Dialog = null;
+//
+//
+//    public static ProgressDialog showProgressDialog(Context context, String text) {
+//        m_Dialog = new ProgressDialog(context);
+//        if (text == null || text.contentEquals("")) {
+//            text = "Please Wait...";
+//        }
+//        SpannableString spannableString = new SpannableString(text);
+//        spannableString.setSpan(ResourcesCompat.getFont(context, R.font.ubuntu_r), 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        m_Dialog.setMessage(spannableString);
+//
+//        m_Dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        m_Dialog.setCancelable(true);
+//        m_Dialog.show();
+//        return m_Dialog;
+//    }
+//
+//    public static void hideProgressDialog() {
+//        if (m_Dialog != null) {
+//            if (m_Dialog.isShowing()) {
+//                m_Dialog.dismiss();
+//            }
+//        }
+//    }
+//
+//    public static ProgressDialog showProgressDialogNotCancelable(Context context, String text) {
+//        m_Dialog = new ProgressDialog(context);
+//        if (text == null || text.contentEquals("")) {
+//            text = "Please Wait...";
+//        }
+//        SpannableString spannableString = new SpannableString(text);
+//        spannableString.setSpan(ResourcesCompat.getFont(context, R.font.ubuntu_r), 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        m_Dialog.setMessage(spannableString);
+//        m_Dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        m_Dialog.setCancelable(false);
+//        m_Dialog.show();
+//        return m_Dialog;
+//    }
+//
+//}
+
