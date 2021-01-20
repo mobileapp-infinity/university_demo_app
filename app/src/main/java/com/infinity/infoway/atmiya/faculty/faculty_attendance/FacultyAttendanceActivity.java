@@ -113,7 +113,9 @@ public class FacultyAttendanceActivity extends AppCompatActivity implements View
         if (v.getId() == R.id.ivCloseFacultyAttendance) {
             onBackPressed();
         } else if (v.getId() == R.id.cvFacultyAttendance) {
-            materialDatePicker.show(getSupportFragmentManager(), "Date Picker");
+            if (!materialDatePicker.isVisible()){
+                materialDatePicker.show(getSupportFragmentManager(), "Date Picker");
+            }
         }
     }
 
