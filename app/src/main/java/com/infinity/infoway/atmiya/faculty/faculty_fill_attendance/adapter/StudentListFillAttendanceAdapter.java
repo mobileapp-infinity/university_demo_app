@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
+import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.activity.FacultyFillAttendanceActivity;
 import com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.pojo.StudentDetailsFillAttendancePojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.kyleduo.switchbutton.SwitchButton;
@@ -48,6 +49,83 @@ public class StudentListFillAttendanceAdapter extends RecyclerView.Adapter<Stude
             holder.llDynamicRow.setBackgroundColor(context.getResources().getColor(R.color.white));
         } else {
             holder.llDynamicRow.setBackgroundColor(context.getResources().getColor(R.color.exam_module_row_color));
+        }
+        if (FacultyFillAttendanceActivity.IS_STUDENT_NAME_DISPLAY && FacultyFillAttendanceActivity.IS_STUDENT_ENROLLMENT_NUMBER_DISPLAY) {
+            LinearLayout.LayoutParams layoutParamForStudentName = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.3f);
+            holder.tvStudentNameFillAttendance.setLayoutParams(layoutParamForStudentName);
+
+            LinearLayout.LayoutParams layoutParamForStudentEnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.3f);
+            holder.tvStudentEnNoFillAttendance.setLayoutParams(layoutParamForStudentEnNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentRollNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            holder.tvStudentRollNoFillAttendance.setLayoutParams(layoutParamForStudentRollNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentSwitch = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            holder.sbtnPresentAbsetntFillAttendance.setLayoutParams(layoutParamForStudentSwitch);
+
+            holder.view3.setVisibility(View.VISIBLE);
+            holder.view2.setVisibility(View.VISIBLE);
+
+            holder.tvStudentNameFillAttendance.setVisibility(View.VISIBLE);
+            holder.tvStudentEnNoFillAttendance.setVisibility(View.VISIBLE);
+        } else if (FacultyFillAttendanceActivity.IS_STUDENT_NAME_DISPLAY && !FacultyFillAttendanceActivity.IS_STUDENT_ENROLLMENT_NUMBER_DISPLAY) {
+
+            LinearLayout.LayoutParams layoutParamForStudentName = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2.6f);
+            holder.tvStudentNameFillAttendance.setLayoutParams(layoutParamForStudentName);
+
+            LinearLayout.LayoutParams layoutParamForStudentEnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f);
+            holder.tvStudentEnNoFillAttendance.setLayoutParams(layoutParamForStudentEnNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentRollNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            holder.tvStudentRollNoFillAttendance.setLayoutParams(layoutParamForStudentRollNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentSwitch = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            holder.sbtnPresentAbsetntFillAttendance.setLayoutParams(layoutParamForStudentSwitch);
+
+            holder.view3.setVisibility(View.GONE);
+            holder.view2.setVisibility(View.VISIBLE);
+
+
+            holder.tvStudentNameFillAttendance.setVisibility(View.VISIBLE);
+            holder.tvStudentEnNoFillAttendance.setVisibility(View.GONE);
+        } else if (!FacultyFillAttendanceActivity.IS_STUDENT_NAME_DISPLAY && FacultyFillAttendanceActivity.IS_STUDENT_ENROLLMENT_NUMBER_DISPLAY) {
+
+            LinearLayout.LayoutParams layoutParamForStudentName = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f);
+            holder.tvStudentNameFillAttendance.setLayoutParams(layoutParamForStudentName);
+
+            LinearLayout.LayoutParams layoutParamForStudentEnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2.6f);
+            holder.tvStudentEnNoFillAttendance.setLayoutParams(layoutParamForStudentEnNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentRollNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            holder.tvStudentRollNoFillAttendance.setLayoutParams(layoutParamForStudentRollNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentSwitch = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            holder.sbtnPresentAbsetntFillAttendance.setLayoutParams(layoutParamForStudentSwitch);
+
+            holder.view3.setVisibility(View.VISIBLE);
+            holder.view2.setVisibility(View.GONE);
+
+            holder.tvStudentNameFillAttendance.setVisibility(View.GONE);
+            holder.tvStudentEnNoFillAttendance.setVisibility(View.VISIBLE);
+        } else {
+            LinearLayout.LayoutParams layoutParamForStudentName = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f);
+            holder.tvStudentNameFillAttendance.setLayoutParams(layoutParamForStudentName);
+
+            LinearLayout.LayoutParams layoutParamForStudentEnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f);
+            holder.tvStudentEnNoFillAttendance.setLayoutParams(layoutParamForStudentEnNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentRollNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2.0f);
+            holder.tvStudentRollNoFillAttendance.setLayoutParams(layoutParamForStudentRollNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentSwitch = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2.0f);
+            holder.sbtnPresentAbsetntFillAttendance.setLayoutParams(layoutParamForStudentSwitch);
+
+            holder.view3.setVisibility(View.VISIBLE);
+            holder.view2.setVisibility(View.GONE);
+
+            holder.tvStudentEnNoFillAttendance.setVisibility(View.GONE);
+            holder.tvStudentNameFillAttendance.setVisibility(View.GONE);
+
         }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getSwdRollNo())) {
@@ -109,9 +187,15 @@ public class StudentListFillAttendanceAdapter extends RecyclerView.Adapter<Stude
         TextViewRegularFont tvStudentEnNoFillAttendance;
         SwitchButton sbtnPresentAbsetntFillAttendance;
         LinearLayout llDynamicRow;
+        View view1;
+        View view2;
+        View view3;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            view1 = itemView.findViewById(R.id.view1);
+            view2 = itemView.findViewById(R.id.view2);
+            view3 = itemView.findViewById(R.id.view3);
             tvStudentRollNoFillAttendance = itemView.findViewById(R.id.tvStudentRollNoFillAttendance);
             tvStudentNameFillAttendance = itemView.findViewById(R.id.tvStudentNameFillAttendance);
             tvStudentEnNoFillAttendance = itemView.findViewById(R.id.tvStudentEnNoFillAttendance);

@@ -153,32 +153,32 @@
                 android:id="@+id/llFacultyAttendanceList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical"
-                android:visibility="gone"
                 android:paddingLeft="4dp"
-                android:paddingRight="4dp"
                 android:paddingTop="8dp"
-                android:layout_marginBottom="8dp">
+                android:paddingRight="4dp"
+                android:visibility="gone">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvFacultyAttendanceListNew"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:layoutAnimation="@anim/layout_animation_from_bottom_for_list"
                     android:scrollbars="none"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layoutAnimation="@anim/layout_animation_from_bottom_for_list"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-<!--                <ExpandableListView-->
-<!--                    android:id="@+id/elvFacultyAttendance"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:childDivider="@color/common_bg_color"-->
-<!--                    android:divider="@color/common_bg_color"-->
-<!--                    android:dividerHeight="10dp"-->
-<!--                    android:groupIndicator="@null"-->
-<!--                    android:scrollbars="none"-->
-<!--                    android:visibility="visible" />-->
+                <!--                <ExpandableListView-->
+                <!--                    android:id="@+id/elvFacultyAttendance"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:childDivider="@color/common_bg_color"-->
+                <!--                    android:divider="@color/common_bg_color"-->
+                <!--                    android:dividerHeight="10dp"-->
+                <!--                    android:groupIndicator="@null"-->
+                <!--                    android:scrollbars="none"-->
+                <!--                    android:visibility="visible" />-->
 
             </LinearLayout>
 
@@ -191,14 +191,13 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-<!--                <ProgressBar-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:indeterminate="true"-->
-<!--                    android:indeterminateTint="@color/colorPrimary" />-->
+                <!--                <ProgressBar-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:indeterminate="true"-->
+                <!--                    android:indeterminateTint="@color/colorPrimary" />-->
 
-                <com.github.ybq.android.spinkit.SpinKitView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/spin_kit"
                     style="@style/SpinKitView.Large.Circle"
                     android:layout_width="60dp"

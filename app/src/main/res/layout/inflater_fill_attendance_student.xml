@@ -28,6 +28,7 @@
             android:textSize="11sp" />
 
         <View
+            android:id="@+id/view1"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/white" />
@@ -42,9 +43,10 @@
             android:paddingBottom="8dp"
             android:text="-"
             android:textColor="@color/colorPrimary"
-            android:textSize="11sp"/>
+            android:textSize="11sp" />
 
         <View
+            android:id="@+id/view2"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/white" />
@@ -59,9 +61,10 @@
             android:paddingBottom="8dp"
             android:text="-"
             android:textColor="@color/colorPrimary"
-            android:textSize="11sp"/>
+            android:textSize="11sp" />
 
         <View
+            android:id="@+id/view3"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/white" />
@@ -72,10 +75,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
-            tools:ignore="RtlHardcoded"
+            android:gravity="center"
             app:kswTextOff="A"
             app:kswTextOn="P"
-            app:kswTintColor="@color/colorPrimary"/>
+            app:kswTintColor="@color/colorPrimary"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 

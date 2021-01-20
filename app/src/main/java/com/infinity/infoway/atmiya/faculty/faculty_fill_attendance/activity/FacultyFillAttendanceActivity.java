@@ -1,13 +1,19 @@
 package com.infinity.infoway.atmiya.faculty.faculty_fill_attendance.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -123,7 +129,19 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
     String strDate = "";
 
     StudentListFillAttendanceAdapter studentListFillAttendanceAdapter = null;
+    ArrayList<StudentDetailsFillAttendancePojo.TableBean> studentAbsentPresentList = null;
     SwitchButton sbtnPresentOrAbsentAll;
+
+    public static boolean IS_STUDENT_NAME_DISPLAY = true;
+    public static boolean IS_STUDENT_ENROLLMENT_NUMBER_DISPLAY = true;
+    AppCompatButton btnColumn;
+    TextViewRegularFont tvRollNoHeader;
+    TextViewRegularFont tvStudentNameHeader;
+    TextViewRegularFont tvStudentEnNoHeader;
+
+    View view1Header;
+    View view2Header;
+    View view3Header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +199,8 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
     }
 
     private void initView() {
+        IS_STUDENT_NAME_DISPLAY = true;
+        IS_STUDENT_ENROLLMENT_NUMBER_DISPLAY = true;
         mySharedPreferences = new MySharedPreferences(FacultyFillAttendanceActivity.this);
         connectionDetector = new ConnectionDetector(FacultyFillAttendanceActivity.this);
         tilStudentCommaSeparatedRollNumber = findViewById(R.id.tilStudentCommaSeparatedRollNumber);
@@ -201,9 +221,18 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         tvLectureName = findViewById(R.id.tvLectureName);
         llHangingCard = findViewById(R.id.llHangingCard);
         llTopicUnitForConfig2 = findViewById(R.id.llTopicForConfig2);
+        btnColumn = findViewById(R.id.btnColumn);
+        btnColumn.setOnClickListener(this);
+        tvRollNoHeader = findViewById(R.id.tvRollNoHeader);
+        tvStudentNameHeader = findViewById(R.id.tvStudentNameHeader);
+        tvStudentEnNoHeader = findViewById(R.id.tvStudentEnNoHeader);
 
         llSelectTeachingMethod = findViewById(R.id.llSelectTeachingMethod);
         gvTeachingMethodList = findViewById(R.id.gvTeachingMethodList);
+
+        view1Header = findViewById(R.id.view1Header);
+        view2Header = findViewById(R.id.view2Header);
+        view3Header = findViewById(R.id.view3Header);
 
         noOfPostArrayList.add(SELECT_NO_OF_POST_ON);
 
@@ -310,12 +339,151 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
         });
     }
 
+    AlertDialog filterDialog;
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.ivCloseFacultyFillAttendance) {
             onBackPressed();
         } else if (v.getId() == R.id.btnSaveFilledAttendance) {
             callStudentAttendanceSaveApi();
+        } else if (v.getId() == R.id.btnColumn) {
+            try {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(FacultyFillAttendanceActivity.this);
+                dialogBuilder.setCancelable(true);
+                LayoutInflater layoutInflater1 = LayoutInflater.from(FacultyFillAttendanceActivity.this);
+                View dialogView = layoutInflater1.inflate(R.layout.custom_layout_for_fill_attendance_filter, null);
+                AppCompatCheckBox cbSelectEnrollmentNo = dialogView.findViewById(R.id.cbSelectEnrollmentNo);
+                AppCompatCheckBox cbSelectStudentName = dialogView.findViewById(R.id.cbSelectStudentName);
+                AppCompatButton btnCancel = dialogView.findViewById(R.id.btnCancel);
+                AppCompatButton btnOk = dialogView.findViewById(R.id.btnOk);
+
+                applyFilter(cbSelectEnrollmentNo, cbSelectStudentName);
+
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        filterDialog.hide();
+                    }
+                });
+                btnOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        IS_STUDENT_ENROLLMENT_NUMBER_DISPLAY = cbSelectEnrollmentNo.isChecked();
+                        IS_STUDENT_NAME_DISPLAY = cbSelectStudentName.isChecked();
+
+                        applyFilter(cbSelectEnrollmentNo, cbSelectStudentName);
+
+                        if (studentListFillAttendanceAdapter != null) {
+                            studentListFillAttendanceAdapter.notifyDataSetChanged();
+                        }
+                        filterDialog.hide();
+                    }
+                });
+
+
+                dialogBuilder.setView(dialogView);
+                filterDialog = dialogBuilder.create();
+                filterDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                filterDialog.show();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
+    private void applyFilter(AppCompatCheckBox cbSelectEnrollmentNo, AppCompatCheckBox cbSelectStudentName) {
+        if (FacultyFillAttendanceActivity.IS_STUDENT_NAME_DISPLAY && FacultyFillAttendanceActivity.IS_STUDENT_ENROLLMENT_NUMBER_DISPLAY) {
+            cbSelectEnrollmentNo.setChecked(true);
+            cbSelectStudentName.setChecked(true);
+
+            LinearLayout.LayoutParams layoutParamForStudentName = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.3f);
+            tvStudentNameHeader.setLayoutParams(layoutParamForStudentName);
+
+            LinearLayout.LayoutParams layoutParamForStudentEnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.3f);
+            tvStudentEnNoHeader.setLayoutParams(layoutParamForStudentEnNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentRollNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            tvRollNoHeader.setLayoutParams(layoutParamForStudentRollNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentSwitch = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            sbtnPresentOrAbsentAll.setLayoutParams(layoutParamForStudentSwitch);
+
+            view3Header.setVisibility(View.VISIBLE);
+            view2Header.setVisibility(View.VISIBLE);
+
+            tvStudentEnNoHeader.setVisibility(View.VISIBLE);
+            tvStudentNameHeader.setVisibility(View.VISIBLE);
+
+        } else if (FacultyFillAttendanceActivity.IS_STUDENT_NAME_DISPLAY && !FacultyFillAttendanceActivity.IS_STUDENT_ENROLLMENT_NUMBER_DISPLAY) {
+            cbSelectStudentName.setChecked(true);
+            cbSelectEnrollmentNo.setChecked(false);
+
+            LinearLayout.LayoutParams layoutParamForStudentName = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2.6f);
+            tvStudentNameHeader.setLayoutParams(layoutParamForStudentName);
+
+            LinearLayout.LayoutParams layoutParamForStudentEnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f);
+            tvStudentEnNoHeader.setLayoutParams(layoutParamForStudentEnNo);
+
+
+            LinearLayout.LayoutParams layoutParamForStudentRollNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            tvRollNoHeader.setLayoutParams(layoutParamForStudentRollNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentSwitch = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            sbtnPresentOrAbsentAll.setLayoutParams(layoutParamForStudentSwitch);
+
+            view3Header.setVisibility(View.GONE);
+            view2Header.setVisibility(View.VISIBLE);
+
+            tvStudentNameHeader.setVisibility(View.VISIBLE);
+            tvStudentEnNoHeader.setVisibility(View.GONE);
+
+        } else if (!FacultyFillAttendanceActivity.IS_STUDENT_NAME_DISPLAY && FacultyFillAttendanceActivity.IS_STUDENT_ENROLLMENT_NUMBER_DISPLAY) {
+            cbSelectEnrollmentNo.setChecked(true);
+            cbSelectStudentName.setChecked(false);
+
+            LinearLayout.LayoutParams layoutParamForStudentName = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f);
+            tvStudentNameHeader.setLayoutParams(layoutParamForStudentName);
+
+            LinearLayout.LayoutParams layoutParamForStudentEnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2.6f);
+            tvStudentEnNoHeader.setLayoutParams(layoutParamForStudentEnNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentRollNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            tvRollNoHeader.setLayoutParams(layoutParamForStudentRollNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentSwitch = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
+            sbtnPresentOrAbsentAll.setLayoutParams(layoutParamForStudentSwitch);
+
+            view3Header.setVisibility(View.VISIBLE);
+            view2Header.setVisibility(View.GONE);
+
+            tvStudentNameHeader.setVisibility(View.GONE);
+            tvStudentEnNoHeader.setVisibility(View.VISIBLE);
+
+        } else {
+            cbSelectEnrollmentNo.setChecked(false);
+            cbSelectStudentName.setChecked(false);
+
+            LinearLayout.LayoutParams layoutParamForStudentName = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f);
+            tvStudentNameHeader.setLayoutParams(layoutParamForStudentName);
+
+            LinearLayout.LayoutParams layoutParamForStudentEnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f);
+            tvStudentEnNoHeader.setLayoutParams(layoutParamForStudentEnNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentRollNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2.0f);
+            tvRollNoHeader.setLayoutParams(layoutParamForStudentRollNo);
+
+            LinearLayout.LayoutParams layoutParamForStudentSwitch = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2.0f);
+            sbtnPresentOrAbsentAll.setLayoutParams(layoutParamForStudentSwitch);
+
+            view3Header.setVisibility(View.VISIBLE);
+            view2Header.setVisibility(View.GONE);
+
+            tvStudentEnNoHeader.setVisibility(View.GONE);
+            tvStudentNameHeader.setVisibility(View.GONE);
+
         }
     }
 
@@ -732,7 +900,9 @@ public class FacultyFillAttendanceActivity extends AppCompatActivity implements 
                                     response.body().getTableBean().size() > 0) {
                                 llFillAttendanceByStudentInner.setVisibility(View.VISIBLE);
                                 onAbsentPresentStatusChange((ArrayList<StudentDetailsFillAttendancePojo.TableBean>) response.body().getTableBean());
-                                studentListFillAttendanceAdapter = new StudentListFillAttendanceAdapter(FacultyFillAttendanceActivity.this, (ArrayList<StudentDetailsFillAttendancePojo.TableBean>) response.body().getTableBean());
+
+                                studentAbsentPresentList = (ArrayList<StudentDetailsFillAttendancePojo.TableBean>) response.body().getTableBean();
+                                studentListFillAttendanceAdapter = new StudentListFillAttendanceAdapter(FacultyFillAttendanceActivity.this, studentAbsentPresentList);
                                 rvFillAttendanceStudentList.setAdapter(studentListFillAttendanceAdapter);
                                 getLessonPlanningDetailsByFacultyAndTopicWiseApiCall(false, true);
                             } else {
