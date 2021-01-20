@@ -625,17 +625,10 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         if (resultCode == Activity.RESULT_OK &&
                 requestCode == IntentConstants.REQUEST_CODE_FOR_VERIFY_OTP) {
             Intent intent = new Intent(ForgotPasswordActivity.this, SelectUserTypeActivity.class);
-//            String userName = "";
             boolean isOTPVerifiedAndResetPass = false;
-
-//            if (data.hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
-//                userName = data.getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
-//            }
-
             if (data.hasExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS)) {
                 isOTPVerifiedAndResetPass = data.getBooleanExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, false);
             }
-//            intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userName);
             intent.putExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, isOTPVerifiedAndResetPass);
             setResult(Activity.RESULT_OK, intent);
             finish();

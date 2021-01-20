@@ -15,8 +15,6 @@ import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewMediumFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
 import com.infinity.infoway.atmiya.forgot_password.pojo.CheckLoginByOTPAndUsernamePojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
@@ -115,7 +113,7 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
                         CheckLoginByOTPAndUsernamePojo checkLoginByOTPAndUsernamePojo = response.body();
                         if (userType.compareToIgnoreCase(String.valueOf(CommonUtil.SELECTED_USER_TYPE_FACULTY)) == 0) {
-                            setEmpNewLoginDate(checkLoginByOTPAndUsernamePojo);
+                            setStudentOrEmployeeDataToPreferences(checkLoginByOTPAndUsernamePojo.getTable().get(0));
                             Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
                             redirectToResetPasswordActivity(userId, institute_id, user_type);
                         } else if (userType.compareToIgnoreCase(String.valueOf(CommonUtil.SELECTED_USER_TYPE_STUDENT)) == 0) {
@@ -191,92 +189,283 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
      * emp_password: null
      **/
 
-    private void setEmpNewLoginDate(CheckLoginByOTPAndUsernamePojo checkLoginByOTPAndUsernamePojo) {
+    private void setStudentLoginData(CheckLoginByOTPAndUsernamePojo.TableBean checkOtpVerificationForStudentPojo) {
 
-
-        //emp_username
-        if (checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_username() != null) {
-            mySharedPreferences.setEmpUserName(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_username());
+        if (checkOtpVerificationForStudentPojo.getStud_user_name() != null) {
+            mySharedPreferences.setStudentUsername(checkOtpVerificationForStudentPojo.getStud_user_name() + "");
         }
+//        mySharedPreferences.setStudentPassword(password);
+        mySharedPreferences.setLoginUserType(2);
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOtpVerificationForStudentPojo.getInstitute_id())) {
+            mySharedPreferences.setStudentId(checkOtpVerificationForStudentPojo.getInstitute_id() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getDm_id() != null) {
+            mySharedPreferences.setDMId(checkOtpVerificationForStudentPojo.getDm_id() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getDmFullName() != null) {
+            mySharedPreferences.setDmFullName(checkOtpVerificationForStudentPojo.getDmFullName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getCourseId() != null) {
+            mySharedPreferences.setCourseId(checkOtpVerificationForStudentPojo.getCourseId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getCourseFullname() != null) {
+            mySharedPreferences.setCourseFullName(checkOtpVerificationForStudentPojo.getCourseFullname());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSmId() != null) {
+            mySharedPreferences.setSmId(checkOtpVerificationForStudentPojo.getSmId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSmName() != null) {
+            mySharedPreferences.setSmName(checkOtpVerificationForStudentPojo.getSmName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getAcId() != null) {
+            mySharedPreferences.setAcId(checkOtpVerificationForStudentPojo.getAcId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getAcFullName() != null) {
+            mySharedPreferences.setAcFullName(checkOtpVerificationForStudentPojo.getAcFullName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSwdYearId() != null) {
+            mySharedPreferences.setSwdYearId(checkOtpVerificationForStudentPojo.getSwdYearId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getAcCode() != null) {
+            mySharedPreferences.setAcCode(checkOtpVerificationForStudentPojo.getAcCode() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getHostelCode() != null) {
+            mySharedPreferences.setHostelCode(checkOtpVerificationForStudentPojo.getHostelCode() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getName() != null) {
+            mySharedPreferences.setStudentName(checkOtpVerificationForStudentPojo.getName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getStudAdmissionNo() != null) {
+            mySharedPreferences.setStudAdmissionNo(checkOtpVerificationForStudentPojo.getStudAdmissionNo());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getStudEnrollmentNo() != null) {
+            mySharedPreferences.setStudentEnrollmentNo(checkOtpVerificationForStudentPojo.getStudEnrollmentNo());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getStudPhoto() != null) {
+            mySharedPreferences.setStudentPhotoUrl(checkOtpVerificationForStudentPojo.getStudPhoto());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getStatus() != null) {
+            mySharedPreferences.setStatus(checkOtpVerificationForStudentPojo.getStatus() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSwdDivisionId() != null) {
+            mySharedPreferences.setSwdDivisionId(checkOtpVerificationForStudentPojo.getSwdDivisionId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getSwdBatchId() != null) {
+            mySharedPreferences.setSwdBatchId(checkOtpVerificationForStudentPojo.getSwdBatchId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getShiftId() != null) {
+            mySharedPreferences.setShiftId(checkOtpVerificationForStudentPojo.getShiftId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getImDomainName() != null) {
+            mySharedPreferences.setImDomainName(checkOtpVerificationForStudentPojo.getImDomainName());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getIntituteId() != null) {
+            mySharedPreferences.setInstituteId(checkOtpVerificationForStudentPojo.getIntituteId() + "");
+        }
+
+        if (checkOtpVerificationForStudentPojo.getFcFile() != null) {
+            mySharedPreferences.setFcFile(checkOtpVerificationForStudentPojo.getFcFile());
+        }
+
+        if (checkOtpVerificationForStudentPojo.getImExamDbName() != null) {
+            mySharedPreferences.setImExamDbName(checkOtpVerificationForStudentPojo.getImExamDbName());
+        }
+    }
+
+    private void setEmployeeLoginData(CheckLoginByOTPAndUsernamePojo.TableBean checkOTPVerificationForEmployeePojo) {
+
+        if (checkOTPVerificationForEmployeePojo.getEmpUsername() != null) {
+            mySharedPreferences.setEmpUserName(checkOTPVerificationForEmployeePojo.getEmpUsername());
+        }
+//        mySharedPreferences.setEmpPassword(empPassword);
+
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getLoginUserType())) {
         mySharedPreferences.setLoginUserType(1);
+//        }
 
-        // emp_id: 2270,
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_id())) {
-            mySharedPreferences.setEmpId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_id() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpId())) {
+            mySharedPreferences.setEmpId(checkOTPVerificationForEmployeePojo.getEmpId() + "");
         }
 
-        //emp_number: "123456",
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_number())) {
-            mySharedPreferences.setEmpNumber(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_number() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpNumber())) {
+            mySharedPreferences.setEmpNumber(checkOTPVerificationForEmployeePojo.getEmpNumber() + "");
         }
 
-        //name: "CMS Admin Infinity",
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getName())) {
-            mySharedPreferences.setEmpName(checkLoginByOTPAndUsernamePojo.getTable().get(0).getName() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getName())) {
+            mySharedPreferences.setEmpName(checkOTPVerificationForEmployeePojo.getName() + "");
         }
 
-        // emp_main_school_id: 6,
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_main_school_id())) {
-            mySharedPreferences.setEmpMainSchoolId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_main_school_id() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpMainSchoolId())) {
+            mySharedPreferences.setEmpMainSchoolId(checkOTPVerificationForEmployeePojo.getEmpMainSchoolId() + "");
         }
 
-        /*if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).get)) {
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getAcFullName())) {
             mySharedPreferences.setAcFullName(checkOTPVerificationForEmployeePojo.getAcFullName() + "");
-        }*/
-
-        //ac_logo: "458afea2_3f9f_45d6_8ccb_acb765678fff.png",
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getAc_logo())) {
-            mySharedPreferences.setEmpAcLogo(checkLoginByOTPAndUsernamePojo.getTable().get(0).getAc_logo() + "");
         }
 
-        //stud_photo: "https://cms.atmiya.edu.in/images/Emp_photo/2270.jpg",
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getStud_photo())) {
-            mySharedPreferences.setStudentPhotoUrl(checkLoginByOTPAndUsernamePojo.getTable().get(0).getStud_photo() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getAcLogo())) {
+            mySharedPreferences.setEmpAcLogo(checkOTPVerificationForEmployeePojo.getAcLogo() + "");
         }
 
-      /*  if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getStatus())) {
-            mySharedPreferences.setEmpS(checkLoginByOTPAndUsernamePojo.getTable().get(0).getStatus() + "");
-        }*/
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getStudPhoto())) {
+            mySharedPreferences.setStudentPhotoUrl(checkOTPVerificationForEmployeePojo.getStudPhoto() + "");
+        }
 
-        //not available in response
-      /*  if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getAcCode())) {
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getStatus())) {
+//            mySharedPreferences.setEmpStatus(checkOTPVerificationForEmployeePojo.getStatus() + "");
+//        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getAcCode())) {
             mySharedPreferences.setEmpAcCode(checkOTPVerificationForEmployeePojo.getAcCode() + "");
-        }*/
-
-        //is_director
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getIs_director())) {
-            mySharedPreferences.setEmpIsDirectory(checkLoginByOTPAndUsernamePojo.getTable().get(0).getIs_director() + "");
         }
 
-        //emp_year_id
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_year_id())) {
-            mySharedPreferences.setEmpYearId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_year_id() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getIsDirector())) {
+            mySharedPreferences.setEmpIsDirectory(checkOTPVerificationForEmployeePojo.getIsDirector() + "");
         }
 
-        //institute_id
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getInstitute_id())) {
-            mySharedPreferences.setEmpInstituteId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getInstitute_id() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpId())) {
+            mySharedPreferences.setEmpId(checkOTPVerificationForEmployeePojo.getEmpId() + "");
         }
 
-        //im_domain_name
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getIm_domain_name())) {
-            mySharedPreferences.setEmpImDomainName(checkLoginByOTPAndUsernamePojo.getTable().get(0).getIm_domain_name() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpYearId())) {
+            mySharedPreferences.setEmpYearId(checkOTPVerificationForEmployeePojo.getEmpYearId() + "");
         }
 
-        //emp_user_status
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_user_status())) {
-            mySharedPreferences.setEmpUserStatus(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_user_status() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getInstituteId())) {
+            mySharedPreferences.setEmpInstituteId(checkOTPVerificationForEmployeePojo.getInstituteId() + "");
         }
 
-        //emp_permenant_college
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_permenant_college())) {
-            mySharedPreferences.setEmpPermanentCollege(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_permenant_college() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getImDomainName())) {
+            mySharedPreferences.setEmpImDomainName(checkOTPVerificationForEmployeePojo.getImDomainName() + "");
         }
 
-        //emp_department_id
-        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_department_id())) {
-            mySharedPreferences.setEmpDepartmentId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_department_id() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpUserStatus())) {
+            mySharedPreferences.setEmpUserStatus(checkOTPVerificationForEmployeePojo.getEmpUserStatus() + "");
         }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpPermenantCollege())) {
+            mySharedPreferences.setEmpPermanentCollege(checkOTPVerificationForEmployeePojo.getEmpPermenantCollege() + "");
+        }
+
+        if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getEmpDepartmentId())) {
+            mySharedPreferences.setEmpDepartmentId(checkOTPVerificationForEmployeePojo.getEmpDepartmentId() + "");
+        }
+
+    }
+
+    private void setStudentOrEmployeeDataToPreferences(CheckLoginByOTPAndUsernamePojo.TableBean checkLoginByOTPAndUsernamePojo) {
+
+        if (userType.equalsIgnoreCase(String.valueOf(CommonUtil.SELECTED_USER_TYPE_STUDENT))) {
+            setStudentLoginData(checkLoginByOTPAndUsernamePojo);
+        } else {
+            setEmployeeLoginData(checkLoginByOTPAndUsernamePojo);
+        }
+
+//        //emp_username
+//        if (checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_username() != null) {
+//            mySharedPreferences.setEmpUserName(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_username());
+//        }
+//        mySharedPreferences.setLoginUserType(1);
+//
+//        // emp_id: 2270,
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_id())) {
+//            mySharedPreferences.setEmpId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_id() + "");
+//        }
+//
+//        //emp_number: "123456",
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_number())) {
+//            mySharedPreferences.setEmpNumber(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_number() + "");
+//        }
+//
+//        //name: "CMS Admin Infinity",
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getName())) {
+//            mySharedPreferences.setEmpName(checkLoginByOTPAndUsernamePojo.getTable().get(0).getName() + "");
+//        }
+//
+//        // emp_main_school_id: 6,
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_main_school_id())) {
+//            mySharedPreferences.setEmpMainSchoolId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_main_school_id() + "");
+//        }
+//
+//        /*if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).get)) {
+//            mySharedPreferences.setAcFullName(checkOTPVerificationForEmployeePojo.getAcFullName() + "");
+//        }*/
+//
+//        //ac_logo: "458afea2_3f9f_45d6_8ccb_acb765678fff.png",
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getAc_logo())) {
+//            mySharedPreferences.setEmpAcLogo(checkLoginByOTPAndUsernamePojo.getTable().get(0).getAc_logo() + "");
+//        }
+//
+//        //stud_photo: "https://cms.atmiya.edu.in/images/Emp_photo/2270.jpg",
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getStud_photo())) {
+//            mySharedPreferences.setStudentPhotoUrl(checkLoginByOTPAndUsernamePojo.getTable().get(0).getStud_photo() + "");
+//        }
+//
+//      /*  if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getStatus())) {
+//            mySharedPreferences.setEmpS(checkLoginByOTPAndUsernamePojo.getTable().get(0).getStatus() + "");
+//        }*/
+//
+//        //not available in response
+//      /*  if (!CommonUtil.checkIsEmptyOrNullCommon(checkOTPVerificationForEmployeePojo.getAcCode())) {
+//            mySharedPreferences.setEmpAcCode(checkOTPVerificationForEmployeePojo.getAcCode() + "");
+//        }*/
+//
+//        //is_director
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getIs_director())) {
+//            mySharedPreferences.setEmpIsDirectory(checkLoginByOTPAndUsernamePojo.getTable().get(0).getIs_director() + "");
+//        }
+//
+//        //emp_year_id
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_year_id())) {
+//            mySharedPreferences.setEmpYearId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_year_id() + "");
+//        }
+//
+//        //institute_id
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getInstitute_id())) {
+//            mySharedPreferences.setEmpInstituteId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getInstitute_id() + "");
+//        }
+//
+//        //im_domain_name
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getIm_domain_name())) {
+//            mySharedPreferences.setEmpImDomainName(checkLoginByOTPAndUsernamePojo.getTable().get(0).getIm_domain_name() + "");
+//        }
+//
+//        //emp_user_status
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_user_status())) {
+//            mySharedPreferences.setEmpUserStatus(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_user_status() + "");
+//        }
+//
+//        //emp_permenant_college
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_permenant_college())) {
+//            mySharedPreferences.setEmpPermanentCollege(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_permenant_college() + "");
+//        }
+//
+//        //emp_department_id
+//        if (!CommonUtil.checkIsEmptyOrNullCommon(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_department_id())) {
+//            mySharedPreferences.setEmpDepartmentId(checkLoginByOTPAndUsernamePojo.getTable().get(0).getEmp_department_id() + "");
+//        }
 
 
 
