@@ -1,5 +1,4 @@
 package com.infinity.infoway.atmiya.forgot_password.pojo;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -77,7 +76,7 @@ public class OtpBaseLoginDetailsForEmployeePojo {
         private Object imYearlyDomainName;
         @SerializedName("emp_mobile_phone")
         @Expose
-        private String empMobilePhone;
+        private Integer empMobilePhone;
         @SerializedName("is_emp_login_otp_required")
         @Expose
         private Integer isEmpLoginOtpRequired;
@@ -234,11 +233,11 @@ public class OtpBaseLoginDetailsForEmployeePojo {
             this.imYearlyDomainName = imYearlyDomainName;
         }
 
-        public String getEmpMobilePhone() {
+        public Integer getEmpMobilePhone() {
             return empMobilePhone;
         }
 
-        public void setEmpMobilePhone(String empMobilePhone) {
+        public void setEmpMobilePhone(Integer empMobilePhone) {
             this.empMobilePhone = empMobilePhone;
         }
 

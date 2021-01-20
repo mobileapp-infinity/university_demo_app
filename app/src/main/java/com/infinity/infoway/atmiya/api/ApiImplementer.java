@@ -28,15 +28,6 @@ import com.infinity.infoway.atmiya.faculty.faculty_timetable.pojo.FacultyTimeTab
 import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.student.exam.pojo.DownloadHallTicketExaminationSchedulePojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayWithPaytmPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.CheckOTPVerificationForEmployeePojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.CheckOTPVerificationForStudentPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.InsertForgotPasswordOTPSmsRecordPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.InsertStudentPasswordAndSMSAbsentApiCall;
-import com.infinity.infoway.atmiya.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.OtpBaseLoginDetailsForStudentPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.ResetEmployeePasswordPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.ResetStudentPasswordPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.UpdateStudentForgotPasswordOtpPojo;
 import com.infinity.infoway.atmiya.student.home_work.pojo.StudentHomeWorkPojo;
 import com.infinity.infoway.atmiya.student.news_or_notification.UpdateNotificationStatusPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.UpdateStudentFCMTokenPojo;
@@ -72,10 +63,6 @@ import com.infinity.infoway.atmiya.student.fee_details.pojo.GetPaymentSingleButt
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PayFeeTypePojoList;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PaySlipOfAxisPojo;
 import com.infinity.infoway.atmiya.student.fee_details.pojo.PrintFeeReceiptPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.GetForgetPasswordDetailsByStudentEmployeeIdPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.GetInstituteFromDomainPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.GetSMSApiForApplicationPojo;
-import com.infinity.infoway.atmiya.forgot_password.pojo.GetStudentForgotPasswordDetailsPojo;
 import com.infinity.infoway.atmiya.student.holiday.HolidayListPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.CheckStudentLeaveExistPojo;
 import com.infinity.infoway.atmiya.student.leave_application.pojo.InsertStudentLeavePojo;
@@ -92,6 +79,7 @@ import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
 import com.infinity.infoway.atmiya.student.student_syllabus.SyllabusListPojo;
 import com.infinity.infoway.atmiya.student.student_timetable.pojo.StudentTimeTablePojo;
+import com.infinity.infoway.atmiya.forgot_password.pojo.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -477,11 +465,18 @@ public class ApiImplementer {
         call.enqueue(cb);
     }
 
-    public static void getStudentForgetPasswordDetailsApiImplementer(String emp_stud_id, String emp_stud_status, String institute_id, Callback<ArrayList<GetForgetPasswordDetailsByStudentEmployeeIdPojo>> cb) {
+    //new Api added by harsh
+    public static void getForgetPasswordDetailByUserIDImplementer(String user_id, String user_type, String domain_name, Callback<ArrayList<GetForgetPasswordDetailByUserIDPojo>> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<ArrayList<GetForgetPasswordDetailsByStudentEmployeeIdPojo>> call = apiInterface.getForgotPasswordDetailsByStudentOrEmpId(emp_stud_id, emp_stud_status, institute_id);
+        Call<ArrayList<GetForgetPasswordDetailByUserIDPojo>> call = apiInterface.getForgetPasswordDetailByUserID(user_id, user_type, domain_name);
         call.enqueue(cb);
     }
+
+//    public static void getStudentForgetPasswordDetailsApiImplementer(String emp_stud_id, String emp_stud_status, String institute_id, Callback<ArrayList<GetForgetPasswordDetailsByStudentEmployeeIdPojo>> cb) {
+//        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+//        Call<ArrayList<GetForgetPasswordDetailsByStudentEmployeeIdPojo>> call = apiInterface.getForgotPasswordDetailsByStudentOrEmpId(emp_stud_id, emp_stud_status, institute_id);
+//        call.enqueue(cb);
+//    }
 
     public static void getSMSApiForApplicationApiImplementer(String institute_id, Callback<ArrayList<GetSMSApiForApplicationPojo>> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
@@ -911,6 +906,41 @@ public class ApiImplementer {
                 att_created_by,
                 att_created_ip);
         call.enqueue(cb);
+    }
+
+    //Added by harsh 18-1-2021
+    public static void getUserWiseDetailForForgetPasswordAPIImplementer(String uname_mobile, String user_type, String domain_name, Callback<GetUserWiseDetailForgetPasswordPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<GetUserWiseDetailForgetPasswordPojo> call = apiInterface.getUserWiseDetailForForgetPasswordAPI(uname_mobile, user_type, domain_name);
+        call.enqueue(cb);
+    }
+
+    public static void insertForgetPasswordSendSMSRecordImplementer(String sms, String user_id, String user_type, String mobile_no, String ip_addr, Callback<InsertForgetPasswordSendSMSRecordPojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<InsertForgetPasswordSendSMSRecordPojo> call = apiInterface.insertForgetPasswordSendSMSRecord(sms, user_id, user_type, mobile_no, ip_addr);
+        call.enqueue(cb);
+    }
+
+    public static void updateUserOTPAtForgetPasswordAPIImplementer(String user_type, String user_id, String otp, String ip_addr, Callback<ArrayList<UpdateUserOTPAtForgetPasswordPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<UpdateUserOTPAtForgetPasswordPojo>> call = apiInterface.updateUserOTPAtForgetPasswordAPI(user_type, user_id, otp, ip_addr);
+        call.enqueue(cb);
+
+    }
+
+
+    public static void checkLoginByOTPAndUsernameAPIImplementer(String user_type, String user_name, String institute_id, String otp, String ip_addr, Callback<CheckLoginByOTPAndUsernamePojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<CheckLoginByOTPAndUsernamePojo> call = apiInterface.checkLoginByOTPAndUsernameAPI(user_type, user_name, institute_id, otp, ip_addr);
+        call.enqueue(cb);
+
+    }
+
+    public static void resetUserPasswordAPIImplementer(String user_type, String user_id, String institute_id, String password, String ip_addr, Callback<ArrayList<ResetUserPasswordPojo>> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<ArrayList<ResetUserPasswordPojo>> call = apiInterface.resetUserPasswordAPI(user_type, user_id, institute_id, password, ip_addr);
+        call.enqueue(cb);
+
     }
 
 }

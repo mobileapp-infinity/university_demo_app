@@ -92,6 +92,7 @@ import com.infinity.infoway.atmiya.student.student_activity.StudentActivityPojo;
 import com.infinity.infoway.atmiya.student.student_dashboard.pojo.GetSliderImageUrlsPojo;
 import com.infinity.infoway.atmiya.student.student_syllabus.SyllabusListPojo;
 import com.infinity.infoway.atmiya.student.student_timetable.pojo.StudentTimeTablePojo;
+import com.infinity.infoway.atmiya.forgot_password.pojo.*;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -362,11 +363,12 @@ public interface IApiInterface {
     @GET("get_student_forget_password_detail")
     Call<ArrayList<GetStudentForgotPasswordDetailsPojo>> getStudentForgetPassDeail(@Query("email") String email);
 
-    @GET("get_forget_password_detail_by_Student_Employee_ID")
-    Call<ArrayList<GetForgetPasswordDetailsByStudentEmployeeIdPojo>> getForgotPasswordDetailsByStudentOrEmpId(
-            @Query("emp_stud_id") String emp_stud_id,
-            @Query("emp_stud_status") String emp_stud_status,
-            @Query("institute_id") String institute_id);
+    //new Api Added By harsh
+    @GET("Get_Forget_Password_Detail_by_User_ID")
+    Call<ArrayList<GetForgetPasswordDetailByUserIDPojo>> getForgetPasswordDetailByUserID(
+            @Query("user_id") String user_id,
+            @Query("user_type") String user_type,
+            @Query("domain_name") String domain_name);
 
     @GET("GET_SMS_API_For_Application")
     Call<ArrayList<GetSMSApiForApplicationPojo>> getSMSApiForApplication(
@@ -724,5 +726,35 @@ public interface IApiInterface {
             @Query("att_homework") String att_homework,
             @Query("att_created_by") String att_created_by,
             @Query("att_created_ip") String att_created_ip);
+
+    //Added by harsh on 18-1-2021
+    @GET("Get_User_wise_Detail_For_Forget_Password_API")
+    Call<GetUserWiseDetailForgetPasswordPojo> getUserWiseDetailForForgetPasswordAPI(
+            @Query("uname_mobile") String uname_mobile, @Query("user_type") String user_type,
+            @Query("domain_name") String domain_name);
+
+
+    @GET("Insert_Forget_Password_Send_SMS_Record")
+    Call<InsertForgetPasswordSendSMSRecordPojo> insertForgetPasswordSendSMSRecord(
+            @Query("sms") String sms, @Query("user_id") String user_id,
+            @Query("user_type") String user_type, @Query("mobile_no") String mobile_no, @Query("ip_addr") String ip_addr);
+
+
+    @GET("Update_User_OTP_At_Forget_Password_API")
+    Call<ArrayList<UpdateUserOTPAtForgetPasswordPojo>> updateUserOTPAtForgetPasswordAPI(
+            @Query("user_type") String user_type, @Query("user_id") String user_id,
+            @Query("otp") String otp, @Query("ip_addr") String ip_addr);
+
+
+    @GET("Check_Login_By_OTP_and_Username_API")
+    Call<CheckLoginByOTPAndUsernamePojo> checkLoginByOTPAndUsernameAPI(
+            @Query("user_type") String user_type, @Query("username") String username,
+            @Query("otp") String otp, @Query("institute_id") String institute_id, @Query("ip_addr") String ip_addr);
+
+
+    @GET("Reset_User_Password_API")
+    Call<ArrayList<ResetUserPasswordPojo>> resetUserPasswordAPI(
+            @Query("user_type") String user_type, @Query("user_id") String user_id,
+            @Query("institute_id") String institute_id, @Query("password") String password, @Query("ip_addr") String ip_addr);
 
 }

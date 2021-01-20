@@ -12,15 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.forgot_password.adapter.RegisterEmployeeListAdapter;
+import com.infinity.infoway.atmiya.forgot_password.pojo.GetUserWiseDetailForgetPasswordPojo;
 import com.infinity.infoway.atmiya.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
 
 import java.util.ArrayList;
+
 
 public class RegisteredEmployeeListBottomSheetDialog extends BottomSheetDialogFragment {
 
     ForgotPasswordActivity context;
     RecyclerView rvRegisterEmployeeList;
     ArrayList<OtpBaseLoginDetailsForEmployeePojo.TableBean> tableBeanArrayList;
+    GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo;
     String instituteId = "";
 
 
@@ -28,12 +31,20 @@ public class RegisteredEmployeeListBottomSheetDialog extends BottomSheetDialogFr
 
     }
 
+//    RegisteredEmployeeListBottomSheetDialog(Context context,
+//                                            ArrayList<OtpBaseLoginDetailsForEmployeePojo.TableBean> tableBeanArrayList, String instituteId) {
+//        this.context = (ForgotPasswordActivity) context;
+//        this.tableBeanArrayList = tableBeanArrayList;
+//        this.instituteId = instituteId;
+//    }
+
     RegisteredEmployeeListBottomSheetDialog(Context context,
-                                            ArrayList<OtpBaseLoginDetailsForEmployeePojo.TableBean> tableBeanArrayList, String instituteId) {
+                                            GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo, String instituteId) {
         this.context = (ForgotPasswordActivity) context;
-        this.tableBeanArrayList = tableBeanArrayList;
+        this.getUserWiseDetailForgetPasswordPojo = getUserWiseDetailForgetPasswordPojo;
         this.instituteId = instituteId;
     }
+
 
     @Override
     public int getTheme() {
@@ -51,7 +62,7 @@ public class RegisteredEmployeeListBottomSheetDialog extends BottomSheetDialogFr
 
     private void initView(View view) {
         rvRegisterEmployeeList = view.findViewById(R.id.rvRegisterEmployeeList);
-        rvRegisterEmployeeList.setAdapter(new RegisterEmployeeListAdapter(context, tableBeanArrayList, instituteId));
+        rvRegisterEmployeeList.setAdapter(new RegisterEmployeeListAdapter(context, tableBeanArrayList, getUserWiseDetailForgetPasswordPojo, instituteId));
     }
 
 }

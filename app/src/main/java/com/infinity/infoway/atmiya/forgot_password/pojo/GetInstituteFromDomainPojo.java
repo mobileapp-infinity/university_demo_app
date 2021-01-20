@@ -1,5 +1,4 @@
 package com.infinity.infoway.atmiya.forgot_password.pojo;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

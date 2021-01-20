@@ -2,11 +2,14 @@ package com.infinity.infoway.atmiya.forgot_password.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetForgetPasswordDetailsByStudentEmployeeIdPojo {
+public class GetForgetPasswordDetailByUserIDPojo {
 
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("institute_id")
+    @Expose
+    private Integer instituteId;
     @SerializedName("username")
     @Expose
     private String username;
@@ -18,7 +21,7 @@ public class GetForgetPasswordDetailsByStudentEmployeeIdPojo {
     private String name;
     @SerializedName("email")
     @Expose
-    private Object email;
+    private String email;
     @SerializedName("encrypted_pwd_config")
     @Expose
     private Integer encryptedPwdConfig;
@@ -34,17 +37,9 @@ public class GetForgetPasswordDetailsByStudentEmployeeIdPojo {
     @SerializedName("emp_stud_status")
     @Expose
     private Integer empStudStatus;
-    @SerializedName("institute_id")
+    @SerializedName("sms_api")
     @Expose
-    private Integer institute_id;
-
-    public Integer getInstitute_id() {
-        return institute_id;
-    }
-
-    public void setInstitute_id(Integer institute_id) {
-        this.institute_id = institute_id;
-    }
+    private String smsApi;
 
     public Integer getId() {
         return id;
@@ -52,6 +47,14 @@ public class GetForgetPasswordDetailsByStudentEmployeeIdPojo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getInstituteId() {
+        return instituteId;
+    }
+
+    public void setInstituteId(Integer instituteId) {
+        this.instituteId = instituteId;
     }
 
     public String getUsername() {
@@ -78,11 +81,11 @@ public class GetForgetPasswordDetailsByStudentEmployeeIdPojo {
         this.name = name;
     }
 
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -126,5 +129,11 @@ public class GetForgetPasswordDetailsByStudentEmployeeIdPojo {
         this.empStudStatus = empStudStatus;
     }
 
+    public String getSmsApi() {
+        return smsApi;
+    }
 
+    public void setSmsApi(String smsApi) {
+        this.smsApi = smsApi;
+    }
 }

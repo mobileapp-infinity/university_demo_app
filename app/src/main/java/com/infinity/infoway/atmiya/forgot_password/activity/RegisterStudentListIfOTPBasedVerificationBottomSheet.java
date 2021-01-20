@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.forgot_password.adapter.RegisterStudentListIfOTPBasedVerificationAdapter;
+import com.infinity.infoway.atmiya.forgot_password.pojo.GetUserWiseDetailForgetPasswordPojo;
 import com.infinity.infoway.atmiya.forgot_password.pojo.OtpBaseLoginDetailsForStudentPojo;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class RegisterStudentListIfOTPBasedVerificationBottomSheet extends Bottom
     ForgotPasswordActivity context;
     RecyclerView rvRegisterStudentListIfOtpBasedLogin;
     ArrayList<OtpBaseLoginDetailsForStudentPojo.TableBean> tableBeanArrayList;
+    GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo;
     String instituteId = "";
 
     RegisterStudentListIfOTPBasedVerificationBottomSheet() {
@@ -32,6 +34,14 @@ public class RegisterStudentListIfOTPBasedVerificationBottomSheet extends Bottom
                                                          String instituteId) {
         this.context = (ForgotPasswordActivity) context;
         this.tableBeanArrayList = tableBeanArrayList;
+        this.instituteId = instituteId;
+    }
+
+    RegisterStudentListIfOTPBasedVerificationBottomSheet(Context context,
+                                                         GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo,
+                                                         String instituteId) {
+        this.context = (ForgotPasswordActivity) context;
+        this.getUserWiseDetailForgetPasswordPojo = getUserWiseDetailForgetPasswordPojo;
         this.instituteId = instituteId;
     }
 

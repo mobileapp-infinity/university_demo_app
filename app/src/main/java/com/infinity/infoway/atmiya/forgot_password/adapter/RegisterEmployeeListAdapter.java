@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
+import com.infinity.infoway.atmiya.forgot_password.pojo.GetUserWiseDetailForgetPasswordPojo;
 import com.infinity.infoway.atmiya.forgot_password.pojo.OtpBaseLoginDetailsForEmployeePojo;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 
@@ -22,6 +23,7 @@ public class RegisterEmployeeListAdapter extends RecyclerView.Adapter<RegisterEm
 
     Context context;
     ArrayList<OtpBaseLoginDetailsForEmployeePojo.TableBean> tableBeanArrayList;
+    GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo;
     LayoutInflater layoutInflater;
     IRegisterEmployeeList iRegisterEmployeeList;
     String instituteId = "";
@@ -35,6 +37,16 @@ public class RegisterEmployeeListAdapter extends RecyclerView.Adapter<RegisterEm
         this.instituteId = instituteId;
     }
 
+    public RegisterEmployeeListAdapter(Context context, ArrayList<OtpBaseLoginDetailsForEmployeePojo.TableBean> tableBeanArrayList,
+                                       GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo, String instituteId) {
+        this.context = context;
+        this.tableBeanArrayList = tableBeanArrayList;
+        iRegisterEmployeeList = (IRegisterEmployeeList) context;
+        layoutInflater = LayoutInflater.from(context);
+        this.getUserWiseDetailForgetPasswordPojo = getUserWiseDetailForgetPasswordPojo;
+        this.instituteId = instituteId;
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,25 +56,26 @@ public class RegisterEmployeeListAdapter extends RecyclerView.Adapter<RegisterEm
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        OtpBaseLoginDetailsForEmployeePojo.TableBean tableBean = tableBeanArrayList.get(position);
+        //  OtpBaseLoginDetailsForEmployeePojo.TableBean tableBean = tableBeanArrayList.get(position);
+        GetUserWiseDetailForgetPasswordPojo.TableBean tableBean = getUserWiseDetailForgetPasswordPojo.getTable().get(position);
 
-        if (position == tableBeanArrayList.size() - 1) {
+        if (position == getUserWiseDetailForgetPasswordPojo.getTable().size() - 1) {
             holder.line.setVisibility(View.GONE);
         }
 
         String userName = "";
-        if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getEmpName())) {
-            userName = tableBean.getEmpName() + " ";
+        if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getName())) {
+            userName = tableBean.getName() + " ";
         }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getEmpUsername())) {
-            userName += "(" + tableBean.getEmpUsername() + ")";
+        if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getName())) {
+            userName += "(" + tableBean.getName() + ")";
         }
 
         holder.tvRegisterEmpUsername.setText(userName);
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getEmpMobilePhone())) {
-            holder.tvRegisterEmpMobileNo.setText(tableBean.getEmpMobilePhone() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(tableBean.getMobile_no())) {
+            holder.tvRegisterEmpMobileNo.setText(tableBean.getMobile_no() + "");
         }
 
         holder.cbSelectRegisterEmp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -84,7 +97,7 @@ public class RegisterEmployeeListAdapter extends RecyclerView.Adapter<RegisterEm
 
     @Override
     public int getItemCount() {
-        return tableBeanArrayList.size();
+        return getUserWiseDetailForgetPasswordPojo.getTable().size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -103,7 +116,7 @@ public class RegisterEmployeeListAdapter extends RecyclerView.Adapter<RegisterEm
     }
 
     public interface IRegisterEmployeeList {
-        void onRegisterEmployeeSelected(OtpBaseLoginDetailsForEmployeePojo.TableBean tableBean, String instituteId);
+        void onRegisterEmployeeSelected(GetUserWiseDetailForgetPasswordPojo.TableBean tableBean, String instituteId);
     }
 
 

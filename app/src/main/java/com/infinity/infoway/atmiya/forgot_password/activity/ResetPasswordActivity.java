@@ -13,13 +13,18 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
+import com.infinity.infoway.atmiya.faculty.faculty_dashboard.activity.FacultyDashboardActivity;
 import com.infinity.infoway.atmiya.forgot_password.pojo.ResetEmployeePasswordPojo;
 import com.infinity.infoway.atmiya.forgot_password.pojo.ResetStudentPasswordPojo;
+import com.infinity.infoway.atmiya.forgot_password.pojo.ResetUserPasswordPojo;
+import com.infinity.infoway.atmiya.student.student_dashboard.activity.StudentDashboardActivity;
 import com.infinity.infoway.atmiya.utils.CommonUtil;
 import com.infinity.infoway.atmiya.utils.ConnectionDetector;
 import com.infinity.infoway.atmiya.utils.DialogUtil;
 import com.infinity.infoway.atmiya.utils.IntentConstants;
 import com.infinity.infoway.atmiya.utils.MySharedPreferences;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,11 +39,9 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     AppCompatEditText edtConfirmPassword;
     TextViewRegularFont btnUpdatePassword;
 
-//    String userNameAfterForgotPassword = "";
     String userId = "";
+    String userType = "";
     String instituteId = "";
-    String isEmployee = "";
-    String isStudent = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +49,12 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_reset_password);
         initView();
 
-//        if (getIntent().hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
-//            userNameAfterForgotPassword = getIntent().getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
-//        }
-
         if (getIntent().hasExtra(IntentConstants.RESET_PASS_USER_ID)) {
             userId = getIntent().getStringExtra(IntentConstants.RESET_PASS_USER_ID);
         }
 
-//        if (getIntent().hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
-//            passwordAfterForgotPassword = getIntent().getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
-//        }
-
-        if (getIntent().hasExtra(IntentConstants.IS_EMPLOYEE_RESET_PASSWORD)) {
-            isEmployee = getIntent().getStringExtra(IntentConstants.IS_EMPLOYEE_RESET_PASSWORD);
-        }
-
-        if (getIntent().hasExtra(IntentConstants.IS_STUDENT_RESET_PASSWORD)) {
-            isStudent = getIntent().getStringExtra(IntentConstants.IS_STUDENT_RESET_PASSWORD);
+        if (getIntent().hasExtra(IntentConstants.FACULTY_OR_STUDENT)) {
+            userType = getIntent().getStringExtra(IntentConstants.FACULTY_OR_STUDENT);
         }
 
         if (getIntent().hasExtra(IntentConstants.RESET_PASS_INSTITUTE_ID)) {
@@ -90,15 +81,9 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
         } else if (v.getId() == R.id.btnUpdatePassword) {
             if (isValid()) {
                 CommonUtil.hideKeyboardCommon(ResetPasswordActivity.this);
-                if (isStudent.equalsIgnoreCase("1")) {
-                    resetStudentPasswordApiCall(userId, instituteId, edtConfirmPassword.getText().toString().trim(),
-                            userId, "1");
-                } else if (isEmployee.equalsIgnoreCase("1")) {
-                    resetEmployeePasswordApiCall(userId, instituteId, edtConfirmPassword.getText().toString().trim(),
-                            userId, "1");
-                } else {
-                    Toast.makeText(this, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();
-                }
+                resetUserPasswordAPI(userType, userId, instituteId, edtConfirmPassword.getText().toString().trim(), "1");
+
+
             }
         }
     }
@@ -121,73 +106,43 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(ResetPasswordActivity.this, VerifyOTPActivity.class);
-//        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userNameAfterForgotPassword);
         intent.putExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, false);
         setResult(Activity.RESULT_OK, intent);
         finish();
     }
 
-
-    private void resetStudentPasswordApiCall(String studId, String instituteId, String password, String modifyBy, String modifyIp) {
+    private void resetUserPasswordAPI(String user_type, String user_id, String institute_id, String password, String ip_addr) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(ResetPasswordActivity.this, "");
-            ApiImplementer.resetStudentPasswordApiImplementer(studId, instituteId, password, modifyBy, modifyIp, new Callback<ResetStudentPasswordPojo>() {
+            ApiImplementer.resetUserPasswordAPIImplementer(user_type, user_id, institute_id, password, ip_addr, new Callback<ArrayList<ResetUserPasswordPojo>>() {
                 @Override
-                public void onResponse(Call<ResetStudentPasswordPojo> call, Response<ResetStudentPasswordPojo> response) {
+                public void onResponse(Call<ArrayList<ResetUserPasswordPojo>> call, Response<ArrayList<ResetUserPasswordPojo>> response) {
                     DialogUtil.hideProgressDialog();
-                    if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0 &&
-                            response.body().getTable().get(0).getErrorCode() == 1) {
+                    if (response.isSuccessful() && response.body() != null &&
+                            response.body().get(0).getErrorCode().equals("1")) {
                         Toast.makeText(ResetPasswordActivity.this, "Password reset successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ResetPasswordActivity.this, VerifyOTPActivity.class);
-//                        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userNameAfterForgotPassword);
+
                         intent.putExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, true);
                         setResult(Activity.RESULT_OK, intent);
                         finish();
+
                     } else {
+                        DialogUtil.hideProgressDialog();
                         Toast.makeText(ResetPasswordActivity.this, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<ResetStudentPasswordPojo> call, Throwable t) {
+                public void onFailure(Call<ArrayList<ResetUserPasswordPojo>> call, Throwable t) {
                     DialogUtil.hideProgressDialog();
                     Toast.makeText(ResetPasswordActivity.this, "Request failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+
         } else {
             Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
         }
-    }
 
-
-    private void resetEmployeePasswordApiCall(String emp_id, String institute_id, String password, String modify_by, String modify_ip) {
-        if (connectionDetector.isConnectingToInternet()) {
-            DialogUtil.showProgressDialogNotCancelable(ResetPasswordActivity.this, "");
-            ApiImplementer.resetEmployeePasswordApiImplementer(emp_id, institute_id, password, modify_by, modify_ip, new Callback<ResetEmployeePasswordPojo>() {
-                @Override
-                public void onResponse(Call<ResetEmployeePasswordPojo> call, Response<ResetEmployeePasswordPojo> response) {
-                    DialogUtil.hideProgressDialog();
-                    if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0 &&
-                            response.body().getTable().get(0).getErrorCode() == 1) {
-                        Intent intent = new Intent(ResetPasswordActivity.this, VerifyOTPActivity.class);
-//                        intent.putExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS, userNameAfterForgotPassword);
-                        intent.putExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, true);
-                        setResult(Activity.RESULT_OK, intent);
-                        finish();
-                        Toast.makeText(ResetPasswordActivity.this, "Password reset successful", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(ResetPasswordActivity.this, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResetEmployeePasswordPojo> call, Throwable t) {
-                    DialogUtil.hideProgressDialog();
-                    Toast.makeText(ResetPasswordActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
-        }
     }
 }

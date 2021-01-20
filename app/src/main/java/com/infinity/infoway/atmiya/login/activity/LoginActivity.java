@@ -24,6 +24,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.api.ApiImplementer;
 import com.infinity.infoway.atmiya.faculty.faculty_dashboard.activity.FacultyDashboardActivity;
+import com.infinity.infoway.atmiya.forgot_password.activity.SelectUserTypeActivity;
 import com.infinity.infoway.atmiya.login.adapter.LoginUserListAdapter;
 import com.infinity.infoway.atmiya.login.pojo.EmployeeLoginPojo;
 import com.infinity.infoway.atmiya.login.pojo.RegisterStudentDetailsModel;
@@ -148,15 +149,13 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.llLogin) {
-//            final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
-//            llLogin.startAnimation(animation);
             if (isValid()) {
                 CommonUtil.hideKeyboardCommon(LoginActivity.this);
                 checkStudentLoginCheckApiCall(edtLoginUserName.getText().toString().trim(), edtLoginUserPassword.getText().toString().trim());
             }
         } else if (v.getId() == R.id.llForgotPassword) {
-            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-            startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD);
+            Intent intent = new Intent(LoginActivity.this, SelectUserTypeActivity.class);
+            startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_SELECT_USER_TYPE);
         }
     }
 
@@ -476,7 +475,7 @@ public class LoginActivity extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK &&
-                requestCode == IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD) {
+                requestCode == IntentConstants.REQUEST_CODE_FOR_SELECT_USER_TYPE) {
 
             boolean isOTPVerifiedAndResetPass = false;
 
@@ -493,24 +492,7 @@ public class LoginActivity extends AppCompatActivity implements
                     redirectToFacultyDashboard();
                 }
             }
-
-//            String userName = "";
-//            String password = "";
-//
-//            if (data.hasExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS)) {
-//                userName = data.getStringExtra(IntentConstants.USERNAME_AFTER_FORGOT_PASS);
-//            }
-//
-//            if (data.hasExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS)) {
-//                password = data.getStringExtra(IntentConstants.PASSWORD_AFTER_FORGOT_PASS);
-//            }
-
-//            if (!CommonUtil.checkIsEmptyOrNullCommon(userName) &&
-//                    !CommonUtil.checkIsEmptyOrNullCommon(password)) {
-//                edtLoginUserName.setText(userName + "");
-//                edtLoginUserPassword.setText(password + "");
-//                llLogin.performClick();
-//            }
         }
     }
+
 }

@@ -1,28 +1,32 @@
 package com.infinity.infoway.atmiya.forgot_password.pojo;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class InsertForgotPasswordOTPSmsRecordPojo {
+public class InsertForgetPasswordSendSMSRecordPojo {
 
-    private List<InsertForgotPasswordOTPSmsRecordPojo.TableBean> Table;
+    @SerializedName("Table")
+    @Expose
+    private List<Table> table = null;
 
-    public List<InsertForgotPasswordOTPSmsRecordPojo.TableBean> getTable() {
-        return Table;
+    public List<Table> getTable() {
+        return table;
     }
 
-    public void setTable(List<InsertForgotPasswordOTPSmsRecordPojo.TableBean> Table) {
-        this.Table = Table;
+    public void setTable(List<Table> table) {
+        this.table = table;
     }
 
-    public class TableBean {
+    public class Table {
+
         @SerializedName("insert_id")
         @Expose
         private Integer insertId;
         @SerializedName("Error_code")
         @Expose
-        private Integer errorCode;
+        private String errorCode;
         @SerializedName("Error_msg")
         @Expose
         private String errorMsg;
@@ -35,11 +39,11 @@ public class InsertForgotPasswordOTPSmsRecordPojo {
             this.insertId = insertId;
         }
 
-        public Integer getErrorCode() {
+        public String getErrorCode() {
             return errorCode;
         }
 
-        public void setErrorCode(Integer errorCode) {
+        public void setErrorCode(String errorCode) {
             this.errorCode = errorCode;
         }
 

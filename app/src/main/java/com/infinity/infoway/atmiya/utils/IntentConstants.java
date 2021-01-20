@@ -19,8 +19,9 @@ public class IntentConstants {
     public static final int REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION_FACULTY_SIDE = 1009;
     public static final int REQUEST_CODE_FACULTY_PENDING_ATTENDANCE_UPDATE_LIST = 1010;
     public static final int REQUEST_CODE_FACULTY_NO_INTERNET_CONNECTION = 1011;
+    public static final int REQUEST_CODE_FOR_SELECT_USER_TYPE = 1012;
 
-//    public static final String USERNAME_AFTER_FORGOT_PASS = "UsernameAfterForgot";
+    //    public static final String USERNAME_AFTER_FORGOT_PASS = "UsernameAfterForgot";
     //    public static final String PASSWORD_AFTER_FORGOT_PASS = "PasswordAfterForgot";
     public static final String IS_OTP_VERIFIED_AND_RESENT_PASS = "IsOtpVerifiedAndResentPass";
 
@@ -40,6 +41,10 @@ public class IntentConstants {
     public static final String IS_STUDENT_RESET_PASSWORD = "IsStudentResetPassword";
     public static final String RESET_PASS_USER_ID = "ResetPassUserId";
     public static final String RESET_PASS_INSTITUTE_ID = "ResetPassInstituteId";
+    public static final String FACULTY_OR_STUDENT = "facultyOrStudent";
+    public static final String INSTITUTE_ID_FOR_FORGET_PASSWORD = "InstituteIdForForgetPassword";
+    public static final String IM_OTP_BASE_FORGET_PASSWORD = "imOtpBasedForgotPassword";
+    public static final String USER_ID_VERIFY_OTP = "UserIdForVerifyOtp";
 
 
     //For Employee
