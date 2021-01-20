@@ -69,7 +69,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     RequestQueue queue;
     private RegisterStudentListBottomSheetDialog registerStudentListBottomSheetDialog;
     private RegisteredEmployeeListBottomSheetDialog registeredEmployeeListBottomSheetDialog;
-    private RegisterStudentListIfOTPBasedVerificationBottomSheet registerStudentListIfOTPBasedVerificationBottomSheet;
+    //    private RegisterStudentListIfOTPBasedVerificationBottomSheet registerStudentListIfOTPBasedVerificationBottomSheet;
     private Intent otpBasedForgetPasswordIntent, instituteIdIntent, facultyOrStudentIntent;
     String otpBaseForgetPassword, instituteId, userType;
 
@@ -80,14 +80,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         initView();
         otpBaseForgetPassword = otpBasedForgetPasswordIntent.getStringExtra(IntentConstants.IM_OTP_BASE_FORGET_PASSWORD);
         instituteId = instituteIdIntent.getStringExtra(IntentConstants.INSTITUTE_ID_FOR_FORGET_PASSWORD);
-
         userType = String.valueOf(facultyOrStudentIntent.getIntExtra(IntentConstants.FACULTY_OR_STUDENT, 0));
-        System.out.println(userType);
-
-
-        // isFacultyOrStudent =
-
-
     }
 
     private void initView() {
@@ -224,7 +217,6 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
 
 //                                "http://message.smartwave.co.in/rest/services/sendSMS/sendGroupSms?AUTH_KEY=c564eac8f430fd3023e1c046e286885b&senderId=ATMIYA&routeId=1&smsContentType=english&message=addmessage&mobileNos=addmobileno"//New response url
 
-
 //                                String webUrl = "http://message.smartwave.co.in/rest/services/sendSMS/sendGroupSms?AUTH_KEY=c564eac8f430fd3023e1c046e286885b&senderId=ATMIYA&routeId=1&smsContentType=english&message= Username :" + username + "  Password :" + password + "&mobileNos=" + edtEnterRegisterMobileNo.getText().toString().trim();//OLD URL
 
                                 if (!CommonUtil.checkIsEmptyOrNullCommon(getForgetPasswordDetailByUserIDPojoArrayList.get(0).getSmsApi())) {
@@ -337,52 +329,52 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         registerStudentListBottomSheetDialog.show(this.getSupportFragmentManager(), "Select Register Student");
     }
 
-    private void getOTPBaseLoginDetailsForStudentApiCall(boolean isPdShow, boolean isPdHide, String mobileNo, String instituteId) {
-        if (connectionDetector.isConnectingToInternet()) {
-            if (isPdShow) {
-                DialogUtil.showProgressDialogNotCancelable(ForgotPasswordActivity.this, "");
-            }
-            ApiImplementer.getOTPBaseLoginDetailsForStudentApiImplementer(mobileNo, instituteId, new Callback<OtpBaseLoginDetailsForStudentPojo>() {
-                @Override
-                public void onResponse(Call<OtpBaseLoginDetailsForStudentPojo> call, Response<OtpBaseLoginDetailsForStudentPojo> response) {
-                    if (isPdHide) {
-                        DialogUtil.hideProgressDialog();
-                    }
-                    if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
-                        OtpBaseLoginDetailsForStudentPojo otpBaseLoginDetailsForStudentPojo = response.body();
-                        if (!CommonUtil.checkIsEmptyOrNullCommon(otpBaseLoginDetailsForStudentPojo.getTable().get(0).getStudMobileNo())) {
-                            if (otpBaseLoginDetailsForStudentPojo.getTable().size() > 1) {
-                                DialogUtil.hideProgressDialog();
-                                registerStudentListIfOTPBasedVerificationBottomSheet = new RegisterStudentListIfOTPBasedVerificationBottomSheet(ForgotPasswordActivity.this,
-                                        (ArrayList<OtpBaseLoginDetailsForStudentPojo.TableBean>) otpBaseLoginDetailsForStudentPojo.getTable(), instituteId);
-                                registerStudentListIfOTPBasedVerificationBottomSheet.show(ForgotPasswordActivity.this.getSupportFragmentManager(),
-                                        "Select Register User If OTP Based Verification");
-                            } else if (otpBaseLoginDetailsForStudentPojo.getTable().size() > 0) {
-                                final String RANDOM_6_DIGIT_OTP = CommonUtil.getRandom6DigitOTP();
-                                getSMSApiForApplicationApiCallIfLoginIsOTPBased(false, true, instituteId,
-                                        RANDOM_6_DIGIT_OTP, otpBaseLoginDetailsForStudentPojo.getTable().get(0).getStudId().toString(),
-                                        mobileNo, "0", "1", otpBaseLoginDetailsForStudentPojo.getTable().get(0).getStudUserName() + "");
-                            }
-                        } else {
-                            DialogUtil.hideProgressDialog();
-                            Toast.makeText(ForgotPasswordActivity.this, "Mobile no not registered.", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        DialogUtil.hideProgressDialog();
-                        Toast.makeText(ForgotPasswordActivity.this, "No User Found!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<OtpBaseLoginDetailsForStudentPojo> call, Throwable t) {
-                    DialogUtil.hideProgressDialog();
-                    Toast.makeText(ForgotPasswordActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void getOTPBaseLoginDetailsForStudentApiCall(boolean isPdShow, boolean isPdHide, String mobileNo, String instituteId) {
+//        if (connectionDetector.isConnectingToInternet()) {
+//            if (isPdShow) {
+//                DialogUtil.showProgressDialogNotCancelable(ForgotPasswordActivity.this, "");
+//            }
+//            ApiImplementer.getOTPBaseLoginDetailsForStudentApiImplementer(mobileNo, instituteId, new Callback<OtpBaseLoginDetailsForStudentPojo>() {
+//                @Override
+//                public void onResponse(Call<OtpBaseLoginDetailsForStudentPojo> call, Response<OtpBaseLoginDetailsForStudentPojo> response) {
+//                    if (isPdHide) {
+//                        DialogUtil.hideProgressDialog();
+//                    }
+//                    if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
+//                        OtpBaseLoginDetailsForStudentPojo otpBaseLoginDetailsForStudentPojo = response.body();
+//                        if (!CommonUtil.checkIsEmptyOrNullCommon(otpBaseLoginDetailsForStudentPojo.getTable().get(0).getStudMobileNo())) {
+//                            if (otpBaseLoginDetailsForStudentPojo.getTable().size() > 1) {
+//                                DialogUtil.hideProgressDialog();
+//                                registerStudentListIfOTPBasedVerificationBottomSheet = new RegisterStudentListIfOTPBasedVerificationBottomSheet(ForgotPasswordActivity.this,
+//                                        (ArrayList<OtpBaseLoginDetailsForStudentPojo.TableBean>) otpBaseLoginDetailsForStudentPojo.getTable(), instituteId);
+//                                registerStudentListIfOTPBasedVerificationBottomSheet.show(ForgotPasswordActivity.this.getSupportFragmentManager(),
+//                                        "Select Register User If OTP Based Verification");
+//                            } else if (otpBaseLoginDetailsForStudentPojo.getTable().size() > 0) {
+//                                final String RANDOM_6_DIGIT_OTP = CommonUtil.getRandom6DigitOTP();
+//                                getSMSApiForApplicationApiCallIfLoginIsOTPBased(false, true, instituteId,
+//                                        RANDOM_6_DIGIT_OTP, otpBaseLoginDetailsForStudentPojo.getTable().get(0).getStudId().toString(),
+//                                        mobileNo, "0", "1", otpBaseLoginDetailsForStudentPojo.getTable().get(0).getStudUserName() + "");
+//                            }
+//                        } else {
+//                            DialogUtil.hideProgressDialog();
+//                            Toast.makeText(ForgotPasswordActivity.this, "Mobile no not registered.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
+//                        DialogUtil.hideProgressDialog();
+//                        Toast.makeText(ForgotPasswordActivity.this, "No User Found!", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<OtpBaseLoginDetailsForStudentPojo> call, Throwable t) {
+//                    DialogUtil.hideProgressDialog();
+//                    Toast.makeText(ForgotPasswordActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        } else {
+//            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 //    private void getOTPBaseLoginDetailsForEmployeeApiCall(boolean isPdShow, boolean isPdHide, String mobileNo, String instituteId) {
 //        if (connectionDetector.isConnectingToInternet()) {
@@ -453,13 +445,14 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                     URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
                     url = uri.toURL();
 
-                    Toast.makeText(ForgotPasswordActivity.this, url.toString(), Toast.LENGTH_SHORT).show();
-                    System.out.println("URL===" + url);
                     StringRequest request = new StringRequest(Request.Method.GET, url.toString(), new com.android.volley.Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             Toast.makeText(ForgotPasswordActivity.this, "SMS sent", Toast.LENGTH_LONG).show();
-                            insertForgetPasswordSendSMSRecord(msg, tableBean.getUser_id() + "", userType, edtEnterRegisterMobileNo.getText().toString().trim(), "1", tableBean.getUsername(), RANDOM_6_DIGIT_OTP);
+                            updateUserOTPAtForgetPasswordAPI(userType, tableBean.getUser_id() + "", RANDOM_6_DIGIT_OTP,
+                                    "1", tableBean.getUsername(), edtEnterRegisterMobileNo.getText().toString().trim());
+                            insertForgetPasswordSendSMSRecord(msg, tableBean.getUser_id() + "", userType,
+                                    edtEnterRegisterMobileNo.getText().toString().trim());
                         }
                     }, new com.android.volley.Response.ErrorListener() {
                         @Override
@@ -613,14 +606,12 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         intent.putExtra(IntentConstants.USER_ID_VERIFY_OTP, user_id);
         intent.putExtra(IntentConstants.ENTERED_MOBILE_NO, mobileNo);
         intent.putExtra(IntentConstants.FACULTY_OR_STUDENT, userType);
-       /* intent.putExtra(IntentConstants.IS_EMPLOYEE_FORGOT_PASSWORD, isEmployeeForgotPassword);
-        intent.putExtra(IntentConstants.IS_STUDENT_FORGOT_PASSWORD, isStudentForgotPassword);*/
         startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VERIFY_OTP);
     }
 
     @Override
     public void onOtpBasedVerificationRegisteredStudentSelected(OtpBaseLoginDetailsForStudentPojo.TableBean tableBean, String instituteId) {
-        registerStudentListIfOTPBasedVerificationBottomSheet.dismiss();
+//        registerStudentListIfOTPBasedVerificationBottomSheet.dismiss();
         final String RANDOM_6_DIGIT_OTP = CommonUtil.getRandom6DigitOTP();
         getSMSApiForApplicationApiCallIfLoginIsOTPBased(true, true, instituteId, RANDOM_6_DIGIT_OTP,
                 tableBean.getStudId().toString(), tableBean.getStudMobileNo(), "0", "1",
@@ -691,22 +682,20 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     }
 
 
-    private void insertForgetPasswordSendSMSRecord(String sms, String user_id, String user_type, String mobile_no, String ip_addr, String userName, String otp) {
+    private void insertForgetPasswordSendSMSRecord(String sms, String user_id, String user_type, String mobile_no) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(ForgotPasswordActivity.this, "");
-            ApiImplementer.insertForgetPasswordSendSMSRecordImplementer(sms, user_id, user_type, mobile_no, ip_addr, new Callback<InsertForgetPasswordSendSMSRecordPojo>() {
+            ApiImplementer.insertForgetPasswordSendSMSRecordImplementer(sms, user_id, user_type, mobile_no, "1", new Callback<InsertForgetPasswordSendSMSRecordPojo>() {
                 @Override
                 public void onResponse(Call<InsertForgetPasswordSendSMSRecordPojo> call, Response<InsertForgetPasswordSendSMSRecordPojo> response) {
                     DialogUtil.hideProgressDialog();
-                    if (response.isSuccessful() && response.body() != null && response.body().getTable().get(0).equals("1")) {
-                        updateUserOTPAtForgetPasswordAPI(user_type, user_id, otp, ip_addr, userName, mobile_no);
+                    if (response.isSuccessful() && response.body() != null && response.body().getTable().get(0).getErrorCode().equals("1")) {
                     }
                 }
 
                 @Override
                 public void onFailure(Call<InsertForgetPasswordSendSMSRecordPojo> call, Throwable t) {
                     DialogUtil.hideProgressDialog();
-                    Toast.makeText(ForgotPasswordActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -721,25 +710,21 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     private void updateUserOTPAtForgetPasswordAPI(String user_type, String user_id, String otp, String ip_addr, String userName, String mobile_no) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(ForgotPasswordActivity.this, "");
-            ApiImplementer.updateUserOTPAtForgetPasswordAPIImplementer(user_type, user_id, otp, ip_addr, new Callback<ArrayList<UpdateUserOTPAtForgetPasswordPojo>>() {
+            ApiImplementer.updateUserOTPAtForgetPasswordAPIImplementer(user_type, user_id, otp, ip_addr, new Callback<UpdateUserOTPAtForgetPasswordPojo>() {
                 @Override
-                public void onResponse(Call<ArrayList<UpdateUserOTPAtForgetPasswordPojo>> call, Response<ArrayList<UpdateUserOTPAtForgetPasswordPojo>> response) {
+                public void onResponse(Call<UpdateUserOTPAtForgetPasswordPojo> call, Response<UpdateUserOTPAtForgetPasswordPojo> response) {
                     DialogUtil.hideProgressDialog();
-                    if (response.isSuccessful() && response.body() != null && response.body().get(0).getErrorCode().equals("1")) {
-
-
+                    if (response.isSuccessful() && response.body() != null && response.body().getTable().get(0).getErrorCode().equals("1")) {
                         redirectToOTPVerificationScreen(instituteId, userName, mobile_no, user_type, user_id);
-
+                    } else {
+                        Toast.makeText(ForgotPasswordActivity.this, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();
                     }
-
-
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<UpdateUserOTPAtForgetPasswordPojo>> call, Throwable t) {
+                public void onFailure(Call<UpdateUserOTPAtForgetPasswordPojo> call, Throwable t) {
                     DialogUtil.hideProgressDialog();
                     Toast.makeText(ForgotPasswordActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-
                 }
             });
 

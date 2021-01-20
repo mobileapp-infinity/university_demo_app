@@ -70,8 +70,6 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
         } else {
             tvEnteredMobileNo.setText("+91  - " + "xxxxxxxxxx");
         }
-
-
     }
 
     private void initView() {
@@ -125,8 +123,6 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                             Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
                             redirectToResetPasswordActivity(userId, institute_id, user_type);
                         }
-
-
                     } else {
                         Toast.makeText(VerifyOTPActivity.this, "Incorrect OTP,Please enter correct OTP.", Toast.LENGTH_SHORT).show();
                     }

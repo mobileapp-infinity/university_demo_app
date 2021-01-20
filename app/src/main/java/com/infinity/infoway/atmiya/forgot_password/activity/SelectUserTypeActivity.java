@@ -90,7 +90,6 @@ public class SelectUserTypeActivity extends AppCompatActivity implements View.On
         intent.putExtra(IntentConstants.FACULTY_OR_STUDENT, selectedUserType);
         intent.putExtra(IntentConstants.INSTITUTE_ID_FOR_FORGET_PASSWORD, instituteId);
         intent.putExtra(IntentConstants.IM_OTP_BASE_FORGET_PASSWORD, imOtpBasedForgotPassword);
-
         startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_FORGOT_PASSWORD);
     }
 

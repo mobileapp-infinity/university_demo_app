@@ -185,7 +185,7 @@ public class LoginActivity extends AppCompatActivity implements
                             }
                             redirectToStudentDashboard();
                         } else {
-                            checkEmployeeLoginCheckApiCall(false, true, userName, password);
+                             checkEmployeeLoginCheckApiCall(false, true, userName, password);
                         }
                     } else {
                         DialogUtil.hideProgressDialog();

@@ -921,24 +921,38 @@ public class ApiImplementer {
         call.enqueue(cb);
     }
 
-    public static void updateUserOTPAtForgetPasswordAPIImplementer(String user_type, String user_id, String otp, String ip_addr, Callback<ArrayList<UpdateUserOTPAtForgetPasswordPojo>> cb) {
+    public static void updateUserOTPAtForgetPasswordAPIImplementer(String user_type, String user_id, String otp, String ip_addr, Callback<UpdateUserOTPAtForgetPasswordPojo> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<ArrayList<UpdateUserOTPAtForgetPasswordPojo>> call = apiInterface.updateUserOTPAtForgetPasswordAPI(user_type, user_id, otp, ip_addr);
+        Call<UpdateUserOTPAtForgetPasswordPojo> call = apiInterface.updateUserOTPAtForgetPasswordAPI(user_type, user_id, otp, ip_addr);
+        call.enqueue(cb);
+    }
+
+
+    public static void checkLoginByOTPAndUsernameAPIImplementer(String user_type,
+                                                                String username,
+                                                                String otp,
+                                                                String institute_id,
+                                                                String ip_addr,
+                                                                Callback<CheckLoginByOTPAndUsernamePojo> cb) {
+        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+        Call<CheckLoginByOTPAndUsernamePojo> call = apiInterface.checkLoginByOTPAndUsernameAPI(
+                user_type,
+                username,
+                otp,
+                institute_id,
+                ip_addr);
         call.enqueue(cb);
 
     }
 
-
-    public static void checkLoginByOTPAndUsernameAPIImplementer(String user_type, String user_name, String institute_id, String otp, String ip_addr, Callback<CheckLoginByOTPAndUsernamePojo> cb) {
+    public static void resetUserPasswordAPIImplementer(String user_type,
+                                                       String user_id,
+                                                       String institute_id,
+                                                       String password,
+                                                       String ip_addr,
+                                                       Callback<ResetUserPasswordPojo> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<CheckLoginByOTPAndUsernamePojo> call = apiInterface.checkLoginByOTPAndUsernameAPI(user_type, user_name, institute_id, otp, ip_addr);
-        call.enqueue(cb);
-
-    }
-
-    public static void resetUserPasswordAPIImplementer(String user_type, String user_id, String institute_id, String password, String ip_addr, Callback<ArrayList<ResetUserPasswordPojo>> cb) {
-        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<ArrayList<ResetUserPasswordPojo>> call = apiInterface.resetUserPasswordAPI(user_type, user_id, institute_id, password, ip_addr);
+        Call<ResetUserPasswordPojo> call = apiInterface.resetUserPasswordAPI(user_type, user_id, institute_id, password, ip_addr);
         call.enqueue(cb);
 
     }

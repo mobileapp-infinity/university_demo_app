@@ -82,8 +82,6 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
             if (isValid()) {
                 CommonUtil.hideKeyboardCommon(ResetPasswordActivity.this);
                 resetUserPasswordAPI(userType, userId, instituteId, edtConfirmPassword.getText().toString().trim(), "1");
-
-
             }
         }
     }
@@ -114,12 +112,12 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     private void resetUserPasswordAPI(String user_type, String user_id, String institute_id, String password, String ip_addr) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(ResetPasswordActivity.this, "");
-            ApiImplementer.resetUserPasswordAPIImplementer(user_type, user_id, institute_id, password, ip_addr, new Callback<ArrayList<ResetUserPasswordPojo>>() {
+            ApiImplementer.resetUserPasswordAPIImplementer(user_type, user_id, institute_id, password, ip_addr, new Callback<ResetUserPasswordPojo>() {
                 @Override
-                public void onResponse(Call<ArrayList<ResetUserPasswordPojo>> call, Response<ArrayList<ResetUserPasswordPojo>> response) {
+                public void onResponse(Call<ResetUserPasswordPojo> call, Response<ResetUserPasswordPojo> response) {
                     DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null &&
-                            response.body().get(0).getErrorCode().equals("1")) {
+                            response.body().getTable().get(0).getErrorCode().equals("1")) {
                         Toast.makeText(ResetPasswordActivity.this, "Password reset successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ResetPasswordActivity.this, VerifyOTPActivity.class);
 
@@ -134,7 +132,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<ResetUserPasswordPojo>> call, Throwable t) {
+                public void onFailure(Call<ResetUserPasswordPojo> call, Throwable t) {
                     DialogUtil.hideProgressDialog();
                     Toast.makeText(ResetPasswordActivity.this, "Request failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }

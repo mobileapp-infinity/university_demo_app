@@ -19,50 +19,50 @@ import java.util.ArrayList;
 
 public class RegisterStudentListIfOTPBasedVerificationBottomSheet extends BottomSheetDialogFragment {
 
-    ForgotPasswordActivity context;
-    RecyclerView rvRegisterStudentListIfOtpBasedLogin;
-    ArrayList<OtpBaseLoginDetailsForStudentPojo.TableBean> tableBeanArrayList;
-    GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo;
-    String instituteId = "";
-
-    RegisterStudentListIfOTPBasedVerificationBottomSheet() {
-
-    }
-
-    RegisterStudentListIfOTPBasedVerificationBottomSheet(Context context,
-                                                         ArrayList<OtpBaseLoginDetailsForStudentPojo.TableBean> tableBeanArrayList,
-                                                         String instituteId) {
-        this.context = (ForgotPasswordActivity) context;
-        this.tableBeanArrayList = tableBeanArrayList;
-        this.instituteId = instituteId;
-    }
-
-    RegisterStudentListIfOTPBasedVerificationBottomSheet(Context context,
-                                                         GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo,
-                                                         String instituteId) {
-        this.context = (ForgotPasswordActivity) context;
-        this.getUserWiseDetailForgetPasswordPojo = getUserWiseDetailForgetPasswordPojo;
-        this.instituteId = instituteId;
-    }
-
-    @Override
-    public int getTheme() {
-        return R.style.CustomBottomSheetDialog;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable
-            ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_for_registered_student_list_if_otp_based_verification_bottom_sheet,
-                container, false);
-        initView(view);
-        return view;
-    }
-
-    private void initView(View view) {
-        rvRegisterStudentListIfOtpBasedLogin = view.findViewById(R.id.rvRegisterStudentListIfOtpBasedLogin);
-        RegisterStudentListIfOTPBasedVerificationAdapter registerStudentListAdapter = new RegisterStudentListIfOTPBasedVerificationAdapter(context, tableBeanArrayList,instituteId);
-        rvRegisterStudentListIfOtpBasedLogin.setAdapter(registerStudentListAdapter);
-    }
+//    ForgotPasswordActivity context;
+//    RecyclerView rvRegisterStudentListIfOtpBasedLogin;
+//    ArrayList<OtpBaseLoginDetailsForStudentPojo.TableBean> tableBeanArrayList;
+//    GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo;
+//    String instituteId = "";
+//
+//    RegisterStudentListIfOTPBasedVerificationBottomSheet() {
+//
+//    }
+//
+//    RegisterStudentListIfOTPBasedVerificationBottomSheet(Context context,
+//                                                         ArrayList<OtpBaseLoginDetailsForStudentPojo.TableBean> tableBeanArrayList,
+//                                                         String instituteId) {
+//        this.context = (ForgotPasswordActivity) context;
+//        this.tableBeanArrayList = tableBeanArrayList;
+//        this.instituteId = instituteId;
+//    }
+//
+//    RegisterStudentListIfOTPBasedVerificationBottomSheet(Context context,
+//                                                         GetUserWiseDetailForgetPasswordPojo getUserWiseDetailForgetPasswordPojo,
+//                                                         String instituteId) {
+//        this.context = (ForgotPasswordActivity) context;
+//        this.getUserWiseDetailForgetPasswordPojo = getUserWiseDetailForgetPasswordPojo;
+//        this.instituteId = instituteId;
+//    }
+//
+//    @Override
+//    public int getTheme() {
+//        return R.style.CustomBottomSheetDialog;
+//    }
+//
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, @Nullable
+//            ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.layout_for_registered_student_list_if_otp_based_verification_bottom_sheet,
+//                container, false);
+//        initView(view);
+//        return view;
+//    }
+//
+//    private void initView(View view) {
+//        rvRegisterStudentListIfOtpBasedLogin = view.findViewById(R.id.rvRegisterStudentListIfOtpBasedLogin);
+//        RegisterStudentListIfOTPBasedVerificationAdapter registerStudentListAdapter = new RegisterStudentListIfOTPBasedVerificationAdapter(context, tableBeanArrayList,instituteId);
+//        rvRegisterStudentListIfOtpBasedLogin.setAdapter(registerStudentListAdapter);
+//    }
 
 }

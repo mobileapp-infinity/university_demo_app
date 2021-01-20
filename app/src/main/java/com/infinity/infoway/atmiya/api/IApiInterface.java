@@ -741,20 +741,26 @@ public interface IApiInterface {
 
 
     @GET("Update_User_OTP_At_Forget_Password_API")
-    Call<ArrayList<UpdateUserOTPAtForgetPasswordPojo>> updateUserOTPAtForgetPasswordAPI(
+    Call<UpdateUserOTPAtForgetPasswordPojo> updateUserOTPAtForgetPasswordAPI(
             @Query("user_type") String user_type, @Query("user_id") String user_id,
             @Query("otp") String otp, @Query("ip_addr") String ip_addr);
 
 
     @GET("Check_Login_By_OTP_and_Username_API")
     Call<CheckLoginByOTPAndUsernamePojo> checkLoginByOTPAndUsernameAPI(
-            @Query("user_type") String user_type, @Query("username") String username,
-            @Query("otp") String otp, @Query("institute_id") String institute_id, @Query("ip_addr") String ip_addr);
+            @Query("user_type") String user_type,
+            @Query("username") String username,
+            @Query("otp") String otp,
+            @Query("institute_id") String institute_id,
+            @Query("ip_addr") String ip_addr);
 
 
     @GET("Reset_User_Password_API")
-    Call<ArrayList<ResetUserPasswordPojo>> resetUserPasswordAPI(
-            @Query("user_type") String user_type, @Query("user_id") String user_id,
-            @Query("institute_id") String institute_id, @Query("password") String password, @Query("ip_addr") String ip_addr);
+    Call<ResetUserPasswordPojo> resetUserPasswordAPI(
+            @Query("user_type") String user_type,
+            @Query("user_id") String user_id,
+            @Query("institute_id") String institute_id,
+            @Query("password") String password,
+            @Query("ip_addr") String ip_addr);
 
 }
