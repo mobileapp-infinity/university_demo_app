@@ -40,20 +40,20 @@ public class FacultyLeaveAdapter extends RecyclerView.Adapter<FacultyLeaveAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         FacultyLeavePojo facultyLeavePojo = facultyLeavePojoArrayList.get(position);
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyLeavePojo.getLeave_Name())) {
-            holder.tvLeaveTypeFaculty.setText(facultyLeavePojo.getLeave_Name() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyLeavePojo.getLeaveName())) {
+            holder.tvLeaveTypeFaculty.setText(facultyLeavePojo.getLeaveName() + "");
         }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyLeavePojo.getLeave_Day())) {
-            holder.tvLeaveDaysFaculty.setText(facultyLeavePojo.getLeave_Day() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyLeavePojo.getLeaveDay())) {
+            holder.tvLeaveDaysFaculty.setText(facultyLeavePojo.getLeaveDay() + "");
         }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyLeavePojo.getLeave_Taken())) {
-            holder.tvTakenLeaveFaculty.setText(facultyLeavePojo.getLeave_Taken() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyLeavePojo.getLeaveTaken())) {
+            holder.tvTakenLeaveFaculty.setText(facultyLeavePojo.getLeaveTaken() + "");
         }
 
-        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyLeavePojo.getLeave_Balance())) {
-            holder.tvBalanceLeaveFaculty.setText(facultyLeavePojo.getLeave_Balance() + "");
+        if (!CommonUtil.checkIsEmptyOrNullCommon(facultyLeavePojo.getLeaveBalance())) {
+            holder.tvBalanceLeaveFaculty.setText(facultyLeavePojo.getLeaveBalance() + "");
         }
 
         holder.llExpandedHeaderFaculty.setOnClickListener(new View.OnClickListener() {

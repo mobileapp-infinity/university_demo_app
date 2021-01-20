@@ -1,5 +1,6 @@
 package com.infinity.infoway.atmiya.faculty.faculty_leave;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class FacultyLeavePojo {
@@ -16,38 +17,58 @@ public class FacultyLeavePojo {
     }
 
     @SerializedName("Contact_ID")
-    public String Contact_ID;
-
-    public String getContact_ID() {
-        return Contact_ID;
-    }
-
+    @Expose
+    private Integer contactID;
     @SerializedName("Leave_Name")
-    public String Leave_Name;
-
-    public String getLeave_Name() {
-        return Leave_Name;
-    }
-
+    @Expose
+    private String leaveName;
     @SerializedName("Leave_Day")
-    public String Leave_Day;
-
-    public String getLeave_Day() {
-        return Leave_Day;
-    }
-
+    @Expose
+    private Integer leaveDay;
     @SerializedName("Leave_Balance")
-    public String Leave_Balance;
-
-    public String getLeave_Balance() {
-        return Leave_Balance;
-    }
-
+    @Expose
+    private Integer leaveBalance;
     @SerializedName("Leave_Taken")
-    public String Leave_Taken;
+    @Expose
+    private Integer leaveTaken;
 
-    public String getLeave_Taken() {
-        return Leave_Taken;
+    public Integer getContactID() {
+        return contactID;
     }
 
+    public void setContactID(Integer contactID) {
+        this.contactID = contactID;
+    }
+
+    public String getLeaveName() {
+        return leaveName;
+    }
+
+    public void setLeaveName(String leaveName) {
+        this.leaveName = leaveName;
+    }
+
+    public Integer getLeaveDay() {
+        return leaveDay;
+    }
+
+    public void setLeaveDay(Integer leaveDay) {
+        this.leaveDay = leaveDay;
+    }
+
+    public Integer getLeaveBalance() {
+        return leaveBalance;
+    }
+
+    public void setLeaveBalance(Integer leaveBalance) {
+        this.leaveBalance = leaveBalance;
+    }
+
+    public Integer getLeaveTaken() {
+        return leaveTaken;
+    }
+
+    public void setLeaveTaken(Integer leaveTaken) {
+        this.leaveTaken = leaveTaken;
+    }
 }
