@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -146,6 +148,8 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.llLogin) {
+//            final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
+//            llLogin.startAnimation(animation);
             if (isValid()) {
                 CommonUtil.hideKeyboardCommon(LoginActivity.this);
                 checkStudentLoginCheckApiCall(edtLoginUserName.getText().toString().trim(), edtLoginUserPassword.getText().toString().trim());

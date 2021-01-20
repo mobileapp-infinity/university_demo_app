@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -247,8 +248,16 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
                 Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
             }
         } else if (v.getId() == R.id.btnViewAllStudentSide) {
+//            final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
+//            btnViewAllStudentSide.startAnimation(animation);
+
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
             Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationStudentActivity.class);
             startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
+//                }
+//            }, 400);
         } else if (v.getId() == R.id.flNotification) {
             Intent intent = new Intent(StudentDashboardActivity.this, ViewAllNewsOrNotificationStudentActivity.class);
             startActivityForResult(intent, IntentConstants.REQUEST_CODE_FOR_VIEW_ALL_NEWS_OR_NOTIFICATION);
