@@ -92,7 +92,7 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
             if (!CommonUtil.checkIsEmptyOrNullCommon(otpText) &&
                     otpText.length() == 6) {
                 //new Call
-                checkLoginByOTPAndUsernameAPI(userId, userType, userName, instituteId, otpText, "1");
+                checkLoginByOTPAndUsernameAPI(userType, userName, otpText, instituteId, "1");
 
             } else {
                 Toast.makeText(this, "Please enter 6 digit OTP.", Toast.LENGTH_SHORT).show();
@@ -105,10 +105,10 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
         super.onBackPressed();
     }
 
-    private void checkLoginByOTPAndUsernameAPI(String userId, String user_type, String user_name, String institute_id, String otp, String ip_addr) {
+    private void checkLoginByOTPAndUsernameAPI(String user_type, String username, String otp, String institute_id, String ip_addr) {
         if (connectionDetector.isConnectingToInternet()) {
             DialogUtil.showProgressDialogNotCancelable(VerifyOTPActivity.this, "");
-            ApiImplementer.checkLoginByOTPAndUsernameAPIImplementer(user_type, user_name, institute_id, otp, ip_addr, new Callback<CheckLoginByOTPAndUsernamePojo>() {
+            ApiImplementer.checkLoginByOTPAndUsernameAPIImplementer(user_type, username, otp, institute_id, ip_addr, new Callback<CheckLoginByOTPAndUsernamePojo>() {
                 @Override
                 public void onResponse(Call<CheckLoginByOTPAndUsernamePojo> call, Response<CheckLoginByOTPAndUsernamePojo> response) {
                     DialogUtil.hideProgressDialog();
