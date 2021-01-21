@@ -117,7 +117,9 @@
         <activity
             android:name=".student.fee_details.activity.AxisAndHdfcPaymentWebViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".forgot_password.activity.ResetPasswordActivity" />
+        <activity
+            android:name=".forgot_password.activity.ResetPasswordActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".forgot_password.activity.VerifyOTPActivity"
             android:screenOrientation="portrait" />
