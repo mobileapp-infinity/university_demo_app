@@ -66,7 +66,7 @@ public class SelectUserTypeActivity extends AppCompatActivity implements View.On
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    redirectToForgotPasswordActivity(CommonUtil.SELECTED_USER_TYPE_FACULTY);
+                    redirectToForgotPasswordActivity(CommonUtil.LOGIN_TYPE_FACULTY);
                 }
             }, 50);
         } else if (v.getId() == R.id.llIAmAStudent) {
@@ -75,7 +75,7 @@ public class SelectUserTypeActivity extends AppCompatActivity implements View.On
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    redirectToForgotPasswordActivity(CommonUtil.SELECTED_USER_TYPE_STUDENT);
+                    redirectToForgotPasswordActivity(CommonUtil.LOGIN_TYPE_STUDENT);
                 }
             }, 50);
         } else if (v.getId() == R.id.ivCloseForSelectYourRole) {

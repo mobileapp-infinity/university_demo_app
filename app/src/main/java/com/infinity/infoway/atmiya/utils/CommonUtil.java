@@ -27,9 +27,6 @@ public class CommonUtil {
     public static final int LOGIN_TYPE_FACULTY = 1;
     public static final int LOGIN_TYPE_STUDENT = 2;
 
-    public static final int SELECTED_USER_TYPE_FACULTY = 1;
-    public static final int SELECTED_USER_TYPE_STUDENT = 2;
-
     public static final int ROW_PER_PAGE = 25;
     public static final String FOLDER_NAME = "Atmiya";
 

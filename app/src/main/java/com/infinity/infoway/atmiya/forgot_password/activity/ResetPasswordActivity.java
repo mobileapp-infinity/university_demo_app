@@ -118,13 +118,12 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                     DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null &&
                             response.body().getTable().get(0).getErrorCode().equals("1")) {
+                        mySharedPreferences.logoutStudentOrFaulty();
                         Toast.makeText(ResetPasswordActivity.this, "Password reset successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ResetPasswordActivity.this, VerifyOTPActivity.class);
-
                         intent.putExtra(IntentConstants.IS_OTP_VERIFIED_AND_RESENT_PASS, true);
                         setResult(Activity.RESULT_OK, intent);
                         finish();
-
                     } else {
                         DialogUtil.hideProgressDialog();
                         Toast.makeText(ResetPasswordActivity.this, "Something went wrong,Please try again later.", Toast.LENGTH_SHORT).show();

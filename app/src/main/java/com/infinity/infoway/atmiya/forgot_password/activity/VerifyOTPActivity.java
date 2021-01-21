@@ -112,11 +112,11 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                     DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
                         CheckLoginByOTPAndUsernamePojo checkLoginByOTPAndUsernamePojo = response.body();
-                        if (userType.compareToIgnoreCase(String.valueOf(CommonUtil.SELECTED_USER_TYPE_FACULTY)) == 0) {
+                        if (userType.trim().equals(String.valueOf(CommonUtil.LOGIN_TYPE_STUDENT))) {
                             setStudentLoginData(checkLoginByOTPAndUsernamePojo.getTable().get(0));
                             Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
                             redirectToResetPasswordActivity(userId, institute_id, user_type);
-                        } else if (userType.compareToIgnoreCase(String.valueOf(CommonUtil.SELECTED_USER_TYPE_STUDENT)) == 0) {
+                        } else if (userType.trim().equals(String.valueOf(CommonUtil.LOGIN_TYPE_FACULTY))) {
                             setEmployeeLoginData(checkLoginByOTPAndUsernamePojo.getTable().get(0));
                             Toast.makeText(VerifyOTPActivity.this, "OTP verified Successfully ", Toast.LENGTH_SHORT).show();
                             redirectToResetPasswordActivity(userId, institute_id, user_type);
