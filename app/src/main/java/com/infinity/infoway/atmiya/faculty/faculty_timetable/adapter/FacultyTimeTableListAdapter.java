@@ -63,6 +63,9 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
             } else if (position == facultyLectureDetailsArrayList.size() - 1) {
                 holder.tvStart.setVisibility(View.GONE);
                 holder.tvEnd.setVisibility(View.VISIBLE);
+            } else {
+                holder.tvStart.setVisibility(View.GONE);
+                holder.tvEnd.setVisibility(View.GONE);
             }
 
             if (inoutArray1.getLectName().contains("RECESS")) {
@@ -156,76 +159,76 @@ public class FacultyTimeTableListAdapter extends RecyclerView.Adapter<FacultyTim
         }
     }
 
-    private void mergingLogic(FacultyTimeTablePojo.InoutArray1 inoutArray1,
-                              FacultyTimeTableListAdapter.MyViewHolder holder) {
-        holder.llFacultyMergingDynamicLayout.removeAllViewsInLayout();
-        //merging logic
-        try {
-            for (int i = 0; i < inoutArray1.getInputArray().size(); i++) {
-
-                LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View mergingView = inflaterForMergingLayout.inflate(R.layout.faculty_time_table_merging_layout, null);
-
-                TextViewRegularFont tvSemFacultyMergingLayout = mergingView.findViewById(R.id.tvSemFacultyMergingLayout);
-                TextViewRegularFont tvFacultySubjectNameMergingLayout = mergingView.findViewById(R.id.tvFacultySubjectNameMergingLayout);
-                TextViewRegularFont tvFacultyLectureStartAndEnTimeMergingLayout = mergingView.findViewById(R.id.tvFacultyLectureStartAndEnTimeMergingLayout);
-                TextViewRegularFont tvFacultyRoomNoMergingLayout = mergingView.findViewById(R.id.tvFacultyRoomNoMergingLayout);
-                View lineStudentTimetableMergingLayout = mergingView.findViewById(R.id.lineStudentTimetableMergingLayout);
-
-                if (i == (inoutArray1.getInputArray().size() - 1)) {
-                    lineStudentTimetableMergingLayout.setVisibility(View.GONE);
-                }
-
-                FacultyTimeTablePojo.InputArray test = inoutArray1.getInputArray().get(i);
-
-                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getSmName())) {
-
-                    String semAndDiv = test.getSmName();
-
-                    if (test.getSmName().contains("-")) {
-                        semAndDiv = test.getSmName().split("-")[1];
-                    }
-
-                    if (!CommonUtil.checkIsEmptyOrNullCommon(test.getDvmName())) {
-                        semAndDiv += " (" + test.getDvmName() + ") ";
-                    }
-
-
-                    tvSemFacultyMergingLayout.setText(semAndDiv);
-                } else {
-                    tvSemFacultyMergingLayout.setText("-");
-                }
-
-                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getSubShortName())) {
-                    tvFacultySubjectNameMergingLayout.setText(test.getSubShortName());
-                } else {
-                    tvFacultySubjectNameMergingLayout.setText("-");
-                }
-
-                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getLectStTime())) {
-                    String lecStartAndEndTime = test.getLectStTime().trim();
-
-                    if (!CommonUtil.checkIsEmptyOrNullCommon(test.getLectEndTime())) {
-                        lecStartAndEndTime += " to " + test.getLectEndTime();
-                    }
-                    tvFacultyLectureStartAndEnTimeMergingLayout.setText(lecStartAndEndTime);
-
-                }
-
-                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getRmName())) {
-                    tvFacultyRoomNoMergingLayout.setText(test.getRmName() + "");
-                } else {
-                    tvFacultyRoomNoMergingLayout.setText("-");
-                }
-
-                holder.llFacultyMergingDynamicLayout.addView(mergingView);
-
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+//    private void mergingLogic(FacultyTimeTablePojo.InoutArray1 inoutArray1,
+//                              FacultyTimeTableListAdapter.MyViewHolder holder) {
+//        holder.llFacultyMergingDynamicLayout.removeAllViewsInLayout();
+//        //merging logic
+//        try {
+//            for (int i = 0; i < inoutArray1.getInputArray().size(); i++) {
+//
+//                LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
+//                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                View mergingView = inflaterForMergingLayout.inflate(R.layout.faculty_time_table_merging_layout, null);
+//
+//                TextViewRegularFont tvSemFacultyMergingLayout = mergingView.findViewById(R.id.tvSemFacultyMergingLayout);
+//                TextViewRegularFont tvFacultySubjectNameMergingLayout = mergingView.findViewById(R.id.tvFacultySubjectNameMergingLayout);
+//                TextViewRegularFont tvFacultyLectureStartAndEnTimeMergingLayout = mergingView.findViewById(R.id.tvFacultyLectureStartAndEnTimeMergingLayout);
+//                TextViewRegularFont tvFacultyRoomNoMergingLayout = mergingView.findViewById(R.id.tvFacultyRoomNoMergingLayout);
+//                View lineStudentTimetableMergingLayout = mergingView.findViewById(R.id.lineStudentTimetableMergingLayout);
+//
+//                if (i == (inoutArray1.getInputArray().size() - 1)) {
+//                    lineStudentTimetableMergingLayout.setVisibility(View.GONE);
+//                }
+//
+//                FacultyTimeTablePojo.InputArray test = inoutArray1.getInputArray().get(i);
+//
+//                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getSmName())) {
+//
+//                    String semAndDiv = test.getSmName();
+//
+//                    if (test.getSmName().contains("-")) {
+//                        semAndDiv = test.getSmName().split("-")[1];
+//                    }
+//
+//                    if (!CommonUtil.checkIsEmptyOrNullCommon(test.getDvmName())) {
+//                        semAndDiv += " (" + test.getDvmName() + ") ";
+//                    }
+//
+//
+//                    tvSemFacultyMergingLayout.setText(semAndDiv);
+//                } else {
+//                    tvSemFacultyMergingLayout.setText("-");
+//                }
+//
+//                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getSubShortName())) {
+//                    tvFacultySubjectNameMergingLayout.setText(test.getSubShortName());
+//                } else {
+//                    tvFacultySubjectNameMergingLayout.setText("-");
+//                }
+//
+//                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getLectStTime())) {
+//                    String lecStartAndEndTime = test.getLectStTime().trim();
+//
+//                    if (!CommonUtil.checkIsEmptyOrNullCommon(test.getLectEndTime())) {
+//                        lecStartAndEndTime += " to " + test.getLectEndTime();
+//                    }
+//                    tvFacultyLectureStartAndEnTimeMergingLayout.setText(lecStartAndEndTime);
+//
+//                }
+//
+//                if (!CommonUtil.checkIsEmptyOrNullCommon(test.getRmName())) {
+//                    tvFacultyRoomNoMergingLayout.setText(test.getRmName() + "");
+//                } else {
+//                    tvFacultyRoomNoMergingLayout.setText("-");
+//                }
+//
+//                holder.llFacultyMergingDynamicLayout.addView(mergingView);
+//
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
 
     @Override
     public int getItemCount() {

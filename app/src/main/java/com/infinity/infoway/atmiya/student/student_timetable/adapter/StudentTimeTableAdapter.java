@@ -132,65 +132,65 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
         }
     }
 
-    private void mergingLogic(StudentTimeTablePojo.InoutArray1 inoutArray1, int position,
-                              MyViewHolder holder) {
-        //merging logic
-
-        if (inoutArray1.getLabArray() != null && inoutArray1.getLabArray().size() > 0 &&
-                CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getLectName())) {
-
-            try {
-                String lectNo = "";
-                if (inoutArray1.getLabArray().get(0).getLectName().contains("-")) {
-                    lectNo = inoutArray1.getLabArray().get(0).getLectName().split("-")[1];
-                    lectNo += "/" + (Integer.parseInt(lectNo.trim()) + 1);
-                }
-                holder.tvStudentLectureNoIndex.setText(lectNo);
-
-            } catch (Exception ex) {
-
-            }
-
-            for (int i = 0; i < inoutArray1.getLabArray().size(); i++) {
-
-                LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View mergingView = inflaterForMergingLayout.inflate(R.layout.student_time_table_merging_layout, null);
-
-                TextViewRegularFont tvStudentBatchMergingLayout = mergingView.findViewById(R.id.tvStudentBatchMergingLayout);
-                TextViewRegularFont tvStudentFacultyNameMergingLayout = mergingView.findViewById(R.id.tvStudentFacultyNameMergingLayout);
-                TextViewRegularFont tvStudentSubjectNameMergingLayout = mergingView.findViewById(R.id.tvStudentSubjectNameMergingLayout);
-                TextViewRegularFont tvStudentClassRoomMergingLayout = mergingView.findViewById(R.id.tvStudentClassRoomMergingLayout);
-                View lineStudentTimetableMergingLayout = mergingView.findViewById(R.id.lineStudentTimetableMergingLayout);
-
-                if (i == (inoutArray1.getLabArray().size() - 1)) {
-                    lineStudentTimetableMergingLayout.setVisibility(View.GONE);
-                }
-
-                StudentTimeTablePojo.LabArray labArray = inoutArray1.getLabArray().get(i);
-
-                if (!CommonUtil.checkIsEmptyOrNullCommon(labArray.getDvmName())) {
-                    tvStudentBatchMergingLayout.setText("Batch :- " + labArray.getDvmName() + "");
-                }
-
-                if (!CommonUtil.checkIsEmptyOrNullCommon(labArray.getEmpName())) {
-                    tvStudentFacultyNameMergingLayout.setText(labArray.getEmpName() + "");
-                }
-
-                if (!CommonUtil.checkIsEmptyOrNullCommon(labArray.getSubShortName())) {
-                    tvStudentSubjectNameMergingLayout.setText(labArray.getSubShortName() + "");
-                }
-
-                if (!CommonUtil.checkIsEmptyOrNullCommon(labArray.getRmName())) {
-                    tvStudentClassRoomMergingLayout.setText(labArray.getRmName() + "");
-                }
-
-                holder.llMergingDynamicLayout.addView(mergingView);
-
-            }
-
-        }
-    }
+//    private void mergingLogic(StudentTimeTablePojo.InoutArray1 inoutArray1, int position,
+//                              MyViewHolder holder) {
+//        //merging logic
+//
+//        if (inoutArray1.getLabArray() != null && inoutArray1.getLabArray().size() > 0 &&
+//                CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getLectName())) {
+//
+//            try {
+//                String lectNo = "";
+//                if (inoutArray1.getLabArray().get(0).getLectName().contains("-")) {
+//                    lectNo = inoutArray1.getLabArray().get(0).getLectName().split("-")[1];
+//                    lectNo += "/" + (Integer.parseInt(lectNo.trim()) + 1);
+//                }
+//                holder.tvStudentLectureNoIndex.setText(lectNo);
+//
+//            } catch (Exception ex) {
+//
+//            }
+//
+//            for (int i = 0; i < inoutArray1.getLabArray().size(); i++) {
+//
+//                LayoutInflater inflaterForMergingLayout = (LayoutInflater) context
+//                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                View mergingView = inflaterForMergingLayout.inflate(R.layout.student_time_table_merging_layout, null);
+//
+//                TextViewRegularFont tvStudentBatchMergingLayout = mergingView.findViewById(R.id.tvStudentBatchMergingLayout);
+//                TextViewRegularFont tvStudentFacultyNameMergingLayout = mergingView.findViewById(R.id.tvStudentFacultyNameMergingLayout);
+//                TextViewRegularFont tvStudentSubjectNameMergingLayout = mergingView.findViewById(R.id.tvStudentSubjectNameMergingLayout);
+//                TextViewRegularFont tvStudentClassRoomMergingLayout = mergingView.findViewById(R.id.tvStudentClassRoomMergingLayout);
+//                View lineStudentTimetableMergingLayout = mergingView.findViewById(R.id.lineStudentTimetableMergingLayout);
+//
+//                if (i == (inoutArray1.getLabArray().size() - 1)) {
+//                    lineStudentTimetableMergingLayout.setVisibility(View.GONE);
+//                }
+//
+//                StudentTimeTablePojo.LabArray labArray = inoutArray1.getLabArray().get(i);
+//
+//                if (!CommonUtil.checkIsEmptyOrNullCommon(labArray.getDvmName())) {
+//                    tvStudentBatchMergingLayout.setText("Batch :- " + labArray.getDvmName() + "");
+//                }
+//
+//                if (!CommonUtil.checkIsEmptyOrNullCommon(labArray.getEmpName())) {
+//                    tvStudentFacultyNameMergingLayout.setText(labArray.getEmpName() + "");
+//                }
+//
+//                if (!CommonUtil.checkIsEmptyOrNullCommon(labArray.getSubShortName())) {
+//                    tvStudentSubjectNameMergingLayout.setText(labArray.getSubShortName() + "");
+//                }
+//
+//                if (!CommonUtil.checkIsEmptyOrNullCommon(labArray.getRmName())) {
+//                    tvStudentClassRoomMergingLayout.setText(labArray.getRmName() + "");
+//                }
+//
+//                holder.llMergingDynamicLayout.addView(mergingView);
+//
+//            }
+//
+//        }
+//    }
 
 
     @Override

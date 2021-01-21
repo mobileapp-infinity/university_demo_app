@@ -47,6 +47,9 @@ public class StudentHomeWorkListAdapter extends RecyclerView.Adapter<StudentHome
         } else if (position == studentHomeWorkPojoArrayList.size() - 1) {
             holder.tvEnd.setVisibility(View.VISIBLE);
             holder.tvStart.setVisibility(View.GONE);
+        } else {
+            holder.tvEnd.setVisibility(View.GONE);
+            holder.tvStart.setVisibility(View.GONE);
         }
 
         String lectureNoForIndex = "-";
