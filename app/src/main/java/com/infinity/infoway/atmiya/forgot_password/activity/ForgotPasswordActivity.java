@@ -329,102 +329,6 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         registerStudentListBottomSheetDialog.show(this.getSupportFragmentManager(), "Select Register Student");
     }
 
-//    private void getOTPBaseLoginDetailsForStudentApiCall(boolean isPdShow, boolean isPdHide, String mobileNo, String instituteId) {
-//        if (connectionDetector.isConnectingToInternet()) {
-//            if (isPdShow) {
-//                DialogUtil.showProgressDialogNotCancelable(ForgotPasswordActivity.this, "");
-//            }
-//            ApiImplementer.getOTPBaseLoginDetailsForStudentApiImplementer(mobileNo, instituteId, new Callback<OtpBaseLoginDetailsForStudentPojo>() {
-//                @Override
-//                public void onResponse(Call<OtpBaseLoginDetailsForStudentPojo> call, Response<OtpBaseLoginDetailsForStudentPojo> response) {
-//                    if (isPdHide) {
-//                        DialogUtil.hideProgressDialog();
-//                    }
-//                    if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
-//                        OtpBaseLoginDetailsForStudentPojo otpBaseLoginDetailsForStudentPojo = response.body();
-//                        if (!CommonUtil.checkIsEmptyOrNullCommon(otpBaseLoginDetailsForStudentPojo.getTable().get(0).getStudMobileNo())) {
-//                            if (otpBaseLoginDetailsForStudentPojo.getTable().size() > 1) {
-//                                DialogUtil.hideProgressDialog();
-//                                registerStudentListIfOTPBasedVerificationBottomSheet = new RegisterStudentListIfOTPBasedVerificationBottomSheet(ForgotPasswordActivity.this,
-//                                        (ArrayList<OtpBaseLoginDetailsForStudentPojo.TableBean>) otpBaseLoginDetailsForStudentPojo.getTable(), instituteId);
-//                                registerStudentListIfOTPBasedVerificationBottomSheet.show(ForgotPasswordActivity.this.getSupportFragmentManager(),
-//                                        "Select Register User If OTP Based Verification");
-//                            } else if (otpBaseLoginDetailsForStudentPojo.getTable().size() > 0) {
-//                                final String RANDOM_6_DIGIT_OTP = CommonUtil.getRandom6DigitOTP();
-//                                getSMSApiForApplicationApiCallIfLoginIsOTPBased(false, true, instituteId,
-//                                        RANDOM_6_DIGIT_OTP, otpBaseLoginDetailsForStudentPojo.getTable().get(0).getStudId().toString(),
-//                                        mobileNo, "0", "1", otpBaseLoginDetailsForStudentPojo.getTable().get(0).getStudUserName() + "");
-//                            }
-//                        } else {
-//                            DialogUtil.hideProgressDialog();
-//                            Toast.makeText(ForgotPasswordActivity.this, "Mobile no not registered.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    } else {
-//                        DialogUtil.hideProgressDialog();
-//                        Toast.makeText(ForgotPasswordActivity.this, "No User Found!", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<OtpBaseLoginDetailsForStudentPojo> call, Throwable t) {
-//                    DialogUtil.hideProgressDialog();
-//                    Toast.makeText(ForgotPasswordActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } else {
-//            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-//    private void getOTPBaseLoginDetailsForEmployeeApiCall(boolean isPdShow, boolean isPdHide, String mobileNo, String instituteId) {
-//        if (connectionDetector.isConnectingToInternet()) {
-//            if (isPdShow) {
-//                DialogUtil.showProgressDialogNotCancelable(ForgotPasswordActivity.this, "");
-//            }
-//            ApiImplementer.getOTPBaseLoginDetailsForEmployeeApiImplementer(mobileNo, instituteId, new Callback<OtpBaseLoginDetailsForEmployeePojo>() {
-//                @Override
-//                public void onResponse(Call<OtpBaseLoginDetailsForEmployeePojo> call, Response<OtpBaseLoginDetailsForEmployeePojo> response) {
-//                    if (isPdHide) {
-//                        DialogUtil.hideProgressDialog();
-//                    }
-//                    if (response.isSuccessful() && response.body() != null && response.body().getTable().size() > 0) {
-//                        OtpBaseLoginDetailsForEmployeePojo otpBaseLoginDetailsForEmployeePojo = response.body();
-//
-//                        if (!CommonUtil.checkIsEmptyOrNullCommon(otpBaseLoginDetailsForEmployeePojo.getTable().get(0).getEmpMobilePhone())) {
-//                            if (otpBaseLoginDetailsForEmployeePojo.getTable().size() > 1) {
-//                                //display list of employee
-//                                DialogUtil.hideProgressDialog();
-//                                registeredEmployeeListBottomSheetDialog = new RegisteredEmployeeListBottomSheetDialog(ForgotPasswordActivity.this,
-//                                        (ArrayList<OtpBaseLoginDetailsForEmployeePojo.TableBean>) otpBaseLoginDetailsForEmployeePojo.getTable(),
-//                                        instituteId);
-//                                registeredEmployeeListBottomSheetDialog.show(ForgotPasswordActivity.this.getSupportFragmentManager(), "Select Register Employee");
-//                            } else if (otpBaseLoginDetailsForEmployeePojo.getTable().size() > 0) {
-//                                final String RANDOM_6_DIGIT_OTP = CommonUtil.getRandom6DigitOTP();
-//                                getSMSApiForApplicationApiCallIfLoginIsOTPBased(false, true, instituteId, RANDOM_6_DIGIT_OTP, otpBaseLoginDetailsForEmployeePojo.getTable().get(0).getEmpId() + "",
-//                                        otpBaseLoginDetailsForEmployeePojo.getTable().get(0).getEmpMobilePhone() + "", "1", "0",
-//                                        otpBaseLoginDetailsForEmployeePojo.getTable().get(0).getEmpUsername() + "");
-//                            }
-//                        } else {
-//                            DialogUtil.hideProgressDialog();
-//                            Toast.makeText(ForgotPasswordActivity.this, "Mobile no not registered.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    } else {
-//                        getOTPBaseLoginDetailsForStudentApiCall(false, true, mobileNo, instituteId);
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<OtpBaseLoginDetailsForEmployeePojo> call, Throwable t) {
-//                    DialogUtil.hideProgressDialog();
-//                    Toast.makeText(ForgotPasswordActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } else {
-//            Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-
     @Override
     public void onRegisterEmployeeSelected(GetUserWiseDetailForgetPasswordPojo.TableBean tableBean, String instituteId) {
         registeredEmployeeListBottomSheetDialog.dismiss();
@@ -677,18 +581,18 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
 
     private void insertForgetPasswordSendSMSRecord(String sms, String user_id, String user_type, String mobile_no) {
         if (connectionDetector.isConnectingToInternet()) {
-            DialogUtil.showProgressDialogNotCancelable(ForgotPasswordActivity.this, "");
+//            DialogUtil.showProgressDialogNotCancelable(ForgotPasswordActivity.this, "");
             ApiImplementer.insertForgetPasswordSendSMSRecordImplementer(sms, user_id, user_type, mobile_no, "1", new Callback<InsertForgetPasswordSendSMSRecordPojo>() {
                 @Override
                 public void onResponse(Call<InsertForgetPasswordSendSMSRecordPojo> call, Response<InsertForgetPasswordSendSMSRecordPojo> response) {
-                    DialogUtil.hideProgressDialog();
+//                    DialogUtil.hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null && response.body().getTable().get(0).getErrorCode().equals("1")) {
                     }
                 }
 
                 @Override
                 public void onFailure(Call<InsertForgetPasswordSendSMSRecordPojo> call, Throwable t) {
-                    DialogUtil.hideProgressDialog();
+//                    DialogUtil.hideProgressDialog();
                 }
             });
 
