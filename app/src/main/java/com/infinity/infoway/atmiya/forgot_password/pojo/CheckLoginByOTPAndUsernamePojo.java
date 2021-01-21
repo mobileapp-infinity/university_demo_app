@@ -1,102 +1,412 @@
 package com.infinity.infoway.atmiya.forgot_password.pojo;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class CheckLoginByOTPAndUsernamePojo {
 
+    @SerializedName("Table")
+    @Expose
+    private List<Table> table = null;
 
-    private List<TableBean> Table;
-
-    public List<TableBean> getTable() {
-        return Table;
+    public List<Table> getTable() {
+        return table;
     }
 
-    public void setTable(List<TableBean> Table) {
-        this.Table = Table;
+    public void setTable(List<Table> table) {
+        this.table = table;
     }
 
-    public static class TableBean {
-        /**
-         * emp_id : 2270
-         * emp_number : 123456
-         * name : CMS Admin Infinity
-         * emp_main_school_id : 6
-         * college_code : 11
-         * college_name : Atmiya Institute of Technology & Science (MCA)
-         * ac_logo : 458afea2_3f9f_45d6_8ccb_acb765678fff.png
-         * stud_photo : https://cms.atmiya.edu.in/images/Emp_photo/2270.jpg
-         * status : 1
-         * is_director : 0
-         * emp_year_id : 5
-         * institute_id : 1
-         * im_domain_name : https://cms.atmiya.edu.in
-         * emp_user_status : 1
-         * emp_permenant_college : null
-         * emp_department_id : 4
-         * emp_username : infinitysupport@gmail.com
-         * emp_password : null
-         */
+    public class Table {
 
-        private int emp_id;
-        private String emp_number;
+        //for student response parameters
+        @SerializedName("ac_id")
+        @Expose
+        private Integer acId;
+        @SerializedName("stud_id")
+        @Expose
+        private Integer studId;
+        @SerializedName("dm_id")
+        @Expose
+        private Integer dmId;
+        @SerializedName("dm_full_name")
+        @Expose
+        private String dmFullName;
+        @SerializedName("course_id")
+        @Expose
+        private Integer courseId;
+        @SerializedName("course_fullname")
+        @Expose
+        private String courseFullname;
+        @SerializedName("sm_id")
+        @Expose
+        private Integer smId;
+        @SerializedName("sm_name")
+        @Expose
+        private String smName;
+        @SerializedName("swd_year_id")
+        @Expose
+        private Integer swdYearId;
+        @SerializedName("hostel_code")
+        @Expose
+        private String hostelCode;
+        @SerializedName("stud_admission_no")
+        @Expose
+        private String studAdmissionNo;
+        @SerializedName("Stud_Enrollment_no")
+        @Expose
+        private String studEnrollmentNo;
+        @SerializedName("swd_division_id")
+        @Expose
+        private Integer swdDivisionId;
+        @SerializedName("swd_batch_id")
+        @Expose
+        private Integer swdBatchId;
+        @SerializedName("shift_id")
+        @Expose
+        private Integer shiftId;
+        @SerializedName("fc_file")
+        @Expose
+        private String fcFile;
+        @SerializedName("Stud_user_name")
+        @Expose
+        private String studUserName;
+        @SerializedName("Stud_password")
+        @Expose
+        private String studPassword;
+        @SerializedName("im_exam_db_name")
+        @Expose
+        private String imExamDbName;
+
+        public String getImExamDbName() {
+            return imExamDbName;
+        }
+
+        public void setImExamDbName(String imExamDbName) {
+            this.imExamDbName = imExamDbName;
+        }
+
+        public Integer getAcId() {
+            return acId;
+        }
+
+        public void setAcId(Integer acId) {
+            this.acId = acId;
+        }
+
+        public Integer getStudId() {
+            return studId;
+        }
+
+        public void setStudId(Integer studId) {
+            this.studId = studId;
+        }
+
+        public Integer getDmId() {
+            return dmId;
+        }
+
+        public void setDmId(Integer dmId) {
+            this.dmId = dmId;
+        }
+
+        public String getDmFullName() {
+            return dmFullName;
+        }
+
+        public void setDmFullName(String dmFullName) {
+            this.dmFullName = dmFullName;
+        }
+
+        public Integer getCourseId() {
+            return courseId;
+        }
+
+        public void setCourseId(Integer courseId) {
+            this.courseId = courseId;
+        }
+
+        public String getCourseFullname() {
+            return courseFullname;
+        }
+
+        public void setCourseFullname(String courseFullname) {
+            this.courseFullname = courseFullname;
+        }
+
+        public Integer getSmId() {
+            return smId;
+        }
+
+        public void setSmId(Integer smId) {
+            this.smId = smId;
+        }
+
+        public String getSmName() {
+            return smName;
+        }
+
+        public void setSmName(String smName) {
+            this.smName = smName;
+        }
+
+        public Integer getSwdYearId() {
+            return swdYearId;
+        }
+
+        public void setSwdYearId(Integer swdYearId) {
+            this.swdYearId = swdYearId;
+        }
+
+        public String getHostelCode() {
+            return hostelCode;
+        }
+
+        public void setHostelCode(String hostelCode) {
+            this.hostelCode = hostelCode;
+        }
+
+        public String getStudAdmissionNo() {
+            return studAdmissionNo;
+        }
+
+        public void setStudAdmissionNo(String studAdmissionNo) {
+            this.studAdmissionNo = studAdmissionNo;
+        }
+
+        public String getStudEnrollmentNo() {
+            return studEnrollmentNo;
+        }
+
+        public void setStudEnrollmentNo(String studEnrollmentNo) {
+            this.studEnrollmentNo = studEnrollmentNo;
+        }
+
+        public Integer getSwdDivisionId() {
+            return swdDivisionId;
+        }
+
+        public void setSwdDivisionId(Integer swdDivisionId) {
+            this.swdDivisionId = swdDivisionId;
+        }
+
+        public Integer getSwdBatchId() {
+            return swdBatchId;
+        }
+
+        public void setSwdBatchId(Integer swdBatchId) {
+            this.swdBatchId = swdBatchId;
+        }
+
+        public Integer getShiftId() {
+            return shiftId;
+        }
+
+        public void setShiftId(Integer shiftId) {
+            this.shiftId = shiftId;
+        }
+
+        public String getFcFile() {
+            return fcFile;
+        }
+
+        public void setFcFile(String fcFile) {
+            this.fcFile = fcFile;
+        }
+
+        public String getStudUserName() {
+            return studUserName;
+        }
+
+        public void setStudUserName(String studUserName) {
+            this.studUserName = studUserName;
+        }
+
+        public String getStudPassword() {
+            return studPassword;
+        }
+
+        public void setStudPassword(String studPassword) {
+            this.studPassword = studPassword;
+        }
+
+
+        //for employee response parameters
+        @SerializedName("emp_id")
+        @Expose
+        private Integer empId;
+        @SerializedName("emp_number")
+        @Expose
+        private String empNumber;
+        @SerializedName("emp_main_school_id")
+        @Expose
+        private Integer empMainSchoolId;
+        @SerializedName("ac_logo")
+        @Expose
+        private String acLogo;
+        @SerializedName("is_director")
+        @Expose
+        private Integer isDirector;
+        @SerializedName("emp_year_id")
+        @Expose
+        private Integer empYearId;
+        @SerializedName("emp_user_status")
+        @Expose
+        private Integer empUserStatus;
+        @SerializedName("emp_permenant_college")
+        @Expose
+        private Object empPermenantCollege;
+        @SerializedName("emp_department_id")
+        @Expose
+        private Integer empDepartmentId;
+        @SerializedName("emp_username")
+        @Expose
+        private String empUsername;
+        @SerializedName("emp_password")
+        @Expose
+        private Object empPassword;
+
+        public Integer getEmpId() {
+            return empId;
+        }
+
+        public void setEmpId(Integer empId) {
+            this.empId = empId;
+        }
+
+        public String getEmpNumber() {
+            return empNumber;
+        }
+
+        public void setEmpNumber(String empNumber) {
+            this.empNumber = empNumber;
+        }
+
+        public Integer getEmpMainSchoolId() {
+            return empMainSchoolId;
+        }
+
+        public void setEmpMainSchoolId(Integer empMainSchoolId) {
+            this.empMainSchoolId = empMainSchoolId;
+        }
+
+        public String getAcLogo() {
+            return acLogo;
+        }
+
+        public void setAcLogo(String acLogo) {
+            this.acLogo = acLogo;
+        }
+
+        public Integer getIsDirector() {
+            return isDirector;
+        }
+
+        public void setIsDirector(Integer isDirector) {
+            this.isDirector = isDirector;
+        }
+
+        public Integer getEmpYearId() {
+            return empYearId;
+        }
+
+        public void setEmpYearId(Integer empYearId) {
+            this.empYearId = empYearId;
+        }
+
+        public Integer getEmpUserStatus() {
+            return empUserStatus;
+        }
+
+        public void setEmpUserStatus(Integer empUserStatus) {
+            this.empUserStatus = empUserStatus;
+        }
+
+        public Object getEmpPermenantCollege() {
+            return empPermenantCollege;
+        }
+
+        public void setEmpPermenantCollege(Object empPermenantCollege) {
+            this.empPermenantCollege = empPermenantCollege;
+        }
+
+        public Integer getEmpDepartmentId() {
+            return empDepartmentId;
+        }
+
+        public void setEmpDepartmentId(Integer empDepartmentId) {
+            this.empDepartmentId = empDepartmentId;
+        }
+
+        public String getEmpUsername() {
+            return empUsername;
+        }
+
+        public void setEmpUsername(String empUsername) {
+            this.empUsername = empUsername;
+        }
+
+        public Object getEmpPassword() {
+            return empPassword;
+        }
+
+        public void setEmpPassword(Object empPassword) {
+            this.empPassword = empPassword;
+        }
+
+        //common parameters
+        @SerializedName("institute_id")
+        @Expose
+        private Integer instituteId;
+        @SerializedName("name")
+        @Expose
         private String name;
-        private int emp_main_school_id;
-        private String college_code;
-        private String college_name;
-        private String ac_logo;
-        private String stud_photo;
-        private int status;
-        private int is_director;
-        private int emp_year_id;
-        private int institute_id;
-        private String im_domain_name;
-        private int emp_user_status;
-        private Object emp_permenant_college;
-        private int emp_department_id;
-        private String emp_username;
-        private Object emp_password;
+        @SerializedName("college_code")
+        @Expose
+        private Integer collegeCode;
+        @SerializedName("college_name")
+        @Expose
+        private String collegeName;
+        @SerializedName("stud_photo")
+        @Expose
+        private String studPhoto;
+        @SerializedName("status")
+        @Expose
+        private Integer status;
+        @SerializedName("im_domain_name")
+        @Expose
+        private String imDomainName;
+        @SerializedName("ac_full_name")
+        @Expose
+        private String acFullName;
+        @SerializedName("ac_code")
+        @Expose
+        private String acCode;
 
-
-
-        private int stud_id;
-        private int dm_id;
-        private String dm_full_name;
-        private int course_id;
-        private String course_fullname;
-        private int sm_id;
-        private String sm_name;
-       /* private int college_code;
-        private String college_name;*/
-        private int swd_year_id;
-       /* private int status;*/
-        private String hostel_code;
-      /*  private String name;*/
-        private String stud_admission_no;
-        private String Stud_Enrollment_no;
-      /*  private String stud_photo;*/
-        private int swd_division_id;
-        private int swd_batch_id;
-        private int shift_id;
-       /* private String im_domain_name;*/
-        private int intitute_id;
-        private String fc_file;
-        private String Stud_user_name;
-        private String Stud_password;
-
-        public int getEmp_id() {
-            return emp_id;
+        public String getAcFullName() {
+            return acFullName;
         }
 
-        public void setEmp_id(int emp_id) {
-            this.emp_id = emp_id;
+        public void setAcFullName(String acFullName) {
+            this.acFullName = acFullName;
         }
 
-        public String getEmp_number() {
-            return emp_number;
+        public String getAcCode() {
+            return acCode;
         }
 
-        public void setEmp_number(String emp_number) {
-            this.emp_number = emp_number;
+        public void setAcCode(String acCode) {
+            this.acCode = acCode;
+        }
+
+        public Integer getInstituteId() {
+            return instituteId;
+        }
+
+        public void setInstituteId(Integer instituteId) {
+            this.instituteId = instituteId;
         }
 
         public String getName() {
@@ -107,317 +417,45 @@ public class CheckLoginByOTPAndUsernamePojo {
             this.name = name;
         }
 
-        public int getEmp_main_school_id() {
-            return emp_main_school_id;
+        public Integer getCollegeCode() {
+            return collegeCode;
         }
 
-        public void setEmp_main_school_id(int emp_main_school_id) {
-            this.emp_main_school_id = emp_main_school_id;
+        public void setCollegeCode(Integer collegeCode) {
+            this.collegeCode = collegeCode;
         }
 
-        public String getCollege_code() {
-            return college_code;
+        public String getCollegeName() {
+            return collegeName;
         }
 
-        public void setCollege_code(String college_code) {
-            this.college_code = college_code;
+        public void setCollegeName(String collegeName) {
+            this.collegeName = collegeName;
         }
 
-        public String getCollege_name() {
-            return college_name;
+        public String getStudPhoto() {
+            return studPhoto;
         }
 
-        public void setCollege_name(String college_name) {
-            this.college_name = college_name;
+        public void setStudPhoto(String studPhoto) {
+            this.studPhoto = studPhoto;
         }
 
-        public String getAc_logo() {
-            return ac_logo;
-        }
-
-        public void setAc_logo(String ac_logo) {
-            this.ac_logo = ac_logo;
-        }
-
-        public String getStud_photo() {
-            return stud_photo;
-        }
-
-        public void setStud_photo(String stud_photo) {
-            this.stud_photo = stud_photo;
-        }
-
-        public int getStatus() {
+        public Integer getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(Integer status) {
             this.status = status;
         }
 
-        public int getIs_director() {
-            return is_director;
+        public String getImDomainName() {
+            return imDomainName;
         }
 
-        public void setIs_director(int is_director) {
-            this.is_director = is_director;
+        public void setImDomainName(String imDomainName) {
+            this.imDomainName = imDomainName;
         }
 
-        public int getEmp_year_id() {
-            return emp_year_id;
-        }
-
-        public void setEmp_year_id(int emp_year_id) {
-            this.emp_year_id = emp_year_id;
-        }
-
-        public int getInstitute_id() {
-            return institute_id;
-        }
-
-        public void setInstitute_id(int institute_id) {
-            this.institute_id = institute_id;
-        }
-
-        public String getIm_domain_name() {
-            return im_domain_name;
-        }
-
-        public void setIm_domain_name(String im_domain_name) {
-            this.im_domain_name = im_domain_name;
-        }
-
-        public int getEmp_user_status() {
-            return emp_user_status;
-        }
-
-        public void setEmp_user_status(int emp_user_status) {
-            this.emp_user_status = emp_user_status;
-        }
-
-        public Object getEmp_permenant_college() {
-            return emp_permenant_college;
-        }
-
-        public void setEmp_permenant_college(Object emp_permenant_college) {
-            this.emp_permenant_college = emp_permenant_college;
-        }
-
-        public int getEmp_department_id() {
-            return emp_department_id;
-        }
-
-        public void setEmp_department_id(int emp_department_id) {
-            this.emp_department_id = emp_department_id;
-        }
-
-        public String getEmp_username() {
-            return emp_username;
-        }
-
-        public void setEmp_username(String emp_username) {
-            this.emp_username = emp_username;
-        }
-
-        public Object getEmp_password() {
-            return emp_password;
-        }
-
-        public void setEmp_password(Object emp_password) {
-            this.emp_password = emp_password;
-        }
-
-        //student
-        public int getStud_id() {
-            return stud_id;
-        }
-
-        public void setStud_id(int stud_id) {
-            this.stud_id = stud_id;
-        }
-
-        public int getDm_id() {
-            return dm_id;
-        }
-
-        public void setDm_id(int dm_id) {
-            this.dm_id = dm_id;
-        }
-
-        public String getDm_full_name() {
-            return dm_full_name;
-        }
-
-        public void setDm_full_name(String dm_full_name) {
-            this.dm_full_name = dm_full_name;
-        }
-
-        public int getCourse_id() {
-            return course_id;
-        }
-
-        public void setCourse_id(int course_id) {
-            this.course_id = course_id;
-        }
-
-        public String getCourse_fullname() {
-            return course_fullname;
-        }
-
-        public void setCourse_fullname(String course_fullname) {
-            this.course_fullname = course_fullname;
-        }
-
-        public int getSm_id() {
-            return sm_id;
-        }
-
-        public void setSm_id(int sm_id) {
-            this.sm_id = sm_id;
-        }
-
-        public String getSm_name() {
-            return sm_name;
-        }
-
-        public void setSm_name(String sm_name) {
-            this.sm_name = sm_name;
-        }
-
-      /*  public int getCollege_code() {
-            return college_code;
-        }
-
-        public void setCollege_code(int college_code) {
-            this.college_code = college_code;
-        }*/
-
-       /* public String getCollege_name() {
-            return college_name;
-        }
-
-        public void setCollege_name(String college_name) {
-            this.college_name = college_name;
-        }*/
-
-        public int getSwd_year_id() {
-            return swd_year_id;
-        }
-
-        public void setSwd_year_id(int swd_year_id) {
-            this.swd_year_id = swd_year_id;
-        }
-
-       /* public int getStatus() {
-            return status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }*/
-
-        public String getHostel_code() {
-            return hostel_code;
-        }
-
-        public void setHostel_code(String hostel_code) {
-            this.hostel_code = hostel_code;
-        }
-
-       /* public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }*/
-
-        public String getStud_admission_no() {
-            return stud_admission_no;
-        }
-
-        public void setStud_admission_no(String stud_admission_no) {
-            this.stud_admission_no = stud_admission_no;
-        }
-
-        public String getStud_Enrollment_no() {
-            return Stud_Enrollment_no;
-        }
-
-        public void setStud_Enrollment_no(String Stud_Enrollment_no) {
-            this.Stud_Enrollment_no = Stud_Enrollment_no;
-        }
-
-       /* public String getStud_photo() {
-            return stud_photo;
-        }
-
-        public void setStud_photo(String stud_photo) {
-            this.stud_photo = stud_photo;
-        }*/
-
-        public int getSwd_division_id() {
-            return swd_division_id;
-        }
-
-        public void setSwd_division_id(int swd_division_id) {
-            this.swd_division_id = swd_division_id;
-        }
-
-        public int getSwd_batch_id() {
-            return swd_batch_id;
-        }
-
-        public void setSwd_batch_id(int swd_batch_id) {
-            this.swd_batch_id = swd_batch_id;
-        }
-
-        public int getShift_id() {
-            return shift_id;
-        }
-
-        public void setShift_id(int shift_id) {
-            this.shift_id = shift_id;
-        }
-
-       /* public String getIm_domain_name() {
-            return im_domain_name;
-        }*/
-
-        /*public void setIm_domain_name(String im_domain_name) {
-            this.im_domain_name = im_domain_name;
-        }*/
-
-        public int getIntitute_id() {
-            return intitute_id;
-        }
-
-        public void setIntitute_id(int intitute_id) {
-            this.intitute_id = intitute_id;
-        }
-
-        public String getFc_file() {
-            return fc_file;
-        }
-
-        public void setFc_file(String fc_file) {
-            this.fc_file = fc_file;
-        }
-
-        public String getStud_user_name() {
-            return Stud_user_name;
-        }
-
-        public void setStud_user_name(String Stud_user_name) {
-            this.Stud_user_name = Stud_user_name;
-        }
-
-        public String getStud_password() {
-            return Stud_password;
-        }
-
-        public void setStud_password(String Stud_password) {
-            this.Stud_password = Stud_password;
-        }
     }
 }
