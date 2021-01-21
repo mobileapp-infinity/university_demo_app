@@ -16,7 +16,7 @@
 
     <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
         android:id="@+id/tvNotificationCount"
-        android:layout_width="20dp"
+        android:layout_width="22dp"
         android:layout_height="20dp"
         android:layout_gravity="right|end|top"
         android:layout_marginTop="3dp"
@@ -24,7 +24,7 @@
         android:layout_marginRight="-5dp"
         android:background="@drawable/badge_background"
         android:gravity="center"
-        android:padding="3dp"
+        android:padding="2dp"
         android:textColor="@android:color/white"
         android:textSize="8sp" />
 
