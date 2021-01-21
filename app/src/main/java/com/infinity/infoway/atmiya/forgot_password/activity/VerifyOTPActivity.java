@@ -124,27 +124,22 @@ public class VerifyOTPActivity extends AppCompatActivity implements View.OnClick
                     } else {
                         Toast.makeText(VerifyOTPActivity.this, "Incorrect OTP,Please enter correct OTP.", Toast.LENGTH_SHORT).show();
                     }
-
                 }
 
                 @Override
                 public void onFailure(Call<CheckLoginByOTPAndUsernamePojo> call, Throwable t) {
                     DialogUtil.hideProgressDialog();
                     Toast.makeText(VerifyOTPActivity.this, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
-
                 }
             });
 
         } else {
             Toast.makeText(this, "No internet connection,Please try again later.", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
 
-    private void redirectToResetPasswordActivity(String userId,
-                                                 String instituteId, String userType) {
+    private void redirectToResetPasswordActivity(String userId, String instituteId, String userType) {
         Intent intent = new Intent(VerifyOTPActivity.this, ResetPasswordActivity.class);
         intent.putExtra(IntentConstants.RESET_PASS_USER_ID, userId);
         intent.putExtra(IntentConstants.FACULTY_OR_STUDENT, userType);
