@@ -52,6 +52,9 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
             } else if (position == studentTimeTablePojoArrayList.size() - 1) {
                 holder.tvEnd.setVisibility(View.VISIBLE);
                 holder.tvStart.setVisibility(View.GONE);
+            } else {
+                holder.tvEnd.setVisibility(View.GONE);
+                holder.tvStart.setVisibility(View.GONE);
             }
 
             if (inoutArray1.getLectName().contains("RECESS")) {
@@ -70,6 +73,8 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
 
                 if (!CommonUtil.checkIsEmptyOrNullCommon(inoutArray1.getLectName()) &&
                         (inoutArray1.getLabArray() == null || inoutArray1.getLabArray().size() == 0)) {
+                    holder.llMergingDynamicLayout.setVisibility(View.GONE);
+
 
                     if (position > 0 && studentTimeTablePojoArrayList.get(position - 1).getLabArray() != null &&
                             studentTimeTablePojoArrayList.get(position - 1).getLabArray().size() > 0
@@ -107,7 +112,19 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
                     }
                 } else {
                     holder.llStaticLayoutStudentTimetable.setVisibility(View.GONE);
-                    mergingLogic(inoutArray1, position, holder);
+
+                    String lectNo = "";
+                    if (inoutArray1.getLabArray().get(0).getLectName().contains("-")) {
+                        lectNo = inoutArray1.getLabArray().get(0).getLectName().split("-")[1];
+                        lectNo += "/" + (Integer.parseInt(lectNo.trim()) + 1);
+                    }
+                    holder.tvStudentLectureNoIndex.setText(lectNo);
+
+                    holder.rvStudentMergingDynamicLayout.setAdapter(new StudentTimeTableChildMergingAdapter(context,
+                            (ArrayList<StudentTimeTablePojo.LabArray>) studentTimeTablePojoArrayList.get(position).getLabArray()));
+
+                    holder.llMergingDynamicLayout.setVisibility(View.VISIBLE);
+//                    mergingLogic(inoutArray1, position, holder);
                 }
             }
         } catch (Exception ex) {
@@ -168,7 +185,7 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
                     tvStudentClassRoomMergingLayout.setText(labArray.getRmName() + "");
                 }
 
-                holder.llMergingLayout.addView(mergingView);
+                holder.llMergingDynamicLayout.addView(mergingView);
 
             }
 
@@ -203,8 +220,9 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
         AppCompatTextView tvStart;
         AppCompatTextView tvEnd;
 
-        LinearLayout llMergingLayout;
+        LinearLayout llMergingDynamicLayout;
         LinearLayout llStaticLayoutStudentTimetable;
+        RecyclerView rvStudentMergingDynamicLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -223,8 +241,10 @@ public class StudentTimeTableAdapter extends RecyclerView.Adapter<StudentTimeTab
 
             tvStart = itemView.findViewById(R.id.tvStart);
             tvEnd = itemView.findViewById(R.id.tvEnd);
-            llMergingLayout = itemView.findViewById(R.id.llMergingDynamicLayout);
+            llMergingDynamicLayout = itemView.findViewById(R.id.llMergingDynamicLayout);
             llStaticLayoutStudentTimetable = itemView.findViewById(R.id.llStaticLayoutStudentTimetable);
+
+            rvStudentMergingDynamicLayout = itemView.findViewById(R.id.rvStudentMergingDynamicLayout);
         }
     }
 

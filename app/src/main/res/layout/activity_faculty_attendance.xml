@@ -90,7 +90,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
-                            android:text="30-Jun-2020"
+                            android:text="-"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
@@ -131,7 +131,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
-                            android:text="30-Jun-2020"
+                            android:text="-"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 

@@ -79,88 +79,95 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Faculty"
-                        android:textColor="@color/profile_heading_color"
-                        android:textSize="10sp" />
-
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:id="@+id/tvStudentFacultyName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="-"
-                        android:textColor="@color/profile_heading_value_color"
-                        android:textSize="11sp" />
-
-                </LinearLayout>
 
                     <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="vertical">
-
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Subject"
-                        android:textColor="@color/profile_heading_color"
-                        android:textSize="10sp" />
+                        android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:id="@+id/tvStudentSubjectName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="-"
-                        android:textColor="@color/profile_heading_value_color"
-                        android:textSize="11sp" />
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Faculty"
+                            android:textColor="@color/profile_heading_color"
+                            android:textSize="10sp" />
 
-                </LinearLayout>
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:id="@+id/tvStudentFacultyName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textColor="@color/profile_heading_value_color"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
 
                     <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:orientation="horizontal">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Subject"
+                            android:textColor="@color/profile_heading_color"
+                            android:textSize="10sp" />
+
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:id="@+id/tvStudentSubjectName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textColor="@color/profile_heading_value_color"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="Class Room : "
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="10sp" />
+                        android:orientation="horizontal">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
-                        android:id="@+id/tvStudentClassRoom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:text="-"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="11sp" />
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:text="Class Room : "
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10sp" />
 
-                </LinearLayout>
+                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            android:id="@+id/tvStudentClassRoom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:text="-"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="visible"
                     android:id="@+id/llMergingDynamicLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvStudentMergingDynamicLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 </LinearLayout>
-
 
             </LinearLayout>
 
