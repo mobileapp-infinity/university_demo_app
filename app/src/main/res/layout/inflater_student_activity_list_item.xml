@@ -36,7 +36,7 @@
                 android:id="@+id/tvActivityDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="07/12/2020"
+                android:text="-"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
@@ -62,7 +62,7 @@
                 android:id="@+id/tvActivityDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Test"
+                android:text="-"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
