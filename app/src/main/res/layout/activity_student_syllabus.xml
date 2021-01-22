@@ -13,11 +13,7 @@
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="8dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCloseStudentSyllabus"
