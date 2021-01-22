@@ -13,10 +13,7 @@
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        android:padding="12dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="12dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCloseFacultyAttendance"
