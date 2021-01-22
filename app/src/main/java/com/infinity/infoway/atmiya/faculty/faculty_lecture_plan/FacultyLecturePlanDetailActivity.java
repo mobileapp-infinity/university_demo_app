@@ -92,7 +92,6 @@ public class FacultyLecturePlanDetailActivity extends AppCompatActivity implemen
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyLecturePlanPojo.getRefBookName())) {
             tvRefBookFacultyLectureDetails.setText(facultyLecturePlanPojo.getRefBookName() + "");
         }
-
     }
 
 

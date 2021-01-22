@@ -103,7 +103,6 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         otpBasedForgetPasswordIntent = getIntent();
         instituteIdIntent = getIntent();
         facultyOrStudentIntent = getIntent();
-
     }
 
 
