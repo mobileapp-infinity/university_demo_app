@@ -492,17 +492,17 @@ public class ApiImplementer {
     }
 
 
-    public static void getOTPBaseLoginDetailsForEmployeeApiImplementer(String uname_mobile, String institute_id, Callback<OtpBaseLoginDetailsForEmployeePojo> cb) {
-        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<OtpBaseLoginDetailsForEmployeePojo> call = apiInterface.getOTPBaseLoginDetailsForEmployee(uname_mobile, institute_id);
-        call.enqueue(cb);
-    }
-
-    public static void getOTPBaseLoginDetailsForStudentApiImplementer(String uname_mobile, String institute_id, Callback<OtpBaseLoginDetailsForStudentPojo> cb) {
-        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<OtpBaseLoginDetailsForStudentPojo> call = apiInterface.getOTPBaseLoginDetailsForStudent(uname_mobile, institute_id);
-        call.enqueue(cb);
-    }
+//    public static void getOTPBaseLoginDetailsForEmployeeApiImplementer(String uname_mobile, String institute_id, Callback<OtpBaseLoginDetailsForEmployeePojo> cb) {
+//        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+//        Call<OtpBaseLoginDetailsForEmployeePojo> call = apiInterface.getOTPBaseLoginDetailsForEmployee(uname_mobile, institute_id);
+//        call.enqueue(cb);
+//    }
+//
+//    public static void getOTPBaseLoginDetailsForStudentApiImplementer(String uname_mobile, String institute_id, Callback<OtpBaseLoginDetailsForStudentPojo> cb) {
+//        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+//        Call<OtpBaseLoginDetailsForStudentPojo> call = apiInterface.getOTPBaseLoginDetailsForStudent(uname_mobile, institute_id);
+//        call.enqueue(cb);
+//    }
 
     public static void insertStudentPasswordAndSendSmsAbsentApiImplementer(String sms, Callback<InsertStudentPasswordAndSMSAbsentApiCall> cb) {
         final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
@@ -528,33 +528,33 @@ public class ApiImplementer {
         call.enqueue(cb);
     }
 
-    public static void checkOTPVerificationForEmployeeApiImplementer(String username, String otp, String institute_id, String ip_addr,
-                                                                     Callback<CheckOTPVerificationForEmployeePojo> cb) {
-        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<CheckOTPVerificationForEmployeePojo> call = apiInterface.checkOTPVerificationForEmployee(username, otp, institute_id, ip_addr);
-        call.enqueue(cb);
-    }
-
-    public static void checkOTPVerificationForStudentApiImplementer(String username, String otp, String institute_id, String ip_addr,
-                                                                    Callback<CheckOTPVerificationForStudentPojo> cb) {
-        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<CheckOTPVerificationForStudentPojo> call = apiInterface.checkOTPVerificationForStudent(username, otp, institute_id, ip_addr);
-        call.enqueue(cb);
-    }
-
-    public static void resetStudentPasswordApiImplementer(String stud_id, String institute_id, String password, String modify_by,
-                                                          String modify_ip, Callback<ResetStudentPasswordPojo> cb) {
-        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<ResetStudentPasswordPojo> call = apiInterface.resetStudentPassword(stud_id, institute_id, password, modify_by, modify_ip);
-        call.enqueue(cb);
-    }
-
-    public static void resetEmployeePasswordApiImplementer(String emp_id, String institute_id, String password, String modify_by,
-                                                           String modify_ip, Callback<ResetEmployeePasswordPojo> cb) {
-        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
-        Call<ResetEmployeePasswordPojo> call = apiInterface.resetEmployeePassword(emp_id, institute_id, password, modify_by, modify_ip);
-        call.enqueue(cb);
-    }
+//    public static void checkOTPVerificationForEmployeeApiImplementer(String username, String otp, String institute_id, String ip_addr,
+//                                                                     Callback<CheckOTPVerificationForEmployeePojo> cb) {
+//        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+//        Call<CheckOTPVerificationForEmployeePojo> call = apiInterface.checkOTPVerificationForEmployee(username, otp, institute_id, ip_addr);
+//        call.enqueue(cb);
+//    }
+//
+//    public static void checkOTPVerificationForStudentApiImplementer(String username, String otp, String institute_id, String ip_addr,
+//                                                                    Callback<CheckOTPVerificationForStudentPojo> cb) {
+//        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+//        Call<CheckOTPVerificationForStudentPojo> call = apiInterface.checkOTPVerificationForStudent(username, otp, institute_id, ip_addr);
+//        call.enqueue(cb);
+//    }
+//
+//    public static void resetStudentPasswordApiImplementer(String stud_id, String institute_id, String password, String modify_by,
+//                                                          String modify_ip, Callback<ResetStudentPasswordPojo> cb) {
+//        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+//        Call<ResetStudentPasswordPojo> call = apiInterface.resetStudentPassword(stud_id, institute_id, password, modify_by, modify_ip);
+//        call.enqueue(cb);
+//    }
+//
+//    public static void resetEmployeePasswordApiImplementer(String emp_id, String institute_id, String password, String modify_by,
+//                                                           String modify_ip, Callback<ResetEmployeePasswordPojo> cb) {
+//        final IApiInterface apiInterface = ApiClient.getClient().create(IApiInterface.class);
+//        Call<ResetEmployeePasswordPojo> call = apiInterface.resetEmployeePassword(emp_id, institute_id, password, modify_by, modify_ip);
+//        call.enqueue(cb);
+//    }
 
     public static void getStudentHomeWorkApiImplementer(String stud_id, String year_id, String div_id,
                                                         Callback<ArrayList<StudentHomeWorkPojo>> cb) {
