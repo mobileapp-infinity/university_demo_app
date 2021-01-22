@@ -90,7 +90,7 @@ public class FacultyNewsActivity extends AppCompatActivity implements View.OnCli
                         if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
                             llFacultyNews.setVisibility(View.VISIBLE);
                             llNoDataFoundFacultyNews.setVisibility(View.GONE);
-                            TimeTableViewPagerAdapter adapter = new TimeTableViewPagerAdapter(getSupportFragmentManager());
+                            FacultyNewsViewPagerAdapter adapter = new FacultyNewsViewPagerAdapter(getSupportFragmentManager());
                             ArrayList<FacultyNewsPojo> facultyNewsPojoArrayList = response.body();
                             boolean isFragmentAdded = false;
                             for (int i = 0; i < facultyNewsPojoArrayList.size(); i++) {
