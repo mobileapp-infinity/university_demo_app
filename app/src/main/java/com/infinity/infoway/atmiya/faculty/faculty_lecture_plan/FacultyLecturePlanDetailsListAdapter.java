@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.infinity.infoway.atmiya.R;
 import com.infinity.infoway.atmiya.custom_class.TextViewBoldFont;
 import com.infinity.infoway.atmiya.custom_class.TextViewRegularFont;
@@ -75,8 +77,14 @@ public class FacultyLecturePlanDetailsListAdapter extends BaseExpandableListAdap
 
         TextViewBoldFont tvFacultyLectureDetailsTopicsNo = view.findViewById(R.id.tvFacultyLectureDetailsTopicsNo);
         TextViewRegularFont tvFacultyLectureDetailsTopicDescription = view.findViewById(R.id.tvFacultyLectureDetailsTopicDescription);
-
+        AppCompatImageView imgExpandMoreFaculty = view.findViewById(R.id.imgExpandMoreFaculty);
         View viewLine = view.findViewById(R.id.viewLineFaculty);
+
+        if (isExpanded) {
+            imgExpandMoreFaculty.setImageResource(R.drawable.ic_expand_more);
+        } else {
+            imgExpandMoreFaculty.setImageResource(R.drawable.ic_expand_less);
+        }
 
         if (!CommonUtil.checkIsEmptyOrNullCommon(topicName)) {
             tvFacultyLectureDetailsTopicDescription.setText(topicName);
