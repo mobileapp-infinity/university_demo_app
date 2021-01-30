@@ -108,8 +108,8 @@ public class SelectUserTypeActivity extends AppCompatActivity implements View.On
 
                     } else {
                         DialogUtil.hideProgressDialog();
-//                        Toast.makeText(SelectUserTypeActivity.this, "" + response.message(), Toast.LENGTH_SHORT).show();
-//                        finish();
+                        Toast.makeText(SelectUserTypeActivity.this, "" + response.message(), Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
 

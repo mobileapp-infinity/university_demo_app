@@ -35,7 +35,7 @@ public class StudentResultActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-//        initView();
+        initView();
 //        getStudentCIAMarksListApiCall();
     }
 

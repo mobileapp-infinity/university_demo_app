@@ -5,10 +5,10 @@ public class Urls {
     public static String BASE_URL = "http://icampus.biz/API_Student_Panel_JSON.asmx/";//For Live
     public static String BASE_URL_FOR_FACULTY_PENDING_ATTENDANCE = "http://icampus.biz/API_Student_Panel_JSON_icampus.asmx/";
 
-    public static String DOMAIN_NAME = "http://icampus.biz";
-    public static String KEY_FOR_FACULTY_ATTENDANCE = "v8llRrQaDng=";
-    public static String KEY_FOR_EMPLOYEE_LEAVE = "v8llRrQaDng=";
-    public static final String DOMAIN_NAME_URL_FOR_FORGOT_PASSWORD = "https://cms.atmiya.edu.in";
+    public static String DOMAIN_NAME = "https://icampus.biz";
+    public static final String DOMAIN_NAME_URL_FOR_FORGOT_PASSWORD = "https://icampus.biz";
+//    public static String KEY_FOR_FACULTY_ATTENDANCE = "v8llRrQaDng=";
+//    public static String KEY_FOR_EMPLOYEE_LEAVE = "v8llRrQaDng=";
 
 
 
