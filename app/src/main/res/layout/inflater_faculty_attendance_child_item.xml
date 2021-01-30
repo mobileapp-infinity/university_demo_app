@@ -25,7 +25,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="top"
@@ -33,7 +33,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvFacultyAttendanceFromDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="top"
@@ -59,7 +59,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvFacultyAttendanceToDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

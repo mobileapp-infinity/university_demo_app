@@ -21,7 +21,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvCourseNameLabOrLecturePlan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -61,14 +61,14 @@
                     android:layout_marginBottom="6dp"
                     android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Semester"
                         android:textColor="@color/profile_heading_color"
                         android:textSize="10sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:id="@+id/tvStudentSemLabOrLecturePlan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -85,14 +85,14 @@
                     android:layout_marginBottom="6dp"
                     android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Subject Name"
                         android:textColor="@color/profile_heading_color"
                         android:textSize="10sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:id="@+id/tvSubjectNameLabOrLecturePlan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -109,14 +109,14 @@
                     android:layout_marginTop="6dp"
                     android:orientation="horizontal">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lecture Per Week - "
                         android:textColor="@color/profile_heading_color"
                         android:textSize="10sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:id="@+id/tvLectureCountPerWeekLabOrLecturePlan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

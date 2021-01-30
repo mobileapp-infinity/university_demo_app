@@ -32,7 +32,7 @@
 <!--                android:textColor="@color/colorPrimary"-->
 <!--                android:textSize="10sp" />-->
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvNotificationDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvNotificationTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvNotificationDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

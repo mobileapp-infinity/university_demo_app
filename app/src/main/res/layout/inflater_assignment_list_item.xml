@@ -25,14 +25,14 @@
                 android:layout_weight="1.4"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Subject : "
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                     android:id="@+id/tvAssignmentSubjectName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -49,14 +49,14 @@
                 android:gravity="end"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date : "
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                     android:id="@+id/tvAssignmentSubjectDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,14 +80,14 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Assignment Name : "
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                     android:id="@+id/tvAssignmentName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             android:visibility="visible"
             android:orientation="horizontal">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvDownloadAssignment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

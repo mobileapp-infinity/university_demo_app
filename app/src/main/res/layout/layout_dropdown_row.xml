@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.infinity.infoway.atmiya.custom_class.TextViewRegularFont xmlns:android="http://schemas.android.com/apk/res/android"
+<com.infinity.infoway.university_demo.custom_class.TextViewRegularFont xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textColor="@color/white"
@@ -7,4 +7,4 @@
     android:padding="6dp"
     android:id="@+id/tvDropdownRow">
 
-</com.infinity.infoway.atmiya.custom_class.TextViewRegularFont>
+</com.infinity.infoway.university_demo.custom_class.TextViewRegularFont>

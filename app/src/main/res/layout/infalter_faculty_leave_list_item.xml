@@ -21,7 +21,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvLeaveTypeFaculty"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -73,14 +73,14 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Leave Days"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="12sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:id="@+id/tvLeaveDaysFaculty"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -96,14 +96,14 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Taken Leave"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="12sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:id="@+id/tvTakenLeaveFaculty"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -122,14 +122,14 @@
                         android:layout_marginBottom="2dp"
                         android:orientation="vertical">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Balance"
                             android:textColor="@color/colorAccent"
                             android:textSize="12sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:id="@+id/tvBalanceLeaveFaculty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

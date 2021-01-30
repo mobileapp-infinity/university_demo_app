@@ -19,7 +19,7 @@
             android:orientation="horizontal"
             android:padding="4dp">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -27,7 +27,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

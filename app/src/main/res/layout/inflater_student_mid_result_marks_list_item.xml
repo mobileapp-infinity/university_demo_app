@@ -21,7 +21,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvSemNameMidResult"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -33,7 +33,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvYearNameMidResult"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -84,14 +84,14 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Result Name"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="12sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:id="@+id/tvResultNameMidResult"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -107,14 +107,14 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Result Date"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="12sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:id="@+id/tvResultDateMidResult"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -133,14 +133,14 @@
                         android:layout_marginBottom="2dp"
                         android:orientation="vertical">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Remarks"
                             android:textColor="@color/colorAccent"
                             android:textSize="12sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:id="@+id/tvRemarksMidResult"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
                         android:visibility="visible"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:id="@+id/btnDownloadMidResult"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

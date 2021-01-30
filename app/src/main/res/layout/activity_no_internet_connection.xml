@@ -41,14 +41,14 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:text="No Internet Connection"/>
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:text="You are not connected to the internet, Makes your Wi-Fi is on,\nAirplane Mode is off and try again.  "/>
 
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/btnTryAgain"
                 android:layout_marginTop="18dp"
                 android:layout_width="110dp"

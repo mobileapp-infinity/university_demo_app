@@ -65,7 +65,7 @@
                 android:paddingRight="10dp"
                 android:paddingBottom="4dp">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Note : "
@@ -98,14 +98,14 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="S - "
                                     android:textColor="@color/status_period_suspend_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Suspend"
@@ -119,14 +119,14 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="R - "
                                     android:textColor="@color/status_remaining_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Remaining  "
@@ -150,14 +150,14 @@
                             android:gravity="center_horizontal"
                             android:orientation="horizontal">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="H - "
                                 android:textColor="@color/status_holiday_color"
                                 android:textSize="10sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Holiday"
@@ -179,14 +179,14 @@
                             android:gravity="center_horizontal"
                             android:orientation="horizontal">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="A - "
                                 android:textColor="@color/status_absent_color"
                                 android:textSize="10sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Absent"
@@ -208,14 +208,14 @@
                             android:gravity="center_horizontal"
                             android:orientation="horizontal">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="P - "
                                 android:textColor="@color/status_present_color"
                                 android:textSize="10sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Present"
@@ -315,7 +315,7 @@
             android:layout_gravity="center"
             app:srcCompat="@drawable/ic_no_data_found"/>
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
             android:layout_marginTop="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

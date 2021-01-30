@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_back" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -73,7 +73,7 @@
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"/>
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Fee Circular"
@@ -115,7 +115,7 @@
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"/>
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Pay Fee"
@@ -157,7 +157,7 @@
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"/>
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Fee Receipt"
@@ -207,7 +207,7 @@
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"/>
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Pay Slip of Axis"
@@ -249,7 +249,7 @@
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"/>
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Pay slip of hdfc"
@@ -291,7 +291,7 @@
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"/>
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Fee Receipt"

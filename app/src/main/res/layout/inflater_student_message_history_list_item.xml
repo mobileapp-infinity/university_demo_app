@@ -19,8 +19,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="2sp"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/logo" />
+                android:adjustViewBounds="true"/>
 
         </LinearLayout>
 
@@ -50,14 +49,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="To : "
                             android:textColor="@color/colorAccent"
                             android:textSize="12sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                             android:id="@+id/tvMessageHistoryMobileNo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -74,14 +73,14 @@
                         android:gravity="end"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Date : "
                             android:textColor="@color/color_primary_with_75_opacity"
                             android:textSize="12sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                             android:id="@+id/tvMessageHistoryDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -99,7 +98,7 @@
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:id="@+id/tvMessageHistoryNote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

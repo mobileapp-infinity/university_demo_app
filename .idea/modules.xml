@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/atmiya_new_code.iml" filepath="$PROJECT_DIR$/.idea/modules/atmiya_new_code.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/atmiya_new_code.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/atmiya_new_code.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/recyclerviewpager/atmiya_new_code.recyclerviewpager.iml" filepath="$PROJECT_DIR$/.idea/modules/recyclerviewpager/atmiya_new_code.recyclerviewpager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/infinity_university_demo_app.iml" filepath="$PROJECT_DIR$/.idea/modules/infinity_university_demo_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/infinity_university_demo_app.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/infinity_university_demo_app.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/recyclerviewpager/infinity_university_demo_app.recyclerviewpager.iml" filepath="$PROJECT_DIR$/.idea/modules/recyclerviewpager/infinity_university_demo_app.recyclerviewpager.iml" />
     </modules>
   </component>
 </project>

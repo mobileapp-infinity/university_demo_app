@@ -25,7 +25,7 @@
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_close" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -95,7 +95,7 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvFacultyName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvFacultyEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
                 android:orientation="vertical"
                 android:padding="8dp">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -207,7 +207,7 @@
                     android:textColor="@color/profile_heading_color"
                     android:textSize="10sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                     android:id="@+id/tvFacultyEmployeeNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -233,7 +233,7 @@
                 android:orientation="vertical"
                 android:padding="8dp">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -243,7 +243,7 @@
                     android:textColor="@color/profile_heading_color"
                     android:textSize="10sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                     android:id="@+id/tvFacultyEducation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -301,7 +301,7 @@
                         android:background="@drawable/profile_personal_details_shape"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -339,14 +339,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Gender"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyGender"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -363,14 +363,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Date of Birth"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyDOB"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -387,14 +387,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Aadhaar Card No."
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyAadhaarCardNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -411,14 +411,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="PAN Card No."
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyPanCardNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -436,14 +436,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Mobile No."
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyMobileNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -483,7 +483,7 @@
                         android:background="@drawable/profile_personal_details_shape"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -521,14 +521,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Permanent Address"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyPermenantAddress"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -545,14 +545,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Present Address"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyPresentAddress"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -569,14 +569,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Home Mobile No."
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyHomeMobileNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -594,14 +594,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="City"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyCity"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -619,14 +619,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="State"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyState"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -644,14 +644,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Country"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyCountry"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -691,7 +691,7 @@
                         android:background="@drawable/profile_personal_details_shape"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -729,14 +729,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="college"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvStudentCollegeName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -753,14 +753,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Department Name"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyDepartmentName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -777,14 +777,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Designation"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyJobName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -802,14 +802,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Date of Joining"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyDateOfJoining"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -827,14 +827,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Offer Letter No."
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyOfferLetterNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -851,14 +851,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Card no"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyCardNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -876,14 +876,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Job Time"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyJobTimeFromToto"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -922,7 +922,7 @@
                         android:background="@drawable/profile_personal_details_shape"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -960,14 +960,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Father's Name"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyFatherName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -984,14 +984,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Father's Occupation"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyFatherOccupation"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1008,14 +1008,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Father's Address"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyFathersAddress"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1033,14 +1033,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Mother's Name"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyMotherName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1058,14 +1058,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Mother Occupation"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyMotherOccupation"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1083,14 +1083,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Spouse's Name"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultySpouseName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1107,14 +1107,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Spouse's Occupation"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultySppuseOccupation"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1131,14 +1131,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Son/Daughter Name"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultySonOrDoughterName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1155,14 +1155,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Son/Daughter's Date of Birth"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultySonOrDaughterDOF"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1202,7 +1202,7 @@
                         android:background="@drawable/profile_personal_details_shape"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -1240,14 +1240,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Bank Name"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyBankName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1264,14 +1264,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Account No."
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyAccountNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1288,14 +1288,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Branch Name"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyBranchName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1313,14 +1313,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Account Type"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFacultyAccountType"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"

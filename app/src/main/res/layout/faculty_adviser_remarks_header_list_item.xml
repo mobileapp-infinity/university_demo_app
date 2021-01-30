@@ -13,7 +13,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvSemNameFacultyAdViserRemarks"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -36,7 +36,7 @@
             android:orientation="horizontal"
             android:padding="4dp">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvCourseNameFacultyAdviserRemarks"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

@@ -32,7 +32,7 @@
                 <!--                    android:textColor="@color/colorAccent"-->
                 <!--                    android:textSize="12sp" />-->
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                     android:id="@+id/tvFacultyNewsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 <!--                    android:textColor="@color/colorPrimary"-->
                 <!--                    android:textSize="12sp" />-->
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvFacultyNewsDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 <!--                    android:textColor="@color/colorAccent"-->
                 <!--                    android:textSize="12sp" />-->
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvFacultyNewsDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
             android:orientation="horizontal"
             android:visibility="visible">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvDownloadFacultyNews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

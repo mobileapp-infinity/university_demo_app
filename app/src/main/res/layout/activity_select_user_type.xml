@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_back" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -42,7 +42,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -79,14 +79,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:text="I am an Employee"
                         android:textColor="@color/colorPrimary" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
@@ -126,14 +126,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:text="I am a Student"
                         android:textColor="@color/colorPrimary" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"

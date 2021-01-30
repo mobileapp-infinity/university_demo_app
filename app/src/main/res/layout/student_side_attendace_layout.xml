@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
 
-    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -35,7 +35,7 @@
             android:progressDrawable="@drawable/custom_progressbar"
             android:rotation="-90" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvPercentageCurrentMonthStudentSide"
             android:layout_width="44dp"
             android:layout_height="44dp"
@@ -46,7 +46,7 @@
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cpCurrentMonthStudentSide"
@@ -74,7 +74,7 @@
             android:progressDrawable="@drawable/custom_progressbar"
             android:rotation="-90" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvPercentagePreviousMonthStudentSide"
             android:layout_width="44dp"
             android:layout_height="44dp"
@@ -85,7 +85,7 @@
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cpPreviousMonthStudentSide"
@@ -114,7 +114,7 @@
             android:progressDrawable="@drawable/custom_progressbar"
             android:rotation="-90" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvPercentageAvgStudentSide"
             android:layout_width="44dp"
             android:layout_height="44dp"
@@ -125,7 +125,7 @@
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cpAvgStudentSide"

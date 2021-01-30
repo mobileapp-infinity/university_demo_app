@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewBoldFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewBoldFont
                 android:id="@+id/tvStudentName"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -45,7 +45,7 @@
                 android:text=""
                 android:textColor="@color/colorPrimary" />
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvStudentSemAndDesignation"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -132,7 +132,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_time_table" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -157,7 +157,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_e_learning" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -181,7 +181,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_exam" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -213,7 +213,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_leave_application" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -238,7 +238,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_assignment" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -262,7 +262,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_holiday" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -305,7 +305,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_syllabus" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -329,7 +329,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_lesson_plan" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -353,7 +353,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_home_work" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -386,7 +386,7 @@
                             android:adjustViewBounds="true"
                             app:srcCompat="@drawable/ic_fee_details" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -410,7 +410,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_activity" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -434,7 +434,7 @@
                             android:layout_height="48dp"
                             app:srcCompat="@drawable/ic_message_history" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -462,7 +462,7 @@
                     android:orientation="horizontal"
                     android:padding="12dp">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"

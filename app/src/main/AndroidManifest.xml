@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.infinity.infoway.atmiya">
+    package="com.infinity.infoway.university_demo">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -31,7 +31,7 @@
     <uses-permission android:name="android.permission.RECEIVE_MMS" />
 
     <application
-        android:name=".utils.AppController"
+        android:name="com.infinity.infoway.university_demo.utils.AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -43,154 +43,154 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".intro_screen.activity.IntroScreenActivity"
+            android:name="com.infinity.infoway.university_demo.intro_screen.activity.IntroScreenActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".common_activity.ErrorActivity"
+            android:name="com.infinity.infoway.university_demo.common_activity.ErrorActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".common_activity.NoInternetConnectionActivity"
+            android:name="com.infinity.infoway.university_demo.common_activity.NoInternetConnectionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_teaching_update.faculty_adviser_remarks.FacultyAdviserRemarksActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_teaching_update.faculty_adviser_remarks.FacultyAdviserRemarksActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_fill_attendance.activity.FacultyFillAttendanceActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_fill_attendance.activity.FacultyFillAttendanceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdateDetailsActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdateDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdateActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_teaching_update.faculty_lab_or_lecture_plan_teaching_update.FacultyLabOrLecturePlanTeachingUpdateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".forgot_password.activity.SelectUserTypeActivity"
+            android:name="com.infinity.infoway.university_demo.forgot_password.activity.SelectUserTypeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_pending_attendance.FacultyPendingAttendanceActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_pending_attendance.FacultyPendingAttendanceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_teaching_update.faculty_subject_wise_division_wise_total_theory_period_engaged.FacultySubjectWiseDivisionWiseTotalTheoryPeriodEngagedActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_teaching_update.FacultyTeachingUpdateActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_teaching_update.FacultyTeachingUpdateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_teaching_update.faculty_student_forum.FacultyStudentForumActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_teaching_update.faculty_student_forum.FacultyStudentForumActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_teaching_update.faculty_details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_teaching_update.faculty_details_of_theory_sub.FacultyDetailsOfTheorySubjectTaughtActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_attendance.FacultyAttendanceActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_attendance.FacultyAttendanceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_news.FacultyNewsDetailActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_news.FacultyNewsDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_news.FacultyNewsActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_news.FacultyNewsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_lecture_plan.FacultyLecturePlanDetailActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_lecture_plan.FacultyLecturePlanDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_lecture_plan.FacultyLecturePlanActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_lecture_plan.FacultyLecturePlanActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_rem_attendance.FacultyRemAttendanceActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_rem_attendance.FacultyRemAttendanceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_leave.FacultyLeaveActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_leave.FacultyLeaveActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_timetable.activity.FacultyTimeTableActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_timetable.activity.FacultyTimeTableActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_announcement.FacultyAnnouncementActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_announcement.FacultyAnnouncementActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_profile.FacultyProfileActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_profile.FacultyProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".faculty.faculty_dashboard.activity.FacultyDashboardActivity"
+            android:name="com.infinity.infoway.university_demo.faculty.faculty_dashboard.activity.FacultyDashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.fee_details.activity.PaytmPaymentActivity"
+            android:name="com.infinity.infoway.university_demo.student.fee_details.activity.PaytmPaymentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.fee_details.activity.AxisAndHdfcPaymentWebViewActivity"
+            android:name="com.infinity.infoway.university_demo.student.fee_details.activity.AxisAndHdfcPaymentWebViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".forgot_password.activity.ResetPasswordActivity"
+            android:name="com.infinity.infoway.university_demo.forgot_password.activity.ResetPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".forgot_password.activity.VerifyOTPActivity"
+            android:name="com.infinity.infoway.university_demo.forgot_password.activity.VerifyOTPActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".login.activity.UpdateAppActivity"
+            android:name="com.infinity.infoway.university_demo.login.activity.UpdateAppActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".forgot_password.activity.ForgotPasswordActivity"
+            android:name="com.infinity.infoway.university_demo.forgot_password.activity.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.exam.activity.MidResultActivity"
+            android:name="com.infinity.infoway.university_demo.student.exam.activity.MidResultActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.exam.activity.CIAExamMarksActivity"
+            android:name="com.infinity.infoway.university_demo.student.exam.activity.CIAExamMarksActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.news_or_notification.ViewAllNewsOrNotificationStudentActivity"
+            android:name="com.infinity.infoway.university_demo.student.news_or_notification.ViewAllNewsOrNotificationStudentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.fee_details.activity.PayFeeActivity"
+            android:name="com.infinity.infoway.university_demo.student.fee_details.activity.PayFeeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.home_work.activity.StudentHomeWorkActivity"
+            android:name="com.infinity.infoway.university_demo.student.home_work.activity.StudentHomeWorkActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.lesson_plan.StudentLessonPlanDetailActivity"
+            android:name="com.infinity.infoway.university_demo.student.lesson_plan.StudentLessonPlanDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.lesson_plan.StudentLessonPlanActivity"
+            android:name="com.infinity.infoway.university_demo.student.lesson_plan.StudentLessonPlanActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.student_syllabus.StudentSyllabusActivity"
+            android:name="com.infinity.infoway.university_demo.student.student_syllabus.StudentSyllabusActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.student_timetable.activity.StudentTimeTableActivity"
+            android:name="com.infinity.infoway.university_demo.student.student_timetable.activity.StudentTimeTableActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.holiday.HolidayActivity"
+            android:name="com.infinity.infoway.university_demo.student.holiday.HolidayActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.e_learning.activity.ELearningActivity"
+            android:name="com.infinity.infoway.university_demo.student.e_learning.activity.ELearningActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.leave_application.activity.LeaveApplicationActivity"
+            android:name="com.infinity.infoway.university_demo.student.leave_application.activity.LeaveApplicationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.student_activity.StudentActivity"
+            android:name="com.infinity.infoway.university_demo.student.student_activity.StudentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.message_history.MessageHistoryActivity"
+            android:name="com.infinity.infoway.university_demo.student.message_history.MessageHistoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.assignment.AssignmentActivity"
+            android:name="com.infinity.infoway.university_demo.student.assignment.AssignmentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.exam.activity.ExaminationScheduleActivity"
+            android:name="com.infinity.infoway.university_demo.student.exam.activity.ExaminationScheduleActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.exam.activity.StudentResultActivity"
+            android:name="com.infinity.infoway.university_demo.student.exam.activity.StudentResultActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.exam.activity.ExamActivity"
+            android:name="com.infinity.infoway.university_demo.student.exam.activity.ExamActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.fee_details.activity.FeeReciptActivity"
+            android:name="com.infinity.infoway.university_demo.student.fee_details.activity.FeeReciptActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".login.activity.SplashActivity"
+            android:name="com.infinity.infoway.university_demo.login.activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -214,19 +214,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".student.fee_details.activity.FeeDetailsActivity"
+            android:name="com.infinity.infoway.university_demo.student.fee_details.activity.FeeDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.attendance.activity.StudentAttendanceActivity"
+            android:name="com.infinity.infoway.university_demo.student.attendance.activity.StudentAttendanceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.profile.StudentProfileActivity"
+            android:name="com.infinity.infoway.university_demo.student.profile.StudentProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".login.activity.LoginActivity"
+            android:name="com.infinity.infoway.university_demo.login.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".student.student_dashboard.activity.StudentDashboardActivity"
+            android:name="com.infinity.infoway.university_demo.student.student_dashboard.activity.StudentDashboardActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -235,7 +235,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.infinity.infoway.atmiya.fileprovider"
+            android:authorities="com.infinity.infoway.university_demo.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -261,7 +261,7 @@
         <!-- </intent-filter> -->
         <!-- </service> -->
         <service
-            android:name=".services.MyFirebaseInstanceIdAndMessagingService"
+            android:name="com.infinity.infoway.university_demo.services.MyFirebaseInstanceIdAndMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

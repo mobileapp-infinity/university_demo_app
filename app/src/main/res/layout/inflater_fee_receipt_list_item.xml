@@ -20,7 +20,7 @@
             android:background="@drawable/amount_fee_details_shape"
             android:orientation="horizontal">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvClassName"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -30,7 +30,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white" />
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvFeeAmount"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -97,14 +97,14 @@
                     android:gravity="end|center_vertical"
                     android:orientation="horizontal">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Receipt No. "
                         android:textColor="#252258"
                         android:textSize="12sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:id="@+id/tvFeeReceiptNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                     android:orientation="horizontal"
                     android:padding="4dp">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -140,7 +140,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -161,7 +161,7 @@
                     android:orientation="horizontal"
                     android:padding="4dp">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:id="@+id/tvClasName_"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -170,7 +170,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:id="@+id/tvFeeAmount_"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -206,14 +206,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Payment Mode : "
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                             android:id="@+id/tvPaymentMode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -228,14 +228,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ref.No. : "
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                             android:id="@+id/tvReferenceNo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -265,14 +265,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ref.Date. : "
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                             android:id="@+id/tvFeeReceiptDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -287,14 +287,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Bank : "
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                             android:id="@+id/tvBankName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -343,7 +343,7 @@
                         android:gravity="end"
                         android:orientation="horizontal">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:id="@+id/tvPreintFeeReceipt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

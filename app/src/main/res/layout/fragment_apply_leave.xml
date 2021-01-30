@@ -152,7 +152,7 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -233,7 +233,7 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvSaveLeave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

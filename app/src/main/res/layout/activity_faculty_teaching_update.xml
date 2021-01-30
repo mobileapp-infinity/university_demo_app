@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_back" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -74,7 +74,7 @@
                         android:paddingBottom="8dp"
                         app:srcCompat="@drawable/ic_faculty_teaching_update_lab_plan" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/shape_fee_details_screen"
@@ -117,7 +117,7 @@
                         android:paddingBottom="8dp"
                         app:srcCompat="@drawable/ic_activity" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/shape_fee_details_screen"
@@ -160,7 +160,7 @@
                         android:paddingBottom="8dp"
                         app:srcCompat="@drawable/ic_faculty_advicer_remarks" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/shape_fee_details_screen"
@@ -211,7 +211,7 @@
                         android:paddingBottom="8dp"
                         app:srcCompat="@drawable/ic_faculty_teaching_update_details_of_theory_sub" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/shape_fee_details_screen"
@@ -254,7 +254,7 @@
                         android:paddingBottom="8dp"
                         app:srcCompat="@drawable/ic_faculty_teching_update_subject_wise_total_theory_period" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/shape_fee_details_screen"
@@ -296,7 +296,7 @@
                         android:paddingBottom="18dp"
                         app:srcCompat="@drawable/ic_fee_receipt" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/shape_fee_details_screen"

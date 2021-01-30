@@ -22,7 +22,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvLeaveApplyDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,14 +73,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Leave Type : "
                     android:textColor="@color/color_primary_with_80_opacity"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvLeaveType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,14 +98,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date : "
                     android:textColor="@color/color_primary_with_80_opacity"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvLeaveDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -122,14 +122,14 @@
                 android:layout_marginBottom="4dp"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Remarks : "
                     android:textColor="@color/color_primary_with_80_opacity"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvLeaveRemaks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -147,14 +147,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Status : "
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/leaveStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -18,7 +18,7 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewBoldFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewBoldFont
                 android:id="@+id/tvFacultyLabOrLectureDerailsIndex"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -48,7 +48,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvFacultyLabOrLectureDerailsTopicDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

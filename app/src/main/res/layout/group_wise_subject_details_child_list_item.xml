@@ -28,14 +28,14 @@
                 android:paddingBottom="4dp"
                 android:background="@drawable/common_shape_yello">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Subject : "
                     android:textColor="@color/white_color_with_75_opacity"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvGroupWiseSubjectName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -52,14 +52,14 @@
                 android:gravity="end"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date : "
                     android:textColor="@color/color_primary_with_75_opacity"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvGroupWiseSubjectDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,14 +83,14 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Description : "
                     android:textColor="@color/color_primary_with_75_opacity"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvGroupWiseSubjectDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:visibility="gone"
             android:orientation="horizontal">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/btnDownloadGroupWiseSubjectDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

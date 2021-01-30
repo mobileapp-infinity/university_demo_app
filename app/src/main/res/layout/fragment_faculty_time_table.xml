@@ -41,7 +41,7 @@
             android:layout_gravity="center"
             app:srcCompat="@drawable/ic_no_data_found" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"

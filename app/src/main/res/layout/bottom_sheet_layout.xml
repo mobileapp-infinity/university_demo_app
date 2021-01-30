@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
             android:id="@+id/tvLectureDateAndTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:textColor="#000051"
             android:textSize="14sp" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvClassOrLab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             <!--                android:textSize="12sp"-->
             <!--                android:textColor="#000051"/>-->
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvSubjectName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
 
         </LinearLayout>
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvProfessorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/ic_done"/>
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvAbsentPresent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

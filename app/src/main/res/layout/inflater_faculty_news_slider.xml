@@ -29,7 +29,7 @@
         android:layout_gravity="bottom"
         android:background="@drawable/bg_overlay">
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tv_auto_image_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

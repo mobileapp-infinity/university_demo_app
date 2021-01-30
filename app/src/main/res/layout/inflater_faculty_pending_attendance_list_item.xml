@@ -28,7 +28,7 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvSemesterFacultyPendingAttendance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:layout_margin="4dp"
                 android:background="@color/color_primary_with_75_opacity" />
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvFacultyPendingAttendanceDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                     android:layout_marginBottom="4dp"
                     android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -121,7 +121,7 @@
                         android:textColor="@color/profile_heading_color"
                         android:textSize="10sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:id="@+id/tvCourseNameFacultyPendingAttendance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                     android:layout_marginBottom="4dp"
                     android:orientation="vertical">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -150,7 +150,7 @@
                         android:textColor="@color/profile_heading_color"
                         android:textSize="10sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:id="@+id/tvSubjectNameFacultyPendingAttendance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -185,7 +185,7 @@
                             android:textColor="@color/profile_heading_color"
                             android:textSize="10sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:id="@+id/tvDivisionFacultyPendingAttendance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -210,7 +210,7 @@
                             android:textColor="@color/profile_heading_color"
                             android:textSize="10sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:id="@+id/tvBatchFacultyPendingAttendance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -235,7 +235,7 @@
                             android:textColor="@color/profile_heading_color"
                             android:textSize="10sp" />
 
-                        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                             android:id="@+id/tvLectureNoFacultyPendingAttendance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -268,7 +268,7 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"

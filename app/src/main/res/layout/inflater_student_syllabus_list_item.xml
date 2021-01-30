@@ -75,14 +75,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Subject Code"
                     android:textColor="@color/profile_heading_color"
                     android:textSize="10sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvSubjectCodeStudentSyllabus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,14 +99,14 @@
                 android:layout_marginBottom="6dp"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Subject Name"
                     android:textColor="@color/profile_heading_color"
                     android:textSize="10sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvStudentSubjectNameSyllabus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
             android:orientation="horizontal"
             android:visibility="visible">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/btnDownloadStudentSyllabus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

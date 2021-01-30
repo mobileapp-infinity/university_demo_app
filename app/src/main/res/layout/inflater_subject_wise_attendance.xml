@@ -21,7 +21,7 @@
             android:background="@drawable/shape_subject_wise_attendance_list_item"
             android:orientation="horizontal">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvSubjectName"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -60,14 +60,14 @@
                     android:layout_marginBottom="4dp"
                     android:orientation="horizontal">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total Lecture : "
                         android:textColor="#252258"
                         android:textSize="12sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:id="@+id/tvTotalLecture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -84,14 +84,14 @@
                     android:layout_marginBottom="4dp"
                     android:orientation="horizontal">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Remaining Lecture : "
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:id="@+id/tvRemainingLecture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -108,14 +108,14 @@
                     android:layout_marginBottom="4dp"
                     android:orientation="horizontal">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Present In Lecture : "
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:id="@+id/tvPresentInLecture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -131,14 +131,14 @@
                     android:layout_marginTop="4dp"
                     android:orientation="horizontal">
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Attendance in(%) : "
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp" />
 
-                    <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                    <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                         android:id="@+id/tvTotalAttendance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

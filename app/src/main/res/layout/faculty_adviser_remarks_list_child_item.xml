@@ -19,7 +19,7 @@
             android:layout_marginBottom="6dp"
             android:orientation="vertical">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="top"
@@ -27,7 +27,7 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp" />
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvStudentNameFacultyAdviserDetails"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -50,7 +50,7 @@
                 android:layout_weight="1.2"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="top"
@@ -58,7 +58,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvStudentEnrollmentNoFacultyAdviserRemarks"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -76,7 +76,7 @@
                 android:layout_weight="0.8"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="top"
@@ -84,7 +84,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvRollNoFacultyAdviserRemarks"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -110,7 +110,7 @@
                 android:layout_weight="1.2"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="top"
@@ -118,7 +118,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvStudentMobileNo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -136,7 +136,7 @@
                 android:layout_weight="0.8"
                 android:orientation="vertical">
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="top"
@@ -144,7 +144,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 
-                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                     android:id="@+id/tvStudentAttendancePr"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

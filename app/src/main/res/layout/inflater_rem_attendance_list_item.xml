@@ -21,7 +21,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:id="@+id/tvCourseNameRemAttendace"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -73,14 +73,14 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Semester"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="12sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:id="@+id/tvSemesterFacultyRemAttendance"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -96,14 +96,14 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Date"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="12sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:id="@+id/tvRemAttendanceFacultyDate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -128,14 +128,14 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Lecture No"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="12sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:id="@+id/tvLectureNoFacultyremAttendance"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -152,14 +152,14 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Division"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="12sp" />
 
-                            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                 android:id="@+id/tvRemAttendanceFacultyDivision"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

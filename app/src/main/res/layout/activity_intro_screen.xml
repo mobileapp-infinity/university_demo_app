@@ -20,14 +20,14 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Welcome to Atmiya"
                 android:textColor="@color/colorPrimary"
                 android:textSize="22sp" />
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -75,7 +75,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_margin="16dp"

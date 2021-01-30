@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_back" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -124,14 +124,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Fee Date"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFeeDatePayFee"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -148,14 +148,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Fee Type"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvFeeTypePayFee"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -172,14 +172,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Total Fee"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvTotalFeePayFee"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -196,14 +196,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Paid Fee"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvPaidFeePayFee"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -220,14 +220,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Pending Fee"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvPendingFeePayFee"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -244,14 +244,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Pending Fee Refund"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvPendingFeeRefundPayFee"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -268,14 +268,14 @@
                                 android:layout_marginBottom="4dp"
                                 android:orientation="vertical">
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Due Date"
                                     android:textColor="@color/profile_heading_color"
                                     android:textSize="10sp" />
 
-                                <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+                                <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                                     android:id="@+id/tvDueDatePayFee"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -417,7 +417,7 @@
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/ic_no_data_found" />
 
-            <com.infinity.infoway.atmiya.custom_class.TextViewMediumFont
+            <com.infinity.infoway.university_demo.custom_class.TextViewMediumFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"

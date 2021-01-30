@@ -11,14 +11,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Batch"
             android:textColor="@color/profile_heading_color"
             android:textSize="10sp" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvStudentBatchMergingLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,14 +35,14 @@
         android:layout_marginBottom="8dp"
         android:orientation="vertical">
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Faculty"
             android:textColor="@color/profile_heading_color"
             android:textSize="10sp" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvStudentFacultyNameMergingLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,14 +59,14 @@
         android:layout_marginBottom="8dp"
         android:orientation="vertical">
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Subject"
             android:textColor="@color/profile_heading_color"
             android:textSize="10sp" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvStudentSubjectNameMergingLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
         android:layout_gravity="end"
         android:orientation="horizontal">
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -90,7 +90,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="10sp" />
 
-        <com.infinity.infoway.atmiya.custom_class.TextViewRegularFont
+        <com.infinity.infoway.university_demo.custom_class.TextViewRegularFont
             android:id="@+id/tvStudentClassRoomMergingLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
