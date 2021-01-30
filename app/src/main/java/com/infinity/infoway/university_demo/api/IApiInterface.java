@@ -253,7 +253,7 @@ public interface IApiInterface {
 
 
     @GET("Insert_Student_Learning_Management_Push_Notification_API")
-    Call<InsertStudentLearningManagementPushNotificationPojo> insertStudentLearningManagementPushNotification(
+    Call<ArrayList<InsertStudentLearningManagementPushNotificationPojo>> insertStudentLearningManagementPushNotification(
             @Query("grp_id") String grp_id,
             @Query("year_id") String year_id,
             @Query("stud_id") String stud_id,

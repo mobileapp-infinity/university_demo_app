@@ -7,43 +7,27 @@ import java.util.List;
 
 public class InsertStudentLearningManagementPushNotificationPojo {
 
-    @SerializedName("Table")
+    @SerializedName("Error_code")
     @Expose
-    private List<Table> table = null;
+    private String errorCode;
+    @SerializedName("Error_msg")
+    @Expose
+    private String errorMsg;
 
-    public List<Table> getTable() {
-        return table;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setTable(List<Table> table) {
-        this.table = table;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public class Table {
+    public String getErrorMsg() {
+        return errorMsg;
+    }
 
-        @SerializedName("Error_code")
-        @Expose
-        private String errorCode;
-        @SerializedName("Error_msg")
-        @Expose
-        private String errorMsg;
-
-        public String getErrorCode() {
-            return errorCode;
-        }
-
-        public void setErrorCode(String errorCode) {
-            this.errorCode = errorCode;
-        }
-
-        public String getErrorMsg() {
-            return errorMsg;
-        }
-
-        public void setErrorMsg(String errorMsg) {
-            this.errorMsg = errorMsg;
-        }
-
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
 }

@@ -224,15 +224,15 @@ public class JoinGroupListAdapter extends BaseExpandableListAdapter {
                 mySharedPreferences.getSmId(), "Learning Management For Student",
                 "Learning Management :" + grp_name + "File Posted.",
                 "0", mySharedPreferences.getStudentId(), "1",
-                mySharedPreferences.getInstituteId(), new Callback<InsertStudentLearningManagementPushNotificationPojo>() {
+                mySharedPreferences.getInstituteId(), new Callback<ArrayList<InsertStudentLearningManagementPushNotificationPojo>>() {
                     @Override
-                    public void onResponse(Call<InsertStudentLearningManagementPushNotificationPojo> call, Response<InsertStudentLearningManagementPushNotificationPojo> response) {
+                    public void onResponse(Call<ArrayList<InsertStudentLearningManagementPushNotificationPojo>> call, Response<ArrayList<InsertStudentLearningManagementPushNotificationPojo>> response) {
                         if (isPdHide) {
                             DialogUtil.hideProgressDialog();
                         }
                         if (response.isSuccessful() && response.body() != null &&
-                                response.body().getTable().size() > 0) {
-                            if (response.body().getTable().get(0).getErrorCode().equalsIgnoreCase("1")) {
+                                response.body().size() > 0) {
+                            if (response.body().get(0).getErrorCode().equalsIgnoreCase("1")) {
                                 Toast.makeText(context, "Enroll Successfully", Toast.LENGTH_SHORT).show();
                                 context.finish();
                             }
@@ -240,7 +240,7 @@ public class JoinGroupListAdapter extends BaseExpandableListAdapter {
                     }
 
                     @Override
-                    public void onFailure(Call<InsertStudentLearningManagementPushNotificationPojo> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<InsertStudentLearningManagementPushNotificationPojo>> call, Throwable t) {
                         DialogUtil.hideProgressDialog();
                         Toast.makeText(context, "Request Failed:- " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }

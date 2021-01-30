@@ -356,9 +356,9 @@ public class ApiImplementer {
             String grp_id, String year_id, String stud_id, String sem_id, String nt_type,
             String notif_desc, String read_status, String created_by, String created_ip,
             String institute_id,
-            Callback<InsertStudentLearningManagementPushNotificationPojo> cb) {
+            Callback<ArrayList<InsertStudentLearningManagementPushNotificationPojo>> cb) {
         final IApiInterface apiService = ApiClient.getClient().create(IApiInterface.class);
-        Call<InsertStudentLearningManagementPushNotificationPojo> call = apiService.insertStudentLearningManagementPushNotification(
+        Call<ArrayList<InsertStudentLearningManagementPushNotificationPojo>> call = apiService.insertStudentLearningManagementPushNotification(
                 grp_id, year_id, stud_id, sem_id, nt_type, notif_desc, read_status, created_by,
                 created_ip, institute_id);
         call.enqueue(cb);
