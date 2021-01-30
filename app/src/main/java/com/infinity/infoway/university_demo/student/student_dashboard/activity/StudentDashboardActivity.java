@@ -112,8 +112,8 @@ public class StudentDashboardActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //For day mode theme
         setContentView(R.layout.activity_student_dashboard);
-//        initView();
-//        getStudentProfileAndAttendanceData();
+        initView();
+        getStudentProfileAndAttendanceData();
 //        sendStudentFCMTokenToServer();
     }
 

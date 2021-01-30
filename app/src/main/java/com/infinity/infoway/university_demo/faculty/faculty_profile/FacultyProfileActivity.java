@@ -43,7 +43,7 @@ public class FacultyProfileActivity extends AppCompatActivity implements View.On
 
     private TextViewRegularFont tvFacultyName;
     private TextViewRegularFont tvFacultyEmail;
-//    private TextViewMediumFont tvEmpId;
+    //    private TextViewMediumFont tvEmpId;
     private TextViewMediumFont tvFacultyEmployeeNo;
     private TextViewMediumFont tvFacultyEducation;
 
@@ -401,8 +401,6 @@ public class FacultyProfileActivity extends AppCompatActivity implements View.On
         if (!CommonUtil.checkIsEmptyOrNullCommon(facultyProfilePojo.getEmpDateOfChield())) {
             tvFacultySonOrDaughterDOF.setText(facultyProfilePojo.getEmpDateOfChield() + "");
         }
-
-
     }
 
     private void logoutUserApiCall() {

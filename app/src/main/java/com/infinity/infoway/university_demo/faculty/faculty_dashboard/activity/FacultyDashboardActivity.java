@@ -91,9 +91,9 @@ public class FacultyDashboardActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_dashboard);
-//        initView();
+        initView();
 //        sendFacultyFCMTokenToServer();
-//        getFacultyProfileDetailsApiCall();
+        getFacultyProfileDetailsApiCall();
     }
 
 
